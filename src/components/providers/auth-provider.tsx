@@ -118,62 +118,50 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     // Fetch user profile from API Qurani
     const fetchUserProfile = useCallback(
         async (authId: string): Promise<UserProfile | null> => {
-            // No longer check cached profile from myqurani_user_profile_v2
-            // Priority 0 is now to just use what's inside customUser / getStoredAuth
             const stored = getStoredAuth();
+
+            // Priority 0: Fetch from /api/me (same endpoint used by Profile page)
+            try {
+                const res = await fetch('/api/me');
+                if (res.ok) {
+                    const json = await res.json();
+                    if (json?.profile) {
+                        const p = json.profile;
+                        const avatarUrl = p.avatar || p.avatar_url || normalizeAvatarUrl(p.image);
+                        const profileObj: UserProfile = {
+                            id: String(p.id || authId),
+                            name: p.name || p.username || stored?.name || 'User',
+                            username: p.username || stored?.username || '',
+                            email: p.email || stored?.email || '',
+                            avatar: avatarUrl || '',
+                            role: p.role || stored?.roles?.[0] || 'member',
+                            roles: p.roles || (p.role ? [p.role] : stored?.roles) || ['member'],
+                            timezone: p.timezone || (stored?.timezone as string) || '',
+                        };
+
+                        if (stored && avatarUrl && stored.image !== avatarUrl) {
+                            setStoredAuth({ ...stored, image: avatarUrl });
+                        }
+
+                        return profileObj;
+                    }
+                }
+            } catch (err) {
+                console.warn('[AuthProvider] /api/me fetch failed:', err);
+            }
+
+            // Fallback: use what's inside customUser / getStoredAuth
             if (stored && stored.name) {
                 return {
                     id: stored.userId?.toString() || authId,
                     name: stored.name || stored.username,
                     username: stored.username,
                     email: stored.email,
-                    avatar: normalizeAvatarUrl(stored.image),
+                    avatar: normalizeAvatarUrl((stored as any).avatar || stored.image),
                     role: stored.roles && stored.roles.length > 0 ? stored.roles[0] : "member",
                     roles: stored.roles || [],
                     timezone: (stored.timezone as string) || "",
                 } as UserProfile;
-            }
-
-            // Priority 1: Fetch from API Qurani
-            if (stored?.accessToken) {
-                try {
-                    console.log('[AuthProvider] Fetching profile from API Qurani');
-                    const { userApi } = await import('@/lib/api');
-                    const result = await userApi.getMe(stored.accessToken);
-                    const userData = result.data || result;
-
-                    if (userData) {
-                        const profile: UserProfile = {
-                            id: userData.id?.toString() || authId,
-                            name: userData.name || userData.username,
-                            username: userData.username,
-                            email: userData.email,
-                            avatar: normalizeAvatarUrl(userData.avatar || userData.image),
-                            role: userData.role || "member",
-                            roles: userData.roles || [],
-                            timezone: userData.timezone || "",
-                        };
-
-                        // Cache the profile back into auth context
-                        if (stored) {
-                            const newAuth = {
-                                ...stored,
-                                ...userData,
-                                // ensure critical fields are properly mapped
-                                name: userData.name || userData.username || stored.name,
-                                image: normalizeAvatarUrl(userData.avatar || userData.image || stored.image),
-                                timezone: userData.timezone || stored.timezone || "",
-                                cityName: userData.city || userData.cityName || stored.cityName,
-                                countryName: userData.country || userData.countryName || stored.countryName,
-                            };
-                            setStoredAuth(newAuth);
-                        }
-
-                        return profile;
-                    }
-                } catch (e) {
-                    console.warn("[AuthProvider] API getMe failed:", e);
-                }
             }
 
             return null;
@@ -255,7 +243,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
                 name: customUser.name || customUser.username,
                 username: customUser.username,
                 email: customUser.email,
-                avatar: normalizeAvatarUrl(customUser.image),
+                avatar: normalizeAvatarUrl((customUser as any).avatar || (customUser as any).avatarUrl || customUser.image),
                 role: customUser.roles?.[0] || "member",
                 roles: customUser.roles || [],
                 timezone: (customUser as any).timezone || "",
