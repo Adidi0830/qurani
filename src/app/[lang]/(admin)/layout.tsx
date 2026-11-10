@@ -23,6 +23,8 @@ function AdminShell({ children }: AdminLayoutProps) {
   // Redirect unauthenticated users
   useEffect(() => {
     if (hasMounted && !loading && !isAuthenticated) {
+      document.cookie = 'myqurani_access_token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
+      document.cookie = 'myqurani_user=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
       window.location.href = "/api/auth/force-logout"
     }
   }, [hasMounted, loading, isAuthenticated])

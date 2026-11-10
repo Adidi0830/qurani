@@ -243,7 +243,8 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 
     const isAuthenticated = useMemo(() => !!customUser, [customUser]);
 
-    const loading = authLoading || (!!customUser && !profile && !profileError);
+    // Don't block loading on SWR profile; effectiveProfile already falls back to customUser
+    const loading = authLoading;
 
     // Build effective profile from customUser when SWR hasn't loaded yet
     const effectiveProfile = useMemo(() => {
