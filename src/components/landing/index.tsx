@@ -1,0 +1,8 @@
+export { Header } from './header'
+export { HeroSection } from './hero-section'
+export { FeaturesSection } from './features-section'
+export { StatisticsSection } from './statistics-section'
+export { TestimonialsSection } from './testimonials-section'
+export { FAQSection } from './faq-section'
+export { Footer } from './footer'
+export { LandingPage } from './page'

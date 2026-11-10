@@ -1,0 +1,276 @@
+{
+  "billing": {
+    "title": "Billing",
+    "subtitle": "Manage your Qurani plan, usage, and transaction history.",
+    "credit_label": "Qurani Credit Balance",
+    "summary": {
+      "active_plan": "Active Plan",
+      "active_plan_value": "Expert 1 Year",
+      "active_plan_ends": "Ends {{date}}",
+      "mau": "Monthly Active Users",
+      "human_agents": "Human Agents",
+      "ai_responses": "AI Responses",
+      "of_quota": "of {{quota}} quota"
+    },
+    "periods": {
+      "monthly": "Monthly",
+      "half_yearly": "Half-Yearly",
+      "yearly": "Yearly"
+    },
+    "period_label": {
+      "month": "per month"
+    },
+    "plans": {
+      "badges": {
+        "save_50": "Save 50%",
+        "best_value": "Best value"
+      },
+      "basic": {
+        "name": "Basic",
+        "features": {
+          "0": "10,000 AI Responses",
+          "1": "2,000 Monthly Active Users",
+          "2": "3 Human Agents",
+          "3": "1 WhatsApp & 1 Telegram",
+          "4": "Unlimited Qurani Groups",
+          "5": "Basic Dashboard & Reports"
+        }
+      },
+      "pro": {
+        "name": "Pro",
+        "features": {
+          "0": "50,000 AI Responses",
+          "1": "10,000 Monthly Active Users",
+          "2": "7 Human Agents",
+          "3": "3 WhatsApp & 2 Telegram",
+          "4": "Priority Support",
+          "5": "Basic API Integrations"
+        }
+      },
+      "expert": {
+        "name": "Expert",
+        "features": {
+          "0": "150,000 AI Responses",
+          "1": "30,000 Monthly Active Users",
+          "2": "15 Human Agents",
+          "3": "4 WhatsApp & 4 Telegram",
+          "4": "SLA & Priority Support",
+          "5": "Advanced API Integrations"
+        }
+      }
+    },
+    "plan_features": "Plan Features",
+    "buy_package": "Buy Package",
+    "no_plans_title": "No plans set for this period.",
+    "no_plans_desc": "Please contact admin to enable {{period}} plans.",
+    "recent": {
+      "title": "Recent Transactions",
+      "subtitle": "Your Qurani plan payment history.",
+      "view_all": "View all"
+    },
+    "table": {
+      "order_date": "Order Date",
+      "order_id": "Order ID",
+      "package_name": "Package Name",
+      "price": "Price",
+      "discount": "Discount",
+      "quantity": "Qty",
+      "total_price": "Total Price",
+      "status": "Status",
+      "action": "Action"
+    },
+    "action": {
+      "detail": "Detail"
+    },
+    "empty_transactions": "No transactions yet.",
+    "modal": {
+      "title": "Transaction",
+      "order_id": "Order ID",
+      "order_date": "Order Date",
+      "payment_date": "Payment Date",
+      "product": "Product",
+      "quantity": "Quantity: {{quantity}}",
+      "price": "Price",
+      "discount": "Discount",
+      "total": "Total Price",
+      "close": "Close"
+    },
+    "status": {
+      "paid": "Paid",
+      "pending": "Pending"
+    },
+    "transactions": {
+      "expert_year": "Expert 1 Year",
+      "pro_monthly": "Pro Monthly"
+    },
+    "courses": {
+      "title": "Teacher Courses",
+      "free": "Free",
+      "close": "Close",
+      "cancel": "Cancel",
+      "reset": "Reset",
+      "updating": "Updating...",
+      "applyWithCount": "Apply ({{count}})",
+      "searchPlaceholder": "Search package name...",
+      "searchButton": "Search",
+      "loading": "Loading courses...",
+      "empty": "No courses match the filters.",
+      "certificate": "Certificate",
+      "teacherFallback": "Qurani Teacher",
+      "sessionsCount": "{{count}} sessions",
+      "minutesCount": "{{count}} min",
+      "studentsCount": "{{count}} students",
+      "summary": {
+        "total": "Total Course",
+        "published": "Published",
+        "verified": "Verified",
+        "featured": "Featured",
+        "revenue": "Revenue"
+      },
+      "filters": {
+        "all": "All",
+        "allVerification": "All Verification",
+        "verified": "Verified",
+        "unverified": "Unverified"
+      },
+      "filter": {
+        "button": "Teacher Filter",
+        "title": "Filter by Teacher",
+        "subtitle": "Choose one or more teachers",
+        "searchTeacher": "Search teacher name...",
+        "selectVisible": "Select all",
+        "clearVisible": "Clear selection",
+        "selected": "{{count}} selected",
+        "courseCount": "{{count}} courses"
+      },
+      "bulk": {
+        "title": "Bulk Actions",
+        "selected": "{{count}} selected",
+        "update": "Update",
+        "status": "Status",
+        "noChange": "No Change",
+        "chooseAction": "Choose action",
+        "apply": "Apply",
+        "publishDescription": "Make selected packages visible to users.",
+        "unpublishDescription": "Hide selected packages from users."
+      },
+      "table": {
+        "course": "Package",
+        "teacher": "Teacher",
+        "info": "Info",
+        "sessions": "Sessions",
+        "price": "Price",
+        "status": "Status",
+        "performance": "Performance",
+        "actions": "Actions"
+      },
+      "status": {
+        "published": "Published",
+        "unpublished": "Unpublished",
+        "draft": "Draft",
+        "archived": "Archived"
+      },
+      "mode": {
+        "1": "Online",
+        "2": "Offline",
+        "3": "Hybrid"
+      },
+      "actions": {
+        "open": "Open actions",
+        "detail": "Detail",
+        "publish": "Publish",
+        "unpublish": "Unpublish",
+        "verify": "Verify",
+        "unverify": "Unverify",
+        "feature": "Feature",
+        "unfeature": "Unfeature"
+      },
+      "pagination": {
+        "showing": "Showing {{from}}-{{to}} of {{total}} data",
+        "selected": "{{count}} selected"
+      },
+      "detail": {
+        "title": "Course Detail",
+        "durationLine": "{{sessions}} sessions - {{duration}} minutes/session",
+        "noDescription": "No description yet.",
+        "category": "Category",
+        "level": "Level",
+        "mode": "Mode",
+        "type": "Type",
+        "learningOutcomes": "Learning Outcomes",
+        "requirements": "Requirements",
+        "noOutcomes": "No outcomes yet.",
+        "noRequirements": "No special requirements.",
+        "syllabus": "Syllabus",
+        "noSyllabus": "No syllabus yet."
+      }
+    },
+    "payments": {
+      "title": "Payment",
+      "searchPlaceholder": "Search UserId, TrainerId, Status...",
+      "searchButton": "Search",
+      "tabs": {
+        "payments": "Payments List",
+        "disputes": "Disputes"
+      },
+      "disputes": {
+        "table": {
+          "type": "Type"
+        },
+        "action": {
+          "detail": "View Detail",
+          "reply": "Reply",
+          "resolve": "Resolve"
+        }
+      },
+      "summary": {
+        "total": "Total Payments",
+        "revenue": "Revenue",
+        "pendingRefunds": "Pending Refunds",
+        "pendingPayouts": "Pending Payouts"
+      },
+      "table": {
+        "id": "ID",
+        "user": "User",
+        "trainer": "Trainer",
+        "amount": "Amount",
+        "status": "Status",
+        "paymentMethod": "Method",
+        "date": "Date",
+        "actions": "Actions"
+      },
+      "status": {
+        "paid": "Paid",
+        "pending": "Pending",
+        "failed": "Failed",
+        "refunded": "Refunded",
+        "disputed": "Disputed"
+      },
+      "actions": {
+        "processRefund": "Process Refund",
+        "markPayout": "Mark Payout",
+        "updateStatus": "Update Status"
+      },
+      "modal": {
+        "processRefundTitle": "Process Refund",
+        "markPayoutTitle": "Mark Payout",
+        "updateStatusTitle": "Update Status",
+        "bulkPayoutTitle": "Bulk Payout",
+        "approve": "Approve",
+        "reject": "Reject",
+        "notes": "Notes",
+        "payoutReference": "Payout Reference",
+        "submit": "Submit",
+        "cancel": "Cancel",
+        "failureReason": "Failure Reason"
+      },
+      "bulk": {
+        "selected": "{{count}} selected",
+        "actions": "Bulk Actions",
+        "markPayout": "Bulk Mark Payout"
+      },
+      "empty": "No payments found.",
+      "loading": "Loading payment data..."
+    }
+  }
+}

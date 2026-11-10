@@ -1,0 +1,3973 @@
+{
+    "trainerPackages": [
+        {
+            "id": "tp-3011",
+            "trainerId": 301,
+            "trainerName": "Hasyim asy'ari, Lc",
+            "trainerAvatar": "https://i.pravatar.cc/150?img=57",
+            "name": "1x Pertemuan",
+            "sessions": 1,
+            "basePrice": 120000,
+            "serviceFee": 5000,
+            "totalPrice": 125000,
+            "status": "active",
+            "category": "Satuan",
+            "description": "Satu sesi percobaan bersama Ust. Hasyim lulusan Al-Azhar Kairo.",
+            "totalOrders": 12,
+            "totalRevenue": 1500000
+        },
+        {
+            "id": "tp-3012",
+            "trainerId": 301,
+            "trainerName": "Hasyim asy'ari, Lc",
+            "trainerAvatar": "https://i.pravatar.cc/150?img=57",
+            "name": "5x Pertemuan",
+            "sessions": 5,
+            "basePrice": 550000,
+            "serviceFee": 5000,
+            "totalPrice": 555000,
+            "status": "active",
+            "category": "Hemat",
+            "description": "5 sesi intensif tajwid & makharijul huruf dengan metode talaqqi.",
+            "totalOrders": 28,
+            "totalRevenue": 15540000
+        },
+        {
+            "id": "tp-3013",
+            "trainerId": 301,
+            "trainerName": "Hasyim asy'ari, Lc",
+            "trainerAvatar": "https://i.pravatar.cc/150?img=57",
+            "name": "10x Pertemuan",
+            "sessions": 10,
+            "basePrice": 1000000,
+            "serviceFee": 5000,
+            "totalPrice": 1005000,
+            "status": "active",
+            "category": "Intensif",
+            "description": "Program tahsin intensif 10 sesi, cocok bagi yang ingin cepat fasih.",
+            "totalOrders": 15,
+            "totalRevenue": 15075000
+        },
+        {
+            "id": "tp-3021",
+            "trainerId": 302,
+            "trainerName": "Indi Fitriani",
+            "trainerAvatar": "https://i.pravatar.cc/150?img=47",
+            "name": "1x Pertemuan",
+            "sessions": 1,
+            "basePrice": 80000,
+            "serviceFee": 5000,
+            "totalPrice": 85000,
+            "status": "active",
+            "category": "Satuan",
+            "description": "Kenali metode mengajar Indi lewat 1 sesi tanpa komitmen.",
+            "totalOrders": 19,
+            "totalRevenue": 1615000
+        },
+        {
+            "id": "tp-3022",
+            "trainerId": 302,
+            "trainerName": "Indi Fitriani",
+            "trainerAvatar": "https://c.superprof.com/i/m/22913978/600/20241221202313/22913978.webp",
+            "name": "5x Pertemuan",
+            "sessions": 5,
+            "basePrice": 375000,
+            "serviceFee": 5000,
+            "totalPrice": 380000,
+            "status": "active",
+            "category": "Hemat",
+            "description": "5 sesi belajar tartil dengan metode Tilawati yang menyenangkan.",
+            "totalOrders": 34,
+            "totalRevenue": 12920000
+        },
+        {
+            "id": "tp-3023",
+            "trainerId": 302,
+            "trainerName": "Indi Fitriani",
+            "trainerAvatar": "https://c.superprof.com/i/m/22913978/600/20241221202313/22913978.webp",
+            "name": "8x Pertemuan",
+            "sessions": 8,
+            "basePrice": 560000,
+            "serviceFee": 5000,
+            "totalPrice": 565000,
+            "status": "active",
+            "category": "Intensif",
+            "description": "8 sesi khusus program hafalan juz 30 untuk pemula.",
+            "totalOrders": 11,
+            "totalRevenue": 6215000
+        },
+        {
+            "id": "tp-3031",
+            "trainerId": 303,
+            "trainerName": "Iwan",
+            "trainerAvatar": "https://i.pravatar.cc/150?img=52",
+            "name": "1x Pertemuan",
+            "sessions": 1,
+            "basePrice": 90000,
+            "serviceFee": 5000,
+            "totalPrice": 95000,
+            "status": "active",
+            "category": "Satuan",
+            "description": "Sesi perdana pengenalan metode Qiroati untuk anak-anak.",
+            "totalOrders": 22,
+            "totalRevenue": 2090000
+        },
+        {
+            "id": "tp-3032",
+            "trainerId": 303,
+            "trainerName": "Iwan",
+            "trainerAvatar": "https://i.pravatar.cc/150?img=52",
+            "name": "5x Pertemuan",
+            "sessions": 5,
+            "basePrice": 420000,
+            "serviceFee": 5000,
+            "totalPrice": 425000,
+            "status": "active",
+            "category": "Hemat",
+            "description": "Paket 5 sesi metode Qiroati, cocok untuk anak usia dini.",
+            "totalOrders": 18,
+            "totalRevenue": 7650000
+        },
+        {
+            "id": "tp-3033",
+            "trainerId": 303,
+            "trainerName": "Iwan",
+            "trainerAvatar": "https://i.pravatar.cc/150?img=52",
+            "name": "10x Pertemuan",
+            "sessions": 10,
+            "basePrice": 800000,
+            "serviceFee": 5000,
+            "totalPrice": 805000,
+            "status": "inactive",
+            "category": "Intensif",
+            "description": "Program 10 sesi intensif. Sementara tidak tersedia.",
+            "totalOrders": 5,
+            "totalRevenue": 4025000
+        },
+        {
+            "id": "tp-3041",
+            "trainerId": 304,
+            "trainerName": "Aisyah",
+            "trainerAvatar": "https://i.pravatar.cc/150?img=45",
+            "name": "1x Pertemuan",
+            "sessions": 1,
+            "basePrice": 75000,
+            "serviceFee": 5000,
+            "totalPrice": 80000,
+            "status": "active",
+            "category": "Satuan",
+            "description": "Sesi pertama bersama Nanda ÃƒÂ¢Ã¢â€šÂ¬-Â ramah & sabar untuk pemula.",
+            "totalOrders": 14,
+            "totalRevenue": 1120000
+        },
+        {
+            "id": "tp-3042",
+            "trainerId": 304,
+            "trainerName": "Aisyah",
+            "trainerAvatar": "https://i.pravatar.cc/150?img=45",
+            "name": "4x Pertemuan",
+            "sessions": 4,
+            "basePrice": 280000,
+            "serviceFee": 5000,
+            "totalPrice": 285000,
+            "status": "active",
+            "category": "Hemat",
+            "description": "4 sesi perbaikan bacaan Al-Qur'an dari dasar.",
+            "totalOrders": 9,
+            "totalRevenue": 2565000
+        },
+        {
+            "id": "tp-3051",
+            "trainerId": 305,
+            "trainerName": "Zain Al-Fattah",
+            "trainerAvatar": "https://i.pravatar.cc/150?img=33",
+            "name": "1x Pertemuan",
+            "sessions": 1,
+            "basePrice": 85000,
+            "serviceFee": 5000,
+            "totalPrice": 90000,
+            "status": "active",
+            "category": "Satuan",
+            "description": "Sesi perkenalan khusus dengan Ustadz Zain.",
+            "totalOrders": 8,
+            "totalRevenue": 720000
+        },
+        {
+            "id": "tp-3052",
+            "trainerId": 305,
+            "trainerName": "Zain Al-Fattah",
+            "trainerAvatar": "https://i.pravatar.cc/150?img=33",
+            "name": "5x Pertemuan",
+            "sessions": 5,
+            "basePrice": 400000,
+            "serviceFee": 5000,
+            "totalPrice": 405000,
+            "status": "active",
+            "category": "Hemat",
+            "description": "5 sesi latihan intensif makhraj huruf hijaiyah.",
+            "totalOrders": 6,
+            "totalRevenue": 2430000
+        },
+        {
+            "id": "tp-3053",
+            "trainerId": 305,
+            "trainerName": "Zain Al-Fattah",
+            "trainerAvatar": "https://i.pravatar.cc/150?img=33",
+            "name": "10x Pertemuan",
+            "sessions": 10,
+            "basePrice": 750000,
+            "serviceFee": 5000,
+            "totalPrice": 755000,
+            "status": "active",
+            "category": "Intensif",
+            "description": "Program 10 sesi hafalan dengan bimbingan penuh Ustadz Zain.",
+            "totalOrders": 4,
+            "totalRevenue": 3020000
+        },
+        {
+            "trainerId": 302,
+            "id": "tp-3024",
+            "serviceFee": 5000,
+            "basePrice": 800000,
+            "trainerName": "Indi Fitriani",
+            "totalPrice": 805000,
+            "name": "12x Pertemuan",
+            "totalRevenue": 4000000,
+            "category": "Eksklusif",
+            "sessions": 12,
+            "trainerAvatar": "https://c.superprof.com/i/m/22913978/600/20241221202313/22913978.webp",
+            "totalOrders": 5,
+            "status": "active",
+            "description": "Program lengkap 12 pertemuan untuk hasil maksimal."
+        }
+    ],
+    "stats": {
+        "totalRevenue": 184750000,
+        "totalRevenueCurrency": "IDR",
+        "totalPayments": 1284,
+        "successfulPayments": 1198,
+        "pendingPayments": 52,
+        "failedPayments": 34,
+        "pendingRefunds": 18,
+        "pendingPayouts": 47,
+        "totalBookings": 934,
+        "activeBookings": 812,
+        "completedBookings": 89,
+        "cancelledBookings": 33,
+        "revenueGrowth": 12.4,
+        "bookingGrowth": 8.7,
+        "avgTransactionValue": 143890,
+        "totalDisputes": 9
+    },
+    "revenueByMonth": [
+        {
+            "month": "Sep",
+            "revenue": 11200000
+        },
+        {
+            "month": "Okt",
+            "revenue": 13800000
+        },
+        {
+            "month": "Nov",
+            "revenue": 12400000
+        },
+        {
+            "month": "Des",
+            "revenue": 18900000
+        },
+        {
+            "month": "Jan",
+            "revenue": 16200000
+        },
+        {
+            "month": "Feb",
+            "revenue": 21500000
+        }
+    ],
+    "paymentMethodBreakdown": [
+        {
+            "method": "GoPay",
+            "count": 654,
+            "amount": 98200000,
+            "percentage": 53.2
+        },
+        {
+            "method": "Qurani Wallet",
+            "count": 387,
+            "amount": 55100000,
+            "percentage": 46.8
+        }
+    ],
+    "payments": [
+        {
+            "id": "178572300280010000",
+            "userId": 889977665544101,
+            "userName": "Siti Rahmawati",
+            "trainerId": 302,
+            "trainerName": "Indi Fitriani",
+            "bookingId": 3001,
+            "amount": 387500,
+            "status": "pending",
+            "paymentMethod": "GoPay",
+            "createdAt": "2026-04-05T00:00:00Z"
+        },
+        {
+            "id": "178572300280020000",
+            "userId": 889977665544103,
+            "userName": "Siti Aminah",
+            "trainerId": 302,
+            "trainerName": "Indi Fitriani",
+            "bookingId": 3002,
+            "amount": 90000,
+            "status": "paid",
+            "paymentMethod": "Qurani Wallet",
+            "createdAt": "2026-02-10T00:00:00Z"
+        },
+        {
+            "id": "178572300280030000",
+            "userId": 889977665544104,
+            "userName": "Budi Santoso",
+            "trainerId": 303,
+            "trainerName": "Iwan",
+            "bookingId": 3003,
+            "amount": 705000,
+            "status": "paid",
+            "paymentMethod": "GoPay",
+            "createdAt": "2026-01-01T00:00:00Z"
+        },
+        {
+            "id": "178572300280040000",
+            "userId": 889977665544105,
+            "userName": "Dewi Rahayu",
+            "trainerId": 301,
+            "trainerName": "Hasyim asy'ari, Lc",
+            "bookingId": 3004,
+            "amount": 90000,
+            "status": "paid",
+            "paymentMethod": "GoPay",
+            "createdAt": "2026-01-05T00:00:00Z"
+        },
+        {
+            "id": "178572300280050000",
+            "userId": 889977665544106,
+            "userName": "Nur Hidayah",
+            "trainerId": 304,
+            "trainerName": "Aisyah",
+            "bookingId": 3005,
+            "amount": 387500,
+            "status": "paid",
+            "paymentMethod": "GoPay",
+            "createdAt": "2025-10-01T00:00:00Z"
+        },
+        {
+            "id": "178572300280060000",
+            "userId": 889977665544107,
+            "userName": "Nia Hidayati",
+            "trainerId": 302,
+            "trainerName": "Indi Fitriani",
+            "bookingId": 3006,
+            "amount": 595000,
+            "status": "refunded",
+            "paymentMethod": "GoPay",
+            "createdAt": "2026-03-05T00:00:00Z"
+        },
+        {
+            "id": "178572300280070000",
+            "userId": 889977665544108,
+            "userName": "Farid Al-Amin",
+            "trainerId": 305,
+            "trainerName": "Zain Al-Fattah",
+            "bookingId": 3007,
+            "amount": 387500,
+            "status": "paid",
+            "paymentMethod": "GoPay",
+            "createdAt": "2026-01-15T00:00:00Z"
+        },
+        {
+            "id": "178572300280080000",
+            "userId": 889977665544109,
+            "userName": "Halimah Tussa'diyah",
+            "trainerId": 301,
+            "trainerName": "Hasyim asy'ari, Lc",
+            "bookingId": 3008,
+            "amount": 90000,
+            "status": "paid",
+            "paymentMethod": "Qurani Wallet",
+            "createdAt": "2026-02-15T00:00:00Z"
+        },
+        {
+            "id": "178572300280090000",
+            "userId": 889977665544110,
+            "userName": "Muhammad Yusuf",
+            "trainerId": 302,
+            "trainerName": "Indi Fitriani",
+            "bookingId": 3009,
+            "amount": 705000,
+            "status": "paid",
+            "paymentMethod": "Qurani Wallet",
+            "createdAt": "2026-02-20T00:00:00Z"
+        },
+        {
+            "id": "178572300280100000",
+            "userId": 889977665544110,
+            "userName": "Muhammad Yusuf",
+            "trainerId": 301,
+            "trainerName": "Hasyim asy'ari, Lc",
+            "bookingId": 3010,
+            "amount": 250000,
+            "status": "paid",
+            "paymentMethod": "GoPay",
+            "createdAt": "2026-01-10T00:00:00Z"
+        },
+        {
+            "id": "178572300280980000",
+            "userId": 889977665544111,
+            "userName": "Fauzia Nurrohma",
+            "trainerId": 302,
+            "trainerName": "Indi Fitriani",
+            "bookingId": 3098,
+            "amount": 89600,
+            "status": "paid",
+            "paymentMethod": "GoPay",
+            "createdAt": "2026-04-02T00:00:00Z"
+        },
+        {
+            "id": "178572300280990000",
+            "userId": 889977665544112,
+            "userName": "Rahma Aulia",
+            "trainerId": 302,
+            "trainerName": "Indi Fitriani",
+            "bookingId": 3099,
+            "amount": 420000,
+            "status": "pending",
+            "paymentMethod": "-",
+            "createdAt": "2026-04-01T00:00:00Z"
+        }
+    ],
+    "bookings": [
+        {
+            "id": 3098,
+            "userId": 889977665544111,
+            "userName": "Fauzia Nurrohma",
+            "userEmail": "fauzia.nurrohma@example.com",
+            "trainerId": 302,
+            "trainerName": "Indi Fitriani",
+            "packageName": "1x Pertemuan",
+            "packageKey": "1x",
+            "totalSessions": 1,
+            "completedSessions": 0,
+            "mode": "online",
+            "pricePackage": 84600,
+            "serviceFee": 5000,
+            "totalPayment": 89600,
+            "currency": "IDR",
+            "status": "pending_trainer",
+            "bookingDate": "2026-04-02T00:00:00Z",
+            "paymentMethod": "GoPay",
+            "paymentGateway": "GoPay",
+            "bookingCode": "#3098"
+        },
+        {
+            "id": 3099,
+            "userId": 889977665544112,
+            "userName": "Rahma Aulia",
+            "userEmail": "rahma.aulia@example.com",
+            "trainerId": 302,
+            "trainerName": "Indi Fitriani",
+            "packageName": "5x Pertemuan",
+            "packageKey": "5x",
+            "totalSessions": 5,
+            "completedSessions": 0,
+            "mode": "online",
+            "pricePackage": 415000,
+            "serviceFee": 5000,
+            "totalPayment": 420000,
+            "currency": "IDR",
+            "status": "pending_payment",
+            "bookingDate": "2026-04-01T00:00:00Z",
+            "paymentMethod": "-",
+            "paymentGateway": "-",
+            "bookingCode": "#3099"
+        },
+        {
+            "id": 3010,
+            "userId": 889977665544110,
+            "userName": "Muhammad Yusuf",
+            "userEmail": "m.yusuf@example.com",
+            "trainerId": 301,
+            "trainerName": "Hasyim asy'ari, Lc",
+            "packageName": "3x Pertemuan",
+            "packageKey": "3x",
+            "totalSessions": 3,
+            "completedSessions": 3,
+            "mode": "online",
+            "pricePackage": 245000,
+            "serviceFee": 5000,
+            "totalPayment": 250000,
+            "currency": "IDR",
+            "status": "completed",
+            "bookingDate": "2026-01-10T00:00:00Z",
+            "paymentMethod": "GoPay",
+            "paymentGateway": "GoPay",
+            "bookingCode": "#3010"
+        },
+        {
+            "id": 3001,
+            "userId": 889977665544101,
+            "userName": "Siti Rahmawati",
+            "userEmail": "siti.rahma@example.com",
+            "trainerId": 302,
+            "trainerName": "Indi Fitriani",
+            "packageName": "5x Pertemuan",
+            "packageKey": "5x",
+            "totalSessions": 5,
+            "completedSessions": 2,
+            "mode": "online",
+            "pricePackage": 382500,
+            "serviceFee": 5000,
+            "totalPayment": 387500,
+            "currency": "IDR",
+            "status": "active",
+            "bookingDate": "2026-04-05T00:00:00Z",
+            "paymentMethod": "GoPay",
+            "paymentGateway": "GoPay",
+            "bookingCode": "#3001"
+        },
+        {
+            "id": 3002,
+            "userId": 889977665544103,
+            "userName": "Siti Aminah",
+            "userEmail": "siti.aminah@yahoo.com",
+            "trainerId": 302,
+            "trainerName": "Indi Fitriani",
+            "packageName": "1x Pertemuan",
+            "packageKey": "1x",
+            "totalSessions": 1,
+            "completedSessions": 0,
+            "mode": "online",
+            "pricePackage": 85000,
+            "serviceFee": 5000,
+            "totalPayment": 90000,
+            "currency": "IDR",
+            "status": "active",
+            "bookingDate": "2026-02-10T00:00:00Z",
+            "paymentMethod": "Qurani Wallet",
+            "paymentGateway": "Qurani Wallet",
+            "bookingCode": "#3002"
+        },
+        {
+            "id": 3003,
+            "userId": 889977665544104,
+            "userName": "Budi Santoso",
+            "userEmail": "budi.santoso@email.com",
+            "trainerId": 303,
+            "trainerName": "Iwan",
+            "packageName": "10x Pertemuan",
+            "packageKey": "10x",
+            "totalSessions": 10,
+            "completedSessions": 5,
+            "mode": "online",
+            "pricePackage": 700000,
+            "serviceFee": 5000,
+            "totalPayment": 705000,
+            "currency": "IDR",
+            "status": "active",
+            "bookingDate": "2026-01-01T00:00:00Z",
+            "paymentMethod": "GoPay",
+            "paymentGateway": "GoPay",
+            "bookingCode": "#3003"
+        },
+        {
+            "id": 3004,
+            "userId": 889977665544105,
+            "userName": "Dewi Rahayu",
+            "userEmail": "dewi.rahayu@gmail.com",
+            "trainerId": 301,
+            "trainerName": "Hasyim asy'ari, Lc",
+            "packageName": "1x Pertemuan",
+            "packageKey": "1x",
+            "totalSessions": 1,
+            "completedSessions": 1,
+            "mode": "online",
+            "pricePackage": 85000,
+            "serviceFee": 5000,
+            "totalPayment": 90000,
+            "currency": "IDR",
+            "status": "active",
+            "bookingDate": "2026-01-05T00:00:00Z",
+            "paymentMethod": "GoPay",
+            "paymentGateway": "GoPay",
+            "bookingCode": "#3004"
+        },
+        {
+            "id": 3005,
+            "userId": 889977665544106,
+            "userName": "Nur Hidayah",
+            "userEmail": "nur.hidayah@example.com",
+            "trainerId": 304,
+            "trainerName": "Aisyah",
+            "packageName": "5x Pertemuan",
+            "packageKey": "5x",
+            "totalSessions": 5,
+            "completedSessions": 1,
+            "mode": "online",
+            "pricePackage": 382500,
+            "serviceFee": 5000,
+            "totalPayment": 387500,
+            "currency": "IDR",
+            "status": "active",
+            "bookingDate": "2025-10-01T00:00:00Z",
+            "paymentMethod": "GoPay",
+            "paymentGateway": "GoPay",
+            "bookingCode": "#3005"
+        },
+        {
+            "id": 3006,
+            "userId": 889977665544107,
+            "userName": "Nia Hidayati",
+            "userEmail": "nia.hidayati@mail.com",
+            "trainerId": 302,
+            "trainerName": "Indi Fitriani",
+            "packageName": "5x Pertemuan",
+            "packageKey": "5x",
+            "totalSessions": 5,
+            "completedSessions": 0,
+            "mode": "online",
+            "pricePackage": 590000,
+            "serviceFee": 5000,
+            "totalPayment": 595000,
+            "currency": "IDR",
+            "status": "cancelled",
+            "bookingDate": "2026-03-05T00:00:00Z",
+            "paymentMethod": "GoPay",
+            "paymentGateway": "GoPay",
+            "bookingCode": "#3006"
+        },
+        {
+            "id": 3007,
+            "userId": 889977665544108,
+            "userName": "Farid Al-Amin",
+            "userEmail": "farid.alamin@edu.id",
+            "trainerId": 305,
+            "trainerName": "Zain Al-Fattah",
+            "packageName": "5x Pertemuan",
+            "packageKey": "5x",
+            "totalSessions": 5,
+            "completedSessions": 0,
+            "mode": "online",
+            "pricePackage": 382500,
+            "serviceFee": 5000,
+            "totalPayment": 387500,
+            "currency": "IDR",
+            "status": "active",
+            "bookingDate": "2026-01-15T00:00:00Z",
+            "paymentMethod": "GoPay",
+            "paymentGateway": "GoPay",
+            "bookingCode": "#3007"
+        },
+        {
+            "id": 3008,
+            "userId": 889977665544109,
+            "userName": "Halimah Tussa'diyah",
+            "userEmail": "halimah.tussadiyah@mail.com",
+            "trainerId": 301,
+            "trainerName": "Hasyim asy'ari, Lc",
+            "packageName": "1x Pertemuan",
+            "packageKey": "1x",
+            "totalSessions": 1,
+            "completedSessions": 0,
+            "mode": "online",
+            "pricePackage": 85000,
+            "serviceFee": 5000,
+            "totalPayment": 90000,
+            "currency": "IDR",
+            "status": "active",
+            "bookingDate": "2026-02-15T00:00:00Z",
+            "paymentMethod": "Qurani Wallet",
+            "paymentGateway": "Qurani Wallet",
+            "bookingCode": "#3008"
+        },
+        {
+            "id": 3009,
+            "userId": 889977665544110,
+            "userName": "Muhammad Yusuf",
+            "userEmail": "m.yusuf@example.com",
+            "trainerId": 302,
+            "trainerName": "Indi Fitriani",
+            "packageName": "10x Pertemuan",
+            "packageKey": "10x",
+            "totalSessions": 10,
+            "completedSessions": 4,
+            "mode": "online",
+            "pricePackage": 700000,
+            "serviceFee": 5000,
+            "totalPayment": 705000,
+            "currency": "IDR",
+            "status": "active",
+            "bookingDate": "2026-02-20T00:00:00Z",
+            "paymentMethod": "Qurani Wallet",
+            "paymentGateway": "Qurani Wallet",
+            "bookingCode": "#3009"
+        },
+        {
+            "id": 3011,
+            "userId": 889977665544102,
+            "userName": "Ahmad Fauzan",
+            "userEmail": "ahmad.fauzan@example.com",
+            "trainerId": 303,
+            "trainerName": "Iwan",
+            "packageName": "5x Pertemuan",
+            "packageKey": "5x",
+            "totalSessions": 5,
+            "completedSessions": 5,
+            "mode": "online",
+            "pricePackage": 420000,
+            "serviceFee": 5000,
+            "totalPayment": 425000,
+            "currency": "IDR",
+            "status": "completed",
+            "bookingDate": "2025-02-05T00:00:00Z",
+            "paymentMethod": "GoPay",
+            "paymentGateway": "GoPay",
+            "bookingCode": "#3011"
+        },
+        {
+            "id": 3012,
+            "userId": 889977665544106,
+            "userName": "Nur Hidayah",
+            "userEmail": "nur.hidayah@example.com",
+            "trainerId": 303,
+            "trainerName": "Iwan",
+            "packageName": "1x Pertemuan",
+            "packageKey": "1x",
+            "totalSessions": 1,
+            "completedSessions": 1,
+            "mode": "online",
+            "pricePackage": 90000,
+            "serviceFee": 5000,
+            "totalPayment": 95000,
+            "currency": "IDR",
+            "status": "active",
+            "bookingDate": "2026-08-06T00:00:00Z",
+            "paymentMethod": "GoPay",
+            "paymentGateway": "GoPay",
+            "bookingCode": "#3012"
+        },
+        {
+            "id": 3013,
+            "userId": 889977665544103,
+            "userName": "Siti Aminah",
+            "userEmail": "siti.aminah@yahoo.com",
+            "trainerId": 303,
+            "trainerName": "Iwan",
+            "packageName": "5x Pertemuan",
+            "packageKey": "5x",
+            "totalSessions": 5,
+            "completedSessions": 5,
+            "mode": "online",
+            "pricePackage": 420000,
+            "serviceFee": 5000,
+            "totalPayment": 425000,
+            "currency": "IDR",
+            "status": "completed",
+            "bookingDate": "2025-06-12T00:00:00Z",
+            "paymentMethod": "Qurani Wallet",
+            "paymentGateway": "Qurani Wallet",
+            "bookingCode": "#3013"
+        },
+        {
+            "id": 3014,
+            "userId": 889977665544109,
+            "userName": "Halimah Tussa'diyah",
+            "userEmail": "halimah.tussadiyah@mail.com",
+            "trainerId": 303,
+            "trainerName": "Iwan",
+            "packageName": "10x Pertemuan",
+            "packageKey": "10x",
+            "totalSessions": 10,
+            "completedSessions": 2,
+            "mode": "online",
+            "pricePackage": 800000,
+            "serviceFee": 5000,
+            "totalPayment": 805000,
+            "currency": "IDR",
+            "status": "active",
+            "bookingDate": "2026-09-02T00:00:00Z",
+            "paymentMethod": "GoPay",
+            "paymentGateway": "GoPay",
+            "bookingCode": "#3014"
+        },
+        {
+            "id": 3015,
+            "userId": 889977665544105,
+            "userName": "Dewi Rahayu",
+            "userEmail": "dewi.rahayu@gmail.com",
+            "trainerId": 303,
+            "trainerName": "Iwan",
+            "packageName": "1x Pertemuan",
+            "packageKey": "1x",
+            "totalSessions": 1,
+            "completedSessions": 0,
+            "mode": "online",
+            "pricePackage": 90000,
+            "serviceFee": 5000,
+            "totalPayment": 95000,
+            "currency": "IDR",
+            "status": "pending_payment",
+            "bookingDate": "2026-09-16T00:00:00Z",
+            "paymentMethod": "-",
+            "paymentGateway": "-",
+            "bookingCode": "#3015"
+        },
+        {
+            "id": 3016,
+            "userId": 889977665544101,
+            "userName": "Siti Rahmawati",
+            "userEmail": "siti.rahma@example.com",
+            "trainerId": 304,
+            "trainerName": "Aisyah",
+            "packageName": "4x Pertemuan",
+            "packageKey": "4x",
+            "totalSessions": 4,
+            "completedSessions": 4,
+            "mode": "online",
+            "pricePackage": 280000,
+            "serviceFee": 5000,
+            "totalPayment": 285000,
+            "currency": "IDR",
+            "status": "completed",
+            "bookingDate": "2025-04-08T00:00:00Z",
+            "paymentMethod": "GoPay",
+            "paymentGateway": "GoPay",
+            "bookingCode": "#3016"
+        },
+        {
+            "id": 3017,
+            "userId": 889977665544111,
+            "userName": "Fauzia Nurrohma",
+            "userEmail": "fauzia.n@mail.com",
+            "trainerId": 304,
+            "trainerName": "Aisyah",
+            "packageName": "4x Pertemuan",
+            "packageKey": "4x",
+            "totalSessions": 4,
+            "completedSessions": 2,
+            "mode": "online",
+            "pricePackage": 280000,
+            "serviceFee": 5000,
+            "totalPayment": 285000,
+            "currency": "IDR",
+            "status": "active",
+            "bookingDate": "2026-04-03T00:00:00Z",
+            "paymentMethod": "GoPay",
+            "paymentGateway": "GoPay",
+            "bookingCode": "#3017"
+        },
+        {
+            "id": 3018,
+            "userId": 889977665544112,
+            "userName": "Rahma Aulia",
+            "userEmail": "rahma.aulia@gmail.com",
+            "trainerId": 304,
+            "trainerName": "Aisyah",
+            "packageName": "1x Pertemuan",
+            "packageKey": "1x",
+            "totalSessions": 1,
+            "completedSessions": 1,
+            "mode": "online",
+            "pricePackage": 75000,
+            "serviceFee": 5000,
+            "totalPayment": 80000,
+            "currency": "IDR",
+            "status": "completed",
+            "bookingDate": "2026-04-02T00:00:00Z",
+            "paymentMethod": "Qurani Wallet",
+            "paymentGateway": "Qurani Wallet",
+            "bookingCode": "#3018"
+        },
+        {
+            "id": 3019,
+            "userId": 889977665544107,
+            "userName": "Nia Hidayati",
+            "userEmail": "nia.hidayati@mail.com",
+            "trainerId": 304,
+            "trainerName": "Aisyah",
+            "packageName": "4x Pertemuan",
+            "packageKey": "4x",
+            "totalSessions": 4,
+            "completedSessions": 2,
+            "mode": "online",
+            "pricePackage": 280000,
+            "serviceFee": 5000,
+            "totalPayment": 285000,
+            "currency": "IDR",
+            "status": "active",
+            "bookingDate": "2026-03-26T00:00:00Z",
+            "paymentMethod": "GoPay",
+            "paymentGateway": "GoPay",
+            "bookingCode": "#3019"
+        },
+        {
+            "id": 3020,
+            "userId": 889977665544110,
+            "userName": "Muhammad Yusuf",
+            "userEmail": "m.yusuf@example.com",
+            "trainerId": 304,
+            "trainerName": "Aisyah",
+            "packageName": "4x Pertemuan",
+            "packageKey": "4x",
+            "totalSessions": 4,
+            "completedSessions": 4,
+            "mode": "offline",
+            "pricePackage": 280000,
+            "serviceFee": 5000,
+            "totalPayment": 285000,
+            "currency": "IDR",
+            "status": "completed",
+            "bookingDate": "2025-02-22T00:00:00Z",
+            "paymentMethod": "GoPay",
+            "paymentGateway": "GoPay",
+            "bookingCode": "#3020"
+        },
+        {
+            "id": 3021,
+            "userId": 889977665544109,
+            "userName": "Halimah Tussa'diyah",
+            "userEmail": "halimah.tussadiyah@mail.com",
+            "trainerId": 304,
+            "trainerName": "Aisyah",
+            "packageName": "4x Pertemuan",
+            "packageKey": "4x",
+            "totalSessions": 4,
+            "completedSessions": 4,
+            "mode": "online",
+            "pricePackage": 280000,
+            "serviceFee": 5000,
+            "totalPayment": 285000,
+            "currency": "IDR",
+            "status": "completed",
+            "bookingDate": "2025-01-12T00:00:00Z",
+            "paymentMethod": "Qurani Wallet",
+            "paymentGateway": "Qurani Wallet",
+            "bookingCode": "#3021"
+        },
+        {
+            "id": 3022,
+            "userId": 889977665544105,
+            "userName": "Dewi Rahayu",
+            "userEmail": "dewi.rahayu@gmail.com",
+            "trainerId": 304,
+            "trainerName": "Aisyah",
+            "packageName": "1x Pertemuan",
+            "packageKey": "1x",
+            "totalSessions": 1,
+            "completedSessions": 0,
+            "mode": "online",
+            "pricePackage": 75000,
+            "serviceFee": 5000,
+            "totalPayment": 80000,
+            "currency": "IDR",
+            "status": "pending_payment",
+            "bookingDate": "2026-09-11T00:00:00Z",
+            "paymentMethod": "-",
+            "paymentGateway": "-",
+            "bookingCode": "#3022"
+        },
+        {
+            "id": 3023,
+            "userId": 889977665544104,
+            "userName": "Budi Santoso",
+            "userEmail": "budi.santoso@example.com",
+            "trainerId": 305,
+            "trainerName": "Zain Al-Fattah",
+            "packageName": "10x Pertemuan",
+            "packageKey": "10x",
+            "totalSessions": 10,
+            "completedSessions": 10,
+            "mode": "online",
+            "pricePackage": 750000,
+            "serviceFee": 5000,
+            "totalPayment": 755000,
+            "currency": "IDR",
+            "status": "completed",
+            "bookingDate": "2025-01-22T00:00:00Z",
+            "paymentMethod": "GoPay",
+            "paymentGateway": "GoPay",
+            "bookingCode": "#3023"
+        },
+        {
+            "id": 3024,
+            "userId": 889977665544108,
+            "userName": "Farid Al-Amin",
+            "userEmail": "farid.alamin@edu.id",
+            "trainerId": 305,
+            "trainerName": "Zain Al-Fattah",
+            "packageName": "10x Pertemuan",
+            "packageKey": "10x",
+            "totalSessions": 10,
+            "completedSessions": 5,
+            "mode": "online",
+            "pricePackage": 750000,
+            "serviceFee": 5000,
+            "totalPayment": 755000,
+            "currency": "IDR",
+            "status": "active",
+            "bookingDate": "2026-01-12T00:00:00Z",
+            "paymentMethod": "Qurani Wallet",
+            "paymentGateway": "Qurani Wallet",
+            "bookingCode": "#3024"
+        },
+        {
+            "id": 3025,
+            "userId": 889977665544106,
+            "userName": "Nur Hidayah",
+            "userEmail": "nur.hidayah@example.com",
+            "trainerId": 305,
+            "trainerName": "Zain Al-Fattah",
+            "packageName": "5x Pertemuan",
+            "packageKey": "5x",
+            "totalSessions": 5,
+            "completedSessions": 5,
+            "mode": "online",
+            "pricePackage": 400000,
+            "serviceFee": 5000,
+            "totalPayment": 405000,
+            "currency": "IDR",
+            "status": "completed",
+            "bookingDate": "2025-03-17T00:00:00Z",
+            "paymentMethod": "GoPay",
+            "paymentGateway": "GoPay",
+            "bookingCode": "#3025"
+        },
+        {
+            "id": 3026,
+            "userId": 889977665544102,
+            "userName": "Ahmad Fauzan",
+            "userEmail": "ahmad.fauzan@example.com",
+            "trainerId": 305,
+            "trainerName": "Zain Al-Fattah",
+            "packageName": "5x Pertemuan",
+            "packageKey": "5x",
+            "totalSessions": 5,
+            "completedSessions": 3,
+            "mode": "online",
+            "pricePackage": 400000,
+            "serviceFee": 5000,
+            "totalPayment": 405000,
+            "currency": "IDR",
+            "status": "active",
+            "bookingDate": "2026-08-03T00:00:00Z",
+            "paymentMethod": "GoPay",
+            "paymentGateway": "GoPay",
+            "bookingCode": "#3026"
+        },
+        {
+            "id": 3027,
+            "userId": 889977665544109,
+            "userName": "Halimah Tussa'diyah",
+            "userEmail": "halimah.tussadiyah@mail.com",
+            "trainerId": 305,
+            "trainerName": "Zain Al-Fattah",
+            "packageName": "10x Pertemuan",
+            "packageKey": "10x",
+            "totalSessions": 10,
+            "completedSessions": 10,
+            "mode": "offline",
+            "pricePackage": 750000,
+            "serviceFee": 5000,
+            "totalPayment": 755000,
+            "currency": "IDR",
+            "status": "completed",
+            "bookingDate": "2025-05-07T00:00:00Z",
+            "paymentMethod": "GoPay",
+            "paymentGateway": "GoPay",
+            "bookingCode": "#3027"
+        },
+        {
+            "id": 3028,
+            "userId": 889977665544101,
+            "userName": "Siti Rahmawati",
+            "userEmail": "siti.rahma@example.com",
+            "trainerId": 305,
+            "trainerName": "Zain Al-Fattah",
+            "packageName": "5x Pertemuan",
+            "packageKey": "5x",
+            "totalSessions": 5,
+            "completedSessions": 0,
+            "mode": "online",
+            "pricePackage": 400000,
+            "serviceFee": 5000,
+            "totalPayment": 405000,
+            "currency": "IDR",
+            "status": "pending_payment",
+            "bookingDate": "2026-09-19T00:00:00Z",
+            "paymentMethod": "-",
+            "paymentGateway": "-",
+            "bookingCode": "#3028"
+        },
+        {
+            "id": 3029,
+            "userId": 889977665544108,
+            "userName": "Farid Al-Amin",
+            "userEmail": "farid.alamin@edu.id",
+            "trainerId": 301,
+            "trainerName": "Hasyim asy'ari, Lc",
+            "packageName": "10x Pertemuan",
+            "packageKey": "10x",
+            "totalSessions": 10,
+            "completedSessions": 0,
+            "mode": "online",
+            "pricePackage": 1000000,
+            "serviceFee": 5000,
+            "totalPayment": 1005000,
+            "currency": "IDR",
+            "status": "pending_payment",
+            "bookingDate": "2026-07-21T00:00:00Z",
+            "paymentMethod": "-",
+            "paymentGateway": "-",
+            "bookingCode": "#3029"
+        },
+        {
+            "id": 3030,
+            "userId": 889977665544101,
+            "userName": "Siti Rahmawati",
+            "userEmail": "siti.rahma@example.com",
+            "trainerId": 301,
+            "trainerName": "Hasyim asy'ari, Lc",
+            "packageName": "10x Pertemuan",
+            "packageKey": "10x",
+            "totalSessions": 10,
+            "completedSessions": 10,
+            "mode": "online",
+            "pricePackage": 1000000,
+            "serviceFee": 5000,
+            "totalPayment": 1005000,
+            "currency": "IDR",
+            "status": "completed",
+            "bookingDate": "2024-10-03T00:00:00Z",
+            "paymentMethod": "GoPay",
+            "paymentGateway": "GoPay",
+            "bookingCode": "#3030"
+        }
+    ],
+    "bookingDetails": [
+        {
+            "bookingId": 3001,
+            "member": {
+                "id": 889977665544101,
+                "name": "Siti Rahmawati",
+                "email": "siti.rahma@example.com",
+                "phone": "+62 857-1100-9988",
+                "joinDate": "2025-09-01T00:00:00Z",
+                "location": "Semarang"
+            },
+            "trainer": {
+                "id": 302,
+                "name": "Indi Fitriani",
+                "email": "indi.f@superprof.id",
+                "avatar": "https://i.pravatar.cc/150?img=47",
+                "rating": 4.9,
+                "totalStudents": 39,
+                "specialization": "Tahsinul Qur'an & Tahfidzul Qur'an",
+                "location": "Bekasi",
+                "yearsExperience": 5,
+                "subjects": [
+                    "Tahsinul Qur'an",
+                    "Tahfidzul Qur'an"
+                ]
+            },
+            "sessions": [
+                {
+                    "no": 1,
+                    "date": "2026-04-10",
+                    "time": "09:00 - 10:00",
+                    "status": "completed",
+                    "notes": "Sesi pengenalan makhraj"
+                },
+                {
+                    "no": 2,
+                    "date": "2026-04-12",
+                    "time": "09:00 - 10:00",
+                    "status": "completed",
+                    "notes": "Sesi kedua lancar"
+                },
+                {
+                    "no": 3,
+                    "date": "2026-04-14",
+                    "time": "09:00 - 10:00",
+                    "status": "scheduled",
+                    "notes": null
+                }
+            ],
+            "payment": {
+                "invoiceNo": "INV-2026-3001",
+                "pricePackage": 382500,
+                "serviceFee": 0,
+                "total": 428400,
+                "method": "GoPay",
+                "status": "paid",
+                "paidAt": "2026-04-05T10:30:00Z",
+                "receiptRef": "MID-2026-04-0010",
+                "tax": 45900
+            },
+            "bookingCode": "e1f1a554-a3c1-46fd-b531-0824284c900c"
+        },
+        {
+            "bookingId": 3002,
+            "member": {
+                "id": 889977665544103,
+                "name": "Siti Aminah",
+                "email": "siti.aminah@yahoo.com",
+                "phone": "+62 878-1122-3344",
+                "joinDate": "2025-01-20T00:00:00Z",
+                "location": "Bandung"
+            },
+            "trainer": {
+                "id": 302,
+                "name": "Indi fitriani",
+                "email": "indi.f@superprof.id",
+                "avatar": "https://i.pravatar.cc/150?img=47",
+                "rating": 4.9,
+                "totalStudents": 39,
+                "specialization": "Tahsinul Qur'an & Tahfidzul Qur'an",
+                "location": "Bekasi",
+                "yearsExperience": 5,
+                "subjects": [
+                    "Tahsinul Qur'an",
+                    "Tahfidzul Qur'an"
+                ]
+            },
+            "sessions": [
+                {
+                    "no": 1,
+                    "date": "2026-02-17",
+                    "time": "14:00 -â€œ 15:00",
+                    "status": "scheduled",
+                    "notes": "Sesi perkenalan tatap muka"
+                }
+            ],
+            "payment": {
+                "invoiceNo": "INV-2026-3002",
+                "pricePackage": 85000,
+                "serviceFee": 0,
+                "total": 95200,
+                "method": "Qurani Wallet",
+                "status": "pending",
+                "paidAt": null,
+                "receiptRef": "QRS-2026-02-0023",
+                "tax": 10200
+            },
+            "bookingCode": "9dc5c0c0-b453-4165-a6e8-aaea04b81703"
+        },
+        {
+            "bookingId": 3003,
+            "member": {
+                "id": 889977665544104,
+                "name": "Budi Santoso",
+                "email": "budi.santoso@example.com",
+                "phone": "+62 856-9988-7766",
+                "joinDate": "2024-09-05T00:00:00Z",
+                "location": "Surabaya"
+            },
+            "trainer": {
+                "id": 303,
+                "name": "Iwan",
+                "email": "iwan.ngaji@superprof.id",
+                "avatar": "https://i.pravatar.cc/150?img=52",
+                "rating": 5,
+                "totalStudents": 39,
+                "specialization": "Baca Tulis Al-Qur'an Dasar",
+                "location": "Depok",
+                "yearsExperience": 8,
+                "subjects": [
+                    "Tahfidz",
+                    "Makharijul Huruf",
+                    "Qiraah"
+                ]
+            },
+            "sessions": [
+                {
+                    "no": 1,
+                    "date": "2026-01-05",
+                    "time": "07:00 -â€œ 08:00",
+                    "status": "completed",
+                    "notes": "Tes bacaan awal",
+                    "feedback": {
+                        "rating": 5,
+                        "pesan": "Guru sangat antusias mengajar dan selalu memberikan motivasi. Penjelasan mudah dipahami dan menyenangkan."
+                    }
+                },
+                {
+                    "no": 2,
+                    "date": "2026-01-08",
+                    "time": "07:00 -â€œ 08:00",
+                    "status": "completed",
+                    "notes": null,
+                    "feedback": {
+                        "rating": 4,
+                        "pesan": "Penjelasan makharijul huruf sangat detail dan praktis. Waktu tanya jawab terasa singkat, berharap bisa lebih panjang."
+                    }
+                },
+                {
+                    "no": 3,
+                    "date": "2026-01-12",
+                    "time": "07:00 -â€œ 08:00",
+                    "status": "completed",
+                    "notes": null,
+                    "feedback": {
+                        "rating": 3,
+                        "pesan": "Metode mengajar menyenangkan namun link meeting terlambat dikirim. Sesi dimulai sedikit terlambat karena kendala teknis."
+                    }
+                },
+                {
+                    "no": 4,
+                    "date": "2026-01-15",
+                    "time": "07:00 -â€œ 08:00",
+                    "status": "completed",
+                    "notes": null,
+                    "feedback": {
+                        "rating": 5,
+                        "pesan": "Progres saya sangat terasa, sudah bisa membaca surat pendek dengan lancar. Terima kasih atas bimbingannya."
+                    }
+                },
+                {
+                    "no": 5,
+                    "date": "2026-01-19",
+                    "time": "07:00 -â€œ 08:00",
+                    "status": "completed",
+                    "notes": null,
+                    "feedback": {
+                        "rating": 4,
+                        "pesan": "Guru memberikan feedback yang konstruktif dan membangun semangat belajar. Jadwal yang lebih fleksibel akan sangat membantu."
+                    }
+                },
+                {
+                    "no": 6,
+                    "date": "2026-01-22",
+                    "time": "07:00 -â€œ 08:00",
+                    "status": "completed",
+                    "notes": null,
+                    "feedback": {
+                        "rating": 5,
+                        "pesan": "Sesi hari ini sangat produktif, banyak poin tajwid yang saya perbaiki. Guru sangat profesional dan ramah."
+                    }
+                },
+                {
+                    "no": 7,
+                    "date": "2026-01-26",
+                    "time": "07:00 -â€œ 08:00",
+                    "status": "completed",
+                    "notes": null,
+                    "feedback": {
+                        "rating": 5,
+                        "pesan": "Guru sangat sabar dan materi dijelaskan dengan sangat jelas. Saya merasa lebih percaya diri membaca Al-Qur'an setelah sesi ini."
+                    }
+                },
+                {
+                    "no": 8,
+                    "date": "2026-01-29",
+                    "time": "07:00 -â€œ 08:00",
+                    "status": "completed",
+                    "notes": null,
+                    "feedback": {
+                        "rating": 4,
+                        "pesan": "Sesi berjalan lancar, penjelasan tajwid sangat membantu. Koneksi sempat kurang stabil di awal namun tidak mengganggu secara keseluruhan."
+                    }
+                },
+                {
+                    "no": 9,
+                    "date": "2026-02-02",
+                    "time": "07:00 -â€œ 08:00",
+                    "status": "completed",
+                    "notes": null,
+                    "feedback": {
+                        "rating": 5,
+                        "pesan": "Materi hari ini lebih menantang namun guru membimbing dengan sabar dan detail. Sangat puas dengan sesi ini."
+                    }
+                },
+                {
+                    "no": 10,
+                    "date": "2026-02-05",
+                    "time": "07:00 -â€œ 08:00",
+                    "status": "completed",
+                    "notes": "Ujian akhir & evaluasi",
+                    "feedback": {
+                        "rating": 4,
+                        "pesan": "Saya mulai lebih percaya diri membaca Al-Qur'an berkat bimbingan guru. Modul latihan bisa diperbanyak agar bisa latihan mandiri."
+                    }
+                }
+            ],
+            "payment": {
+                "invoiceNo": "INV-2026-3003",
+                "pricePackage": 700000,
+                "serviceFee": 0,
+                "total": 784000,
+                "method": "OVO",
+                "status": "paid",
+                "paidAt": "2026-01-01T09:02:10Z",
+                "receiptRef": "OVO-2026-01-0044",
+                "tax": 84000
+            },
+            "bookingCode": "d534075c-6aa2-4716-bab0-2d6be778a263"
+        },
+        {
+            "bookingId": 3004,
+            "member": {
+                "id": 889977665544105,
+                "name": "Dewi Rahayu",
+                "email": "budi.santoso@example.com",
+                "phone": "+62 821-5544-3322",
+                "joinDate": "2025-08-12T00:00:00Z",
+                "location": "Yogyakarta"
+            },
+            "trainer": {
+                "id": 301,
+                "name": "Hasyim asy'ari, Lc",
+                "email": "hasyim.lc@superprof.id",
+                "avatar": "https://i.pravatar.cc/150?img=57",
+                "rating": 5,
+                "totalStudents": 45,
+                "specialization": "Lulusan Al-Azhar Kairo-Mesir",
+                "location": "Jakarta Selatan",
+                "yearsExperience": 10,
+                "subjects": [
+                    "Tahfidz",
+                    "Tajwid",
+                    "Al-Qur'an Dasar"
+                ]
+            },
+            "sessions": [
+                {
+                    "no": 1,
+                    "date": "2026-01-10",
+                    "time": "10:00 -â€œ 11:00",
+                    "status": "completed",
+                    "notes": "Sesi perkenalan ÃƒÂ¢Ã¢â€šÂ¬-Â offline di rumah siswa"
+                }
+            ],
+            "payment": {
+                "invoiceNo": "INV-2026-3004",
+                "pricePackage": 85000,
+                "serviceFee": 0,
+                "total": 95200,
+                "method": "GoPay",
+                "status": "paid",
+                "paidAt": "2026-01-05T11:21:33Z",
+                "receiptRef": "MID-2026-01-0101",
+                "tax": 10200
+            },
+            "bookingCode": "cbd92a02-9359-4104-a5e8-58448d7c9190"
+        },
+        {
+            "bookingId": 3005,
+            "member": {
+                "id": 889977665544106,
+                "name": "Nur Hidayah",
+                "email": "nur.hidayah@example.com",
+                "phone": "+62 895-6677-8899",
+                "joinDate": "2024-07-30T00:00:00Z",
+                "location": "Depok"
+            },
+            "trainer": {
+                "id": 304,
+                "name": "Nanda",
+                "email": "nanda.q@superprof.id",
+                "avatar": "https://i.pravatar.cc/150?img=45",
+                "rating": 4.9,
+                "totalStudents": 67,
+                "specialization": "Program Tahsin & Tahfidz",
+                "location": "Bogor",
+                "yearsExperience": 3,
+                "subjects": [
+                    "Tilawah",
+                    "Al-Qur'an Dasar"
+                ]
+            },
+            "sessions": [
+                {
+                    "no": 1,
+                    "date": "2025-10-07",
+                    "time": "19:00 -â€œ 20:00",
+                    "status": "completed",
+                    "notes": "Perkenalan dan tes awal"
+                },
+                {
+                    "no": 2,
+                    "date": "2025-10-14",
+                    "time": "19:00 -â€œ 20:00",
+                    "status": "completed",
+                    "notes": "Latihan huruf hijaiyah lanjutan",
+                    "feedback": {
+                        "rating": 5,
+                        "pesan": "Progres saya sangat terasa, sudah bisa membaca surat pendek dengan lancar. Terima kasih atas bimbingannya."
+                    }
+                },
+                {
+                    "no": 3,
+                    "date": "2025-10-21",
+                    "time": "19:00 -â€œ 20:00",
+                    "status": "completed",
+                    "notes": "Makharijul huruf dan sifatnya",
+                    "feedback": {
+                        "rating": 4,
+                        "pesan": "Guru memberikan feedback yang konstruktif dan membangun semangat belajar. Jadwal yang lebih fleksibel akan sangat membantu."
+                    }
+                },
+                {
+                    "no": 4,
+                    "date": "2025-10-28",
+                    "time": "19:00 -â€œ 20:00",
+                    "status": "ongoing",
+                    "notes": "Sesi sedang berlangsung"
+                },
+                {
+                    "no": 5,
+                    "date": "2025-11-04",
+                    "time": "19:00 -â€œ 20:00",
+                    "status": "scheduled",
+                    "notes": null
+                }
+            ],
+            "payment": {
+                "invoiceNo": "INV-2025-3005",
+                "pricePackage": 382500,
+                "serviceFee": 0,
+                "total": 428400,
+                "method": "Qurani Wallet",
+                "status": "paid",
+                "paidAt": "2025-10-01T16:46:20Z",
+                "receiptRef": "QRS-2025-10-0031",
+                "tax": 45900
+            },
+            "bookingCode": "5f60d9c4-2e02-40e8-91e5-940fd0dc5093"
+        },
+        {
+            "bookingId": 3006,
+            "member": {
+                "id": 889977665544107,
+                "name": "Nia Hidayati",
+                "email": "nia.hidayati@mail.com",
+                "phone": "+62 812-9988-1122",
+                "joinDate": "2025-03-18T00:00:00Z",
+                "location": "Bekasi"
+            },
+            "trainer": {
+                "id": 302,
+                "name": "Indi fitriani",
+                "email": "indi.f@superprof.id",
+                "avatar": "https://i.pravatar.cc/150?img=47",
+                "rating": 4.9,
+                "totalStudents": 39,
+                "specialization": "Tahsinul Qur'an & Tahfidzul Qur'an",
+                "location": "Bekasi",
+                "yearsExperience": 5,
+                "subjects": [
+                    "Tahsinul Qur'an",
+                    "Tahfidzul Qur'an"
+                ]
+            },
+            "sessions": [
+                {
+                    "no": 1,
+                    "date": "Senin, 05 Mar 2026",
+                    "time": "19:00",
+                    "status": "cancelled",
+                    "notes": null,
+                    "feedback": null
+                },
+                {
+                    "no": 2,
+                    "date": "Senin, 12 Mar 2026",
+                    "time": "19:00",
+                    "status": "cancelled",
+                    "notes": null,
+                    "feedback": null
+                },
+                {
+                    "no": 3,
+                    "date": "Senin, 19 Mar 2026",
+                    "time": "19:00",
+                    "status": "cancelled",
+                    "notes": null,
+                    "feedback": null
+                },
+                {
+                    "no": 4,
+                    "date": "Senin, 26 Mar 2026",
+                    "time": "19:00",
+                    "status": "cancelled",
+                    "notes": null,
+                    "feedback": null
+                },
+                {
+                    "no": 5,
+                    "date": "Senin, 02 Apr 2026",
+                    "time": "19:00",
+                    "status": "cancelled",
+                    "notes": null,
+                    "feedback": null
+                }
+            ],
+            "payment": {
+                "invoiceNo": "INV-2025-3006",
+                "pricePackage": 595000,
+                "serviceFee": 0,
+                "total": 666400,
+                "method": "OVO",
+                "status": "paid",
+                "paidAt": "2025-12-01T08:01:15Z",
+                "receiptRef": "OVO-2025-12-0067",
+                "tax": 71400
+            },
+            "bookingDate": "2026-03-05",
+            "packageName": "5x Pertemuan",
+            "totalSessions": 5,
+            "completedSessions": 0,
+            "cancellationInfo": {
+                "kategori": "Penampilan Tidak Sesuai",
+                "ulasan": "Penampilan guru mirip dengan tetangga saya sehingga saya merasa kurang nyaman untuk belajar secara efektif.",
+                "resolusi": "Ganti Guru Baru",
+                "lampiran": null
+            },
+            "bookingCode": "5a00ce30-d49c-46dd-81e3-70c7b28c1822"
+        },
+        {
+            "bookingId": 3007,
+            "member": {
+                "id": 889977665544108,
+                "name": "Farid Al-Amin",
+                "email": "farid.alamin@edu.id",
+                "phone": "+62 877-3344-5566",
+                "joinDate": "2025-05-22T00:00:00Z",
+                "location": "Malang"
+            },
+            "trainer": {
+                "id": 305,
+                "name": "Zain",
+                "email": "zain.n@superprof.id",
+                "avatar": "https://i.pravatar.cc/150?img=33",
+                "rating": 5,
+                "totalStudents": 42,
+                "specialization": "Tahsin & Mahroj Profesional",
+                "location": "Jakarta Timur",
+                "yearsExperience": 7,
+                "subjects": [
+                    "Tahsin",
+                    "Mahroj Profesional"
+                ]
+            },
+            "sessions": [
+                {
+                    "no": 1,
+                    "date": "2026-01-20",
+                    "time": "20:00 -â€œ 21:00",
+                    "status": "scheduled",
+                    "notes": null
+                },
+                {
+                    "no": 2,
+                    "date": "2026-01-27",
+                    "time": "20:00 -â€œ 21:00",
+                    "status": "scheduled",
+                    "notes": null
+                },
+                {
+                    "no": 3,
+                    "date": "2026-02-03",
+                    "time": "20:00 -â€œ 21:00",
+                    "status": "scheduled",
+                    "notes": null
+                },
+                {
+                    "no": 4,
+                    "date": "2026-02-10",
+                    "time": "20:00 -â€œ 21:00",
+                    "status": "scheduled",
+                    "notes": null
+                },
+                {
+                    "no": 5,
+                    "date": "2026-02-17",
+                    "time": "20:00 -â€œ 21:00",
+                    "status": "scheduled",
+                    "notes": null
+                }
+            ],
+            "payment": {
+                "invoiceNo": "INV-2026-3007",
+                "pricePackage": 382500,
+                "serviceFee": 0,
+                "total": 428400,
+                "method": "GoPay",
+                "status": "pending",
+                "paidAt": null,
+                "receiptRef": "MID-2026-01-0145",
+                "tax": 45900
+            },
+            "bookingCode": "bdaa132c-7e34-4167-8770-68708d208bc7"
+        },
+        {
+            "bookingId": 3008,
+            "member": {
+                "id": 889977665544109,
+                "name": "Halimah Tussa'diyah",
+                "email": "halimah.ts@gmail.com",
+                "phone": "+62 859-7788-0011",
+                "joinDate": "2025-10-01T00:00:00Z",
+                "location": "Tangerang"
+            },
+            "trainer": {
+                "id": 301,
+                "name": "Hasyim asy'ari, Lc",
+                "email": "hasyim.lc@superprof.id",
+                "avatar": "https://i.pravatar.cc/150?img=57",
+                "rating": 5,
+                "totalStudents": 45,
+                "specialization": "Lulusan Al-Azhar Kairo-Mesir",
+                "location": "Jakarta Selatan",
+                "yearsExperience": 10,
+                "subjects": [
+                    "Tahfidz",
+                    "Tajwid",
+                    "Al-Qur'an Dasar"
+                ]
+            },
+            "sessions": [
+                {
+                    "no": 1,
+                    "date": "2026-02-20",
+                    "time": "13:00 -â€œ 14:00",
+                    "status": "scheduled",
+                    "notes": "Sesi perkenalan ÃƒÂ¢Ã¢â€šÂ¬-Â offline"
+                }
+            ],
+            "payment": {
+                "invoiceNo": "INV-2026-3008",
+                "pricePackage": 85000,
+                "serviceFee": 0,
+                "total": 95200,
+                "method": "Qurani Wallet",
+                "status": "paid",
+                "paidAt": "2026-02-15T10:02:44Z",
+                "receiptRef": "QRS-2026-02-0055",
+                "tax": 10200
+            },
+            "bookingCode": "e451274a-3c5c-4e5e-82b9-8cae99572abc"
+        },
+        {
+            "bookingId": 3009,
+            "member": {
+                "id": 889977665544110,
+                "name": "Muhammad Yusuf",
+                "email": "m.yusuf@qurani.id",
+                "phone": "+62 813-2211-4455",
+                "joinDate": "2024-11-10T00:00:00Z",
+                "location": "Bogor"
+            },
+            "trainer": {
+                "id": 302,
+                "name": "Indi fitriani",
+                "email": "indi.f@superprof.id",
+                "avatar": "https://i.pravatar.cc/150?img=47",
+                "rating": 4.9,
+                "totalStudents": 39,
+                "specialization": "Tahsinul Qur'an & Tahfidzul Qur'an",
+                "location": "Bekasi",
+                "yearsExperience": 5,
+                "subjects": [
+                    "Tahsinul Qur'an",
+                    "Tahfidzul Qur'an"
+                ]
+            },
+            "sessions": [
+                {
+                    "no": 1,
+                    "date": "2026-02-22",
+                    "time": "08:00 -â€œ 09:00",
+                    "status": "completed",
+                    "notes": null
+                },
+                {
+                    "no": 2,
+                    "date": "2026-02-24",
+                    "time": "08:00 -â€œ 09:00",
+                    "status": "completed",
+                    "notes": null
+                },
+                {
+                    "no": 3,
+                    "date": "2026-02-26",
+                    "time": "08:00 -â€œ 09:00",
+                    "status": "completed",
+                    "notes": null
+                },
+                {
+                    "no": 4,
+                    "date": "2026-02-28",
+                    "time": "08:00 -â€œ 09:00",
+                    "status": "completed",
+                    "notes": null
+                },
+                {
+                    "no": 5,
+                    "date": "2026-03-02",
+                    "time": "08:00 -â€œ 09:00",
+                    "status": "completed",
+                    "notes": "Latihan waqaf dan ibtida",
+                    "feedback": {
+                        "rating": 5,
+                        "pesan": "Guru sangat antusias mengajar dan selalu memberikan motivasi. Penjelasan mudah dipahami dan menyenangkan."
+                    }
+                },
+                {
+                    "no": 6,
+                    "date": "2026-03-04",
+                    "time": "08:00 -â€œ 09:00",
+                    "status": "completed",
+                    "notes": "Mad dan qashr",
+                    "feedback": {
+                        "rating": 4,
+                        "pesan": "Penjelasan makharijul huruf sangat detail dan praktis. Waktu tanya jawab terasa singkat, berharap bisa lebih panjang."
+                    }
+                },
+                {
+                    "no": 7,
+                    "date": "2026-03-06",
+                    "time": "08:00 -â€œ 09:00",
+                    "status": "ongoing",
+                    "notes": "Sesi sedang berlangsung"
+                },
+                {
+                    "no": 8,
+                    "date": "2026-03-08",
+                    "time": "08:00 -â€œ 09:00",
+                    "status": "scheduled",
+                    "notes": null
+                },
+                {
+                    "no": 9,
+                    "date": "2026-03-10",
+                    "time": "08:00 -â€œ 09:00",
+                    "status": "scheduled",
+                    "notes": null
+                },
+                {
+                    "no": 10,
+                    "date": "2026-03-12",
+                    "time": "08:00 -â€œ 09:00",
+                    "status": "scheduled",
+                    "notes": null
+                }
+            ],
+            "payment": {
+                "invoiceNo": "INV-2026-3009",
+                "pricePackage": 700000,
+                "serviceFee": 0,
+                "total": 784000,
+                "method": "GoPay",
+                "status": "paid",
+                "paidAt": "2026-02-20T07:15:00Z",
+                "receiptRef": "MID-2026-02-0200",
+                "tax": 84000
+            },
+            "bookingCode": "019526b2-7ca7-48ed-bdc5-11d66a2307dc"
+        },
+        {
+            "bookingId": 3010,
+            "member": {
+                "id": 889977665544101,
+                "name": "Siti Rahmawati",
+                "email": "siti.rahma@example.com",
+                "phone": "+62 857-1100-9988",
+                "joinDate": "2025-09-01T00:00:00Z",
+                "location": "Semarang"
+            },
+            "trainer": {
+                "id": 303,
+                "name": "Iwan",
+                "email": "iwan.ngaji@superprof.id",
+                "avatar": "https://i.pravatar.cc/150?img=52",
+                "rating": 5,
+                "totalStudents": 39,
+                "specialization": "Baca Tulis Al-Qur'an Dasar",
+                "location": "Depok",
+                "yearsExperience": 8,
+                "subjects": [
+                    "Tahfidz",
+                    "Makharijul Huruf",
+                    "Qiraah"
+                ]
+            },
+            "sessions": [
+                {
+                    "no": 1,
+                    "date": "2025-12-22",
+                    "time": "09:00 -â€œ 10:00",
+                    "status": "completed",
+                    "notes": null
+                },
+                {
+                    "no": 2,
+                    "date": "2025-12-26",
+                    "time": "09:00 -â€œ 10:00",
+                    "status": "completed",
+                    "notes": null
+                },
+                {
+                    "no": 3,
+                    "date": "2025-12-30",
+                    "time": "09:00 -â€œ 10:00",
+                    "status": "completed",
+                    "notes": null
+                },
+                {
+                    "no": 4,
+                    "date": "2026-01-03",
+                    "time": "09:00 -â€œ 10:00",
+                    "status": "completed",
+                    "notes": null
+                },
+                {
+                    "no": 5,
+                    "date": "2026-01-07",
+                    "time": "09:00 -â€œ 10:00",
+                    "status": "completed",
+                    "notes": "Sesi terakhir & evaluasi akhir"
+                }
+            ],
+            "payment": {
+                "invoiceNo": "INV-2025-3010",
+                "pricePackage": 382500,
+                "serviceFee": 0,
+                "total": 428400,
+                "method": "OVO",
+                "status": "paid",
+                "paidAt": "2025-12-20T10:30:00Z",
+                "receiptRef": "OVO-2025-12-0099",
+                "tax": 45900
+            },
+            "bookingCode": "f1a1e554-a3c1-46fd-b531-0824284c900b"
+        },
+        {
+            "bookingId": 3098,
+            "bookingCode": "#3098",
+            "member": {
+                "id": 889977665544111,
+                "name": "Fauzia Nurrohma",
+                "email": "fauzia.nurrohma@example.com",
+                "phone": "+62 894-9244-6078",
+                "joinDate": "2023-01-15T10:00:00Z",
+                "location": "Bandung, Jawa Barat"
+            },
+            "trainer": {
+                "id": 302,
+                "name": "Indi Fitriani",
+                "email": "guru.302@qurani.id",
+                "avatar": "https://i.pravatar.cc/150?img=51",
+                "rating": 4.8,
+                "totalStudents": 110,
+                "specialization": "Tilawati untuk Anak",
+                "location": "Bandung, Jawa Barat",
+                "yearsExperience": 2,
+                "subjects": [
+                    "Tahsin & Talaqqi"
+                ]
+            },
+            "sessions": [
+                {
+                    "no": 1,
+                    "date": "2026-04-02",
+                    "time": "19:00 - 20:00",
+                    "status": "scheduled",
+                    "notes": null
+                }
+            ],
+            "payment": {
+                "invoiceNo": "INV-2026-3098-327",
+                "receiptRef": "-",
+                "method": "GoPay",
+                "status": "pending",
+                "paidAt": null,
+                "pricePackage": 84600,
+                "serviceFee": 5000,
+                "tax": 9306,
+                "total": 89600
+            }
+        },
+        {
+            "bookingId": 3099,
+            "bookingCode": "#3099",
+            "member": {
+                "id": 889977665544112,
+                "name": "Rahma Aulia",
+                "email": "rahma.aulia@example.com",
+                "phone": "+62 836-7883-1010",
+                "joinDate": "2023-02-15T10:00:00Z",
+                "location": "Tangerang Selatan"
+            },
+            "trainer": {
+                "id": 302,
+                "name": "Indi Fitriani",
+                "email": "guru.302@qurani.id",
+                "avatar": "https://i.pravatar.cc/150?img=41",
+                "rating": 4.6,
+                "totalStudents": 51,
+                "specialization": "Tilawati untuk Anak",
+                "location": "Depok",
+                "yearsExperience": 10,
+                "subjects": [
+                    "Irama & Tajwid Lanjut"
+                ]
+            },
+            "sessions": [
+                {
+                    "no": 1,
+                    "date": "2026-04-01",
+                    "time": "10:00 - 11:00",
+                    "status": "scheduled",
+                    "notes": null
+                },
+                {
+                    "no": 2,
+                    "date": "2026-04-08",
+                    "time": "20:00 - 21:00",
+                    "status": "scheduled",
+                    "notes": null
+                },
+                {
+                    "no": 3,
+                    "date": "2026-04-15",
+                    "time": "11:00 - 12:00",
+                    "status": "scheduled",
+                    "notes": null
+                },
+                {
+                    "no": 4,
+                    "date": "2026-04-22",
+                    "time": "14:00 - 15:00",
+                    "status": "scheduled",
+                    "notes": null
+                },
+                {
+                    "no": 5,
+                    "date": "2026-04-29",
+                    "time": "15:00 - 16:00",
+                    "status": "scheduled",
+                    "notes": null
+                }
+            ],
+            "payment": {
+                "invoiceNo": "INV-2026-3099-637",
+                "receiptRef": "-",
+                "method": "-",
+                "status": "pending",
+                "paidAt": null,
+                "pricePackage": 415000,
+                "serviceFee": 5000,
+                "tax": 45650,
+                "total": 420000
+            }
+        },
+        {
+            "bookingId": 3011,
+            "bookingCode": "#3011",
+            "member": {
+                "id": 889977665544102,
+                "name": "Ahmad Fauzan",
+                "email": "ahmad.fauzan@example.com",
+                "phone": "+62 837-5933-6427",
+                "joinDate": "2024-12-15T10:00:00Z",
+                "location": "Surabaya, Jawa Timur"
+            },
+            "trainer": {
+                "id": 303,
+                "name": "Iwan",
+                "email": "guru.303@qurani.id",
+                "avatar": "https://i.pravatar.cc/150?img=18",
+                "rating": 4.4,
+                "totalStudents": 75,
+                "specialization": "Qiroati Dasar",
+                "location": "Medan, Sumatera Utara",
+                "yearsExperience": 2,
+                "subjects": [
+                    "Tahsin & Talaqqi"
+                ]
+            },
+            "sessions": [
+                {
+                    "no": 1,
+                    "date": "2025-02-05",
+                    "time": "20:00 - 21:00",
+                    "status": "completed",
+                    "notes": "Mulai lancar membaca huruf bersambung."
+                },
+                {
+                    "no": 2,
+                    "date": "2025-02-12",
+                    "time": "12:00 - 13:00",
+                    "status": "completed",
+                    "notes": "Perlu banyak latihan untuk huruf Ain dan Ghain."
+                },
+                {
+                    "no": 3,
+                    "date": "2025-02-19",
+                    "time": "08:00 - 09:00",
+                    "status": "completed",
+                    "notes": "Bagus sekali, bacaan tajwid sudah mulai rapi."
+                },
+                {
+                    "no": 4,
+                    "date": "2025-02-26",
+                    "time": "12:00 - 13:00",
+                    "status": "completed",
+                    "notes": "Sesi menyenangkan, interaktif, murid semangat."
+                },
+                {
+                    "no": 5,
+                    "date": "2025-03-05",
+                    "time": "16:00 - 17:00",
+                    "status": "completed",
+                    "notes": "Tidak ada catatan khusus, bacaan sudah sangat baik."
+                }
+            ],
+            "payment": {
+                "invoiceNo": "INV-2026-3011-386",
+                "receiptRef": "GOPAY-REF-505257",
+                "method": "GoPay",
+                "status": "paid",
+                "paidAt": "2025-02-05T00:00:00Z",
+                "pricePackage": 420000,
+                "serviceFee": 5000,
+                "tax": 46200,
+                "total": 425000
+            }
+        },
+        {
+            "bookingId": 3012,
+            "bookingCode": "#3012",
+            "member": {
+                "id": 889977665544106,
+                "name": "Nur Hidayah",
+                "email": "nur.hidayah@example.com",
+                "phone": "+62 833-9018-1739",
+                "joinDate": "2024-11-15T10:00:00Z",
+                "location": "Surabaya, Jawa Timur"
+            },
+            "trainer": {
+                "id": 303,
+                "name": "Iwan",
+                "email": "guru.303@qurani.id",
+                "avatar": "https://i.pravatar.cc/150?img=53",
+                "rating": 4.6,
+                "totalStudents": 194,
+                "specialization": "Hafalan Juz 30",
+                "location": "Bekasi",
+                "yearsExperience": 7,
+                "subjects": [
+                    "Qiroati Dasar"
+                ]
+            },
+            "sessions": [
+                {
+                    "no": 1,
+                    "date": "2026-08-06",
+                    "time": "09:00 - 10:00",
+                    "status": "completed",
+                    "notes": "Sesi berjalan lancar, makhraj sudah mulai tepat."
+                }
+            ],
+            "payment": {
+                "invoiceNo": "INV-2026-3012-529",
+                "receiptRef": "GOPAY-REF-227412",
+                "method": "GoPay",
+                "status": "paid",
+                "paidAt": "2026-08-06T00:00:00Z",
+                "pricePackage": 90000,
+                "serviceFee": 5000,
+                "tax": 9900,
+                "total": 95000
+            }
+        },
+        {
+            "bookingId": 3013,
+            "bookingCode": "#3013",
+            "member": {
+                "id": 889977665544103,
+                "name": "Siti Aminah",
+                "email": "siti.aminah@yahoo.com",
+                "phone": "+62 870-4266-8119",
+                "joinDate": "2024-07-15T10:00:00Z",
+                "location": "Depok"
+            },
+            "trainer": {
+                "id": 303,
+                "name": "Iwan",
+                "email": "guru.303@qurani.id",
+                "avatar": "https://i.pravatar.cc/150?img=42",
+                "rating": 4.7,
+                "totalStudents": 113,
+                "specialization": "Hafalan Juz 30",
+                "location": "Jakarta Selatan",
+                "yearsExperience": 1,
+                "subjects": [
+                    "Tahsin & Talaqqi"
+                ]
+            },
+            "sessions": [
+                {
+                    "no": 1,
+                    "date": "2025-06-12",
+                    "time": "18:00 - 19:00",
+                    "status": "completed",
+                    "notes": "Sinyal agak putus-putus di awal, namun materi tersampaikan dengan baik."
+                },
+                {
+                    "no": 2,
+                    "date": "2025-06-19",
+                    "time": "15:00 - 16:00",
+                    "status": "completed",
+                    "notes": "Murid sangat antusias, tilawah semakin lancar."
+                },
+                {
+                    "no": 3,
+                    "date": "2025-06-26",
+                    "time": "19:00 - 20:00",
+                    "status": "completed",
+                    "notes": "Tidak ada catatan khusus, bacaan sudah sangat baik."
+                },
+                {
+                    "no": 4,
+                    "date": "2025-07-03",
+                    "time": "13:00 - 14:00",
+                    "status": "completed",
+                    "notes": "Sesi menyenangkan, interaktif, murid semangat."
+                },
+                {
+                    "no": 5,
+                    "date": "2025-07-10",
+                    "time": "10:00 - 11:00",
+                    "status": "completed",
+                    "notes": "Sesi berjalan lancar, makhraj sudah mulai tepat."
+                }
+            ],
+            "payment": {
+                "invoiceNo": "INV-2026-3013-633",
+                "receiptRef": "GOPAY-REF-968801",
+                "method": "Qurani Wallet",
+                "status": "paid",
+                "paidAt": "2025-06-12T00:00:00Z",
+                "pricePackage": 420000,
+                "serviceFee": 5000,
+                "tax": 46200,
+                "total": 425000
+            }
+        },
+        {
+            "bookingId": 3014,
+            "bookingCode": "#3014",
+            "member": {
+                "id": 889977665544109,
+                "name": "Halimah Tussa'diyah",
+                "email": "halimah.tussadiyah@mail.com",
+                "phone": "+62 842-2458-1670",
+                "joinDate": "2024-10-15T10:00:00Z",
+                "location": "Bandung, Jawa Barat"
+            },
+            "trainer": {
+                "id": 303,
+                "name": "Iwan",
+                "email": "guru.303@qurani.id",
+                "avatar": "https://i.pravatar.cc/150?img=28",
+                "rating": 4.2,
+                "totalStudents": 24,
+                "specialization": "Hafalan Juz 30",
+                "location": "Surabaya, Jawa Timur",
+                "yearsExperience": 10,
+                "subjects": [
+                    "Tilawati untuk Anak"
+                ]
+            },
+            "sessions": [
+                {
+                    "no": 1,
+                    "date": "2026-09-02",
+                    "time": "13:00 - 14:00",
+                    "status": "completed",
+                    "notes": "Murid sangat antusias, tilawah semakin lancar."
+                },
+                {
+                    "no": 2,
+                    "date": "2026-09-09",
+                    "time": "13:00 - 14:00",
+                    "status": "completed",
+                    "notes": "Tidak ada catatan khusus, bacaan sudah sangat baik."
+                },
+                {
+                    "no": 3,
+                    "date": "2026-09-16",
+                    "time": "14:00 - 15:00",
+                    "status": "scheduled",
+                    "notes": null
+                },
+                {
+                    "no": 4,
+                    "date": "2026-09-23",
+                    "time": "14:00 - 15:00",
+                    "status": "scheduled",
+                    "notes": null
+                },
+                {
+                    "no": 5,
+                    "date": "2026-09-30",
+                    "time": "11:00 - 12:00",
+                    "status": "scheduled",
+                    "notes": null
+                },
+                {
+                    "no": 6,
+                    "date": "2026-10-07",
+                    "time": "13:00 - 14:00",
+                    "status": "scheduled",
+                    "notes": null
+                },
+                {
+                    "no": 7,
+                    "date": "2026-10-14",
+                    "time": "13:00 - 14:00",
+                    "status": "scheduled",
+                    "notes": null
+                },
+                {
+                    "no": 8,
+                    "date": "2026-10-21",
+                    "time": "16:00 - 17:00",
+                    "status": "scheduled",
+                    "notes": null
+                },
+                {
+                    "no": 9,
+                    "date": "2026-10-28",
+                    "time": "12:00 - 13:00",
+                    "status": "scheduled",
+                    "notes": null
+                },
+                {
+                    "no": 10,
+                    "date": "2026-11-04",
+                    "time": "16:00 - 17:00",
+                    "status": "scheduled",
+                    "notes": null
+                }
+            ],
+            "payment": {
+                "invoiceNo": "INV-2026-3014-437",
+                "receiptRef": "GOPAY-REF-457360",
+                "method": "GoPay",
+                "status": "paid",
+                "paidAt": "2026-09-02T00:00:00Z",
+                "pricePackage": 800000,
+                "serviceFee": 5000,
+                "tax": 88000,
+                "total": 805000
+            }
+        },
+        {
+            "bookingId": 3015,
+            "bookingCode": "#3015",
+            "member": {
+                "id": 889977665544105,
+                "name": "Dewi Rahayu",
+                "email": "dewi.rahayu@gmail.com",
+                "phone": "+62 843-7969-2487",
+                "joinDate": "2025-10-15T10:00:00Z",
+                "location": "Surabaya, Jawa Timur"
+            },
+            "trainer": {
+                "id": 303,
+                "name": "Iwan",
+                "email": "guru.303@qurani.id",
+                "avatar": "https://i.pravatar.cc/150?img=59",
+                "rating": 4.6,
+                "totalStudents": 126,
+                "specialization": "Qiroati Dasar",
+                "location": "Tangerang Selatan",
+                "yearsExperience": 9,
+                "subjects": [
+                    "Tilawati untuk Anak"
+                ]
+            },
+            "sessions": [
+                {
+                    "no": 1,
+                    "date": "2026-09-16",
+                    "time": "17:00 - 18:00",
+                    "status": "scheduled",
+                    "notes": null
+                }
+            ],
+            "payment": {
+                "invoiceNo": "INV-2026-3015-843",
+                "receiptRef": "-",
+                "method": "-",
+                "status": "pending",
+                "paidAt": null,
+                "pricePackage": 90000,
+                "serviceFee": 5000,
+                "tax": 9900,
+                "total": 95000
+            }
+        },
+        {
+            "bookingId": 3016,
+            "bookingCode": "#3016",
+            "member": {
+                "id": 889977665544101,
+                "name": "Siti Rahmawati",
+                "email": "siti.rahma@example.com",
+                "phone": "+62 839-9631-3651",
+                "joinDate": "2023-05-15T10:00:00Z",
+                "location": "Bekasi"
+            },
+            "trainer": {
+                "id": 304,
+                "name": "Aisyah",
+                "email": "guru.304@qurani.id",
+                "avatar": "https://i.pravatar.cc/150?img=58",
+                "rating": 4.9,
+                "totalStudents": 180,
+                "specialization": "Tahsin & Talaqqi",
+                "location": "Bekasi",
+                "yearsExperience": 5,
+                "subjects": [
+                    "Tilawati untuk Anak"
+                ]
+            },
+            "sessions": [
+                {
+                    "no": 1,
+                    "date": "2025-04-08",
+                    "time": "19:00 - 20:00",
+                    "status": "completed",
+                    "notes": "Sesi berjalan lancar, makhraj sudah mulai tepat."
+                },
+                {
+                    "no": 2,
+                    "date": "2025-04-15",
+                    "time": "09:00 - 10:00",
+                    "status": "completed",
+                    "notes": "Bagus sekali, bacaan tajwid sudah mulai rapi."
+                },
+                {
+                    "no": 3,
+                    "date": "2025-04-22",
+                    "time": "20:00 - 21:00",
+                    "status": "completed",
+                    "notes": "Perlu banyak latihan untuk huruf Ain dan Ghain."
+                },
+                {
+                    "no": 4,
+                    "date": "2025-04-29",
+                    "time": "13:00 - 14:00",
+                    "status": "completed",
+                    "notes": "Tolong berlatih lagi surat pendek yang diajarkan."
+                }
+            ],
+            "payment": {
+                "invoiceNo": "INV-2026-3016-824",
+                "receiptRef": "GOPAY-REF-967588",
+                "method": "GoPay",
+                "status": "paid",
+                "paidAt": "2025-04-08T00:00:00Z",
+                "pricePackage": 280000,
+                "serviceFee": 5000,
+                "tax": 30800,
+                "total": 285000
+            }
+        },
+        {
+            "bookingId": 3017,
+            "bookingCode": "#3017",
+            "member": {
+                "id": 889977665544111,
+                "name": "Fauzia Nurrohma",
+                "email": "fauzia.n@mail.com",
+                "phone": "+62 844-5958-1774",
+                "joinDate": "2024-11-15T10:00:00Z",
+                "location": "Yogyakarta"
+            },
+            "trainer": {
+                "id": 304,
+                "name": "Aisyah",
+                "email": "guru.304@qurani.id",
+                "avatar": "https://i.pravatar.cc/150?img=37",
+                "rating": 4.1,
+                "totalStudents": 143,
+                "specialization": "Tahsin & Talaqqi",
+                "location": "Depok",
+                "yearsExperience": 9,
+                "subjects": [
+                    "Irama & Tajwid Lanjut"
+                ]
+            },
+            "sessions": [
+                {
+                    "no": 1,
+                    "date": "2026-04-03",
+                    "time": "11:00 - 12:00",
+                    "status": "completed",
+                    "notes": "Sesi menyenangkan, interaktif, murid semangat."
+                },
+                {
+                    "no": 2,
+                    "date": "2026-04-10",
+                    "time": "13:00 - 14:00",
+                    "status": "completed",
+                    "notes": "Bagus sekali, bacaan tajwid sudah mulai rapi."
+                },
+                {
+                    "no": 3,
+                    "date": "2026-04-17",
+                    "time": "13:00 - 14:00",
+                    "status": "scheduled",
+                    "notes": null
+                },
+                {
+                    "no": 4,
+                    "date": "2026-04-24",
+                    "time": "08:00 - 09:00",
+                    "status": "scheduled",
+                    "notes": null
+                }
+            ],
+            "payment": {
+                "invoiceNo": "INV-2026-3017-286",
+                "receiptRef": "GOPAY-REF-100129",
+                "method": "GoPay",
+                "status": "paid",
+                "paidAt": "2026-04-03T00:00:00Z",
+                "pricePackage": 280000,
+                "serviceFee": 5000,
+                "tax": 30800,
+                "total": 285000
+            }
+        },
+        {
+            "bookingId": 3018,
+            "bookingCode": "#3018",
+            "member": {
+                "id": 889977665544112,
+                "name": "Rahma Aulia",
+                "email": "rahma.aulia@gmail.com",
+                "phone": "+62 852-9225-6012",
+                "joinDate": "2024-12-15T10:00:00Z",
+                "location": "Bandung, Jawa Barat"
+            },
+            "trainer": {
+                "id": 304,
+                "name": "Aisyah",
+                "email": "guru.304@qurani.id",
+                "avatar": "https://i.pravatar.cc/150?img=8",
+                "rating": 4.5,
+                "totalStudents": 51,
+                "specialization": "Irama & Tajwid Lanjut",
+                "location": "Medan, Sumatera Utara",
+                "yearsExperience": 4,
+                "subjects": [
+                    "Tahsin & Talaqqi"
+                ]
+            },
+            "sessions": [
+                {
+                    "no": 1,
+                    "date": "2026-04-02",
+                    "time": "13:00 - 14:00",
+                    "status": "completed",
+                    "notes": "Mulai lancar membaca huruf bersambung."
+                }
+            ],
+            "payment": {
+                "invoiceNo": "INV-2026-3018-965",
+                "receiptRef": "GOPAY-REF-941398",
+                "method": "Qurani Wallet",
+                "status": "paid",
+                "paidAt": "2026-04-02T00:00:00Z",
+                "pricePackage": 75000,
+                "serviceFee": 5000,
+                "tax": 8250,
+                "total": 80000
+            }
+        },
+        {
+            "bookingId": 3019,
+            "bookingCode": "#3019",
+            "member": {
+                "id": 889977665544107,
+                "name": "Nia Hidayati",
+                "email": "nia.hidayati@mail.com",
+                "phone": "+62 833-2811-1473",
+                "joinDate": "2023-02-15T10:00:00Z",
+                "location": "Medan, Sumatera Utara"
+            },
+            "trainer": {
+                "id": 304,
+                "name": "Aisyah",
+                "email": "guru.304@qurani.id",
+                "avatar": "https://i.pravatar.cc/150?img=11",
+                "rating": 4.4,
+                "totalStudents": 194,
+                "specialization": "Tahsin & Talaqqi",
+                "location": "Jakarta Selatan",
+                "yearsExperience": 3,
+                "subjects": [
+                    "Irama & Tajwid Lanjut"
+                ]
+            },
+            "sessions": [
+                {
+                    "no": 1,
+                    "date": "2026-03-26",
+                    "time": "14:00 - 15:00",
+                    "status": "completed",
+                    "notes": "Bagus sekali, bacaan tajwid sudah mulai rapi."
+                },
+                {
+                    "no": 2,
+                    "date": "2026-04-02",
+                    "time": "12:00 - 13:00",
+                    "status": "completed",
+                    "notes": "Tidak ada catatan khusus, bacaan sudah sangat baik."
+                },
+                {
+                    "no": 3,
+                    "date": "2026-04-09",
+                    "time": "10:00 - 11:00",
+                    "status": "scheduled",
+                    "notes": null
+                },
+                {
+                    "no": 4,
+                    "date": "2026-04-16",
+                    "time": "19:00 - 20:00",
+                    "status": "scheduled",
+                    "notes": null
+                }
+            ],
+            "payment": {
+                "invoiceNo": "INV-2026-3019-258",
+                "receiptRef": "GOPAY-REF-946333",
+                "method": "GoPay",
+                "status": "paid",
+                "paidAt": "2026-03-26T00:00:00Z",
+                "pricePackage": 280000,
+                "serviceFee": 5000,
+                "tax": 30800,
+                "total": 285000
+            }
+        },
+        {
+            "bookingId": 3020,
+            "bookingCode": "#3020",
+            "member": {
+                "id": 889977665544110,
+                "name": "Muhammad Yusuf",
+                "email": "m.yusuf@example.com",
+                "phone": "+62 856-1912-3004",
+                "joinDate": "2023-09-15T10:00:00Z",
+                "location": "Jakarta Selatan"
+            },
+            "trainer": {
+                "id": 304,
+                "name": "Aisyah",
+                "email": "guru.304@qurani.id",
+                "avatar": "https://i.pravatar.cc/150?img=25",
+                "rating": 4.6,
+                "totalStudents": 82,
+                "specialization": "Irama & Tajwid Lanjut",
+                "location": "Bandung, Jawa Barat",
+                "yearsExperience": 7,
+                "subjects": [
+                    "Qiroati Dasar"
+                ]
+            },
+            "sessions": [
+                {
+                    "no": 1,
+                    "date": "2025-02-22",
+                    "time": "14:00 - 15:00",
+                    "status": "completed",
+                    "notes": "Mulai lancar membaca huruf bersambung."
+                },
+                {
+                    "no": 2,
+                    "date": "2025-03-01",
+                    "time": "14:00 - 15:00",
+                    "status": "completed",
+                    "notes": "Perlu banyak latihan untuk huruf Ain dan Ghain."
+                },
+                {
+                    "no": 3,
+                    "date": "2025-03-08",
+                    "time": "09:00 - 10:00",
+                    "status": "completed",
+                    "notes": "Mulai lancar membaca huruf bersambung."
+                },
+                {
+                    "no": 4,
+                    "date": "2025-03-15",
+                    "time": "12:00 - 13:00",
+                    "status": "completed",
+                    "notes": "Murid sangat antusias, tilawah semakin lancar."
+                }
+            ],
+            "payment": {
+                "invoiceNo": "INV-2026-3020-790",
+                "receiptRef": "GOPAY-REF-889457",
+                "method": "GoPay",
+                "status": "paid",
+                "paidAt": "2025-02-22T00:00:00Z",
+                "pricePackage": 280000,
+                "serviceFee": 5000,
+                "tax": 30800,
+                "total": 285000
+            }
+        },
+        {
+            "bookingId": 3021,
+            "bookingCode": "#3021",
+            "member": {
+                "id": 889977665544109,
+                "name": "Halimah Tussa'diyah",
+                "email": "halimah.tussadiyah@mail.com",
+                "phone": "+62 895-4750-7352",
+                "joinDate": "2023-06-15T10:00:00Z",
+                "location": "Bekasi"
+            },
+            "trainer": {
+                "id": 304,
+                "name": "Aisyah",
+                "email": "guru.304@qurani.id",
+                "avatar": "https://i.pravatar.cc/150?img=27",
+                "rating": 4.1,
+                "totalStudents": 117,
+                "specialization": "Irama & Tajwid Lanjut",
+                "location": "Tangerang Selatan",
+                "yearsExperience": 8,
+                "subjects": [
+                    "Hafalan Juz 30"
+                ]
+            },
+            "sessions": [
+                {
+                    "no": 1,
+                    "date": "2025-01-12",
+                    "time": "14:00 - 15:00",
+                    "status": "completed",
+                    "notes": "Sesi berjalan lancar, makhraj sudah mulai tepat."
+                },
+                {
+                    "no": 2,
+                    "date": "2025-01-19",
+                    "time": "12:00 - 13:00",
+                    "status": "completed",
+                    "notes": "Sesi berjalan lancar, makhraj sudah mulai tepat."
+                },
+                {
+                    "no": 3,
+                    "date": "2025-01-26",
+                    "time": "10:00 - 11:00",
+                    "status": "completed",
+                    "notes": "Tidak ada catatan khusus, bacaan sudah sangat baik."
+                },
+                {
+                    "no": 4,
+                    "date": "2025-02-02",
+                    "time": "17:00 - 18:00",
+                    "status": "completed",
+                    "notes": "Sesi menyenangkan, interaktif, murid semangat."
+                }
+            ],
+            "payment": {
+                "invoiceNo": "INV-2026-3021-768",
+                "receiptRef": "GOPAY-REF-616504",
+                "method": "Qurani Wallet",
+                "status": "paid",
+                "paidAt": "2025-01-12T00:00:00Z",
+                "pricePackage": 280000,
+                "serviceFee": 5000,
+                "tax": 30800,
+                "total": 285000
+            }
+        },
+        {
+            "bookingId": 3022,
+            "bookingCode": "#3022",
+            "member": {
+                "id": 889977665544105,
+                "name": "Dewi Rahayu",
+                "email": "dewi.rahayu@gmail.com",
+                "phone": "+62 881-1333-1909",
+                "joinDate": "2024-06-15T10:00:00Z",
+                "location": "Bandung, Jawa Barat"
+            },
+            "trainer": {
+                "id": 304,
+                "name": "Aisyah",
+                "email": "guru.304@qurani.id",
+                "avatar": "https://i.pravatar.cc/150?img=70",
+                "rating": 4.9,
+                "totalStudents": 128,
+                "specialization": "Tahsin & Talaqqi",
+                "location": "Tangerang Selatan",
+                "yearsExperience": 4,
+                "subjects": [
+                    "Irama & Tajwid Lanjut"
+                ]
+            },
+            "sessions": [
+                {
+                    "no": 1,
+                    "date": "2026-09-11",
+                    "time": "20:00 - 21:00",
+                    "status": "scheduled",
+                    "notes": null
+                }
+            ],
+            "payment": {
+                "invoiceNo": "INV-2026-3022-569",
+                "receiptRef": "-",
+                "method": "-",
+                "status": "pending",
+                "paidAt": null,
+                "pricePackage": 75000,
+                "serviceFee": 5000,
+                "tax": 8250,
+                "total": 80000
+            }
+        },
+        {
+            "bookingId": 3023,
+            "bookingCode": "#3023",
+            "member": {
+                "id": 889977665544104,
+                "name": "Budi Santoso",
+                "email": "budi.santoso@example.com",
+                "phone": "+62 816-8917-7759",
+                "joinDate": "2024-12-15T10:00:00Z",
+                "location": "Tangerang Selatan"
+            },
+            "trainer": {
+                "id": 305,
+                "name": "Zain Al-Fattah",
+                "email": "guru.305@qurani.id",
+                "avatar": "https://i.pravatar.cc/150?img=49",
+                "rating": 4.1,
+                "totalStudents": 31,
+                "specialization": "Irama & Tajwid Lanjut",
+                "location": "Bekasi",
+                "yearsExperience": 4,
+                "subjects": [
+                    "Qiroati Dasar"
+                ]
+            },
+            "sessions": [
+                {
+                    "no": 1,
+                    "date": "2025-01-22",
+                    "time": "15:00 - 16:00",
+                    "status": "completed",
+                    "notes": "Mulai lancar membaca huruf bersambung."
+                },
+                {
+                    "no": 2,
+                    "date": "2025-01-29",
+                    "time": "12:00 - 13:00",
+                    "status": "completed",
+                    "notes": "Sinyal agak putus-putus di awal, namun materi tersampaikan dengan baik."
+                },
+                {
+                    "no": 3,
+                    "date": "2025-02-05",
+                    "time": "10:00 - 11:00",
+                    "status": "completed",
+                    "notes": "Bagus sekali, bacaan tajwid sudah mulai rapi."
+                },
+                {
+                    "no": 4,
+                    "date": "2025-02-12",
+                    "time": "15:00 - 16:00",
+                    "status": "completed",
+                    "notes": "Tidak ada catatan khusus, bacaan sudah sangat baik."
+                },
+                {
+                    "no": 5,
+                    "date": "2025-02-19",
+                    "time": "11:00 - 12:00",
+                    "status": "completed",
+                    "notes": "Tolong berlatih lagi surat pendek yang diajarkan."
+                },
+                {
+                    "no": 6,
+                    "date": "2025-02-26",
+                    "time": "16:00 - 17:00",
+                    "status": "completed",
+                    "notes": "Sesi berjalan lancar, makhraj sudah mulai tepat."
+                },
+                {
+                    "no": 7,
+                    "date": "2025-03-05",
+                    "time": "11:00 - 12:00",
+                    "status": "completed",
+                    "notes": "Sesi menyenangkan, interaktif, murid semangat."
+                },
+                {
+                    "no": 8,
+                    "date": "2025-03-12",
+                    "time": "10:00 - 11:00",
+                    "status": "completed",
+                    "notes": "Sesi berjalan lancar, makhraj sudah mulai tepat."
+                },
+                {
+                    "no": 9,
+                    "date": "2025-03-19",
+                    "time": "16:00 - 17:00",
+                    "status": "completed",
+                    "notes": "Sinyal agak putus-putus di awal, namun materi tersampaikan dengan baik."
+                },
+                {
+                    "no": 10,
+                    "date": "2025-03-26",
+                    "time": "10:00 - 11:00",
+                    "status": "completed",
+                    "notes": "Sinyal agak putus-putus di awal, namun materi tersampaikan dengan baik."
+                }
+            ],
+            "payment": {
+                "invoiceNo": "INV-2026-3023-588",
+                "receiptRef": "GOPAY-REF-184821",
+                "method": "GoPay",
+                "status": "paid",
+                "paidAt": "2025-01-22T00:00:00Z",
+                "pricePackage": 750000,
+                "serviceFee": 5000,
+                "tax": 82500,
+                "total": 755000
+            }
+        },
+        {
+            "bookingId": 3024,
+            "bookingCode": "#3024",
+            "member": {
+                "id": 889977665544108,
+                "name": "Farid Al-Amin",
+                "email": "farid.alamin@edu.id",
+                "phone": "+62 873-1264-7096",
+                "joinDate": "2025-05-15T10:00:00Z",
+                "location": "Bandung, Jawa Barat"
+            },
+            "trainer": {
+                "id": 305,
+                "name": "Zain Al-Fattah",
+                "email": "guru.305@qurani.id",
+                "avatar": "https://i.pravatar.cc/150?img=70",
+                "rating": 4.9,
+                "totalStudents": 167,
+                "specialization": "Tilawati untuk Anak",
+                "location": "Yogyakarta",
+                "yearsExperience": 1,
+                "subjects": [
+                    "Irama & Tajwid Lanjut"
+                ]
+            },
+            "sessions": [
+                {
+                    "no": 1,
+                    "date": "2026-01-12",
+                    "time": "17:00 - 18:00",
+                    "status": "completed",
+                    "notes": "Murid sangat antusias, tilawah semakin lancar."
+                },
+                {
+                    "no": 2,
+                    "date": "2026-01-19",
+                    "time": "14:00 - 15:00",
+                    "status": "completed",
+                    "notes": "Mulai lancar membaca huruf bersambung."
+                },
+                {
+                    "no": 3,
+                    "date": "2026-01-26",
+                    "time": "15:00 - 16:00",
+                    "status": "completed",
+                    "notes": "Murid sangat antusias, tilawah semakin lancar."
+                },
+                {
+                    "no": 4,
+                    "date": "2026-02-02",
+                    "time": "15:00 - 16:00",
+                    "status": "completed",
+                    "notes": "Tidak ada catatan khusus, bacaan sudah sangat baik."
+                },
+                {
+                    "no": 5,
+                    "date": "2026-02-09",
+                    "time": "09:00 - 10:00",
+                    "status": "completed",
+                    "notes": "Sesi berjalan lancar, makhraj sudah mulai tepat."
+                },
+                {
+                    "no": 6,
+                    "date": "2026-02-16",
+                    "time": "16:00 - 17:00",
+                    "status": "scheduled",
+                    "notes": null
+                },
+                {
+                    "no": 7,
+                    "date": "2026-02-23",
+                    "time": "20:00 - 21:00",
+                    "status": "scheduled",
+                    "notes": null
+                },
+                {
+                    "no": 8,
+                    "date": "2026-03-02",
+                    "time": "14:00 - 15:00",
+                    "status": "scheduled",
+                    "notes": null
+                },
+                {
+                    "no": 9,
+                    "date": "2026-03-09",
+                    "time": "16:00 - 17:00",
+                    "status": "scheduled",
+                    "notes": null
+                },
+                {
+                    "no": 10,
+                    "date": "2026-03-16",
+                    "time": "10:00 - 11:00",
+                    "status": "scheduled",
+                    "notes": null
+                }
+            ],
+            "payment": {
+                "invoiceNo": "INV-2026-3024-189",
+                "receiptRef": "GOPAY-REF-934016",
+                "method": "Qurani Wallet",
+                "status": "paid",
+                "paidAt": "2026-01-12T00:00:00Z",
+                "pricePackage": 750000,
+                "serviceFee": 5000,
+                "tax": 82500,
+                "total": 755000
+            }
+        },
+        {
+            "bookingId": 3025,
+            "bookingCode": "#3025",
+            "member": {
+                "id": 889977665544106,
+                "name": "Nur Hidayah",
+                "email": "nur.hidayah@example.com",
+                "phone": "+62 817-6206-3167",
+                "joinDate": "2025-10-15T10:00:00Z",
+                "location": "Bekasi"
+            },
+            "trainer": {
+                "id": 305,
+                "name": "Zain Al-Fattah",
+                "email": "guru.305@qurani.id",
+                "avatar": "https://i.pravatar.cc/150?img=64",
+                "rating": 4.1,
+                "totalStudents": 229,
+                "specialization": "Hafalan Juz 30",
+                "location": "Tangerang Selatan",
+                "yearsExperience": 6,
+                "subjects": [
+                    "Tilawati untuk Anak"
+                ]
+            },
+            "sessions": [
+                {
+                    "no": 1,
+                    "date": "2025-03-17",
+                    "time": "09:00 - 10:00",
+                    "status": "completed",
+                    "notes": "Sinyal agak putus-putus di awal, namun materi tersampaikan dengan baik."
+                },
+                {
+                    "no": 2,
+                    "date": "2025-03-24",
+                    "time": "20:00 - 21:00",
+                    "status": "completed",
+                    "notes": "Murid sangat antusias, tilawah semakin lancar."
+                },
+                {
+                    "no": 3,
+                    "date": "2025-03-31",
+                    "time": "18:00 - 19:00",
+                    "status": "completed",
+                    "notes": "Murid sangat antusias, tilawah semakin lancar."
+                },
+                {
+                    "no": 4,
+                    "date": "2025-04-07",
+                    "time": "19:00 - 20:00",
+                    "status": "completed",
+                    "notes": "Sesi berjalan lancar, makhraj sudah mulai tepat."
+                },
+                {
+                    "no": 5,
+                    "date": "2025-04-14",
+                    "time": "12:00 - 13:00",
+                    "status": "completed",
+                    "notes": "Mulai lancar membaca huruf bersambung."
+                }
+            ],
+            "payment": {
+                "invoiceNo": "INV-2026-3025-952",
+                "receiptRef": "GOPAY-REF-143130",
+                "method": "GoPay",
+                "status": "paid",
+                "paidAt": "2025-03-17T00:00:00Z",
+                "pricePackage": 400000,
+                "serviceFee": 5000,
+                "tax": 44000,
+                "total": 405000
+            }
+        },
+        {
+            "bookingId": 3026,
+            "bookingCode": "#3026",
+            "member": {
+                "id": 889977665544102,
+                "name": "Ahmad Fauzan",
+                "email": "ahmad.fauzan@example.com",
+                "phone": "+62 895-5930-1776",
+                "joinDate": "2024-01-15T10:00:00Z",
+                "location": "Jakarta Selatan"
+            },
+            "trainer": {
+                "id": 305,
+                "name": "Zain Al-Fattah",
+                "email": "guru.305@qurani.id",
+                "avatar": "https://i.pravatar.cc/150?img=18",
+                "rating": 4.5,
+                "totalStudents": 179,
+                "specialization": "Hafalan Juz 30",
+                "location": "Tangerang Selatan",
+                "yearsExperience": 6,
+                "subjects": [
+                    "Tilawati untuk Anak"
+                ]
+            },
+            "sessions": [
+                {
+                    "no": 1,
+                    "date": "2026-08-03",
+                    "time": "13:00 - 14:00",
+                    "status": "completed",
+                    "notes": "Bagus sekali, bacaan tajwid sudah mulai rapi."
+                },
+                {
+                    "no": 2,
+                    "date": "2026-08-10",
+                    "time": "18:00 - 19:00",
+                    "status": "completed",
+                    "notes": "Sesi berjalan lancar, makhraj sudah mulai tepat."
+                },
+                {
+                    "no": 3,
+                    "date": "2026-08-17",
+                    "time": "12:00 - 13:00",
+                    "status": "completed",
+                    "notes": "Sesi menyenangkan, interaktif, murid semangat."
+                },
+                {
+                    "no": 4,
+                    "date": "2026-08-24",
+                    "time": "15:00 - 16:00",
+                    "status": "scheduled",
+                    "notes": null
+                },
+                {
+                    "no": 5,
+                    "date": "2026-08-31",
+                    "time": "08:00 - 09:00",
+                    "status": "scheduled",
+                    "notes": null
+                }
+            ],
+            "payment": {
+                "invoiceNo": "INV-2026-3026-391",
+                "receiptRef": "GOPAY-REF-214838",
+                "method": "GoPay",
+                "status": "paid",
+                "paidAt": "2026-08-03T00:00:00Z",
+                "pricePackage": 400000,
+                "serviceFee": 5000,
+                "tax": 44000,
+                "total": 405000
+            }
+        },
+        {
+            "bookingId": 3027,
+            "bookingCode": "#3027",
+            "member": {
+                "id": 889977665544109,
+                "name": "Halimah Tussa'diyah",
+                "email": "halimah.tussadiyah@mail.com",
+                "phone": "+62 881-7056-9737",
+                "joinDate": "2025-06-15T10:00:00Z",
+                "location": "Tangerang Selatan"
+            },
+            "trainer": {
+                "id": 305,
+                "name": "Zain Al-Fattah",
+                "email": "guru.305@qurani.id",
+                "avatar": "https://i.pravatar.cc/150?img=54",
+                "rating": 4.8,
+                "totalStudents": 164,
+                "specialization": "Hafalan Juz 30",
+                "location": "Surabaya, Jawa Timur",
+                "yearsExperience": 2,
+                "subjects": [
+                    "Qiroati Dasar"
+                ]
+            },
+            "sessions": [
+                {
+                    "no": 1,
+                    "date": "2025-05-07",
+                    "time": "14:00 - 15:00",
+                    "status": "completed",
+                    "notes": "Sesi berjalan lancar, makhraj sudah mulai tepat."
+                },
+                {
+                    "no": 2,
+                    "date": "2025-05-14",
+                    "time": "10:00 - 11:00",
+                    "status": "completed",
+                    "notes": "Mulai lancar membaca huruf bersambung."
+                },
+                {
+                    "no": 3,
+                    "date": "2025-05-21",
+                    "time": "17:00 - 18:00",
+                    "status": "completed",
+                    "notes": "Perlu banyak latihan untuk huruf Ain dan Ghain."
+                },
+                {
+                    "no": 4,
+                    "date": "2025-05-28",
+                    "time": "18:00 - 19:00",
+                    "status": "completed",
+                    "notes": "Sesi berjalan lancar, makhraj sudah mulai tepat."
+                },
+                {
+                    "no": 5,
+                    "date": "2025-06-04",
+                    "time": "08:00 - 09:00",
+                    "status": "completed",
+                    "notes": "Mulai lancar membaca huruf bersambung."
+                },
+                {
+                    "no": 6,
+                    "date": "2025-06-11",
+                    "time": "11:00 - 12:00",
+                    "status": "completed",
+                    "notes": "Sinyal agak putus-putus di awal, namun materi tersampaikan dengan baik."
+                },
+                {
+                    "no": 7,
+                    "date": "2025-06-18",
+                    "time": "11:00 - 12:00",
+                    "status": "completed",
+                    "notes": "Sesi menyenangkan, interaktif, murid semangat."
+                },
+                {
+                    "no": 8,
+                    "date": "2025-06-25",
+                    "time": "15:00 - 16:00",
+                    "status": "completed",
+                    "notes": "Mulai lancar membaca huruf bersambung."
+                },
+                {
+                    "no": 9,
+                    "date": "2025-07-02",
+                    "time": "15:00 - 16:00",
+                    "status": "completed",
+                    "notes": "Sesi menyenangkan, interaktif, murid semangat."
+                },
+                {
+                    "no": 10,
+                    "date": "2025-07-09",
+                    "time": "18:00 - 19:00",
+                    "status": "completed",
+                    "notes": "Sesi berjalan lancar, makhraj sudah mulai tepat."
+                }
+            ],
+            "payment": {
+                "invoiceNo": "INV-2026-3027-597",
+                "receiptRef": "GOPAY-REF-770915",
+                "method": "GoPay",
+                "status": "paid",
+                "paidAt": "2025-05-07T00:00:00Z",
+                "pricePackage": 750000,
+                "serviceFee": 5000,
+                "tax": 82500,
+                "total": 755000
+            }
+        },
+        {
+            "bookingId": 3028,
+            "bookingCode": "#3028",
+            "member": {
+                "id": 889977665544101,
+                "name": "Siti Rahmawati",
+                "email": "siti.rahma@example.com",
+                "phone": "+62 862-4034-9894",
+                "joinDate": "2024-10-15T10:00:00Z",
+                "location": "Surabaya, Jawa Timur"
+            },
+            "trainer": {
+                "id": 305,
+                "name": "Zain Al-Fattah",
+                "email": "guru.305@qurani.id",
+                "avatar": "https://i.pravatar.cc/150?img=64",
+                "rating": 4.1,
+                "totalStudents": 187,
+                "specialization": "Irama & Tajwid Lanjut",
+                "location": "Medan, Sumatera Utara",
+                "yearsExperience": 7,
+                "subjects": [
+                    "Irama & Tajwid Lanjut"
+                ]
+            },
+            "sessions": [
+                {
+                    "no": 1,
+                    "date": "2026-09-19",
+                    "time": "10:00 - 11:00",
+                    "status": "scheduled",
+                    "notes": null
+                },
+                {
+                    "no": 2,
+                    "date": "2026-09-26",
+                    "time": "19:00 - 20:00",
+                    "status": "scheduled",
+                    "notes": null
+                },
+                {
+                    "no": 3,
+                    "date": "2026-10-03",
+                    "time": "12:00 - 13:00",
+                    "status": "scheduled",
+                    "notes": null
+                },
+                {
+                    "no": 4,
+                    "date": "2026-10-10",
+                    "time": "20:00 - 21:00",
+                    "status": "scheduled",
+                    "notes": null
+                },
+                {
+                    "no": 5,
+                    "date": "2026-10-17",
+                    "time": "16:00 - 17:00",
+                    "status": "scheduled",
+                    "notes": null
+                }
+            ],
+            "payment": {
+                "invoiceNo": "INV-2026-3028-343",
+                "receiptRef": "-",
+                "method": "-",
+                "status": "pending",
+                "paidAt": null,
+                "pricePackage": 400000,
+                "serviceFee": 5000,
+                "tax": 44000,
+                "total": 405000
+            }
+        },
+        {
+            "bookingId": 3029,
+            "bookingCode": "#3029",
+            "member": {
+                "id": 889977665544108,
+                "name": "Farid Al-Amin",
+                "email": "farid.alamin@edu.id",
+                "phone": "+62 894-1835-3223",
+                "joinDate": "2024-03-15T10:00:00Z",
+                "location": "Tangerang Selatan"
+            },
+            "trainer": {
+                "id": 301,
+                "name": "Hasyim asy'ari, Lc",
+                "email": "guru.301@qurani.id",
+                "avatar": "https://i.pravatar.cc/150?img=19",
+                "rating": 4.9,
+                "totalStudents": 94,
+                "specialization": "Tahsin & Talaqqi",
+                "location": "Tangerang Selatan",
+                "yearsExperience": 1,
+                "subjects": [
+                    "Tilawati untuk Anak"
+                ]
+            },
+            "sessions": [
+                {
+                    "no": 1,
+                    "date": "2026-07-21",
+                    "time": "16:00 - 17:00",
+                    "status": "scheduled",
+                    "notes": null
+                },
+                {
+                    "no": 2,
+                    "date": "2026-07-28",
+                    "time": "10:00 - 11:00",
+                    "status": "scheduled",
+                    "notes": null
+                },
+                {
+                    "no": 3,
+                    "date": "2026-08-04",
+                    "time": "13:00 - 14:00",
+                    "status": "scheduled",
+                    "notes": null
+                },
+                {
+                    "no": 4,
+                    "date": "2026-08-11",
+                    "time": "14:00 - 15:00",
+                    "status": "scheduled",
+                    "notes": null
+                },
+                {
+                    "no": 5,
+                    "date": "2026-08-18",
+                    "time": "13:00 - 14:00",
+                    "status": "scheduled",
+                    "notes": null
+                },
+                {
+                    "no": 6,
+                    "date": "2026-08-25",
+                    "time": "09:00 - 10:00",
+                    "status": "scheduled",
+                    "notes": null
+                },
+                {
+                    "no": 7,
+                    "date": "2026-09-01",
+                    "time": "10:00 - 11:00",
+                    "status": "scheduled",
+                    "notes": null
+                },
+                {
+                    "no": 8,
+                    "date": "2026-09-08",
+                    "time": "18:00 - 19:00",
+                    "status": "scheduled",
+                    "notes": null
+                },
+                {
+                    "no": 9,
+                    "date": "2026-09-15",
+                    "time": "08:00 - 09:00",
+                    "status": "scheduled",
+                    "notes": null
+                },
+                {
+                    "no": 10,
+                    "date": "2026-09-22",
+                    "time": "14:00 - 15:00",
+                    "status": "scheduled",
+                    "notes": null
+                }
+            ],
+            "payment": {
+                "invoiceNo": "INV-2026-3029-939",
+                "receiptRef": "-",
+                "method": "-",
+                "status": "pending",
+                "paidAt": null,
+                "pricePackage": 1000000,
+                "serviceFee": 5000,
+                "tax": 110000,
+                "total": 1005000
+            }
+        },
+        {
+            "bookingId": 3030,
+            "bookingCode": "#3030",
+            "member": {
+                "id": 889977665544101,
+                "name": "Siti Rahmawati",
+                "email": "siti.rahma@example.com",
+                "phone": "+62 824-5357-7228",
+                "joinDate": "2023-11-15T10:00:00Z",
+                "location": "Jakarta Selatan"
+            },
+            "trainer": {
+                "id": 301,
+                "name": "Hasyim asy'ari, Lc",
+                "email": "guru.301@qurani.id",
+                "avatar": "https://i.pravatar.cc/150?img=12",
+                "rating": 4.1,
+                "totalStudents": 41,
+                "specialization": "Hafalan Juz 30",
+                "location": "Surabaya, Jawa Timur",
+                "yearsExperience": 8,
+                "subjects": [
+                    "Hafalan Juz 30"
+                ]
+            },
+            "sessions": [
+                {
+                    "no": 1,
+                    "date": "2024-10-03",
+                    "time": "15:00 - 16:00",
+                    "status": "completed",
+                    "notes": "Bagus sekali, bacaan tajwid sudah mulai rapi."
+                },
+                {
+                    "no": 2,
+                    "date": "2024-10-10",
+                    "time": "12:00 - 13:00",
+                    "status": "completed",
+                    "notes": "Sesi menyenangkan, interaktif, murid semangat."
+                },
+                {
+                    "no": 3,
+                    "date": "2024-10-17",
+                    "time": "14:00 - 15:00",
+                    "status": "completed",
+                    "notes": "Tidak ada catatan khusus, bacaan sudah sangat baik."
+                },
+                {
+                    "no": 4,
+                    "date": "2024-10-24",
+                    "time": "14:00 - 15:00",
+                    "status": "completed",
+                    "notes": "Sinyal agak putus-putus di awal, namun materi tersampaikan dengan baik."
+                },
+                {
+                    "no": 5,
+                    "date": "2024-10-31",
+                    "time": "16:00 - 17:00",
+                    "status": "completed",
+                    "notes": "Tolong berlatih lagi surat pendek yang diajarkan."
+                },
+                {
+                    "no": 6,
+                    "date": "2024-11-07",
+                    "time": "10:00 - 11:00",
+                    "status": "completed",
+                    "notes": "Murid sangat antusias, tilawah semakin lancar."
+                },
+                {
+                    "no": 7,
+                    "date": "2024-11-14",
+                    "time": "11:00 - 12:00",
+                    "status": "completed",
+                    "notes": "Sinyal agak putus-putus di awal, namun materi tersampaikan dengan baik."
+                },
+                {
+                    "no": 8,
+                    "date": "2024-11-21",
+                    "time": "13:00 - 14:00",
+                    "status": "completed",
+                    "notes": "Perlu banyak latihan untuk huruf Ain dan Ghain."
+                },
+                {
+                    "no": 9,
+                    "date": "2024-11-28",
+                    "time": "09:00 - 10:00",
+                    "status": "completed",
+                    "notes": "Tidak ada catatan khusus, bacaan sudah sangat baik."
+                },
+                {
+                    "no": 10,
+                    "date": "2024-12-05",
+                    "time": "18:00 - 19:00",
+                    "status": "completed",
+                    "notes": "Sinyal agak putus-putus di awal, namun materi tersampaikan dengan baik."
+                }
+            ],
+            "payment": {
+                "invoiceNo": "INV-2026-3030-795",
+                "receiptRef": "GOPAY-REF-700245",
+                "method": "GoPay",
+                "status": "paid",
+                "paidAt": "2024-10-03T00:00:00Z",
+                "pricePackage": 1000000,
+                "serviceFee": 5000,
+                "tax": 110000,
+                "total": 1005000
+            }
+        }
+    ],
+    "discountCodes": [
+        {
+            "id": 5001,
+            "code": "QURANI10",
+            "name": "Diskon Member Baru",
+            "description": "Diskon Member Baru",
+            "deskripsi": "Diskon 10% untuk semua pengguna baru Qurani.",
+            "type": "percentage",
+            "value": 10,
+            "minOrderAmount": 0,
+            "maxDiscountAmount": 50000,
+            "usageLimit": 500,
+            "usageCount": 312,
+            "validFrom": "2026-01-01T00:00:00Z",
+            "validUntil": "2026-06-30T23:59:59Z",
+            "isActive": true,
+            "isReferral": false,
+            "trainerId": null,
+            "trainerName": null,
+            "campaignId": "CAMP-2026-NEW",
+            "createdBy": "Admin",
+            "createdAt": "2025-12-28T08:00:00Z"
+        },
+        {
+            "id": 5002,
+            "code": "RAMADAN25",
+            "name": "Promo Ramadan",
+            "description": "Promo Ramadan",
+            "deskripsi": "Diskon 25% untuk semua paket selama bulan Ramadan.",
+            "type": "percentage",
+            "value": 25,
+            "minOrderAmount": 150000,
+            "maxDiscountAmount": 100000,
+            "usageLimit": 1000,
+            "usageCount": 784,
+            "validFrom": "2026-02-28T00:00:00Z",
+            "validUntil": "2026-03-31T23:59:59Z",
+            "isActive": true,
+            "isReferral": false,
+            "trainerId": null,
+            "trainerName": null,
+            "campaignId": "CAMP-2026-RAMADAN",
+            "createdBy": "Admin",
+            "createdAt": "2026-02-01T09:00:00Z"
+        },
+        {
+            "id": 5003,
+            "code": "HEMAT50K",
+            "name": "Potongan Paket Intensif",
+            "description": "Potongan Paket Intensif",
+            "deskripsi": "Potongan Rp 50.000 untuk pembelian paket intensif.",
+            "type": "fixed",
+            "value": 50000,
+            "minOrderAmount": 300000,
+            "maxDiscountAmount": 50000,
+            "usageLimit": 200,
+            "usageCount": 200,
+            "validFrom": "2026-01-01T00:00:00Z",
+            "validUntil": "2026-01-31T23:59:59Z",
+            "isActive": false,
+            "isReferral": false,
+            "trainerId": null,
+            "trainerName": null,
+            "campaignId": null,
+            "createdBy": "Admin",
+            "createdAt": "2025-12-31T10:00:00Z"
+        },
+        {
+            "id": 5004,
+            "code": "REF-HASYIM-A1B2",
+            "name": "Referral Ust. Hasyim",
+            "description": "Referral Ust. Hasyim",
+            "deskripsi": "Kode referral eksklusif dari Ust. Hasyim Asy'ari, Lc.",
+            "type": "percentage",
+            "value": 15,
+            "minOrderAmount": 0,
+            "maxDiscountAmount": 75000,
+            "usageLimit": 100,
+            "usageCount": 43,
+            "validFrom": "2026-01-01T00:00:00Z",
+            "validUntil": "2026-12-31T23:59:59Z",
+            "isActive": true,
+            "isReferral": true,
+            "trainerId": 301,
+            "trainerName": "Hasyim asy'ari, Lc",
+            "campaignId": null,
+            "createdBy": "System",
+            "createdAt": "2026-01-01T00:00:00Z"
+        },
+        {
+            "id": 5005,
+            "code": "REF-INDI-C3D4",
+            "name": "Referral Indi Fitriani",
+            "description": "Referral Indi Fitriani",
+            "deskripsi": "Kode referral eksklusif dari Indi Fitriani.",
+            "type": "percentage",
+            "value": 15,
+            "minOrderAmount": 0,
+            "maxDiscountAmount": 75000,
+            "usageLimit": 100,
+            "usageCount": 27,
+            "validFrom": "2026-01-01T00:00:00Z",
+            "validUntil": "2026-12-31T23:59:59Z",
+            "isActive": true,
+            "isReferral": true,
+            "trainerId": 302,
+            "trainerName": "Indi Fitriani",
+            "campaignId": null,
+            "createdBy": "System",
+            "createdAt": "2026-01-01T00:00:00Z"
+        },
+        {
+            "id": 5006,
+            "code": "COBA-GRATIS",
+            "name": "Sesi Perdana Gratis",
+            "description": "Sesi Perdana Gratis",
+            "deskripsi": "Sesi pertama gratis, maksimal 1 kali per pengguna.",
+            "type": "fixed",
+            "value": 90000,
+            "minOrderAmount": 90000,
+            "maxDiscountAmount": 90000,
+            "usageLimit": 300,
+            "usageCount": 291,
+            "validFrom": "2025-10-01T00:00:00Z",
+            "validUntil": "2026-03-31T23:59:59Z",
+            "isActive": true,
+            "isReferral": false,
+            "trainerId": null,
+            "trainerName": null,
+            "campaignId": "CAMP-2025-TRIAL",
+            "createdBy": "Admin",
+            "createdAt": "2025-09-28T11:00:00Z"
+        },
+        {
+            "id": 5007,
+            "code": "FLASH20",
+            "name": "Flash Sale Weekend",
+            "description": "Flash Sale Weekend",
+            "deskripsi": "Diskon 20% khusus hari Sabtu dan Minggu.",
+            "type": "percentage",
+            "value": 20,
+            "minOrderAmount": 100000,
+            "maxDiscountAmount": 80000,
+            "usageLimit": 150,
+            "usageCount": 150,
+            "validFrom": "2026-02-08T00:00:00Z",
+            "validUntil": "2026-02-09T23:59:59Z",
+            "isActive": false,
+            "isReferral": false,
+            "trainerId": null,
+            "trainerName": null,
+            "campaignId": "CAMP-FLASH-FEB",
+            "createdBy": "Admin",
+            "createdAt": "2026-02-07T10:00:00Z"
+        },
+        {
+            "id": 5008,
+            "code": "PELAJAR15",
+            "name": "Diskon Pelajar & Mahasiswa",
+            "description": "Diskon Pelajar & Mahasiswa",
+            "deskripsi": "Diskon 15% khusus untuk pelajar dan mahasiswa aktif.",
+            "type": "percentage",
+            "value": 15,
+            "minOrderAmount": 0,
+            "maxDiscountAmount": 60000,
+            "usageLimit": 400,
+            "usageCount": 118,
+            "validFrom": "2026-01-15T00:00:00Z",
+            "validUntil": "2026-07-15T23:59:59Z",
+            "isActive": true,
+            "isReferral": false,
+            "trainerId": null,
+            "trainerName": null,
+            "campaignId": "CAMP-STUDENT",
+            "createdBy": "Admin",
+            "createdAt": "2026-01-14T14:00:00Z"
+        },
+        {
+            "id": 5009,
+            "code": "ANNIVERSARY",
+            "name": "Promo HUT Qurani",
+            "description": "Promo HUT Qurani",
+            "deskripsi": "Diskon flat Rp 30.000 dalam rangka ulang tahun Qurani.",
+            "type": "fixed",
+            "value": 30000,
+            "minOrderAmount": 90000,
+            "maxDiscountAmount": 30000,
+            "usageLimit": 500,
+            "usageCount": 0,
+            "validFrom": "2026-03-01T00:00:00Z",
+            "validUntil": "2026-03-07T23:59:59Z",
+            "isActive": false,
+            "isReferral": false,
+            "trainerId": null,
+            "trainerName": null,
+            "campaignId": "CAMP-ANNIV",
+            "createdBy": "Admin",
+            "createdAt": "2026-02-20T08:00:00Z"
+        },
+        {
+            "id": 5010,
+            "code": "REF-NANDA-E5F6",
+            "name": "Referral Nanda",
+            "description": "Referral Nanda",
+            "deskripsi": "Kode referral eksklusif dari guru Nanda.",
+            "type": "percentage",
+            "value": 15,
+            "minOrderAmount": 0,
+            "maxDiscountAmount": 75000,
+            "usageLimit": 100,
+            "usageCount": 9,
+            "validFrom": "2026-01-01T00:00:00Z",
+            "validUntil": "2026-12-31T23:59:59Z",
+            "isActive": true,
+            "isReferral": true,
+            "trainerId": 304,
+            "trainerName": "Aisyah",
+            "campaignId": null,
+            "createdBy": "System",
+            "createdAt": "2026-01-01T00:00:00Z"
+        }
+    ],
+    "payout_pending": [
+        {
+            "id": "178572300220010000",
+            "userId": 889977665544101,
+            "userName": "Siti Rahmawati",
+            "trainerId": 302,
+            "trainerName": "Indi Fitriani",
+            "bookingId": 3001,
+            "amount": 387500,
+            "status": "pending",
+            "paymentMethod": "GoPay",
+            "createdAt": "2026-04-05T00:00:00Z"
+        },
+        {
+            "id": "178572300220020000",
+            "userId": 889977665544103,
+            "userName": "Siti Aminah",
+            "trainerId": 302,
+            "trainerName": "Indi Fitriani",
+            "bookingId": 3002,
+            "amount": 90000,
+            "status": "pending",
+            "paymentMethod": "Qurani Wallet",
+            "createdAt": "2026-02-10T00:00:00Z"
+        },
+        {
+            "id": "178572300220030000",
+            "userId": 889977665544104,
+            "userName": "Budi Santoso",
+            "trainerId": 303,
+            "trainerName": "Iwan",
+            "bookingId": 3003,
+            "amount": 705000,
+            "status": "pending",
+            "paymentMethod": "GoPay",
+            "createdAt": "2026-01-01T00:00:00Z"
+        },
+        {
+            "id": "178572300220070000",
+            "userId": 889977665544108,
+            "userName": "Farid Al-Amin",
+            "trainerId": 305,
+            "trainerName": "Zain Al-Fattah",
+            "bookingId": 3007,
+            "amount": 387500,
+            "status": "pending",
+            "paymentMethod": "GoPay",
+            "createdAt": "2026-01-15T00:00:00Z"
+        },
+        {
+            "id": "178572300220090000",
+            "userId": 889977665544110,
+            "userName": "Muhammad Yusuf",
+            "trainerId": 302,
+            "trainerName": "Indi Fitriani",
+            "bookingId": 3009,
+            "amount": 705000,
+            "status": "pending",
+            "paymentMethod": "Qurani Wallet",
+            "createdAt": "2026-02-20T00:00:00Z"
+        },
+        {
+            "id": "178572300220100000",
+            "userId": 889977665544110,
+            "userName": "Muhammad Yusuf",
+            "trainerId": 301,
+            "trainerName": "Hasyim asy'ari, Lc",
+            "bookingId": 3010,
+            "amount": 250000,
+            "status": "pending",
+            "paymentMethod": "GoPay",
+            "createdAt": "2026-01-10T00:00:00Z"
+        }
+    ],
+    "payout_history": [
+        {
+            "id": "178572300230040000",
+            "userId": 889977665544105,
+            "userName": "Dewi Rahayu",
+            "trainerId": 301,
+            "trainerName": "Hasyim asy'ari, Lc",
+            "bookingId": 3004,
+            "amount": 90000,
+            "status": "paid_out",
+            "paymentMethod": "GoPay",
+            "payoutReference": "PAY-2026-004",
+            "createdAt": "2026-01-05T00:00:00Z"
+        },
+        {
+            "id": "178572300230050000",
+            "userId": 889977665544106,
+            "userName": "Nur Hidayah",
+            "trainerId": 304,
+            "trainerName": "Aisyah",
+            "bookingId": 3005,
+            "amount": 387500,
+            "status": "paid_out",
+            "paymentMethod": "GoPay",
+            "payoutReference": "PAY-2026-005",
+            "createdAt": "2025-10-01T00:00:00Z"
+        },
+        {
+            "id": "178572300230080000",
+            "userId": 889977665544109,
+            "userName": "Halimah Tussa'diyah",
+            "trainerId": 301,
+            "trainerName": "Hasyim asy'ari, Lc",
+            "bookingId": 3008,
+            "amount": 90000,
+            "status": "paid_out",
+            "paymentMethod": "Qurani Wallet",
+            "payoutReference": "PAY-2026-008",
+            "createdAt": "2026-02-15T00:00:00Z"
+        }
+    ],
+    "refund_pending": [
+        {
+            "id": "178572300240060000",
+            "userId": 889977665544107,
+            "userName": "Nia Hidayati",
+            "trainerId": 302,
+            "trainerName": "Indi Fitriani",
+            "bookingId": 3006,
+            "amount": 595000,
+            "refundAmount": 595000,
+            "status": "pending_refund",
+            "paymentMethod": "GoPay",
+            "refundReason": "Penampilan tidak sesuai harapan",
+            "sessionsInfo": "0 dari 5 Pertemuan",
+            "createdAt": "2026-03-05T00:00:00Z"
+        }
+    ],
+    "refund_processed": [],
+    "withdraw_pending": [],
+    "withdraw_history": []
+}

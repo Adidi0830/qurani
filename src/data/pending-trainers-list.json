@@ -1,0 +1,157 @@
+[
+  {
+    "id": 10001,
+    "userId": 10001,
+    "userName": "irwan",
+    "username": "irwandi",
+    "email": "elshoegaze@gmail.com",
+    "headline": "Pengajar Tahsin & Tajwid Bersertifikat",
+    "bio": "Lulusan Universitas Islam dengan pengalaman mengajar 5 tahun. Spesialisasi dalam perbaikan makhraj dan tajwid.",
+    "expertise": [
+      "Tahsin",
+      "Tajwid",
+      "Tafsir"
+    ],
+    "certifications": [
+      {
+        "name": "Sertifikasi Pengajar Al-Qur'an Metode Qiroati",
+        "issuer": "Lembaga Qiroati Pusat",
+        "credentialId": "QR-2023-8888",
+        "issuedDate": "2023-05-10T00:00:00Z",
+        "expiryDate": "",
+        "url": "https://example.com/sertifikat-qiroati.pdf"
+      }
+    ],
+    "portfolioUrls": [
+      "https://youtu.be/Vm6avc0fSIY?si=xYgPUURiq4oioqHq",
+      "https://example.com/sertifikat.pdf"
+    ],
+    "hourlyRate": 75000,
+    "currency": "IDR",
+    "experienceYears": 5,
+    "isOnline": 1,
+    "isOffline": 1,
+    "location": "Jakarta Selatan, Indonesia",
+    "timezone": "Asia/Jakarta",
+    "categoryIds": [
+      1,
+      2
+    ],
+    "status": "pending",
+    "createdAt": "2026-06-16T10:00:00Z"
+  },
+  {
+    "id": 10002,
+    "userId": 10002,
+    "userName": "Ahmad Syarif",
+    "username": "syarif_q",
+    "email": "syarif@example.com",
+    "headline": "Pengajar Tahfidz Al-Qur'an",
+    "bio": "Berpengalaman mengajar Tahfidz Al-Qur'an selama lebih dari 10 tahun.",
+    "expertise": [
+      "Tahfidz",
+      "Tahsin"
+    ],
+    "certifications": [
+      {
+        "name": "Syahadah Tahfidz 30 Juz",
+        "issuer": "Lembaga Tahfidz Nasional",
+        "credentialId": "TH-2020-7001",
+        "issuedDate": "2020-03-15T00:00:00Z",
+        "expiryDate": "",
+        "url": "https://example.com/syahadah-syarif.pdf"
+      }
+    ],
+    "portfolioUrls": [
+      "https://youtu.be/Vm6avc0fSIY?si=xYgPUURiq4oioqHq"
+    ],
+    "hourlyRate": 100000,
+    "currency": "IDR",
+    "experienceYears": 10,
+    "isOnline": 1,
+    "isOffline": 0,
+    "location": "Bandung, Jawa Barat",
+    "timezone": "Asia/Jakarta",
+    "categoryIds": [
+      1
+    ],
+    "status": "pending",
+    "createdAt": "2026-06-22T09:15:00Z"
+  },
+  {
+    "id": 10003,
+    "userId": 10003,
+    "userName": "Fatimah Azzahra",
+    "username": "fatimahaqlam",
+    "email": "alvia.rpl2@gmail.com",
+    "headline": "Pengajar Tartil & Makhraj",
+    "bio": "Fokus pada pengajaran Tartil dan perbaikan Makharijul Huruf untuk pemula.",
+    "expertise": [
+      "Tartil",
+      "Makhraj"
+    ],
+    "certifications": [
+      {
+        "name": "Sertifikasi Metode Ummi",
+        "issuer": "Ummi Foundation",
+        "credentialId": "UM-2021-7002",
+        "issuedDate": "2021-08-20T00:00:00Z",
+        "expiryDate": "",
+        "url": "https://example.com/sertifikat-ummi.pdf"
+      }
+    ],
+    "portfolioUrls": [],
+    "hourlyRate": 60000,
+    "currency": "IDR",
+    "experienceYears": 3,
+    "isOnline": 0,
+    "isOffline": 1,
+    "location": "Surabaya, Jawa Timur",
+    "timezone": "Asia/Riyadh",
+    "categoryIds": [
+      2,
+      3
+    ],
+    "status": "pending",
+    "createdAt": "2026-06-20T13:00:00Z"
+  },
+  {
+    "id": 10004,
+    "userId": 10004,
+    "userName": "Rizal Hakim",
+    "username": "rizalqurani",
+    "email": "rizal@example.com",
+    "headline": "Pengajar Tajwid Metode Ummi",
+    "bio": "Lulusan S1 Pendidikan Agama Islam. Spesialisasi mengajar dengan metode Ummi yang menyenangkan.",
+    "expertise": [
+      "Tajwid",
+      "Fiqih"
+    ],
+    "certifications": [
+      {
+        "name": "Pelatihan Guru Al-Qur'an Tersertifikasi",
+        "issuer": "Kemenag RI",
+        "credentialId": "PGQ-2019-7003",
+        "issuedDate": "2019-11-05T00:00:00Z",
+        "expiryDate": "",
+        "url": "https://example.com/sertifikat-kemenag.pdf"
+      }
+    ],
+    "portfolioUrls": [
+      "https://example.com/cv-rizal.pdf"
+    ],
+    "hourlyRate": 85000,
+    "currency": "IDR",
+    "experienceYears": 7,
+    "isOnline": 1,
+    "isOffline": 1,
+    "location": "Yogyakarta, DIY",
+    "timezone": "Asia/Makassar",
+    "categoryIds": [
+      2,
+      4
+    ],
+    "status": "batal",
+    "createdAt": "2026-06-18T10:30:00Z"
+  }
+]

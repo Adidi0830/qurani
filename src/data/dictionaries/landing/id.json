@@ -1,0 +1,161 @@
+{
+  "header": {
+    "aria_home": "Qurani - Beranda",
+    "aria_login": "Masuk ke akun Qurani Anda",
+    "login": "Masuk"
+  },
+  "hero": {
+    "title": "Hafalkan",
+    "cta": "Mulai",
+    "video_aria": "Video latar belakang menampilkan hafalan Al-Qur'an",
+    "video_fallback": "Browser Anda tidak mendukung tag video. Silakan gunakan browser modern untuk melihat konten ini.",
+    "rolling": {
+      "anytime": "kapan saja",
+      "faster": "lebih cepat",
+      "smarter": "lebih cerdas",
+      "easier": "lebih mudah",
+      "stronger": "lebih kuat",
+      "anywhere": "di mana saja",
+      "confidently": "dengan percaya diri",
+      "independently": "secara mandiri"
+    }
+  },
+  "features": {
+    "title": "Hafal lebih banyak",
+    "subtitle": "Jadikan pengalaman hafalanmu premium.",
+    "cta": "Mulai",
+    "cta_aria": "Mulai perjalanan hafalan Al-Qur'an Anda",
+    "video_fallback": "Browser Anda tidak mendukung tag video.",
+    "nav_left": "Gulir ke kiri untuk melihat fitur sebelumnya",
+    "nav_right": "Gulir ke kanan untuk melihat fitur lainnya",
+    "items": {
+      "0": {
+        "title": "Hafalan",
+        "subtitle": "Deteksi Kesalahan",
+        "description": "Fitur utama kami: AI Qurani akan mendeteksi kata yang terlewat, salah, dan dilewati dalam bacaan Anda serta memberi tahu secara real time.",
+        "video_alt": "Video yang menampilkan fitur deteksi kesalahan"
+      },
+      "1": {
+        "title": "Perencanaan Hafalan",
+        "description": "Sesuaikan perjalanan hafalan Anda dengan gaya belajar dan preferensi Anda menggunakan alat perencanaan intuitif Qurani.",
+        "video_alt": "Video yang menampilkan fitur perencanaan hafalan"
+      },
+      "2": {
+        "title": "Target",
+        "description": "Tetapkan target dan pantau progres Anda saat menghafal Al-Qur'an.",
+        "video_alt": "Video yang menampilkan fitur target"
+      }
+    }
+  },
+  "stats": {
+    "title_prefix": "Apa",
+    "title_emphasis": "hebat",
+    "title_mid": "nya",
+    "title_brand": "Qurani",
+    "title_premium": "Premium",
+    "title_suffix": "sebenarnya?",
+    "stars_aria": "5 dari 5 bintang",
+    "reviews": "91.000+ Ulasan Bintang 5",
+    "thumbnail_alt": "Demonstrasi fitur Qurani Premium - Video yang menampilkan deteksi kesalahan lanjutan dan fitur belajar yang dipersonalisasi",
+    "play_aria": "Putar video demonstrasi Qurani Premium"
+  },
+  "testimonials": {
+    "podcast_title": "Podcast re:Verses",
+    "podcast_prev": "Episode podcast sebelumnya",
+    "podcast_next": "Episode podcast berikutnya",
+    "blog_title": "Blog Qurani",
+    "blog_prev": "Posting blog sebelumnya",
+    "blog_next": "Posting blog berikutnya",
+    "thumbnail_podcast": "Thumbnail untuk {{title}} - {{subtitle}}",
+    "thumbnail_blog": "Thumbnail untuk posting blog: {{title}}"
+  },
+  "faq": {
+    "title": "Pertanyaan yang Sering Diajukan",
+    "items": {
+      "0": {
+        "question": "Apa itu Qurani?",
+        "answer": "Qurani adalah platform digital yang membantu umat Islam menghafal Al-Qur'an. Aplikasi ini menyediakan sistem pelacakan hafalan, pemantauan progres, dan fitur komunitas untuk membuat perjalanan hafalan Anda lebih mudah dan efektif."
+      },
+      "1": {
+        "question": "Bagaimana cara menggunakan Qurani?",
+        "answer": "Setelah mendaftar, Anda bisa mulai dengan membuat laporan hafalan harian, bergabung dengan grup hafalan, dan memantau progres. Aplikasi juga menyediakan mushaf digital untuk memudahkan membaca dan menghafal."
+      },
+      "2": {
+        "question": "Apakah Qurani gratis?",
+        "answer": "Ya, Qurani menyediakan fitur dasar secara gratis termasuk sistem pelacakan hafalan, pemantauan progres, dan akses mushaf digital. Beberapa fitur premium mungkin tersedia untuk pengalaman yang lebih lengkap."
+      },
+      "3": {
+        "question": "Bagaimana cara bergabung ke grup hafalan?",
+        "answer": "Anda dapat mencari grup hafalan di menu 'Find Group' atau membuat grup sendiri di 'My Groups'. Setelah bergabung, Anda bisa berinteraksi dengan anggota lain dan memantau progres bersama."
+      },
+      "4": {
+        "question": "Bagaimana cara kerja sistem pelacakan hafalan?",
+        "answer": "Sistem pelacakan hafalan memungkinkan Anda melaporkan hafalan harian. Anda dapat memilih surah atau juz yang dihafal, dan sistem akan merekam progres Anda. Hasil hafalan dapat dilihat di dashboard untuk memantau perkembangan."
+      },
+      "5": {
+        "question": "Apakah ada fitur untuk memantau progres hafalan?",
+        "answer": "Ya, Qurani menyediakan statistik lengkap untuk memantau progres hafalan. Anda bisa melihat progres harian, mingguan, dan bulanan. Fitur rekap juga tersedia untuk melihat ringkasan capaian Anda."
+      },
+      "6": {
+        "question": "Bagaimana cara menambah teman di Qurani?",
+        "answer": "Anda dapat mencari teman di menu 'Find Friends' dan mengirim permintaan pertemanan. Setelah berteman, Anda bisa melihat progres hafalan satu sama lain dan saling memberi motivasi."
+      },
+      "7": {
+        "question": "Apakah ada notifikasi untuk mengingatkan hafalan?",
+        "answer": "Ya, sistem notifikasi Qurani akan mengingatkan Anda tentang laporan hafalan harian, permintaan pertemanan, dan aktivitas grup. Anda dapat menyesuaikan preferensi notifikasi sesuai kebutuhan."
+      },
+      "8": {
+        "question": "Bagaimana cara menggunakan mushaf digital?",
+        "answer": "Mushaf digital tersedia dengan font Arab yang mudah dibaca. Anda dapat menavigasi berdasarkan surah atau juz dan menggunakan fitur seperti zoom dan bookmark untuk memudahkan hafalan."
+      },
+      "9": {
+        "question": "Apakah data hafalan saya aman?",
+        "answer": "Ya, semua data hafalan dan informasi pribadi Anda dilindungi dengan sistem keamanan yang ketat. Data Anda hanya dapat diakses oleh Anda dan orang yang Anda izinkan di dalam grup hafalan."
+      }
+    }
+  },
+  "footer": {
+    "aria_home": "Qurani - Beranda",
+    "social_aria": "Tautan media sosial",
+    "social": {
+      "instagram": "Ikuti kami di Instagram",
+      "youtube": "Subscribe ke channel YouTube kami",
+      "twitter": "Ikuti kami di Twitter",
+      "discord": "Bergabung ke komunitas Discord",
+      "github": "Lihat repositori GitHub kami"
+    },
+    "product": {
+      "title": "Produk",
+      "pricing": "Harga",
+      "gift_cards": "Kartu Hadiah",
+      "family_plan": "Paket Keluarga",
+      "mobile_app": "Aplikasi Mobile"
+    },
+    "company": {
+      "title": "Perusahaan",
+      "blog": "Blog",
+      "careers": "Karier",
+      "scholarship": "Beasiswa",
+      "about": "Tentang Kami"
+    },
+    "support": {
+      "title": "Dukungan",
+      "center": "Pusat Bantuan",
+      "requests": "Permintaan Fitur",
+      "contact": "Hubungi Kami"
+    },
+    "community": {
+      "title": "Komunitas",
+      "podcast": "Podcast re:Verses",
+      "network": "Hifz Network",
+      "glossary": "Glosarium",
+      "ramadan": "Ramadan",
+      "discord": "Discord"
+    },
+    "copyright": "Hak Cipta 2025 Qurani, Inc. Semua hak dilindungi.",
+    "privacy": "Kebijakan Privasi",
+    "terms": "Syarat Layanan",
+    "language_aria": "Pemilih bahasa - Bahasa Inggris",
+    "language_label": "Inggris"
+  }
+}

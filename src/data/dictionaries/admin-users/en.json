@@ -1,0 +1,87 @@
+{
+  "title": "User List",
+  "search_placeholder": "Search by username...",
+  "search_button": "Search",
+  "clear_search": "Clear search",
+  "table_headers": {
+    "photo": "Photo",
+    "username": "Username",
+    "full_name": "Full Name",
+    "email": "Email",
+    "join_date": "Join Date",
+    "role": "Role",
+    "active": "Active",
+    "actions": "Actions",
+    "status": "Status"
+  },
+  "roles": {
+    "admin": "Admin",
+    "member": "Member"
+  },
+  "status": {
+    "active": "Active",
+    "inactive": "No",
+    "blocked": "Blocked"
+  },
+  "actions": {
+    "edit": "Edit",
+    "view": "View"
+  },
+  "no_data": "No users found",
+  "search_no_results": "No results found for \"{searchTerm}\"",
+  "edit_user": {
+    "title": "Edit User",
+    "username_label": "Username",
+    "username_placeholder": "Enter username",
+    "full_name_label": "Full Name",
+    "full_name_placeholder": "John Doe",
+    "email_label": "Email",
+    "email_placeholder": "john@example.com",
+    "role_label": "Role",
+    "role_placeholder": "Select role",
+    "status_label": "Active Status",
+    "status_placeholder": "Select status",
+    "status_active": "Active",
+    "status_blocked": "Blocked",
+    "save_button": "Save",
+    "saving_button": "Saving...",
+    "cancel_button": "Cancel"
+  },
+  "validation": {
+    "username_exists": "Username already exists",
+    "username_error": "Error checking username availability"
+  },
+  "messages": {
+    "update_success": "User profile updated successfully",
+    "update_error": "Failed to update user profile",
+    "loading_users": "Loading users...",
+    "search_failed": "Search failed",
+    "no_username_provided": "Username cannot be empty"
+  },
+  "pagination": {
+    "previous": "Previous",
+    "next": "Next",
+    "showing": "Showing {start} - {end} of {total} users"
+  },
+  "filter_modal": {
+    "title": "Filter Users",
+    "filter_by_role": "Role",
+    "filter_by_status": "Status",
+    "filter_by_date": "Date",
+    "from_date": "From Date",
+    "to_date": "To Date",
+    "apply": "Apply Filters",
+    "cancel": "Cancel",
+    "reset": "Reset",
+    "role": {
+      "all": "All Roles",
+      "admin": "Admin",
+      "member": "Member"
+    },
+    "status": {
+      "all": "All Status",
+      "active": "Active",
+      "blocked": "Blocked"
+    }
+  }
+}

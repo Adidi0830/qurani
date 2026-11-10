@@ -1,0 +1,33 @@
+{
+  "test_invitation": {
+    "title": "Tes Notifikasi Undangan Grup",
+    "group_id_label": "ID Grup Test",
+    "group_id_placeholder": "Masukkan ID grup untuk testing",
+    "group_id_help": "ID grup yang akan digunakan untuk mengirim undangan test",
+    "email_label": "Email Undangan",
+    "email_help": "Masukkan email yang akan menerima undangan grup",
+    "sending": "Mengirim Undangan...",
+    "send_button": "Kirim Undangan Test",
+    "instructions_title": "Cara Testing:",
+    "instructions": {
+      "0": "Masukkan email target yang sudah terdaftar di sistem",
+      "1": "Sistem akan membuat notifikasi undangan grup",
+      "2": "Login dengan akun target di halaman notifikasi",
+      "3": "Lihat notifikasi undangan dan test tombol Terima/Tolak"
+    },
+    "features_title": "Fitur yang Sudah Diimplementasi:",
+    "features": {
+      "0": "API mengirim undangan grup",
+      "1": "Notifikasi real-time",
+      "2": "Tombol Terima undangan",
+      "3": "Tombol Tolak undangan",
+      "4": "Update status notifikasi",
+      "5": "Validasi dan error handling"
+    },
+    "errors": {
+      "email_empty": "Email tidak boleh kosong",
+      "email_invalid": "Format email tidak valid",
+      "send_failed": "Terjadi kesalahan saat mengirim undangan"
+    }
+  }
+}

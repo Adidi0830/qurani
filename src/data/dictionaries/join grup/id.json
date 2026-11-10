@@ -1,0 +1,43 @@
+{
+  "join grup": {
+    "loading": {
+      "title": "Memuat undangan...",
+      "description": "Sedang memverifikasi link undangan"
+    },
+    "error": {
+      "title": "Undangan Tidak Valid",
+      "description": "Link undangan tidak ditemukan atau telah kedaluwarsa",
+      "invalid_token": "Token undangan tidak valid",
+      "load_error": "Terjadi kesalahan saat memuat undangan"
+    },
+    "header": {
+      "title": "Undangan Bergabung Grup"
+    },
+    "group_info": {
+      "private": "Tertutup",
+      "public": "Publik",
+      "secret": "Rahasia"
+    },
+    "actions": {
+      "login_required": "Anda harus login terlebih dahulu untuk bergabung ke grup",
+      "login_button": "Login untuk Bergabung",
+      "join_button": "Bergabung ke Grup",
+      "joining": "Bergabung...",
+      "cancel": "Batal",
+      "expired": "Link undangan telah kedaluwarsa",
+      "search_other": "Cari Grup Lain",
+      "back_dashboard": "Kembali ke Dashboard"
+    },
+    "footer": {
+      "terms": "Dengan bergabung, Anda menyetujui untuk mengikuti aturan grup",
+      "joining_as": "Bergabung sebagai: {username}"
+    },
+    "toast": {
+      "login_required": "Anda harus login terlebih dahulu",
+      "invalid_token": "Token undangan tidak valid",
+      "join_success": "Berhasil bergabung ke grup!",
+      "join_error": "Terjadi kesalahan saat bergabung ke grup",
+      "already_member": "Anda sudah menjadi anggota grup ini"
+    }
+  }
+}

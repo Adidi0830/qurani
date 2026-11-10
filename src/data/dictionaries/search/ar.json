@@ -1,0 +1,45 @@
+{
+  "search": {
+    "find_friends": "البحث عن المستخدمين",
+    "search_placeholder": "ابحث عن المستخدمين بالاسم أو اسم المستخدم...",
+    "searching_users": "جارٍ البحث عن المستخدمين...",
+    "no_users_found": "لم يتم العثور على مستخدمين",
+    "try_different_keywords": "جرّب كلمات مفتاحية مختلفة",
+    "all_users_friends": "كل المستخدمين أصدقاء لديك بالفعل",
+    "find_new_friends": "جرّب كلمات مختلفة للعثور على أصدقاء جدد",
+    "connection_error": "خطأ في الاتصال",
+    "unable_to_search": "تعذر البحث عن المستخدمين. يرجى التحقق من الاتصال والمحاولة مرة أخرى.",
+    "try_again": "حاول مرة أخرى",
+    "start_searching": "البحث عن المستخدمين",
+    "enter_name_username": "أدخل اسمًا أو اسم مستخدم للعثور على مستخدمين",
+    "showing_users": "عرض {count} من أصل {total} مستخدم{plural}",
+    "scroll_for_more": "(مرر للمزيد)",
+    "loading_more_users": "جارٍ تحميل المزيد من المستخدمين...",
+    "add": "إضافة",
+    "follow": "متابعة",
+    "unfollow": "إلغاء المتابعة",
+    "cancel": "إلغاء",
+    "accept": "متابعة متبادلة",
+    "reject": "رفض",
+    "unknown": "غير معروف",
+    "user": "مستخدم",
+    "user_initial": "م",
+    "validation_min_chars": "يرجى إدخال 3 أحرف على الأقل للبحث",
+    "messages": {
+      "friend_request_sent": "تم إرسال طلب الصداقة",
+      "friend_request_accepted": "تم قبول طلب الصداقة",
+      "friend_request_rejected": "تم رفض طلب الصداقة",
+      "friend_request_unfoll": "إلغاء متابعة صديق",
+      "search_failed": "فشل البحث عن المستخدمين. يرجى المحاولة مرة أخرى.",
+      "load_more_failed": "فشل تحميل المزيد من المستخدمين. يرجى المحاولة مرة أخرى.",
+      "action_failed": "فشل تنفيذ طلب {action}",
+      "network_error": "خطأ في الشبكة. يرجى التحقق من اتصال الإنترنت.",
+      "timeout_error": "انتهت مهلة الطلب. يرجى المحاولة مرة أخرى.",
+      "config_error": "خطأ في الإعدادات. يرجى التواصل مع الدعم."
+    },
+    "filter": {
+      "cancel": "إلغاء",
+      "apply": "تطبيق"
+    }
+  }
+}

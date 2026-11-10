@@ -1,0 +1,45 @@
+{
+  "search": {
+    "find_friends": "Search Users",
+    "search_placeholder": "Search users by name or username...",
+    "searching_users": "Searching users...",
+    "no_users_found": "No users found",
+    "try_different_keywords": "Try searching with different keywords",
+    "all_users_friends": "All users are already your friends",
+    "find_new_friends": "Try searching with different keywords to find new friends",
+    "connection_error": "Connection Error",
+    "unable_to_search": "Unable to search users. Please check your connection and try again.",
+    "try_again": "Try Again",
+    "start_searching": "Searching users",
+    "enter_name_username": "Enter a name or username to find users",
+    "showing_users": "Showing {count} of {total} user{plural}",
+    "scroll_for_more": "(scroll for more)",
+    "loading_more_users": "Loading more users...",
+    "add": "Add",
+    "follow": "Follow",
+    "unfollow": "Unfollow",
+    "cancel": "Cancel",
+    "accept": "Follback",
+    "reject": "Reject",
+    "unknown": "Unknown",
+    "user": "User",
+    "user_initial": "U",
+    "validation_min_chars": "Please enter at least 3 characters to search",
+    "messages": {
+      "friend_request_sent": "Friend request sent",
+      "friend_request_accepted": "Friend request accepted",
+      "friend_request_rejected": "Friend request rejected",
+      "friend_request_unfoll": "Unfoll friend",
+      "search_failed": "Failed to search users. Please try again.",
+      "load_more_failed": "Failed to load more users. Please try again.",
+      "action_failed": "Failed to {action} request",
+      "network_error": "Network error. Please check your internet connection.",
+      "timeout_error": "Request timeout. Please try again.",
+      "config_error": "Configuration error. Please contact support."
+    },
+    "filter": {
+      "cancel": "Cancel",
+      "apply": "Apply"
+    }
+  }
+}

@@ -1,0 +1,31 @@
+{
+  "cards": {
+    "total_users": "Pengguna",
+    "total_admins": "Admin",
+    "active_users": "Pengguna Aktif",
+    "blocked_users": "Pengguna Diblokir"
+  },
+  "charts": {
+    "gender": "Jenis Kelamin",
+    "top_countries": "Negara Teratas",
+    "top_states": "Provinsi Teratas",
+    "top_cities": "Kota Teratas",
+    "user_distribution": "Distribusi pengguna",
+    "top_locations": "Lokasi teratas berdasarkan pengguna"
+  },
+  "legend": {
+    "male": "Laki-laki",
+    "female": "Perempuan",
+    "unknown": "Tidak diketahui"
+  },
+  "labels": {
+    "users": "Pengguna"
+  },
+  "empty": "Tidak ada data",
+  "aria": {
+    "view": "Lihat {{title}}"
+  },
+  "errors": {
+    "title": "Kesalahan dashboard"
+  }
+}

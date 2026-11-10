@@ -1,0 +1,117 @@
+{
+  "grup saya": {
+    "header": {
+      "title": "Grup"
+    },
+    "tabs": {
+      "owned": "Grup yang Anda Miliki ({count})",
+      "owned_short": "Dimiliki",
+      "member": "Grup yang Anda Ikuti ({count})",
+      "member_short": "Anggota",
+      "search": "Cari"
+    },
+    "search": {
+      "placeholder": "Cari grup...",
+      "button": "Cari"
+    },
+    "create": {
+      "button": "Buat Grup",
+      "button_short": "Buat",
+      "modal_title": "Buat Grup Baru",
+      "modal_description": "Buat grup baru untuk berkomunikasi dan belajar bersama",
+      "photo_label": "Foto Profil (Opsional)",
+      "name_label": "Nama Grup",
+      "name_placeholder": "Nama grup...",
+      "description_label": "Deskripsi (Opsional)",
+      "description_placeholder": "Deskripsi grup...",
+      "status_label": "Tipe",
+      "category_placeholder": "Pilih Kategori...",
+      "private": "Tertutup",
+      "public": "Publik",
+      "secret": "Rahasia",
+      "cancel": "Batal",
+      "done": "Selesai",
+      "creating": "Membuat...",
+      "create_action": "Buat Grup",
+      "category_label": "Kategori"
+    },
+    "validation": {
+      "login_required": "Anda harus login terlebih dahulu",
+      "name_empty": "Nama grup tidak boleh kosong",
+      "name_min_length": "Nama grup minimal 3 karakter",
+      "name_max_length": "Nama grup maksimal 50 karakter",
+      "category_empty": "kategori tidak boleh kosong",
+      "description_max_length": "Deskripsi maksimal 500 karakter",
+      "photo_size_limit": "Ukuran foto maksimal 5MB",
+      "photo_format": "Foto harus berformat JPEG, PNG, atau WebP",
+      "photo_size_exceeded": "Ukuran file tidak boleh melebihi 3MB"
+    },
+    "results": {
+      "showing": "Menampilkan {current} dari {total} grup",
+      "showing_singular": "Menampilkan {current} dari {total} grup"
+    },
+    "card": {
+      "no_description": "Tidak ada deskripsi",
+      "created_prefix": "Dibuat",
+      "members": "Anggota",
+      "manage": "Kelola",
+      "details": "Detail",
+      "leave": "Keluar",
+      "restore": "Pulihkan",
+      "day": "Hari"
+    },
+    "loading": {
+      "text": "Memuat grup Anda..."
+    },
+    "empty": {
+      "owned_title": "Tidak ada grup yang dimiliki",
+      "member_title": "Tidak ada grup yang diikuti",
+      "owned_description": "Buat grup pertama Anda untuk mulai mengelola kelompok belajar sendiri.",
+      "member_description": "Bergabung dengan grup yang ada atau buat grup sendiri untuk mulai belajar bersama.",
+      "create_button": "Buat Grup"
+    },
+    "report": {
+      "report": "Laporkan",
+      "title": "Laporkan Group",
+      "violation_type": "Jenis Pelanggaran",
+      "violation_placeholder": "Pilih jenis pelanggaran",
+      "violation_options": {
+        "spam": "Spam",
+        "harassment": "Pelecehan",
+        "inappropriate": "Konten Tidak Pantas",
+        "scam": "Penipuan",
+        "other": "Lainnya"
+      },
+      "report_title": "Judul Laporan",
+      "report_title_placeholder": "Contoh: Grup ini menyebarkan spam",
+      "report_description": "Isi Laporan",
+      "report_description_placeholder": "Jelaskan detail pelanggaran yang terjadi...",
+      "evidence_label": "Bukti (opsional)",
+      "evidence_upload_text": "Klik untuk unggah",
+      "evidence_hint": "JPG, PNG • Maks. 5MB",
+      "warning_title": "Penting:",
+      "warning_items": {
+        "one": "Laporan yang dikirim harus berdasarkan fakta dan bukti yang jelas.",
+        "two": "Mengirim laporan palsu dapat dikenakan sanksi sesuai ketentuan.",
+        "three": "Laporan akan ditinjau oleh tim kami dalam waktu sekitar 1-3 hari kerja."
+      },
+      "button_cancel": "Batal",
+      "button_send": "Kirim",
+      "char_count": "karakter"
+    },
+    "toast": {
+      "load_failed": "Gagal memuat data grup",
+      "load_error": "Terjadi kesalahan saat mengambil data grup",
+      "leave_success": "Berhasil keluar dari grup",
+      "leave_error": "Terjadi kesalahan saat keluar dari grup",
+      "create_success": "Grup berhasil dibuat!",
+      "create_failed": "Gagal membuat grup",
+      "create_error": "Terjadi kesalahan saat membuat grup",
+      "join_success": "Berhasil bergabung ke grup",
+      "join_request": "Permintaan bergabung berhasil dikirim",
+      "join_error": "Permintaan bergabung gagal dikirim"
+    },
+    "success": "Sukses",
+    "error": "Gagal"
+  }
+}

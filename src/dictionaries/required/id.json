@@ -1,0 +1,37 @@
+{
+  "required": {
+    "title": "Selamat datang!",
+    "username_label": "Username",
+    "username_placeholder": "@username (gunakan _ bukan spasi atau -)",
+    "checking_availability": "Memeriksa ketersediaan...",
+    "username_available": "Username tersedia!",
+    "username_taken": "Username sudah digunakan",
+    "username_help": "Username hanya boleh berisi huruf, angka, dan underscore (3-20 karakter). Tanpa spasi atau tanda hubung.",
+    "countries_label": "Negara",
+    "country_select": "Pilih Negara",
+    "country_search": "Cari Negara",
+    "province_label": "Provinsi",
+    "province_select": "Pilih Provinsi",
+    "province_search": "Cari Provinsi",
+    "city_label": "Kota",
+    "city_select": "Pilih Kota",
+    "city_search": "Cari Kota",
+    "save": "Simpan",
+    "saving": "Menyimpan...",
+    "errors": {
+      "user_not_found": "User tidak ditemukan",
+      "select_province": "Silakan pilih provinsi",
+      "select_city": "Silakan pilih kota",
+      "check_username_failed": "Gagal memeriksa ketersediaan username",
+      "update_failed": "Gagal memperbarui username",
+      "generic": "Terjadi kesalahan, silakan coba lagi"
+    },
+    "validation": {
+      "no_spaces": "Username tidak boleh mengandung spasi. Gunakan underscore (_) sebagai gantinya.",
+      "no_hyphens": "Username tidak boleh mengandung tanda hubung (-). Gunakan underscore (_) sebagai gantinya.",
+      "invalid_chars": "Username hanya boleh berisi huruf, angka, dan underscore (_)",
+      "min_length": "Username minimal 3 karakter",
+      "max_length": "Username maksimal 20 karakter"
+    }
+  }
+}

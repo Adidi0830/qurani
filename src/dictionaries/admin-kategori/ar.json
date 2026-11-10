@@ -1,0 +1,43 @@
+{
+  "title": "الفئات",
+  "search_placeholder": "ابحث باسم الفئة...",
+  "create_button": "إنشاء",
+  "empty": "لا توجد مجموعات في هذه الفئة بعد",
+  "search": "بحث",
+  "table_headers": {
+    "name": "الاسم",
+    "total_group": "إجمالي المجموعات",
+    "actions": "الإجراءات"
+  },
+  "actions": {
+    "edit": "تعديل",
+    "delete": "حذف"
+  },
+  "edit_category": {
+    "title": "تعديل الفئة",
+    "category_label": "الفئة",
+    "category_placeholder": "أدخل اسم الفئة...",
+    "cancel": "إلغاء",
+    "save": "حفظ",
+    "saving": "جارٍ الحفظ..."
+  },
+  "create_category": {
+    "title": "إنشاء فئة",
+    "category_label": "الفئة",
+    "category_placeholder": "أدخل اسم الفئة...",
+    "cancel": "إلغاء",
+    "save": "حفظ",
+    "saving": "جارٍ الحفظ..."
+  },
+  "delete_category": {
+    "title": "حذف الفئة",
+    "message": "هل أنت متأكد من حذف هذه الفئة؟ لا يمكن التراجع عن هذا الإجراء.",
+    "delete": "حذف",
+    "deleting": "جارٍ الحذف..."
+  },
+  "pagination": {
+    "showing": "عرض {start} - {end} من أصل {total} فئات"
+  },
+  "no_results": "لم يتم العثور على فئات",
+  "no_categories": "لا توجد فئات بعد"
+}

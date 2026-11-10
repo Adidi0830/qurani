@@ -1,0 +1,80 @@
+{
+  "grup detail": {
+    "header": {
+      "group_info": "معلومات المجموعة"
+    },
+    "stats": {
+      "total_members": "إجمالي الأعضاء",
+      "group_type": "نوع المجموعة",
+      "created_date": "تاريخ الإنشاء",
+      "created": "تم الإنشاء",
+      "private": "خاص",
+      "public": "عام"
+    },
+    "members": {
+      "title": "أعضاء المجموعة",
+      "search_placeholder": "البحث عن الأعضاء...",
+      "owner": "المالك",
+      "admin": "المدير",
+      "member": "عضو",
+      "members_text": "الأعضاء",
+      "member_singular": "عضو",
+      "member_plural": "أعضاء",
+      "and": "و",
+      "unknown": "غير معروف",
+      "no_members_found": "لم يتم العثور على أعضاء",
+      "try_different_search": "جرب كلمات بحث مختلفة"
+    },
+    "manage": {
+      "title": "إدارة المجموعة",
+      "description": "يمكنك إدارة هذه المجموعة كمدير.",
+      "manage_button": "إدارة",
+      "edit_group": "تعديل المجموعة",
+      "qurani_settings": "إعدادات القرآن"
+    },
+    "leave_group": {
+      "title": "مغادرة المجموعة",
+      "description": "يمكنك مغادرة هذه المجموعة في أي وقت. لا يمكن التراجع عن هذا الإجراء.",
+      "button": "مغادرة",
+      "dialog_title": "مغادرة المجموعة",
+      "dialog_description_before": "هل أنت متأكد من أنك تريد مغادرة مجموعة",
+      "dialog_description_after": "لا يمكن التراجع عن هذا الإجراء وستحتاج إلى دعوة مرة أخرى للانضمام.",
+      "warning_message": "ستفقد الوصول إلى جميع محادثات وملفات المجموعة.",
+      "cancel": "إلغاء",
+      "leaving": "جاري المغادرة...",
+      "leave": "مغادرة",
+      "leave_group": "مغادرة المجموعة",
+      "no": "لا",
+      "yes": "نعم"
+    },
+    "general": {
+      "no_description_available": "لا يوجد وصف متاح",
+      "private": "خاص",
+      "public": "عام"
+    },
+    "toast": {
+      "leave_success": "تم ترك المجموعة بنجاح",
+      "leave_failed": "فشل في ترك المجموعة",
+      "leave_error": "حدث خطأ أثناء ترك المجموعة"
+    },
+    "search": {
+      "no_members_match": "لا يوجد أعضاء يطابقون البحث"
+    },
+    "errors": {
+      "group_not_found": "لم يتم العثور على المجموعة",
+      "group_not_found_description": "قد تكون المجموعة التي تبحث عنها قد حُذفت أو أنك لا تملك الوصول",
+      "access_denied": "تم رفض الوصول",
+      "access_denied_description": "ليس لديك إذن لعرض هذه المجموعة"
+    },
+    "filter": {
+      "category": "التصنيف",
+      "category_placeholder": "اختر تصنيفًا...",
+      "all": "الكل",
+      "reset": "إعادة تعيين",
+      "cancel": "إلغاء",
+      "apply": "تطبيق",
+      "active": "نشط",
+      "deleted": "محذوف"
+    }
+  }
+}

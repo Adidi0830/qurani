@@ -1,0 +1,17 @@
+{
+  "title": "Account Blocked",
+  "subtitle": "Your account has been temporarily suspended",
+  "account_info": "Account Information",
+  "name": "Name",
+  "email": "Email",
+  "reason_title": "Why was my account blocked?",
+  "reason_text": "Your account may have been blocked due to violations of our terms of service or community guidelines. This could include inappropriate behavior, spam, or other policy violations.",
+  "what_to_do_title": "What should I do?",
+  "contact_support": "Contact our support team for assistance",
+  "review_terms": "Review our terms of service and community guidelines",
+  "wait_review": "Wait for our team to review your account status",
+  "checking_status": "Checking Status...",
+  "check_status": "Check Account Status",
+  "sign_out": "Sign Out",
+  "support_contact": "Need help? Contact us at"
+}

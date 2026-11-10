@@ -1,0 +1,144 @@
+{
+  "sa": [
+    {
+      "id": 1,
+      "color": "#CCCCCC",
+      "value": "Ayat Lupa",
+      "status": true
+    },
+    {
+      "id": 2,
+      "color": "#99CCFF",
+      "value": "Ayat Waqaf atau Washal",
+      "status": true
+    },
+    {
+      "id": 3,
+      "color": "#DFF18F",
+      "value": "Ayat Waqaf dan Ibtida",
+      "status": true
+    },
+    {
+      "id": 4,
+      "color": "#F4ACB6",
+      "value": "Ayat Tertukar",
+      "status": true
+    },
+    {
+      "id": 5,
+      "color": "#FA7656",
+      "value": "Lainnya(Global)",
+      "status": true
+    }
+  ],
+  "sk": [
+    {
+      "id": 6,
+      "color": "#FFCC99",
+      "value": "Gharib",
+      "status": true
+    },
+    {
+      "id": 7,
+      "color": "#F4A384",
+      "value": "Ghunnah",
+      "status": true
+    },
+    {
+      "id": 8,
+      "color": "#F8DD74",
+      "value": "Harakat tertukar",
+      "status": true
+    },
+    {
+      "id": 9,
+      "color": "#FA7656",
+      "value": "Huruf Tambah Kurang",
+      "status": true
+    },
+    {
+      "id": 10,
+      "color": "#B5C9DF",
+      "value": "Lupa",
+      "status": true
+    },
+    {
+      "id": 11,
+      "color": "#FE7D8F",
+      "value": "Mad",
+      "status": true
+    },
+    {
+      "id": 12,
+      "color": "#AD4CF",
+      "value": "Makhroj",
+      "status": true
+    },
+    {
+      "id": 13,
+      "color": "#90CBAA",
+      "value": "Nun Mati Tanw",
+      "status": true
+    },
+    {
+      "id": 14,
+      "color": "#FA7656",
+      "value": "Qalqalah",
+      "status": true
+    },
+    {
+      "id": 15,
+      "color": "#FE7D8F",
+      "value": "Tasydid",
+      "status": true
+    },
+    {
+      "id": 16,
+      "color": "#90CBAA",
+      "value": "Urutan Huruf / Kata",
+      "status": true
+    },
+    {
+      "id": 17,
+      "color": "#F8DD74",
+      "value": "Waqof Washal",
+      "status": true
+    },
+    {
+      "id": 18,
+      "color": "#CC99CC",
+      "value": "Waqaf Ibtida",
+      "status": true
+    },
+    {
+      "id": 19,
+      "color": "#CCCCCC",
+      "value": "Lainnya",
+      "status": true
+    }
+  ],
+  "font": {
+    "id": 22,
+    "color": null,
+    "value": "utsmani",
+    "status": false
+  },
+  "font-size": {
+    "id": 20,
+    "color": null,
+    "value": 4,
+    "status": false
+  },
+  "kesimpulan": {
+    "id": 21,
+    "color": null,
+    "value": "tampilkan",
+    "status": false
+  },
+  "tata-letak": {
+    "id": 22,
+    "color": null,
+    "value": "utsmani",
+    "status": false
+  }
+}

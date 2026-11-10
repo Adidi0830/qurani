@@ -1,0 +1,80 @@
+{
+  "grup detail": {
+    "header": {
+      "group_info": "Informasi Grup"
+    },
+    "stats": {
+      "total_members": "Anggota",
+      "group_type": "Tipe",
+      "created_date": "Tanggal Dibuat",
+      "created": "Dibuat",
+      "private": "Privat",
+      "public": "Publik"
+    },
+    "members": {
+      "title": "Anggota Grup",
+      "search_placeholder": "Cari anggota...",
+      "owner": "Pemilik",
+      "admin": "Admin",
+      "member": "Anggota",
+      "members_text": "Anggota",
+      "member_singular": "anggota",
+      "member_plural": "anggota",
+      "and": "dan",
+      "unknown": "Tidak Diketahui",
+      "no_members_found": "Tidak ada anggota yang ditemukan",
+      "try_different_search": "Coba kata kunci pencarian yang berbeda"
+    },
+    "manage": {
+      "title": "Kelola Grup",
+      "description": "Anda dapat mengelola grup ini sebagai admin.",
+      "manage_button": "Kelola",
+      "edit_group": "Edit Grup",
+      "qurani_settings": "Pengaturan Qurani"
+    },
+    "leave_group": {
+      "title": "Keluar dari Grup",
+      "description": "Anda dapat keluar dari grup ini kapan saja. Tindakan ini tidak dapat dibatalkan.",
+      "button": "Keluar",
+      "dialog_title": "Keluar dari Grup",
+      "dialog_description_before": "Apakah Anda yakin ingin keluar dari grup",
+      "dialog_description_after": "Tindakan ini tidak dapat dibatalkan dan Anda perlu diundang kembali untuk bergabung.",
+      "warning_message": "Anda akan kehilangan akses ke semua percakapan dan file grup.",
+      "cancel": "Batal",
+      "leaving": "Keluar...",
+      "leave": "Keluar",
+      "leave_group": "Keluar dari Grup",
+      "no": "Tidak",
+      "yes": "Ya"
+    },
+    "general": {
+      "no_description_available": "Tidak ada deskripsi tersedia",
+      "private": "Privat",
+      "public": "Publik"
+    },
+    "toast": {
+      "leave_success": "Berhasil keluar dari grup",
+      "leave_failed": "Gagal keluar dari grup",
+      "leave_error": "Terjadi kesalahan saat keluar dari grup"
+    },
+    "search": {
+      "no_members_match": "Tidak ada anggota yang cocok dengan pencarian"
+    },
+    "errors": {
+      "group_not_found": "Grup tidak ditemukan",
+      "group_not_found_description": "Grup yang Anda cari mungkin telah dihapus atau Anda tidak memiliki akses",
+      "access_denied": "Akses Ditolak",
+      "access_denied_description": "Anda tidak memiliki izin untuk melihat grup ini"
+    },
+    "filter": {
+      "category": "Kategori",
+      "category_placeholder": "Pilih Kategori...",
+      "all": "Semua",
+      "reset": "Reset",
+      "cancel": "Batal",
+      "apply": "Terapkan",
+      "active": "Aktif",
+      "deleted": "Dihapus"
+    }
+  }
+}

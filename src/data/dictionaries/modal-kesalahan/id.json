@@ -1,0 +1,28 @@
+{
+  "modal": {
+    "title": {
+      "word_error": "Kesalahan Kata",
+      "verse_error": "Kesalahan Ayat",
+      "select_error": "Pilih Kesalahan",
+      "word_error_with_text": "Kesalahan Kata: {{text}}",
+      "verse_error_with_number": "Kesalahan Ayat: {{number}}"
+    },
+    "badges": {
+      "word_error": "Kesalahan Kata",
+      "verse_error": "Kesalahan Ayat"
+    },
+    "existing_error": {
+      "current_error": "Kesalahan saat ini:",
+      "hukum_bacaan": "Hukum Bacaan:",
+      "remove_error": "Hapus Kesalahan",
+      "default_verse_error": "Kesalahan Ayat"
+    },
+    "buttons": {
+      "cancel": "Batal",
+      "close": "Tutup"
+    },
+    "accessibility": {
+      "select_error_type": "Pilih jenis kesalahan: {{type}}"
+    }
+  }
+}

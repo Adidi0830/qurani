@@ -1,0 +1,46 @@
+{
+  "cari grup": {
+    "header": {
+      "title": "Cari Grup"
+    },
+    "search": {
+      "placeholder": "Cari nama grup"
+    },
+    "loading": {
+      "searching": "Mencari grup..."
+    },
+    "empty": {
+      "title": "Tidak ada grup yang ditemukan",
+      "subtitle": "Coba cari dengan kata kunci lain"
+    },
+    "initial": {
+      "title": "Mulai mencari grup",
+      "subtitle": "Masukkan nama atau deskripsi grup untuk menemukan kelompok belajar"
+    },
+    "error": {
+      "title": "Kesalahan Koneksi",
+      "description": "Tidak dapat mencari grup. Periksa koneksi Anda lalu coba lagi.",
+      "retry": "Coba Lagi"
+    },
+    "results": {
+      "found_singular": "Ditemukan {count} grup",
+      "found_plural": "Ditemukan {count} grup"
+    },
+    "card": {
+      "no_description": "Tidak ada deskripsi",
+      "created_prefix": "Dibuat",
+      "members": "Anggota"
+    },
+    "actions": {
+      "join": "Gabung Grup",
+      "request_sent": "Permintaan Dikirim",
+      "request_join": "Minta Bergabung"
+    },
+    "toast": {
+      "search_failed": "Gagal mencari grup. Silakan coba lagi.",
+      "join_failed": "Gagal bergabung ke grup."
+    }
+  }
+}
+
+

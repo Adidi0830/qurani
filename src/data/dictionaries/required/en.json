@@ -1,0 +1,37 @@
+{
+  "required": {
+    "title": "Welcome!",
+    "username_label": "Username",
+    "username_placeholder": "@username (use _ not space or -)",
+    "checking_availability": "Checking availability...",
+    "username_available": "Username is available!",
+    "username_taken": "Username is already taken",
+    "username_help": "Username can only contain letters, numbers, and underscores (3-20 characters). No spaces or hyphens allowed.",
+    "countries_label": "Countries",
+    "country_select": "Select Country",
+    "country_search": "Search Country",
+    "province_label": "Province",
+    "province_select": "Select Province",
+    "province_search": "Search Province",
+    "city_label": "City",
+    "city_select": "Select City",
+    "city_search": "Search City",
+    "save": "Save",
+    "saving": "Saving...",
+    "errors": {
+      "user_not_found": "User not found",
+      "select_province": "Please select a province",
+      "select_city": "Please select a city",
+      "check_username_failed": "Failed to check username availability",
+      "update_failed": "Failed to update username",
+      "generic": "Something went wrong, please try again"
+    },
+    "validation": {
+      "no_spaces": "Username cannot contain spaces. Use underscore (_) instead.",
+      "no_hyphens": "Username cannot contain hyphens (-). Use underscore (_) instead.",
+      "invalid_chars": "Username can only contain letters, numbers, and underscore (_)",
+      "min_length": "Username must be at least 3 characters",
+      "max_length": "Username must be at most 20 characters"
+    }
+  }
+}

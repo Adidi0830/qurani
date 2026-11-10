@@ -1,0 +1,117 @@
+{
+  "grup saya": {
+    "header": {
+      "title": "Groups"
+    },
+    "tabs": {
+      "owned": "Groups You Own ({count})",
+      "owned_short": "Owned",
+      "member": "Groups You In ({count})",
+      "member_short": "Member",
+      "search": "Search"
+    },
+    "search": {
+      "placeholder": "Search groups...",
+      "button": "Search"
+    },
+    "create": {
+      "button": "Create Group",
+      "button_short": "Create",
+      "modal_title": "Create New Group",
+      "modal_description": "Create a new group to communicate and learn together",
+      "photo_label": "Profile Photo (Optional)",
+      "name_label": "Group Name",
+      "name_placeholder": "Group name...",
+      "description_label": "Description (Optional)",
+      "description_placeholder": "Group description...",
+      "status_label": "Type",
+      "category_placeholder": "Select Category...",
+      "private": "Private",
+      "public": "Public",
+      "secret": "Secret",
+      "cancel": "Cancel",
+      "done": "Done",
+      "creating": "Creating...",
+      "create_action": "Create Group",
+      "category_label": "Category"
+    },
+    "validation": {
+      "login_required": "You must login first",
+      "name_empty": "Group name cannot be empty",
+      "name_min_length": "Group name must be at least 3 characters",
+      "name_max_length": "Group name must be less than 50 characters",
+      "category_empty": "Category cannot be empty",
+      "description_max_length": "Description must be less than 500 characters",
+      "photo_size_limit": "Photo size must be less than 5MB",
+      "photo_format": "Photo must be JPEG, PNG, or WebP format",
+      "photo_size_exceeded": "File size must not exceed 3MB"
+    },
+    "results": {
+      "showing": "Showing {current} of {total} groups",
+      "showing_singular": "Showing {current} of {total} group"
+    },
+    "card": {
+      "no_description": "No description available",
+      "created_prefix": "Created",
+      "members": "Members",
+      "manage": "Manage",
+      "details": "Details",
+      "leave": "Leave",
+      "restore": "Restore",
+      "day": "Days"
+    },
+    "loading": {
+      "text": "Loading your groups..."
+    },
+    "empty": {
+      "owned_title": "No groups owned",
+      "member_title": "No groups joined",
+      "owned_description": "Create your first group to start managing your own study groups.",
+      "member_description": "Join existing groups or create your own to start learning together.",
+      "create_button": "Create Group"
+    },
+    "report": {
+      "report": "Report",
+      "title": "Report Group",
+      "violation_type": "Type of Violation",
+      "violation_placeholder": "Select a violation type",
+      "violation_options": {
+        "spam": "Spam",
+        "harassment": "Harassment",
+        "inappropriate": "Inappropriate Content",
+        "scam": "Scam",
+        "other": "Other"
+      },
+      "report_title": "Report Title",
+      "report_title_placeholder": "Example: This group is spreading spam",
+      "report_description": "Report Details",
+      "report_description_placeholder": "Describe the violation in detail...",
+      "evidence_label": "Evidence (optional)",
+      "evidence_upload_text": "Click to upload",
+      "evidence_hint": "JPG, PNG • Max. 5MB",
+      "warning_title": "Important:",
+      "warning_items": {
+        "one": "Reports must be based on facts and clear evidence.",
+        "two": "Submitting false reports may result in penalties.",
+        "three": "Reports will be reviewed by our team within 1–3 business days."
+      },
+      "button_cancel": "Cancel",
+      "button_send": "Send",
+      "char_count": "characters"  
+    },
+    "toast": {
+      "load_failed": "Failed to load group data",
+      "load_error": "An error occurred while fetching group data",
+      "leave_success": "Successfully left the group",
+      "leave_error": "An error occurred while leaving the group",
+      "create_success": "Group created successfully!",
+      "create_failed": "Failed to create group",
+      "create_error": "An error occurred while creating group",
+      "join_success": "Successfully joined the group",
+      "join_request": "Successfully send request join the group",
+      "join_error": "Failed to send request join the group"
+    },
+    "success": "Successfully",
+    "error": "Error"
+  }
+}

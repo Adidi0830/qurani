@@ -1,0 +1,131 @@
+{
+    "recitation": {
+    "title": "Quran Recitation",
+    "reciter": "Reciter",
+    "friend": "Friend",
+    "group": "Group",
+    "label_select_friend": "Select Friend",
+    "label_select_group": "Select Group",
+    "member_group": "Select Member",
+    "recitation": "Recitation Type",
+    "display": "Display",
+    "surah": "Surah",
+    "page": "Page",
+    "label_select_surah": "Select Surah",
+    "label_select_juz": "Select Juz",
+    "label_select_page": "Select Page",
+    "label_select_praquran": "Select Pra Quran",
+    "start": "Start",
+    "interactive_map": "Statistic",
+    "search_friend_no_results": "No friends found",
+    "search_group_no_results": "No group found",
+    "search_member_no_results": "No member found",
+    "back": "Back",
+    "distribution": "Distribution of memorization",
+    "loading": {
+        "friends": "Loading friends...",
+        "groups": "Loading groups...",
+        "members": "Loading members...",
+        "saving": "Saving recitation...",
+        "preparing": "Loading..."
+    },
+    "empty_state": {
+        "no_friends": "No friends yet",
+        "no_groups": "No groups yet",
+        "no_members": "No members yet"
+    },
+    "errors": {
+        "complete_required_data": "Please complete all required data",
+        "failed_load_members": "Failed to load group members",
+        "failed_load_data": "Failed to load data. Please try again.",
+        "error_load_data": "An error occurred while loading data.",
+        "reciter_required": "Reciter type is required",
+        "friend_required": "Please select a friend",
+        "group_member_required": "Please select a group member",
+        "group_required": "Please select a group",
+        "recitation_type_required": "Recitation type is required",
+        "display_type_required": "Display type is required",
+        "item_required": "Please select an item",
+        "page_required": "Please select a page"
+    },
+    "buttons": {
+        "create_group": "Create Group",
+        "find_friends": "Find Friends",
+        "reset": "Reset"
+    },
+    "search": {
+        "surah": "Search Surah",
+        "juz": "Search Juz",
+        "page": "Search Page",
+        "praquran": "Search Pra Quran",
+        "no_results": "No {type} found.",
+        "select_month": "Select Month",
+        "all": "All",
+        "friend": "Search friend...",
+        "group": "Search group...",
+        "member": "Search Member..."
+    },
+    "tab": {
+            "recitation": "Recitations",
+            "user": "Users"
+        },
+        "map": {
+            "unknown_city": "Unknown City"
+        }
+    },
+    "recap": {
+        "verses": "Verses",
+        "recitation_summary": "Recitation",
+        "back": "Back",
+        "recitation_details": "Recitation Details",
+        "preview": "Preview",
+        "mistakes_summary": "Summary",
+        "verse_errors": "Verse Errors",
+        "word_errors": "Word Errors",
+        "conclusion": "Conclusion",
+        "notes": "Notes",
+        "select_conclusion": "Select Conclusion",
+        "special_notes": "Special Notes",
+        "juz": "Juz",
+        "page": "Page",
+        "verse": "Verse",
+        "memorization_range": "Memorization Range",
+        "assessment": "Assessment",
+        "conclusion_options": {
+            "excellent": "Excellent",
+            "very_good": "Very Good",
+            "good": "Good",
+            "pass": "Pass",
+            "weak": "Weak",
+            "not_pass": "Not Pass"
+        },
+        "form": {
+            "participant": "Reciter",
+            "start_surah": "Start Surah",
+            "select_start_surah": "Select Start Surah",
+            "start_verse": "Start Verse",
+            "page": "Page",
+            "select_start_verse": "Select Start Verse",
+            "end_surah": "End Surah",
+            "select_end_surah": "Select End Surah",
+            "end_verse": "End Verse",
+            "select_end_verse": "Select End Verse",
+            "conclusion": "Conclusion",
+            "select_conclusion": "Select Conclusion",
+            "notes_optional": "Notes",
+            "notes_placeholder": "Additional notes...",
+            "notes_empty": "No additional notes",
+            "conclusion_empty": "No conclusion provided",
+            "show_mushaf": "Show Mushaf",
+            "loading": "Loading...",
+            "save": "Save",
+            "saving": "Saving...",
+            "finishing": "Finishing...",
+            "finish": "Finish",
+            "brush_size": "Brush Size",
+            "conclusion_required": "Conclusion is required",
+            "success": "Success",
+            "failed": "Failed"
+        }
+    }
+}

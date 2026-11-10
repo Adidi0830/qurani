@@ -1,0 +1,42 @@
+[
+    {
+        "id": 1,
+        "name": "Ratna Haryaningsih",
+        "skills": ["Ummi"],
+        "rating": 5,
+        "location": "Bandung, Jawa Barat",
+        "avatar": "https://i.pravatar.cc/150?u=ratna"
+    },
+    {
+        "id": 2,
+        "name": "Zain",
+        "skills": ["Tilawati", "Qiraati"],
+        "rating": 4.8,
+        "location": "Maluku Tengah, Maluku",
+        "avatar": "https://i.pravatar.cc/150?u=zain"
+    },
+    {
+        "id": 3,
+        "name": "Nabila",
+        "skills": ["Ummi", "Al-Baghdadi"],
+        "rating": 4.9,
+        "location": "Yogyakarta, DI Yogyakarta",
+        "avatar": "https://i.pravatar.cc/150?u=nabila"
+    },
+    {
+        "id": 4,
+        "name": "Abdullah Hasan",
+        "skills": ["Qiraati", "Tartil"],
+        "rating": 4.7,
+        "location": "Medan, Sumatera Utara",
+        "avatar": "https://i.pravatar.cc/150?u=hasan"
+    },
+    {
+        "id": 5,
+        "name": "Diyah",
+        "skills": ["Ummi", "Tilawati"],
+        "rating": 5,
+        "location": "Makassar, Sulawesi Selatan",
+        "avatar": "https://i.pravatar.cc/150?u=diyah"
+    }
+]

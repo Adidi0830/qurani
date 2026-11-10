@@ -1,0 +1,33 @@
+{
+    "setting global": {
+        "title": "Global Settings",
+        "layout": "Layout",
+        "flexible": "Flexible",
+        "mushaf_uthmani": "Mushaf Uthmani",
+        "font_type": "Font Type",
+        "indo_pak": "IndoPak",
+        "utsmani": "Utsmani",
+        "font_size": "Font Size",
+        "verse_errors": "Verse Errors",
+        "word_errors": "Word Errors",
+        "add_word_error": "Add New Word Error",
+        "add_verse_error": "Add New Verse Error",
+        "error_name": "Error Name",
+        "color": "Color",
+        "status": {
+            "active": "Active",
+            "inactive": "Inactive"
+        },
+        "cancel": "Cancel",
+        "save": "Save",
+        "delete": "Delete",
+        "placeholder": "Enter error name...",
+        "edit_setting": "Edit Setting",
+        "update": "Update",
+        "updating": "Updating...",
+        "delete_setting": "Delete Setting",
+        "sub_title": "Are you sure you want to delete the setting \"{settingName}\"?",
+        "warning": "Warning:",
+        "delete_warning": "This action cannot be undone and will permanently delete all setting data."
+    }
+}

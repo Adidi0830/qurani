@@ -1,0 +1,43 @@
+{
+  "join grup": {
+    "loading": {
+      "title": "Loading invitation...",
+      "description": "Verifying invitation link"
+    },
+    "error": {
+      "title": "Invalid Invitation",
+      "description": "Invitation link not found or has expired",
+      "invalid_token": "Invalid invitation token",
+      "load_error": "An error occurred while loading invitation"
+    },
+    "header": {
+      "title": "Group Invitation"
+    },
+    "group_info": {
+      "private": "Private",
+      "public": "Public",
+      "secret": "Secret"
+    },
+    "actions": {
+      "login_required": "You must login first to join the group",
+      "login_button": "Login to Join",
+      "join_button": "Join Group",
+      "joining": "Joining...",
+      "cancel": "Cancel",
+      "expired": "Invitation link has expired",
+      "search_other": "Search Other Groups",
+      "back_dashboard": "Back to Dashboard"
+    },
+    "footer": {
+      "terms": "By joining, you agree to follow the group rules",
+      "joining_as": "Joining as: {username}"
+    },
+    "toast": {
+      "login_required": "You must login first",
+      "invalid_token": "Invalid invitation token",
+      "join_success": "Successfully joined the group!",
+      "join_error": "An error occurred while joining the group",
+      "already_member": "You are already a member of this group"
+    }
+  }
+}

@@ -1,0 +1,43 @@
+{
+    "title": "Categories",
+    "search_placeholder": "Search by category name...",
+    "create_button": "Create",
+    "empty": "There are no groups in this category yet",
+    "search": "Search",
+    "table_headers": {
+        "name": "Name",
+        "total_group": "Total Group",
+        "actions": "Actions"
+    },
+    "actions": {
+        "edit": "Edit",
+        "delete": "Delete"
+    },
+    "edit_category": {
+        "title": "Edit Category",
+        "category_label": "Category",
+        "category_placeholder": "Enter a category name...",
+        "cancel": "Cancel",
+        "save": "Save",
+        "saving": "Saving..."
+    },
+    "create_category": {
+        "title": "Create Category",
+        "category_label": "Category",
+        "category_placeholder": "Enter a category name...",
+        "cancel": "Cancel",
+        "save": "Save",
+        "saving": "Saving..."
+    },
+    "delete_category": {
+        "title": "Delete Category",
+        "message": "Are you sure you want to delete this category? This action cannot be undone.",
+        "delete": "Delete",
+        "deleting": "Deleting..."
+    },
+    "pagination": {
+        "showing": "Showing {start} - {end} of {total} categories"
+    },
+    "no_results": "No categories found",
+    "no_categories": "No categories yet"
+}

@@ -1,0 +1,33 @@
+{
+    "setting global": {
+        "title": "Pengaturan Global",
+        "layout": "Tata Letak",
+        "flexible": "Fleksibel",
+        "mushaf_uthmani": "Mushaf Utsmani",
+        "font_type": "Jenis Font",
+        "indo_pak": "IndoPak",
+        "utsmani": "Utsmani",
+        "font_size": "Ukuran Font",
+        "verse_errors": "Kesalahan Ayat",
+        "word_errors": "Kesalahan Kata",
+        "add_word_error": "Tambah Kesalahan Kata Baru",
+        "add_verse_error": "Tambah Kesalahan Ayat Baru",
+        "error_name": "Nama Kesalahan",
+        "color": "Warna",
+        "status": {
+            "active": "Aktif",
+            "inactive": "Tidak Aktif"
+        },
+        "cancel": "Batal",
+        "save": "Simpan",
+        "delete": "Hapus",
+        "placeholder": "Masukkan nama kesalahan...",
+        "edit_setting": "Ubah Pengaturan",
+        "update": "Perbarui",
+        "updating": "Memperbarui...",
+        "delete_setting": "Hapus Pengaturan",
+        "sub_title": "Apakah Anda yakin ingin menghapus pengaturan \"{settingName}\"?",
+        "warning": "Peringatan:",
+        "delete_warning": "Data akan dihapus permanen dan tidak dapat dikembalikan."
+    }
+}

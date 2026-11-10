@@ -1,0 +1,28 @@
+{
+  "modal": {
+    "title": {
+      "word_error": "خطأ الكلمة",
+      "verse_error": "خطأ الآية",
+      "select_error": "اختر الخطأ",
+      "word_error_with_text": "خطأ الكلمة: {{text}}",
+      "verse_error_with_number": "خطأ الآية: {{number}}"
+    },
+    "badges": {
+      "word_error": "خطأ الكلمة",
+      "verse_error": "خطأ الآية"
+    },
+    "existing_error": {
+      "current_error": "الخطأ الحالي:",
+      "hukum_bacaan": "حكم التلاوة:",
+      "remove_error": "إزالة الخطأ",
+      "default_verse_error": "خطأ الآية"
+    },
+    "buttons": {
+      "cancel": "إلغاء",
+      "close": "إغلاق"
+    },
+    "accessibility": {
+      "select_error_type": "اختر نوع الخطأ: {{type}}"
+    }
+  }
+}

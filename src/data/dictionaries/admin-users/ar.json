@@ -1,0 +1,65 @@
+{
+  "title": "قائمة المستخدمين",
+  "search_placeholder": "البحث بواسطة اسم المستخدم...",
+  "search_button": "بحث",
+  "clear_search": "مسح البحث",
+  "table_headers": {
+    "photo": "الصورة",
+    "username": "اسم المستخدم",
+    "full_name": "الاسم الكامل",
+    "email": "البريد الإلكتروني",
+    "join_date": "تاريخ الانضمام",
+    "role": "الدور",
+    "active": "نشط",
+    "actions": "الإجراءات"
+  },
+  "roles": {
+    "admin": "مشرف",
+    "member": "عضو"
+  },
+  "status": {
+    "active": "نعم",
+    "inactive": "لا",
+    "blocked": "محظور"
+  },
+  "actions": {
+    "edit": "تعديل",
+    "view": "عرض"
+  },
+  "no_data": "لم يتم العثور على مستخدمين",
+  "search_no_results": "لم يتم العثور على نتائج لـ \"{searchTerm}\"",
+  "edit_user": {
+    "title": "تعديل المستخدم",
+    "username_label": "اسم المستخدم",
+    "username_placeholder": "أدخل اسم المستخدم",
+    "full_name_label": "الاسم الكامل",
+    "full_name_placeholder": "أحمد محمد",
+    "email_label": "البريد الإلكتروني",
+    "email_placeholder": "ahmed@example.com",
+    "role_label": "الدور",
+    "role_placeholder": "اختر الدور",
+    "status_label": "حالة النشاط",
+    "status_placeholder": "اختر الحالة",
+    "status_active": "نشط",
+    "status_blocked": "محظور",
+    "save_button": "حفظ",
+    "saving_button": "جاري الحفظ...",
+    "cancel_button": "إلغاء"
+  },
+  "validation": {
+    "username_exists": "اسم المستخدم موجود بالفعل",
+    "username_error": "خطأ في فحص توفر اسم المستخدم"
+  },
+  "messages": {
+    "update_success": "تم تحديث ملف المستخدم بنجاح",
+    "update_error": "فشل في تحديث ملف المستخدم",
+    "loading_users": "جاري تحميل المستخدمين...",
+    "search_failed": "فشل البحث",
+    "no_username_provided": "لا يمكن أن يكون اسم المستخدم فارغاً"
+  },
+  "pagination": {
+    "previous": "السابق",
+    "next": "التالي",
+    "showing": "عرض {start} - {end} من {total} مستخدمين"
+  }
+}

@@ -1,0 +1,131 @@
+{
+  "recitation": {
+    "title": "تلاوة القرآن",
+    "reciter": "المقرئ",
+    "friend": "الصديق",
+    "group": "المجموعة",
+    "label_select_friend": "اختر صديقًا",
+    "label_select_group": "اختر مجموعة",
+    "member_group": "اختر عضوًا",
+    "recitation": "نوع التلاوة",
+    "display": "عرض",
+    "surah": "السورة",
+    "page": "الصفحة",
+    "label_select_surah": "اختر سورة",
+    "label_select_juz": "اختر جزءًا",
+    "label_select_page": "اختر صفحة",
+    "label_select_praquran": "اختر برا قرآن",
+    "start": "ابدأ",
+    "interactive_map": "الإحصاءات",
+    "search_friend_no_results": "لم يتم العثور على أصدقاء",
+    "search_group_no_results": "لم يتم العثور على مجموعات",
+    "search_member_no_results": "لم يتم العثور على أعضاء",
+    "back": "رجوع",
+    "distribution": "توزيع الحفظ",
+    "loading": {
+      "friends": "جارٍ تحميل الأصدقاء...",
+      "groups": "جارٍ تحميل المجموعات...",
+      "members": "جارٍ تحميل الأعضاء...",
+      "saving": "جارٍ حفظ التلاوة...",
+      "preparing": "جارٍ التحميل..."
+    },
+    "empty_state": {
+      "no_friends": "لا يوجد أصدقاء بعد",
+      "no_groups": "لا توجد مجموعات بعد",
+      "no_members": "لا يوجد أعضاء بعد"
+    },
+    "errors": {
+      "complete_required_data": "يرجى إكمال جميع البيانات المطلوبة",
+      "failed_load_members": "فشل تحميل أعضاء المجموعة",
+      "failed_load_data": "فشل تحميل البيانات. يرجى المحاولة مرة أخرى.",
+      "error_load_data": "حدث خطأ أثناء تحميل البيانات.",
+      "reciter_required": "نوع المقرئ مطلوب",
+      "friend_required": "يرجى اختيار صديق",
+      "group_member_required": "يرجى اختيار عضو من المجموعة",
+      "group_required": "يرجى اختيار مجموعة",
+      "recitation_type_required": "نوع التلاوة مطلوب",
+      "display_type_required": "نوع العرض مطلوب",
+      "item_required": "يرجى اختيار عنصر",
+      "page_required": "يرجى اختيار صفحة"
+    },
+    "buttons": {
+      "create_group": "إنشاء مجموعة",
+      "find_friends": "البحث عن أصدقاء",
+      "reset": "إعادة ضبط"
+    },
+    "search": {
+      "surah": "ابحث عن سورة",
+      "juz": "ابحث عن جزء",
+      "page": "ابحث عن صفحة",
+      "praquran": "ابحث عن برا قرآن",
+      "no_results": "لم يتم العثور على {type}.",
+      "select_month": "اختر شهرًا",
+      "all": "الكل",
+      "friend": "ابحث عن صديق...",
+      "group": "ابحث عن مجموعة...",
+      "member": "ابحث عن عضو..."
+    },
+    "tab": {
+      "recitation": "التلاوات",
+      "user": "المستخدمون"
+    },
+    "map": {
+      "unknown_city": "مدينة غير معروفة"
+    }
+  },
+  "recap": {
+    "verses": "الآيات",
+    "recitation_summary": "التلاوة",
+    "back": "رجوع",
+    "recitation_details": "تفاصيل التلاوة",
+    "preview": "معاينة",
+    "mistakes_summary": "ملخص",
+    "verse_errors": "أخطاء الآيات",
+    "word_errors": "أخطاء الكلمات",
+    "conclusion": "الخلاصة",
+    "notes": "ملاحظات",
+    "select_conclusion": "اختر الخلاصة",
+    "special_notes": "ملاحظات خاصة",
+    "juz": "الجزء",
+    "page": "الصفحة",
+    "verse": "الآية",
+    "memorization_range": "نطاق الحفظ",
+    "assessment": "التقييم",
+    "conclusion_options": {
+      "excellent": "ممتاز",
+      "very_good": "جيد جدًا",
+      "good": "جيد",
+      "pass": "مقبول",
+      "weak": "ضعيف",
+      "not_pass": "غير مقبول"
+    },
+    "form": {
+      "participant": "المقرئ",
+      "start_surah": "سورة البداية",
+      "select_start_surah": "اختر سورة البداية",
+      "start_verse": "آية البداية",
+      "page": "الصفحة",
+      "select_start_verse": "اختر آية البداية",
+      "end_surah": "سورة النهاية",
+      "select_end_surah": "اختر سورة النهاية",
+      "end_verse": "آية النهاية",
+      "select_end_verse": "اختر آية النهاية",
+      "conclusion": "الخلاصة",
+      "select_conclusion": "اختر الخلاصة",
+      "notes_optional": "ملاحظات",
+      "notes_placeholder": "ملاحظات إضافية...",
+      "notes_empty": "لا توجد ملاحظات إضافية",
+      "conclusion_empty": "لا توجد خلاصة",
+      "show_mushaf": "عرض المصحف",
+      "loading": "جارٍ التحميل...",
+      "save": "حفظ",
+      "saving": "جارٍ الحفظ...",
+      "finishing": "جارٍ الإنهاء...",
+      "finish": "إنهاء",
+      "brush_size": "حجم الفرشاة",
+      "conclusion_required": "الخلاصة مطلوبة",
+      "success": "نجاح",
+      "failed": "فشل"
+    }
+  }
+}

@@ -1,0 +1,354 @@
+{
+  "teacher_detail": {
+    "status": {
+      "verified": "Terverifikasi",
+      "pending": "Menunggu Verifikasi",
+      "suspended": "Nonaktif",
+      "rejected": "Ditolak",
+      "seleksi": "Seleksi"
+    },
+    "mode": {
+      "online": "Online",
+      "offline": "Offline",
+      "hybrid": "Online & Offline"
+    },
+    "common": {
+      "back": "Kembali",
+      "cancel": "Batal",
+      "save": "Simpan",
+      "not_found": "Data guru tidak ditemukan",
+      "user_id": "ID User",
+      "copy_user_id": "Salin ID User",
+      "copied": "Tersalin!",
+      "copied_clipboard": "Tersalin ke clipboard",
+      "view_user_profile": "Lihat Profil User",
+      "title": "Profil Guru",
+      "rejection_default": "Ditolak oleh admin",
+      "verified_by_admin": "Diverifikasi oleh Admin",
+      "related_institution": "Lembaga Terkait"
+    },
+    "modal": {
+      "reject_title": "Tolak Pendaftaran Guru",
+      "reason_label": "Alasan Penolakan",
+      "reason_placeholder": "Tulis alasan mengapa guru ini ditolak...",
+      "reason_hint": "Alasan ini akan dikirimkan ke email guru yang bersangkutan.",
+      "cancel": "Batal",
+      "confirm": "Konfirmasi Penolakan"
+    },
+    "toasts": {
+      "failed": "Gagal",
+      "no_token": "Token login tidak ditemukan",
+      "approve": "Pendaftaran guru diterima",
+      "reject": "Pendaftaran guru ditolak",
+      "suspend": "Guru dinonaktifkan",
+      "unsuspend": "Guru diaktifkan kembali",
+      "bg_requested": "Background Check Diminta",
+      "bg_success": "Permintaan background check untuk {{name}} berhasil dikirim.",
+      "bg_mocked": "Background Check Diminta (Mocked)",
+      "bg_mock_message": "Berhasil mock permintaan background check untuk {{name}} karena API error.",
+      "doc_verified": "Dokumen Diverifikasi",
+      "doc_verified_message": "Dokumen {{name}} telah ditandai valid.",
+      "doc_verified_mocked": "Dokumen Diverifikasi (Mocked)",
+      "doc_verified_mock_message": "Berhasil mock validasi dokumen {{label}}."
+    },
+    "manage": {
+      "headline_fallback": "Calon Pengajar Al-Qur'an",
+      "experience_years": "{{count}} thn pengalaman",
+      "registered_at": "Terdaftar {{date}}",
+      "stats": {
+        "courses": "Kursus",
+        "courses_sub": "paket aktif",
+        "students": "Murid",
+        "students_sub": "terdaftar",
+        "rating": "Rating",
+        "rating_sub": "{{count}} ulasan",
+        "rate": "Tarif/Jam",
+        "rate_sub": "per jam"
+      },
+      "tabs": {
+        "info": "Informasi",
+        "package": "Paket",
+        "orders": "Pesanan",
+        "wallet": "Wallet",
+        "gallery": "Galeri",
+        "reviews": "Ulasan"
+      },
+      "info": {
+        "about_title": "Tentang Pengajar",
+        "about_empty": "Guru ini belum mengisi deskripsi diri.",
+        "skills_title": "Keahlian & Metode Mengajar",
+        "skills_empty": "Belum ada keahlian yang disubmit.",
+        "certs_title": "Kredensial & Sertifikasi",
+        "certs_count": "{{count}} sertifikat",
+        "certs_empty": "Belum ada sertifikat yang diunggah.",
+        "certs_empty_hint": "Guru perlu mengunggah ijazah/sertifikat untuk verifikasi.",
+        "cert_fallback": "Sertifikat {{count}}",
+        "issued_label": "Terbit:",
+        "expiry_label": "Berlaku s/d:",
+        "open_doc": "Buka Dokumen",
+        "mark_valid": "Tandai Valid",
+        "portfolio_title": "Portofolio & Media",
+        "portfolio_count": "{{count}} item",
+        "media_kind_video": "📹 Video",
+        "media_kind_image": "🖼️ Gambar",
+        "media_kind_link": "🔗 Link",
+        "portfolio_number": "Portofolio #{{count}}"
+      },
+      "package": {
+        "load_error": "Gagal memuat paket",
+        "empty": "Belum ada paket yang dibuat oleh guru ini.",
+        "sessions": "{{count}} Sesi",
+        "draft": "Draft",
+        "price_label": "Harga Paket",
+        "free": "Gratis",
+        "students": "{{count}} Pendaftar"
+      },
+      "gallery": {
+        "photo_alt": "Foto kegiatan {{count}}",
+        "photo_title": "Foto Kegiatan Mengajar {{count}}",
+        "photo_sub": "Portofolio pengajaran guru",
+        "open_link": "Buka link"
+      },
+      "reviews": {
+        "empty": "Belum ada ulasan dari murid untuk guru ini.",
+        "count": "{{count}} ulasan",
+        "no_comment": "Tidak ada komentar."
+      },
+      "actions": {
+        "title": "Tindakan Admin",
+        "bg_title": "Verifikasi Latar Belakang",
+        "bg_passed": "Lolos Background Check",
+        "bg_running": "Pemeriksaan Berjalan...",
+        "bg_request": "Minta Background Check",
+        "bg_testing_done": "[Testing] Selesaikan Pemeriksaan",
+        "status_label": "Status Guru",
+        "suspend": "Nonaktifkan Guru",
+        "unsuspend": "Aktifkan Kembali",
+        "accept_now": "Terima Sekarang"
+      },
+      "account": {
+        "title": "Info Akun",
+        "user_id": "ID User",
+        "joined": "Tgl Daftar",
+        "mode": "Mode",
+        "rate": "Tarif/Jam"
+      },
+      "stats_teaching": {
+        "title": "Statistik Pengajaran",
+        "reviews": "{{count}} ulasan",
+        "total_courses": "Total Kursus",
+        "total_students": "Total Murid",
+        "certificates": "Sertifikat",
+        "portfolio": "Portfolio",
+        "portfolio_value": "{{count}} item"
+      },
+      "course_modal": {
+        "title": "Detail Paket",
+        "id": "ID: {{id}}",
+        "published": "Published",
+        "unpublished": "Unpublished",
+        "sessions": "{{count}} Sesi",
+        "price_label": "Harga Paket",
+        "free": "Gratis",
+        "sessions_lower": "{{count}} sesi",
+        "students": "{{count}} Pendaftar",
+        "rating": "Rating"
+      },
+      "requirements": {
+        "no_data": "Belum ada data submit untuk syarat ini.",
+        "media_verification": "Media Verifikasi Hafalan",
+        "no_link": "Belum ada link yang disubmit",
+        "cert_docs": "Dokumen Sertifikat",
+        "open": "Buka",
+        "no_doc": "Belum ada dokumen",
+        "mark_valid": "Tandai Dokumen Sah / Valid",
+        "open_doc": "Buka dokumen"
+      },
+      "evidence": {
+        "full_name": "Nama Lengkap & Gelar",
+        "domicile": "Domisili",
+        "experience": "Pengalaman Mengajar",
+        "years": "{{count}} Tahun",
+        "headline": "Headline / Slogan",
+        "bio": "Biografi Singkat",
+        "expertise": "Keahlian / Spesialisasi",
+        "mode": "Mode Mengajar",
+        "mode_online": "Online",
+        "mode_offline": "Offline",
+        "mode_hybrid": "Online & Offline",
+        "rate_per_hour": "Tarif Mengajar per Jam",
+        "cert_label": "Sertifikat / Ijazah: {{name}}",
+        "cert_value_parts": {
+          "issuer": "Penerbit: {{issuer}}",
+          "issued": "Diterbitkan: {{date}}",
+          "expiry": "Berlaku hingga: {{date}}"
+        },
+        "cert_value": "{{issuer}} | {{issued}}{{expiry}}",
+        "fatihah_video": "Link Video Surat Al-Fatihah",
+        "short_surah_video": "Link Video Surat Pendek / Portofolio",
+        "photo": "Foto Portofolio",
+        "media_portfolio": "Media Portofolio"
+      },
+      "requirement_titles": {
+        "profil_kontak": "Profil Dasar",
+        "profil_kontak_sub": "Nama, lokasi domisili & pengalaman",
+        "kualifikasi_metode": "Kualifikasi & Metode",
+        "kualifikasi_metode_sub": "Headline, biografi, keahlian & tarif",
+        "sertifikat": "Sertifikat / Ijazah",
+        "sertifikat_sub": "Dokumen riwayat pendidikan & sertifikasi",
+        "media_portofolio": "Portofolio & Media",
+        "media_portofolio_sub": "Video hafalan atau foto kegiatan mengajar"
+      }
+    },
+    "review": {
+      "title": "Review Pendaftar",
+      "rejected_banner": "Pendaftaran Ditolak",
+      "pick_penguji": "Pilih tim penyeleksi...",
+      "search_penguji": "Cari nama atau spesialisasi...",
+      "penguji_not_found": "Tidak ada penyeleksi ditemukan",
+      "sections": {
+        "profile": "Profil & Headline",
+        "expertise": "Keahlian & Kategori",
+        "rate": "Tarif & Ketersediaan",
+        "portfolio": "Portfolio & Sertifikasi"
+      },
+      "fields": {
+        "headline": "Headline / Tagline Profil",
+        "bio": "Biografi Singkat",
+        "location": "Lokasi / Kota Domisili",
+        "empty": "Belum diisi",
+        "registered": "Terdaftar: {{date}}",
+        "expertise_label": "Keahlian / Metode yang Dikuasai",
+        "expertise_empty": "Belum ada keahlian yang dipilih",
+        "category_label": "Kategori",
+        "category_empty": "Belum ada kategori yang dipilih",
+        "rate_hour": "Tarif per Jam",
+        "experience": "Pengalaman Mengajar",
+        "years": "{{count}} Tahun",
+        "mode": "Mode Mengajar",
+        "online": "Online",
+        "online_sub": "Via Zoom, Google Meet, dll",
+        "offline": "Offline / Tatap Muka",
+        "offline_sub": "Kunjungan ke rumah murid",
+        "video_portfolio": "Video Portfolio",
+        "video_count": "{{count}} video ditambahkan",
+        "video_empty": "Belum ada video portfolio",
+        "watch_youtube": "Tonton di YouTube",
+        "certification_label": "Sertifikasi / Syahadah",
+        "cert_count": "{{count}} sertifikat",
+        "cert_empty": "Belum ada sertifikat yang ditambahkan",
+        "cert_number": "Sertifikat {{count}}",
+        "cert_name": "Nama Sertifikat",
+        "issuer": "Penerbit",
+        "credential_id": "ID Kredensial",
+        "issued_date": "Tanggal Terbit",
+        "expiry_date": "Tanggal Kadaluarsa",
+        "none": "Tidak ada",
+        "cert_url": "URL Sertifikat",
+        "mark_valid": "Tandai Dokumen Sah / Valid"
+      },
+      "verification": {
+        "title": "Keputusan Verifikasi",
+        "warning": "Beberapa data wajib belum dilengkapi oleh pendaftar",
+        "check_profil": "Profil dasar (nama & lokasi)",
+        "check_expertise": "Keahlian & metode mengajar",
+        "check_cert": "Sertifikat / ijazah",
+        "check_video": "Video portfolio",
+        "accept": "Terima & Jadwalkan Seleksi",
+        "reject": "Tolak",
+        "already_status": "Pendaftar ini sudah dalam status {{status}}."
+      },
+      "seleksi_modal": {
+        "title": "Jadwal Wawancara Seleksi",
+        "date": "Tanggal Seleksi",
+        "time": "Waktu Seleksi",
+        "duration": "Durasi: {{value}}",
+        "penguji": "Penguji / Tim Penyeleksi",
+        "method": "Metode",
+        "online": "Online",
+        "offline": "Offline",
+        "online_link": "Link Pertemuan (Zoom / Google Meet)",
+        "offline_location": "Lokasi / Alamat Pertemuan",
+        "applicant_location": "Lokasi pendaftar: {{location}}",
+        "notes": "Catatan Tambahan",
+        "cancel": "Batal",
+        "save": "Simpan"
+      },
+      "email_preview": {
+        "title": "Konfirmasi Kirim Email",
+        "subtitle": "Notifikasi ke calon guru",
+        "summary": "Ringkasan Email yang Akan Dikirim",
+        "recipient": "Penerima",
+        "schedule": "Jadwal",
+        "method_link": "Metode & Link",
+        "penguji": "Penguji",
+        "info": "Email akan berisi tombol Konfirmasi Hadir dan Minta Reschedule untuk calon guru.",
+        "edit": "Edit",
+        "sending": "Mengirim...",
+        "send_email": "Kirim Email"
+      },
+      "toasts": {
+        "pick_penguji": "Pilih Tim Penyeleksi",
+        "pick_penguji_msg": "Harap pilih penguji dari dropdown.",
+        "rejected": "Pendaftaran guru ditolak",
+        "saved_mock": "Jadwal Tersimpan (Email Disimulasi)",
+        "email_sent": "📧 Email Terkirim!",
+        "email_mock_msg": "Data tersimpan. Email ke {{email}} akan aktif setelah Gmail dikonfigurasi.",
+        "email_sent_msg": "Email undangan seleksi dikirim ke {{recipient}}.",
+        "send_failed": "Gagal Kirim Email",
+        "send_failed_msg": "{{error}}",
+        "network_error": "Network error."
+      }
+    },
+    "orders_tab": {
+      "search": "Cari pesanan, nama murid, atau paket...",
+      "filter": "Filter",
+      "filter_label": "Filter Status",
+      "loading": "Memuat data pesanan...",
+      "empty": "Tidak ada pesanan ditemukan.",
+      "empty_all": "Belum ada pesanan untuk guru ini.",
+      "empty_filter": "Tidak ada pesanan dengan filter ini.",
+      "show_all": "Tampilkan semua ({{count}})",
+      "session_count": "{{count}} sesi",
+      "footer": "Menampilkan {{shown}} dari {{total}} pesanan",
+      "columns": {
+        "id": "ID Pesanan",
+        "member": "Murid",
+        "package": "Paket",
+        "mode": "Mode",
+        "amount": "Nominal",
+        "status": "Status",
+        "date": "Tanggal"
+      },
+      "status": {
+        "all": "Semua",
+        "pending": "Pending",
+        "active": "Aktif",
+        "cancelled": "Batal",
+        "completed": "Selesai",
+        "waiting_teacher": "Menunggu Guru"
+      }
+    },
+    "wallet_tab": {
+      "active_balance": "Saldo Aktif (Telah Dicairkan)",
+      "pending_balance": "Saldo Pending",
+      "pending_hint": "Akan dicairkan manual oleh admin melalui menu Payout.",
+      "history_title": "Riwayat Transaksi Payout",
+      "loading": "Memuat riwayat transaksi...",
+      "empty": "Belum ada riwayat transaksi payout.",
+      "columns": {
+        "id": "ID / Referensi",
+        "date": "Tanggal",
+        "amount": "Nominal",
+        "method": "Metode",
+        "status": "Status"
+      },
+      "bank_transfer": "Bank Transfer",
+      "status": {
+        "approved": "Disetujui",
+        "pending": "Pending",
+        "rejected": "Ditolak"
+      }
+    }
+  }
+}

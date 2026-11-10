@@ -1,0 +1,354 @@
+{
+  "teacher_detail": {
+    "status": {
+      "verified": "موثّق",
+      "pending": "قيد الانتظار",
+      "suspended": "موقوف",
+      "rejected": "مرفوض",
+      "seleksi": "الاختيار"
+    },
+    "mode": {
+      "online": "عن بُعد",
+      "offline": "حضوري",
+      "hybrid": "عن بُعد وحضوري"
+    },
+    "common": {
+      "back": "رجوع",
+      "cancel": "إلغاء",
+      "save": "حفظ",
+      "not_found": "لم يتم العثور على بيانات المعلم",
+      "user_id": "معرّف المستخدم",
+      "copy_user_id": "نسخ معرّف المستخدم",
+      "copied": "تم النسخ!",
+      "copied_clipboard": "تم نسخه إلى الحافظة",
+      "view_user_profile": "عرض ملف المستخدم",
+      "title": "ملف المعلم",
+      "rejection_default": "مرفوض بواسطة المسؤول",
+      "verified_by_admin": "تم التحقق من قبل المسؤول",
+      "related_institution": "الجهة ذات الصلة"
+    },
+    "modal": {
+      "reject_title": "رفض طلب المعلم",
+      "reason_label": "سبب الرفض",
+      "reason_placeholder": "اكتب سبب رفض هذا المعلم...",
+      "reason_hint": "سيتم إرسال هذا السبب إلى بريد المعلم الإلكتروني.",
+      "cancel": "إلغاء",
+      "confirm": "تأكيد الرفض"
+    },
+    "toasts": {
+      "failed": "فشل",
+      "no_token": "رمز تسجيل الدخول غير موجود",
+      "approve": "تم قبول طلب المعلم",
+      "reject": "تم رفض طلب المعلم",
+      "suspend": "تم إيقاف المعلم",
+      "unsuspend": "تمت إعادة تفعيل المعلم",
+      "bg_requested": "تم طلب التحقق من الخلفية",
+      "bg_success": "تم إرسال طلب التحقق من الخلفية لـ {{name}} بنجاح.",
+      "bg_mocked": "تم طلب التحقق من الخلفية (محاكاة)",
+      "bg_mock_message": "تم محاكاة طلب التحقق من الخلفية لـ {{name}} بسبب خطأ في الواجهة البرمجية.",
+      "doc_verified": "تم التحقق من المستند",
+      "doc_verified_message": "تم اعتبار مستند {{name}} صالحًا.",
+      "doc_verified_mocked": "تم التحقق من المستند (محاكاة)",
+      "doc_verified_mock_message": "تم محاكاة التحقق من مستند {{label}} بنجاح."
+    },
+    "manage": {
+      "headline_fallback": "معلّم القرآن الكريم",
+      "experience_years": "{{count}} سنوات خبرة",
+      "registered_at": "مسجّل {{date}}",
+      "stats": {
+        "courses": "الدورات",
+        "courses_sub": "باقات نشطة",
+        "students": "الطلاب",
+        "students_sub": "مسجّلون",
+        "rating": "التقييم",
+        "rating_sub": "{{count}} مراجعة",
+        "rate": "السعر/الساعة",
+        "rate_sub": "في الساعة"
+      },
+      "tabs": {
+        "info": "المعلومات",
+        "package": "الباقة",
+        "orders": "الطلبات",
+        "wallet": "المحفظة",
+        "gallery": "المعرض",
+        "reviews": "المراجعات"
+      },
+      "info": {
+        "about_title": "عن المعلّم",
+        "about_empty": "لم يقم هذا المعلّم بملء وصف عن نفسه.",
+        "skills_title": "المهارات وطريقة التدريس",
+        "skills_empty": "لم يتم إرسال المهارات بعد.",
+        "certs_title": "المؤهلات والشهادات",
+        "certs_count": "{{count}} شهادات",
+        "certs_empty": "لم يتم رفع أي شهادات بعد.",
+        "certs_empty_hint": "يجب على المعلّم رفع الشهادة/الإجازة للتحقق.",
+        "cert_fallback": "الشهادة {{count}}",
+        "issued_label": "صدرت:",
+        "expiry_label": "صالحة حتى:",
+        "open_doc": "فتح المستند",
+        "mark_valid": "اعتماد كصالح",
+        "portfolio_title": "ملف الأعمال والوسائط",
+        "portfolio_count": "{{count}} عناصر",
+        "media_kind_video": "📹 فيديو",
+        "media_kind_image": "🖼️ صورة",
+        "media_kind_link": "🔗 رابط",
+        "portfolio_number": "ملف الأعمال #{{count}}"
+      },
+      "package": {
+        "load_error": "فشل تحميل الباقات",
+        "empty": "لا توجد باقات أنشأها هذا المعلّم بعد.",
+        "sessions": "{{count}} جلسات",
+        "draft": "مسودة",
+        "price_label": "سعر الباقة",
+        "free": "مجاني",
+        "students": "{{count}} مسجّل"
+      },
+      "gallery": {
+        "photo_alt": "صورة النشاط {{count}}",
+        "photo_title": "صورة نشاط التدريس {{count}}",
+        "photo_sub": "ملف إنجاز المعلّم",
+        "open_link": "فتح الرابط"
+      },
+      "reviews": {
+        "empty": "لا توجد مراجعات من الطلاب لهذا المعلّم بعد.",
+        "count": "{{count}} مراجعة",
+        "no_comment": "لا يوجد تعليق."
+      },
+      "actions": {
+        "title": "إجراءات المسؤول",
+        "bg_title": "التحقق من الخلفية",
+        "bg_passed": "اجتاز التحقق من الخلفية",
+        "bg_running": "الجاري التحقق...",
+        "bg_request": "طلب التحقق من الخلفية",
+        "bg_testing_done": "[اختبار] إنهاء التحقق",
+        "status_label": "حالة المعلّم",
+        "suspend": "إيقاف المعلّم",
+        "unsuspend": "إعادة التفعيل",
+        "accept_now": "قبول الآن"
+      },
+      "account": {
+        "title": "معلومات الحساب",
+        "user_id": "معرّف المستخدم",
+        "joined": "تاريخ الانضمام",
+        "mode": "الوضع",
+        "rate": "السعر/الساعة"
+      },
+      "stats_teaching": {
+        "title": "إحصائيات التدريس",
+        "reviews": "{{count}} مراجعة",
+        "total_courses": "إجمالي الدورات",
+        "total_students": "إجمالي الطلاب",
+        "certificates": "الشهادات",
+        "portfolio": "ملف الأعمال",
+        "portfolio_value": "{{count}} عناصر"
+      },
+      "course_modal": {
+        "title": "تفاصيل الدورة",
+        "id": "المعرّف: {{id}}",
+        "published": "منشورة",
+        "unpublished": "غير منشورة",
+        "sessions": "{{count}} جلسات",
+        "price_label": "سعر الباقة",
+        "free": "مجاني",
+        "sessions_lower": "{{count}} جلسات",
+        "students": "{{count}} مسجّل",
+        "rating": "التقييم"
+      },
+      "requirements": {
+        "no_data": "لا توجد بيانات مقدمة لهذا الشرط بعد.",
+        "media_verification": "وسائط التحقق من الحفظ",
+        "no_link": "لم يتم إرسال أي رابط بعد",
+        "cert_docs": "مستندات الشهادة",
+        "open": "فتح",
+        "no_doc": "لا يوجد مستند بعد",
+        "mark_valid": "اعتماد المستند كصالح",
+        "open_doc": "فتح المستند"
+      },
+      "evidence": {
+        "full_name": "الاسم الكامل واللقب",
+        "domicile": "محل الإقامة",
+        "experience": "خبرة التدريس",
+        "years": "{{count}} سنوات",
+        "headline": "العنوان / الشعار",
+        "bio": "سيرة ذاتية مختصرة",
+        "expertise": "المهارات / التخصص",
+        "mode": "وضع التدريس",
+        "mode_online": "عن بُعد",
+        "mode_offline": "حضوري",
+        "mode_hybrid": "عن بُعد وحضوري",
+        "rate_per_hour": "أجرة التدريس للساعة",
+        "cert_label": "الشهادة / الإجازة: {{name}}",
+        "cert_value_parts": {
+          "issuer": "الجهة المانحة: {{issuer}}",
+          "issued": "صدرت: {{date}}",
+          "expiry": "صالحة حتى: {{date}}"
+        },
+        "cert_value": "{{issuer}} | {{issued}}{{expiry}}",
+        "fatihah_video": "رابط فيديو سورة الفاتحة",
+        "short_surah_video": "رابط فيديو سورة قصيرة / ملف الأعمال",
+        "photo": "صورة ملف الأعمال",
+        "media_portfolio": "وسائط ملف الأعمال"
+      },
+      "requirement_titles": {
+        "profil_kontak": "الملف الأساسي",
+        "profil_kontak_sub": "الاسم ومحل الإقامة والخبرة",
+        "kualifikasi_metode": "المؤهلات والطرق",
+        "kualifikasi_metode_sub": "العنوان والسيرة والمهارات والأجرة",
+        "sertifikat": "الشهادة / الإجازة",
+        "sertifikat_sub": "مستندات التعليم والشهادات",
+        "media_portofolio": "ملف الأعمال والوسائط",
+        "media_portofolio_sub": "فيديوهات الحفظ أو صور نشاط التدريس"
+      }
+    },
+    "review": {
+      "title": "مراجعة المتقدّم",
+      "rejected_banner": "تم رفض الطلب",
+      "pick_penguji": "اختر فريق المراجعة...",
+      "search_penguji": "ابحث عن اسم أو تخصص...",
+      "penguji_not_found": "لم يتم العثور على مراجع",
+      "sections": {
+        "profile": "الملف والعنوان",
+        "expertise": "المهارات والفئات",
+        "rate": "السعر والتوافر",
+        "portfolio": "ملف الأعمال والشهادات"
+      },
+      "fields": {
+        "headline": "العنوان / شعار الملف",
+        "bio": "سيرة ذاتية مختصرة",
+        "location": "الموقع / المدينة",
+        "empty": "غير مكتمل",
+        "registered": "مسجّل: {{date}}",
+        "expertise_label": "المهارات / طرق التدريس",
+        "expertise_empty": "لم يتم اختيار أي مهارات",
+        "category_label": "الفئات",
+        "category_empty": "لم يتم اختيار أي فئات",
+        "rate_hour": "السعر في الساعة",
+        "experience": "خبرة التدريس",
+        "years": "{{count}} سنوات",
+        "mode": "وضع التدريس",
+        "online": "عن بُعد",
+        "online_sub": "عبر Zoom أو Google Meet وغيرها",
+        "offline": "حضوري / وجهاً لوجه",
+        "offline_sub": "زيارة منزل الطالب",
+        "video_portfolio": "فيديوهات الأعمال",
+        "video_count": "تمت إضافة {{count}} فيديو",
+        "video_empty": "لا توجد فيديوهات أعمال بعد",
+        "watch_youtube": "شاهد على يوتيوب",
+        "certification_label": "الشهادات / الإجازات",
+        "cert_count": "{{count}} شهادات",
+        "cert_empty": "لم تتم إضافة أي شهادات بعد",
+        "cert_number": "الشهادة {{count}}",
+        "cert_name": "اسم الشهادة",
+        "issuer": "الجهة المانحة",
+        "credential_id": "معرّف الاعتماد",
+        "issued_date": "تاريخ الإصدار",
+        "expiry_date": "تاريخ الانتهاء",
+        "none": "لا يوجد",
+        "cert_url": "رابط الشهادة",
+        "mark_valid": "اعتماد المستند كصالح"
+      },
+      "verification": {
+        "title": "قرار التحقق",
+        "warning": "لم يستكمل المتقدّم بعض البيانات الإجبارية",
+        "check_profil": "الملف الأساسي (الاسم والموقع)",
+        "check_expertise": "المهارات وطرق التدريس",
+        "check_cert": "الشهادة / الإجازة",
+        "check_video": "فيديو ملف الأعمال",
+        "accept": "قبول وجدولة الاختيار",
+        "reject": "رفض",
+        "already_status": "هذا المتقدّم في حالة {{status}} بالفعل."
+      },
+      "seleksi_modal": {
+        "title": "جدولة مقابلة الاختيار",
+        "date": "تاريخ الاختيار",
+        "time": "وقت الاختيار",
+        "duration": "المدة: {{value}}",
+        "penguji": "المراجع / فريق الاختيار",
+        "method": "الطريقة",
+        "online": "عن بُعد",
+        "offline": "حضوري",
+        "online_link": "رابط الاجتماع (Zoom / Google Meet)",
+        "offline_location": "الموقع / عنوان الاجتماع",
+        "applicant_location": "موقع المتقدّم: {{location}}",
+        "notes": "ملاحظات إضافية",
+        "cancel": "إلغاء",
+        "save": "حفظ"
+      },
+      "email_preview": {
+        "title": "تأكيد إرسال البريد",
+        "subtitle": "إشعار لمتقدم المعلم",
+        "summary": "ملخص البريد الذي سيُرسل",
+        "recipient": "المستلم",
+        "schedule": "الجدول",
+        "method_link": "الطريقة والرابط",
+        "penguji": "المراجع",
+        "info": "سيحتوي البريد على زر تأكيد الحضور وطلب إعادة الجدولة للمتقدم.",
+        "edit": "تعديل",
+        "sending": "جاري الإرسال...",
+        "send_email": "إرسال البريد"
+      },
+      "toasts": {
+        "pick_penguji": "اختر فريق المراجعة",
+        "pick_penguji_msg": "يرجى اختيار مراجع من القائمة المنسدلة.",
+        "rejected": "تم رفض طلب المعلم",
+        "saved_mock": "تم حفظ الجدول (تمت محاكاة البريد)",
+        "email_sent": "📧 تم إرسال البريد!",
+        "email_mock_msg": "تم حفظ البيانات. سيتم تفعيل البريد إلى {{email}} بعد إعداد Gmail.",
+        "email_sent_msg": "تم إرسال دعوة الاختيار إلى {{recipient}}.",
+        "send_failed": "فشل إرسال البريد",
+        "send_failed_msg": "{{error}}",
+        "network_error": "خطأ في الشبكة."
+      }
+    },
+    "orders_tab": {
+      "search": "ابحث عن طلب أو اسم طالب أو باقة...",
+      "filter": "تصفية",
+      "filter_label": "تصفية الحالة",
+      "loading": "جاري تحميل بيانات الطلبات...",
+      "empty": "لم يتم العثور على طلبات.",
+      "empty_all": "لا توجد طلبات لهذا المعلم بعد.",
+      "empty_filter": "لا توجد طلبات تطابق هذا التصفية.",
+      "show_all": "عرض الكل ({{count}})",
+      "session_count": "{{count}} جلسات",
+      "footer": "عرض {{shown}} من أصل {{total}} طلبات",
+      "columns": {
+        "id": "معرّف الطلب",
+        "member": "الطالب",
+        "package": "الباقة",
+        "mode": "الوضع",
+        "amount": "المبلغ",
+        "status": "الحالة",
+        "date": "التاريخ"
+      },
+      "status": {
+        "all": "الكل",
+        "pending": "قيد الانتظار",
+        "active": "نشط",
+        "cancelled": "ملغي",
+        "completed": "مكتمل",
+        "waiting_teacher": "بانتظار المعلم"
+      }
+    },
+    "wallet_tab": {
+      "active_balance": "الرصيد النشط (تم الدفع)",
+      "pending_balance": "الرصيد المعلّق",
+      "pending_hint": "سيتم الدفع يدويًا بواسطة المسؤول عبر قائمة Payout.",
+      "history_title": "سجل معاملات الدفع",
+      "loading": "جاري تحميل سجل المعاملات...",
+      "empty": "لا يوجد سجل معاملات دفع بعد.",
+      "columns": {
+        "id": "المعرّف / المرجع",
+        "date": "التاريخ",
+        "amount": "المبلغ",
+        "method": "الطريقة",
+        "status": "الحالة"
+      },
+      "bank_transfer": "تحويل بنكي",
+      "status": {
+        "approved": "معتمد",
+        "pending": "قيد الانتظار",
+        "rejected": "مرفوض"
+      }
+    }
+  }
+}

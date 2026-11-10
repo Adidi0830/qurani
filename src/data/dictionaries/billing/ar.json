@@ -1,0 +1,276 @@
+{
+  "billing": {
+    "title": "الفوترة",
+    "subtitle": "أدر خطة قرآني والاستخدام وسجل المعاملات.",
+    "credit_label": "رصيد قرآني",
+    "summary": {
+      "active_plan": "الخطة النشطة",
+      "active_plan_value": "Expert لمدة سنة",
+      "active_plan_ends": "ينتهي {{date}}",
+      "mau": "المستخدمون النشطون شهريًا",
+      "human_agents": "الوكلاء البشريون",
+      "ai_responses": "ردود الذكاء الاصطناعي",
+      "of_quota": "من أصل {{quota}} حصة"
+    },
+    "periods": {
+      "monthly": "شهري",
+      "half_yearly": "نصف سنوي",
+      "yearly": "سنوي"
+    },
+    "period_label": {
+      "month": "شهريًا"
+    },
+    "plans": {
+      "badges": {
+        "save_50": "خصم 50%",
+        "best_value": "أفضل قيمة"
+      },
+      "basic": {
+        "name": "Basic",
+        "features": {
+          "0": "10,000 ردود ذكاء اصطناعي",
+          "1": "2,000 مستخدم نشط شهريًا",
+          "2": "3 وكلاء بشريون",
+          "3": "واتساب واحد وتيليجرام واحد",
+          "4": "مجموعات قرآني غير محدودة",
+          "5": "لوحة تحكم وتقارير أساسية"
+        }
+      },
+      "pro": {
+        "name": "Pro",
+        "features": {
+          "0": "50,000 ردود ذكاء اصطناعي",
+          "1": "10,000 مستخدم نشط شهريًا",
+          "2": "7 وكلاء بشريون",
+          "3": "3 واتساب و2 تيليجرام",
+          "4": "دعم أولوية",
+          "5": "تكاملات API أساسية"
+        }
+      },
+      "expert": {
+        "name": "Expert",
+        "features": {
+          "0": "150,000 ردود ذكاء اصطناعي",
+          "1": "30,000 مستخدم نشط شهريًا",
+          "2": "15 وكلاء بشريون",
+          "3": "4 واتساب و4 تيليجرام",
+          "4": "SLA ودعم أولوية",
+          "5": "تكاملات API متقدمة"
+        }
+      }
+    },
+    "plan_features": "ميزات الخطة",
+    "buy_package": "شراء الباقة",
+    "no_plans_title": "لا توجد خطط لهذه الفترة.",
+    "no_plans_desc": "يرجى الاتصال بالمسؤول لتفعيل خطط {{period}}.",
+    "recent": {
+      "title": "أحدث المعاملات",
+      "subtitle": "سجل مدفوعات خطة قرآني.",
+      "view_all": "عرض الكل"
+    },
+    "table": {
+      "order_date": "تاريخ الطلب",
+      "order_id": "رقم الطلب",
+      "package_name": "اسم الباقة",
+      "price": "السعر",
+      "discount": "الخصم",
+      "quantity": "الكمية",
+      "total_price": "السعر الإجمالي",
+      "status": "الحالة",
+      "action": "الإجراء"
+    },
+    "action": {
+      "detail": "تفاصيل"
+    },
+    "empty_transactions": "لا توجد معاملات بعد.",
+    "modal": {
+      "title": "المعاملة",
+      "order_id": "رقم الطلب",
+      "order_date": "تاريخ الطلب",
+      "payment_date": "تاريخ الدفع",
+      "product": "المنتج",
+      "quantity": "الكمية: {{quantity}}",
+      "price": "السعر",
+      "discount": "الخصم",
+      "total": "السعر الإجمالي",
+      "close": "إغلاق"
+    },
+    "status": {
+      "paid": "مدفوع",
+      "pending": "قيد الانتظار"
+    },
+    "transactions": {
+      "expert_year": "Expert لمدة سنة",
+      "pro_monthly": "Pro شهري"
+    },
+    "courses": {
+      "title": "????? / ????? ????????",
+      "free": "?????",
+      "close": "?????",
+      "cancel": "?????",
+      "reset": "????? ?????",
+      "updating": "???? ???????...",
+      "applyWithCount": "????? ({{count}})",
+      "searchPlaceholder": "???? ?? ??? ??????...",
+      "loading": "???? ????? ???????...",
+      "empty": "?? ???? ????? ?????? ??????.",
+      "certificate": "?????",
+      "teacherFallback": "???? ?????",
+      "sessionsCount": "{{count}} ?????",
+      "minutesCount": "{{count}} ?????",
+      "studentsCount": "{{count}} ????",
+      "summary": {
+        "total": "?????? ???????",
+        "published": "?????",
+        "verified": "????",
+        "featured": "????",
+        "revenue": "?????????"
+      },
+      "filters": {
+        "all": "????",
+        "allVerification": "?? ??????",
+        "verified": "????",
+        "unverified": "??? ????"
+      },
+      "filter": {
+        "button": "???? ??????",
+        "title": "????? ??? ??????",
+        "subtitle": "???? ????? ????? ?? ????",
+        "searchTeacher": "???? ?? ??? ??????...",
+        "selectVisible": "?????? ????",
+        "clearVisible": "??? ????????",
+        "selected": "{{count}} ????",
+        "courseCount": "{{count}} ?????"
+      },
+      "bulk": {
+        "title": "??????? ??????",
+        "selected": "{{count}} ????",
+        "update": "?????",
+        "status": "??????",
+        "noChange": "???? ?????",
+        "chooseAction": "???? ???????",
+        "apply": "?????",
+        "publishDescription": "????? ??????? ??????? ??????????.",
+        "unpublishDescription": "????? ??????? ??????? ?? ??????????."
+      },
+      "table": {
+        "course": "??????",
+        "teacher": "??????",
+        "info": "???????",
+        "sessions": "???????",
+        "price": "?????",
+        "status": "??????",
+        "performance": "??????",
+        "actions": "?????????"
+      },
+      "status": {
+        "published": "?????",
+        "unpublished": "??? ?????",
+        "draft": "?????",
+        "archived": "?????"
+      },
+      "mode": {
+        "1": "??? ????????",
+        "2": "?????",
+        "3": "????"
+      },
+      "actions": {
+        "open": "??? ?????????",
+        "detail": "??????",
+        "publish": "???",
+        "unpublish": "????? ?????",
+        "verify": "?????",
+        "unverify": "????? ???????",
+        "feature": "?????",
+        "unfeature": "????? ???????"
+      },
+      "pagination": {
+        "showing": "??? {{from}}-{{to}} ?? {{total}} ??????",
+        "selected": "{{count}} ????"
+      },
+      "detail": {
+        "title": "?????? ??????",
+        "durationLine": "{{sessions}} ????? - {{duration}} ?????/????",
+        "noDescription": "?? ???? ??? ???.",
+        "category": "?????",
+        "level": "???????",
+        "mode": "?????",
+        "type": "?????",
+        "learningOutcomes": "?????? ??????",
+        "requirements": "?????????",
+        "noOutcomes": "?? ???? ?????? ???.",
+        "noRequirements": "?? ???? ??????? ????.",
+        "syllabus": "??????",
+        "noSyllabus": "?? ???? ???? ???."
+      },
+      "searchButton": "???"
+    },
+    "payments": {
+      "title": "الدفع",
+      "searchPlaceholder": "البحث عن معرّف المستخدم، معرّف المعلم، الحالة...",
+      "searchButton": "بحث",
+      "tabs": {
+        "payments": "قائمة المدفوعات",
+        "disputes": "النزاعات"
+      },
+      "disputes": {
+        "table": {
+          "type": "النوع"
+        },
+        "action": {
+          "detail": "عرض التفاصيل",
+          "reply": "رد",
+          "resolve": "حل"
+        }
+      },
+      "summary": {
+        "total": "إجمالي المدفوعات",
+        "revenue": "الإيرادات",
+        "pendingRefunds": "المبالغ المستردة المعلقة",
+        "pendingPayouts": "المدفوعات المعلقة"
+      },
+      "table": {
+        "id": "المعرف",
+        "user": "المستخدم",
+        "trainer": "المعلم",
+        "amount": "المبلغ",
+        "status": "الحالة",
+        "paymentMethod": "الطريقة",
+        "date": "التاريخ",
+        "actions": "الإجراءات"
+      },
+      "status": {
+        "paid": "مدفوع",
+        "pending": "قيد الانتظار",
+        "failed": "فشل",
+        "refunded": "مستردة",
+        "disputed": "متنازع عليها"
+      },
+      "actions": {
+        "processRefund": "معالجة الاسترداد",
+        "markPayout": "تحديد كمدفوع",
+        "updateStatus": "تحديث الحالة"
+      },
+      "modal": {
+        "processRefundTitle": "معالجة الاسترداد",
+        "markPayoutTitle": "تحديد كمدفوع",
+        "updateStatusTitle": "تحديث الحالة",
+        "bulkPayoutTitle": "دفع جماعي",
+        "approve": "موافقة",
+        "reject": "رفض",
+        "notes": "ملاحظات",
+        "payoutReference": "الرقم المرجعي للدفع",
+        "submit": "إرسال",
+        "cancel": "إلغاء",
+        "failureReason": "سبب الفشل"
+      },
+      "bulk": {
+        "selected": "{{count}} محدد",
+        "actions": "إجراءات جماعية",
+        "markPayout": "Bulk Mark Payout"
+      },
+      "empty": "لم يتم العثور على مدفوعات.",
+      "loading": "جاري تحميل بيانات الدفع..."
+    }
+  }
+}

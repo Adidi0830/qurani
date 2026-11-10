@@ -1,0 +1,31 @@
+{
+  "cards": {
+    "total_users": "المستخدمون",
+    "total_admins": "المشرفون",
+    "active_users": "المستخدمون النشطون",
+    "blocked_users": "المستخدمون المحظورون"
+  },
+  "charts": {
+    "gender": "الجنس",
+    "top_countries": "أعلى الدول",
+    "top_states": "أعلى الولايات",
+    "top_cities": "أعلى المدن",
+    "user_distribution": "توزيع المستخدمين",
+    "top_locations": "أعلى المواقع حسب المستخدمين"
+  },
+  "legend": {
+    "male": "ذكر",
+    "female": "أنثى",
+    "unknown": "غير معروف"
+  },
+  "labels": {
+    "users": "المستخدمون"
+  },
+  "empty": "لا توجد بيانات",
+  "aria": {
+    "view": "عرض {{title}}"
+  },
+  "errors": {
+    "title": "خطأ في لوحة التحكم"
+  }
+}

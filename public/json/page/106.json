@@ -1,0 +1,1053 @@
+[
+    {
+        "id": 669,
+        "page_number": 106,
+        "verse_number": 176,
+        "verse_key": "4:176",
+        "juz_number": 6,
+        "words": [
+            {
+                "id": 13992,
+                "char_type_name": "word",
+                "location": "4:176:1",
+                "page_number": 106,
+                "line_number": 1,
+                "text_uthmani": "\u064a\u064e\u0633\u0652\u062a\u064e\u0641\u0652\u062a\u064f\u0648\u0646\u064e\u0643\u064e"
+            },
+            {
+                "id": 13993,
+                "char_type_name": "word",
+                "location": "4:176:2",
+                "page_number": 106,
+                "line_number": 1,
+                "text_uthmani": "\u0642\u064f\u0644\u0650"
+            },
+            {
+                "id": 13994,
+                "char_type_name": "word",
+                "location": "4:176:3",
+                "page_number": 106,
+                "line_number": 1,
+                "text_uthmani": "\u0671\u0644\u0644\u0651\u064e\u0647\u064f"
+            },
+            {
+                "id": 13995,
+                "char_type_name": "word",
+                "location": "4:176:4",
+                "page_number": 106,
+                "line_number": 1,
+                "text_uthmani": "\u064a\u064f\u0641\u0652\u062a\u0650\u064a\u0643\u064f\u0645\u0652"
+            },
+            {
+                "id": 13996,
+                "char_type_name": "word",
+                "location": "4:176:5",
+                "page_number": 106,
+                "line_number": 1,
+                "text_uthmani": "\u0641\u0650\u0649"
+            },
+            {
+                "id": 13997,
+                "char_type_name": "word",
+                "location": "4:176:6",
+                "page_number": 106,
+                "line_number": 1,
+                "text_uthmani": "\u0671\u0644\u0652\u0643\u064e\u0644\u064e\u0640\u0670\u0644\u064e\u0629\u0650 \u06da"
+            },
+            {
+                "id": 13998,
+                "char_type_name": "word",
+                "location": "4:176:7",
+                "page_number": 106,
+                "line_number": 1,
+                "text_uthmani": "\u0625\u0650\u0646\u0650"
+            },
+            {
+                "id": 13999,
+                "char_type_name": "word",
+                "location": "4:176:8",
+                "page_number": 106,
+                "line_number": 1,
+                "text_uthmani": "\u0671\u0645\u0652\u0631\u064f\u0624\u064c\u0627\u06df"
+            },
+            {
+                "id": 14000,
+                "char_type_name": "word",
+                "location": "4:176:9",
+                "page_number": 106,
+                "line_number": 1,
+                "text_uthmani": "\u0647\u064e\u0644\u064e\u0643\u064e"
+            },
+            {
+                "id": 14001,
+                "char_type_name": "word",
+                "location": "4:176:10",
+                "page_number": 106,
+                "line_number": 2,
+                "text_uthmani": "\u0644\u064e\u064a\u0652\u0633\u064e"
+            },
+            {
+                "id": 14002,
+                "char_type_name": "word",
+                "location": "4:176:11",
+                "page_number": 106,
+                "line_number": 2,
+                "text_uthmani": "\u0644\u064e\u0647\u064f\u06e5"
+            },
+            {
+                "id": 14003,
+                "char_type_name": "word",
+                "location": "4:176:12",
+                "page_number": 106,
+                "line_number": 2,
+                "text_uthmani": "\u0648\u064e\u0644\u064e\u062f\u064c\u06ed"
+            },
+            {
+                "id": 14004,
+                "char_type_name": "word",
+                "location": "4:176:13",
+                "page_number": 106,
+                "line_number": 2,
+                "text_uthmani": "\u0648\u064e\u0644\u064e\u0647\u064f\u06e5\u0653"
+            },
+            {
+                "id": 14005,
+                "char_type_name": "word",
+                "location": "4:176:14",
+                "page_number": 106,
+                "line_number": 2,
+                "text_uthmani": "\u0623\u064f\u062e\u0652\u062a\u064c\u06ed"
+            },
+            {
+                "id": 14006,
+                "char_type_name": "word",
+                "location": "4:176:15",
+                "page_number": 106,
+                "line_number": 2,
+                "text_uthmani": "\u0641\u064e\u0644\u064e\u0647\u064e\u0627"
+            },
+            {
+                "id": 14007,
+                "char_type_name": "word",
+                "location": "4:176:16",
+                "page_number": 106,
+                "line_number": 2,
+                "text_uthmani": "\u0646\u0650\u0635\u0652\u0641\u064f"
+            },
+            {
+                "id": 14008,
+                "char_type_name": "word",
+                "location": "4:176:17",
+                "page_number": 106,
+                "line_number": 2,
+                "text_uthmani": "\u0645\u064e\u0627"
+            },
+            {
+                "id": 14009,
+                "char_type_name": "word",
+                "location": "4:176:18",
+                "page_number": 106,
+                "line_number": 2,
+                "text_uthmani": "\u062a\u064e\u0631\u064e\u0643\u064e \u06da"
+            },
+            {
+                "id": 14010,
+                "char_type_name": "word",
+                "location": "4:176:19",
+                "page_number": 106,
+                "line_number": 2,
+                "text_uthmani": "\u0648\u064e\u0647\u064f\u0648\u064e"
+            },
+            {
+                "id": 14011,
+                "char_type_name": "word",
+                "location": "4:176:20",
+                "page_number": 106,
+                "line_number": 2,
+                "text_uthmani": "\u064a\u064e\u0631\u0650\u062b\u064f\u0647\u064e\u0627\u0653"
+            },
+            {
+                "id": 14012,
+                "char_type_name": "word",
+                "location": "4:176:21",
+                "page_number": 106,
+                "line_number": 3,
+                "text_uthmani": "\u0625\u0650\u0646"
+            },
+            {
+                "id": 14013,
+                "char_type_name": "word",
+                "location": "4:176:22",
+                "page_number": 106,
+                "line_number": 3,
+                "text_uthmani": "\u0644\u0651\u064e\u0645\u0652"
+            },
+            {
+                "id": 14014,
+                "char_type_name": "word",
+                "location": "4:176:23",
+                "page_number": 106,
+                "line_number": 3,
+                "text_uthmani": "\u064a\u064e\u0643\u064f\u0646"
+            },
+            {
+                "id": 14015,
+                "char_type_name": "word",
+                "location": "4:176:24",
+                "page_number": 106,
+                "line_number": 3,
+                "text_uthmani": "\u0644\u0651\u064e\u0647\u064e\u0627"
+            },
+            {
+                "id": 14016,
+                "char_type_name": "word",
+                "location": "4:176:25",
+                "page_number": 106,
+                "line_number": 3,
+                "text_uthmani": "\u0648\u064e\u0644\u064e\u062f\u064c\u06ed \u06da"
+            },
+            {
+                "id": 14017,
+                "char_type_name": "word",
+                "location": "4:176:26",
+                "page_number": 106,
+                "line_number": 3,
+                "text_uthmani": "\u0641\u064e\u0625\u0650\u0646"
+            },
+            {
+                "id": 14018,
+                "char_type_name": "word",
+                "location": "4:176:27",
+                "page_number": 106,
+                "line_number": 3,
+                "text_uthmani": "\u0643\u064e\u0627\u0646\u064e\u062a\u064e\u0627"
+            },
+            {
+                "id": 14019,
+                "char_type_name": "word",
+                "location": "4:176:28",
+                "page_number": 106,
+                "line_number": 3,
+                "text_uthmani": "\u0671\u062b\u0652\u0646\u064e\u062a\u064e\u064a\u0652\u0646\u0650"
+            },
+            {
+                "id": 14020,
+                "char_type_name": "word",
+                "location": "4:176:29",
+                "page_number": 106,
+                "line_number": 3,
+                "text_uthmani": "\u0641\u064e\u0644\u064e\u0647\u064f\u0645\u064e\u0627"
+            },
+            {
+                "id": 14021,
+                "char_type_name": "word",
+                "location": "4:176:30",
+                "page_number": 106,
+                "line_number": 3,
+                "text_uthmani": "\u0671\u0644\u062b\u0651\u064f\u0644\u064f\u062b\u064e\u0627\u0646\u0650"
+            },
+            {
+                "id": 14022,
+                "char_type_name": "word",
+                "location": "4:176:31",
+                "page_number": 106,
+                "line_number": 3,
+                "text_uthmani": "\u0645\u0650\u0645\u0651\u064e\u0627"
+            },
+            {
+                "id": 14023,
+                "char_type_name": "word",
+                "location": "4:176:32",
+                "page_number": 106,
+                "line_number": 3,
+                "text_uthmani": "\u062a\u064e\u0631\u064e\u0643\u064e \u06da"
+            },
+            {
+                "id": 14024,
+                "char_type_name": "word",
+                "location": "4:176:33",
+                "page_number": 106,
+                "line_number": 4,
+                "text_uthmani": "\u0648\u064e\u0625\u0650\u0646"
+            },
+            {
+                "id": 14025,
+                "char_type_name": "word",
+                "location": "4:176:34",
+                "page_number": 106,
+                "line_number": 4,
+                "text_uthmani": "\u0643\u064e\u0627\u0646\u064f\u0648\u0653\u0627\u06df"
+            },
+            {
+                "id": 14026,
+                "char_type_name": "word",
+                "location": "4:176:35",
+                "page_number": 106,
+                "line_number": 4,
+                "text_uthmani": "\u0625\u0650\u062e\u0652\u0648\u064e\u0629\u064b\u06ed"
+            },
+            {
+                "id": 14027,
+                "char_type_name": "word",
+                "location": "4:176:36",
+                "page_number": 106,
+                "line_number": 4,
+                "text_uthmani": "\u0631\u0651\u0650\u062c\u064e\u0627\u0644\u064b\u06ed\u0627"
+            },
+            {
+                "id": 14028,
+                "char_type_name": "word",
+                "location": "4:176:37",
+                "page_number": 106,
+                "line_number": 4,
+                "text_uthmani": "\u0648\u064e\u0646\u0650\u0633\u064e\u0627\u0653\u0621\u064b\u06ed"
+            },
+            {
+                "id": 14029,
+                "char_type_name": "word",
+                "location": "4:176:38",
+                "page_number": 106,
+                "line_number": 4,
+                "text_uthmani": "\u0641\u064e\u0644\u0650\u0644\u0630\u0651\u064e\u0643\u064e\u0631\u0650"
+            },
+            {
+                "id": 14030,
+                "char_type_name": "word",
+                "location": "4:176:39",
+                "page_number": 106,
+                "line_number": 4,
+                "text_uthmani": "\u0645\u0650\u062b\u0652\u0644\u064f"
+            },
+            {
+                "id": 14031,
+                "char_type_name": "word",
+                "location": "4:176:40",
+                "page_number": 106,
+                "line_number": 4,
+                "text_uthmani": "\u062d\u064e\u0638\u0651\u0650"
+            },
+            {
+                "id": 14032,
+                "char_type_name": "word",
+                "location": "4:176:41",
+                "page_number": 106,
+                "line_number": 4,
+                "text_uthmani": "\u0671\u0644\u0652\u0623\u064f\u0646\u062b\u064e\u064a\u064e\u064a\u0652\u0646\u0650 \u06d7"
+            },
+            {
+                "id": 14033,
+                "char_type_name": "word",
+                "location": "4:176:42",
+                "page_number": 106,
+                "line_number": 5,
+                "text_uthmani": "\u064a\u064f\u0628\u064e\u064a\u0651\u0650\u0646\u064f"
+            },
+            {
+                "id": 14034,
+                "char_type_name": "word",
+                "location": "4:176:43",
+                "page_number": 106,
+                "line_number": 5,
+                "text_uthmani": "\u0671\u0644\u0644\u0651\u064e\u0647\u064f"
+            },
+            {
+                "id": 14035,
+                "char_type_name": "word",
+                "location": "4:176:44",
+                "page_number": 106,
+                "line_number": 5,
+                "text_uthmani": "\u0644\u064e\u0643\u064f\u0645\u0652"
+            },
+            {
+                "id": 14036,
+                "char_type_name": "word",
+                "location": "4:176:45",
+                "page_number": 106,
+                "line_number": 5,
+                "text_uthmani": "\u0623\u064e\u0646"
+            },
+            {
+                "id": 14037,
+                "char_type_name": "word",
+                "location": "4:176:46",
+                "page_number": 106,
+                "line_number": 5,
+                "text_uthmani": "\u062a\u064e\u0636\u0650\u0644\u0651\u064f\u0648\u0627\u06df \u06d7"
+            },
+            {
+                "id": 14038,
+                "char_type_name": "word",
+                "location": "4:176:47",
+                "page_number": 106,
+                "line_number": 5,
+                "text_uthmani": "\u0648\u064e\u0671\u0644\u0644\u0651\u064e\u0647\u064f"
+            },
+            {
+                "id": 14039,
+                "char_type_name": "word",
+                "location": "4:176:48",
+                "page_number": 106,
+                "line_number": 5,
+                "text_uthmani": "\u0628\u0650\u0643\u064f\u0644\u0651\u0650"
+            },
+            {
+                "id": 14040,
+                "char_type_name": "word",
+                "location": "4:176:49",
+                "page_number": 106,
+                "line_number": 5,
+                "text_uthmani": "\u0634\u064e\u0649\u0652\u0621\u064d"
+            },
+            {
+                "id": 14041,
+                "char_type_name": "word",
+                "location": "4:176:50",
+                "page_number": 106,
+                "line_number": 5,
+                "text_uthmani": "\u0639\u064e\u0644\u0650\u064a\u0645\u064c\u06e2"
+            },
+            {
+                "id": 14042,
+                "char_type_name": "end",
+                "location": "4:176:51",
+                "page_number": 106,
+                "line_number": 5,
+                "text_uthmani": "\u0661\u0667\u0666"
+            }
+        ]
+    },
+    {
+        "id": 670,
+        "page_number": 106,
+        "verse_number": 1,
+        "verse_key": "5:1",
+        "juz_number": 6,
+        "words": [
+            {
+                "id": 14043,
+                "char_type_name": "word",
+                "location": "5:1:1",
+                "page_number": 106,
+                "line_number": 8,
+                "text_uthmani": "\u064a\u064e\u0640\u0670\u0653\u0623\u064e\u064a\u0651\u064f\u0647\u064e\u0627"
+            },
+            {
+                "id": 14044,
+                "char_type_name": "word",
+                "location": "5:1:2",
+                "page_number": 106,
+                "line_number": 8,
+                "text_uthmani": "\u0671\u0644\u0651\u064e\u0630\u0650\u064a\u0646\u064e"
+            },
+            {
+                "id": 14045,
+                "char_type_name": "word",
+                "location": "5:1:3",
+                "page_number": 106,
+                "line_number": 8,
+                "text_uthmani": "\u0621\u064e\u0627\u0645\u064e\u0646\u064f\u0648\u0653\u0627\u06df"
+            },
+            {
+                "id": 14046,
+                "char_type_name": "word",
+                "location": "5:1:4",
+                "page_number": 106,
+                "line_number": 8,
+                "text_uthmani": "\u0623\u064e\u0648\u0652\u0641\u064f\u0648\u0627\u06df"
+            },
+            {
+                "id": 14047,
+                "char_type_name": "word",
+                "location": "5:1:5",
+                "page_number": 106,
+                "line_number": 8,
+                "text_uthmani": "\u0628\u0650\u0671\u0644\u0652\u0639\u064f\u0642\u064f\u0648\u062f\u0650 \u06da"
+            },
+            {
+                "id": 14048,
+                "char_type_name": "word",
+                "location": "5:1:6",
+                "page_number": 106,
+                "line_number": 8,
+                "text_uthmani": "\u0623\u064f\u062d\u0650\u0644\u0651\u064e\u062a\u0652"
+            },
+            {
+                "id": 14049,
+                "char_type_name": "word",
+                "location": "5:1:7",
+                "page_number": 106,
+                "line_number": 8,
+                "text_uthmani": "\u0644\u064e\u0643\u064f\u0645"
+            },
+            {
+                "id": 14050,
+                "char_type_name": "word",
+                "location": "5:1:8",
+                "page_number": 106,
+                "line_number": 8,
+                "text_uthmani": "\u0628\u064e\u0647\u0650\u064a\u0645\u064e\u0629\u064f"
+            },
+            {
+                "id": 14051,
+                "char_type_name": "word",
+                "location": "5:1:9",
+                "page_number": 106,
+                "line_number": 9,
+                "text_uthmani": "\u0671\u0644\u0652\u0623\u064e\u0646\u0652\u0639\u064e\u0640\u0670\u0645\u0650"
+            },
+            {
+                "id": 14052,
+                "char_type_name": "word",
+                "location": "5:1:10",
+                "page_number": 106,
+                "line_number": 9,
+                "text_uthmani": "\u0625\u0650\u0644\u0651\u064e\u0627"
+            },
+            {
+                "id": 14053,
+                "char_type_name": "word",
+                "location": "5:1:11",
+                "page_number": 106,
+                "line_number": 9,
+                "text_uthmani": "\u0645\u064e\u0627"
+            },
+            {
+                "id": 14054,
+                "char_type_name": "word",
+                "location": "5:1:12",
+                "page_number": 106,
+                "line_number": 9,
+                "text_uthmani": "\u064a\u064f\u062a\u0652\u0644\u064e\u0649\u0670"
+            },
+            {
+                "id": 14055,
+                "char_type_name": "word",
+                "location": "5:1:13",
+                "page_number": 106,
+                "line_number": 9,
+                "text_uthmani": "\u0639\u064e\u0644\u064e\u064a\u0652\u0643\u064f\u0645\u0652"
+            },
+            {
+                "id": 14056,
+                "char_type_name": "word",
+                "location": "5:1:14",
+                "page_number": 106,
+                "line_number": 9,
+                "text_uthmani": "\u063a\u064e\u064a\u0652\u0631\u064e"
+            },
+            {
+                "id": 14057,
+                "char_type_name": "word",
+                "location": "5:1:15",
+                "page_number": 106,
+                "line_number": 9,
+                "text_uthmani": "\u0645\u064f\u062d\u0650\u0644\u0651\u0650\u0649"
+            },
+            {
+                "id": 14058,
+                "char_type_name": "word",
+                "location": "5:1:16",
+                "page_number": 106,
+                "line_number": 9,
+                "text_uthmani": "\u0671\u0644\u0635\u0651\u064e\u064a\u0652\u062f\u0650"
+            },
+            {
+                "id": 14059,
+                "char_type_name": "word",
+                "location": "5:1:17",
+                "page_number": 106,
+                "line_number": 9,
+                "text_uthmani": "\u0648\u064e\u0623\u064e\u0646\u062a\u064f\u0645\u0652"
+            },
+            {
+                "id": 14060,
+                "char_type_name": "word",
+                "location": "5:1:18",
+                "page_number": 106,
+                "line_number": 9,
+                "text_uthmani": "\u062d\u064f\u0631\u064f\u0645\u064c \u06d7"
+            },
+            {
+                "id": 14061,
+                "char_type_name": "word",
+                "location": "5:1:19",
+                "page_number": 106,
+                "line_number": 9,
+                "text_uthmani": "\u0625\u0650\u0646\u0651\u064e"
+            },
+            {
+                "id": 14062,
+                "char_type_name": "word",
+                "location": "5:1:20",
+                "page_number": 106,
+                "line_number": 9,
+                "text_uthmani": "\u0671\u0644\u0644\u0651\u064e\u0647\u064e"
+            },
+            {
+                "id": 14063,
+                "char_type_name": "word",
+                "location": "5:1:21",
+                "page_number": 106,
+                "line_number": 10,
+                "text_uthmani": "\u064a\u064e\u062d\u0652\u0643\u064f\u0645\u064f"
+            },
+            {
+                "id": 14064,
+                "char_type_name": "word",
+                "location": "5:1:22",
+                "page_number": 106,
+                "line_number": 10,
+                "text_uthmani": "\u0645\u064e\u0627"
+            },
+            {
+                "id": 14065,
+                "char_type_name": "word",
+                "location": "5:1:23",
+                "page_number": 106,
+                "line_number": 10,
+                "text_uthmani": "\u064a\u064f\u0631\u0650\u064a\u062f\u064f"
+            },
+            {
+                "id": 14066,
+                "char_type_name": "end",
+                "location": "5:1:24",
+                "page_number": 106,
+                "line_number": 10,
+                "text_uthmani": "\u0661"
+            }
+        ]
+    },
+    {
+        "id": 671,
+        "page_number": 106,
+        "verse_number": 2,
+        "verse_key": "5:2",
+        "juz_number": 6,
+        "words": [
+            {
+                "id": 14067,
+                "char_type_name": "word",
+                "location": "5:2:1",
+                "page_number": 106,
+                "line_number": 10,
+                "text_uthmani": "\u064a\u064e\u0640\u0670\u0653\u0623\u064e\u064a\u0651\u064f\u0647\u064e\u0627"
+            },
+            {
+                "id": 14068,
+                "char_type_name": "word",
+                "location": "5:2:2",
+                "page_number": 106,
+                "line_number": 10,
+                "text_uthmani": "\u0671\u0644\u0651\u064e\u0630\u0650\u064a\u0646\u064e"
+            },
+            {
+                "id": 14069,
+                "char_type_name": "word",
+                "location": "5:2:3",
+                "page_number": 106,
+                "line_number": 10,
+                "text_uthmani": "\u0621\u064e\u0627\u0645\u064e\u0646\u064f\u0648\u0627\u06df"
+            },
+            {
+                "id": 14070,
+                "char_type_name": "word",
+                "location": "5:2:4",
+                "page_number": 106,
+                "line_number": 10,
+                "text_uthmani": "\u0644\u064e\u0627"
+            },
+            {
+                "id": 14071,
+                "char_type_name": "word",
+                "location": "5:2:5",
+                "page_number": 106,
+                "line_number": 10,
+                "text_uthmani": "\u062a\u064f\u062d\u0650\u0644\u0651\u064f\u0648\u0627\u06df"
+            },
+            {
+                "id": 14072,
+                "char_type_name": "word",
+                "location": "5:2:6",
+                "page_number": 106,
+                "line_number": 10,
+                "text_uthmani": "\u0634\u064e\u0639\u064e\u0640\u0670\u0653\u0626\u0650\u0631\u064e"
+            },
+            {
+                "id": 14073,
+                "char_type_name": "word",
+                "location": "5:2:7",
+                "page_number": 106,
+                "line_number": 10,
+                "text_uthmani": "\u0671\u0644\u0644\u0651\u064e\u0647\u0650"
+            },
+            {
+                "id": 14074,
+                "char_type_name": "word",
+                "location": "5:2:8",
+                "page_number": 106,
+                "line_number": 11,
+                "text_uthmani": "\u0648\u064e\u0644\u064e\u0627"
+            },
+            {
+                "id": 14075,
+                "char_type_name": "word",
+                "location": "5:2:9",
+                "page_number": 106,
+                "line_number": 11,
+                "text_uthmani": "\u0671\u0644\u0634\u0651\u064e\u0647\u0652\u0631\u064e"
+            },
+            {
+                "id": 14076,
+                "char_type_name": "word",
+                "location": "5:2:10",
+                "page_number": 106,
+                "line_number": 11,
+                "text_uthmani": "\u0671\u0644\u0652\u062d\u064e\u0631\u064e\u0627\u0645\u064e"
+            },
+            {
+                "id": 14077,
+                "char_type_name": "word",
+                "location": "5:2:11",
+                "page_number": 106,
+                "line_number": 11,
+                "text_uthmani": "\u0648\u064e\u0644\u064e\u0627"
+            },
+            {
+                "id": 14078,
+                "char_type_name": "word",
+                "location": "5:2:12",
+                "page_number": 106,
+                "line_number": 11,
+                "text_uthmani": "\u0671\u0644\u0652\u0647\u064e\u062f\u0652\u0649\u064e"
+            },
+            {
+                "id": 14079,
+                "char_type_name": "word",
+                "location": "5:2:13",
+                "page_number": 106,
+                "line_number": 11,
+                "text_uthmani": "\u0648\u064e\u0644\u064e\u0627"
+            },
+            {
+                "id": 14080,
+                "char_type_name": "word",
+                "location": "5:2:14",
+                "page_number": 106,
+                "line_number": 11,
+                "text_uthmani": "\u0671\u0644\u0652\u0642\u064e\u0644\u064e\u0640\u0670\u0653\u0626\u0650\u062f\u064e"
+            },
+            {
+                "id": 14081,
+                "char_type_name": "word",
+                "location": "5:2:15",
+                "page_number": 106,
+                "line_number": 11,
+                "text_uthmani": "\u0648\u064e\u0644\u064e\u0627\u0653"
+            },
+            {
+                "id": 14082,
+                "char_type_name": "word",
+                "location": "5:2:16",
+                "page_number": 106,
+                "line_number": 11,
+                "text_uthmani": "\u0621\u064e\u0627\u0653\u0645\u0651\u0650\u064a\u0646\u064e"
+            },
+            {
+                "id": 14083,
+                "char_type_name": "word",
+                "location": "5:2:17",
+                "page_number": 106,
+                "line_number": 11,
+                "text_uthmani": "\u0671\u0644\u0652\u0628\u064e\u064a\u0652\u062a\u064e"
+            },
+            {
+                "id": 14084,
+                "char_type_name": "word",
+                "location": "5:2:18",
+                "page_number": 106,
+                "line_number": 12,
+                "text_uthmani": "\u0671\u0644\u0652\u062d\u064e\u0631\u064e\u0627\u0645\u064e"
+            },
+            {
+                "id": 14085,
+                "char_type_name": "word",
+                "location": "5:2:19",
+                "page_number": 106,
+                "line_number": 12,
+                "text_uthmani": "\u064a\u064e\u0628\u0652\u062a\u064e\u063a\u064f\u0648\u0646\u064e"
+            },
+            {
+                "id": 14086,
+                "char_type_name": "word",
+                "location": "5:2:20",
+                "page_number": 106,
+                "line_number": 12,
+                "text_uthmani": "\u0641\u064e\u0636\u0652\u0644\u064b\u06ed\u0627"
+            },
+            {
+                "id": 14087,
+                "char_type_name": "word",
+                "location": "5:2:21",
+                "page_number": 106,
+                "line_number": 12,
+                "text_uthmani": "\u0645\u0651\u0650\u0646"
+            },
+            {
+                "id": 14088,
+                "char_type_name": "word",
+                "location": "5:2:22",
+                "page_number": 106,
+                "line_number": 12,
+                "text_uthmani": "\u0631\u0651\u064e\u0628\u0651\u0650\u0647\u0650\u0645\u0652"
+            },
+            {
+                "id": 14089,
+                "char_type_name": "word",
+                "location": "5:2:23",
+                "page_number": 106,
+                "line_number": 12,
+                "text_uthmani": "\u0648\u064e\u0631\u0650\u0636\u0652\u0648\u064e\u0670\u0646\u064b\u06ed\u0627 \u06da"
+            },
+            {
+                "id": 14090,
+                "char_type_name": "word",
+                "location": "5:2:24",
+                "page_number": 106,
+                "line_number": 12,
+                "text_uthmani": "\u0648\u064e\u0625\u0650\u0630\u064e\u0627"
+            },
+            {
+                "id": 14091,
+                "char_type_name": "word",
+                "location": "5:2:25",
+                "page_number": 106,
+                "line_number": 12,
+                "text_uthmani": "\u062d\u064e\u0644\u064e\u0644\u0652\u062a\u064f\u0645\u0652"
+            },
+            {
+                "id": 14092,
+                "char_type_name": "word",
+                "location": "5:2:26",
+                "page_number": 106,
+                "line_number": 12,
+                "text_uthmani": "\u0641\u064e\u0671\u0635\u0652\u0637\u064e\u0627\u062f\u064f\u0648\u0627\u06df \u06da"
+            },
+            {
+                "id": 14093,
+                "char_type_name": "word",
+                "location": "5:2:27",
+                "page_number": 106,
+                "line_number": 13,
+                "text_uthmani": "\u0648\u064e\u0644\u064e\u0627"
+            },
+            {
+                "id": 14094,
+                "char_type_name": "word",
+                "location": "5:2:28",
+                "page_number": 106,
+                "line_number": 13,
+                "text_uthmani": "\u064a\u064e\u062c\u0652\u0631\u0650\u0645\u064e\u0646\u0651\u064e\u0643\u064f\u0645\u0652"
+            },
+            {
+                "id": 14095,
+                "char_type_name": "word",
+                "location": "5:2:29",
+                "page_number": 106,
+                "line_number": 13,
+                "text_uthmani": "\u0634\u064e\u0646\u064e\u0640\u0654\u064e\u0627\u0646\u064f"
+            },
+            {
+                "id": 14096,
+                "char_type_name": "word",
+                "location": "5:2:30",
+                "page_number": 106,
+                "line_number": 13,
+                "text_uthmani": "\u0642\u064e\u0648\u0652\u0645\u064d"
+            },
+            {
+                "id": 14097,
+                "char_type_name": "word",
+                "location": "5:2:31",
+                "page_number": 106,
+                "line_number": 13,
+                "text_uthmani": "\u0623\u064e\u0646"
+            },
+            {
+                "id": 14098,
+                "char_type_name": "word",
+                "location": "5:2:32",
+                "page_number": 106,
+                "line_number": 13,
+                "text_uthmani": "\u0635\u064e\u062f\u0651\u064f\u0648\u0643\u064f\u0645\u0652"
+            },
+            {
+                "id": 14099,
+                "char_type_name": "word",
+                "location": "5:2:33",
+                "page_number": 106,
+                "line_number": 13,
+                "text_uthmani": "\u0639\u064e\u0646\u0650"
+            },
+            {
+                "id": 14100,
+                "char_type_name": "word",
+                "location": "5:2:34",
+                "page_number": 106,
+                "line_number": 13,
+                "text_uthmani": "\u0671\u0644\u0652\u0645\u064e\u0633\u0652\u062c\u0650\u062f\u0650"
+            },
+            {
+                "id": 14101,
+                "char_type_name": "word",
+                "location": "5:2:35",
+                "page_number": 106,
+                "line_number": 14,
+                "text_uthmani": "\u0671\u0644\u0652\u062d\u064e\u0631\u064e\u0627\u0645\u0650"
+            },
+            {
+                "id": 14102,
+                "char_type_name": "word",
+                "location": "5:2:36",
+                "page_number": 106,
+                "line_number": 14,
+                "text_uthmani": "\u0623\u064e\u0646"
+            },
+            {
+                "id": 14103,
+                "char_type_name": "word",
+                "location": "5:2:37",
+                "page_number": 106,
+                "line_number": 14,
+                "text_uthmani": "\u062a\u064e\u0639\u0652\u062a\u064e\u062f\u064f\u0648\u0627\u06df \u06d8"
+            },
+            {
+                "id": 14104,
+                "char_type_name": "word",
+                "location": "5:2:38",
+                "page_number": 106,
+                "line_number": 14,
+                "text_uthmani": "\u0648\u064e\u062a\u064e\u0639\u064e\u0627\u0648\u064e\u0646\u064f\u0648\u0627\u06df"
+            },
+            {
+                "id": 14105,
+                "char_type_name": "word",
+                "location": "5:2:39",
+                "page_number": 106,
+                "line_number": 14,
+                "text_uthmani": "\u0639\u064e\u0644\u064e\u0649"
+            },
+            {
+                "id": 14106,
+                "char_type_name": "word",
+                "location": "5:2:40",
+                "page_number": 106,
+                "line_number": 14,
+                "text_uthmani": "\u0671\u0644\u0652\u0628\u0650\u0631\u0651\u0650"
+            },
+            {
+                "id": 14107,
+                "char_type_name": "word",
+                "location": "5:2:41",
+                "page_number": 106,
+                "line_number": 14,
+                "text_uthmani": "\u0648\u064e\u0671\u0644\u062a\u0651\u064e\u0642\u0652\u0648\u064e\u0649\u0670 \u06d6"
+            },
+            {
+                "id": 14108,
+                "char_type_name": "word",
+                "location": "5:2:42",
+                "page_number": 106,
+                "line_number": 14,
+                "text_uthmani": "\u0648\u064e\u0644\u064e\u0627"
+            },
+            {
+                "id": 14109,
+                "char_type_name": "word",
+                "location": "5:2:43",
+                "page_number": 106,
+                "line_number": 14,
+                "text_uthmani": "\u062a\u064e\u0639\u064e\u0627\u0648\u064e\u0646\u064f\u0648\u0627\u06df"
+            },
+            {
+                "id": 14110,
+                "char_type_name": "word",
+                "location": "5:2:44",
+                "page_number": 106,
+                "line_number": 15,
+                "text_uthmani": "\u0639\u064e\u0644\u064e\u0649"
+            },
+            {
+                "id": 14111,
+                "char_type_name": "word",
+                "location": "5:2:45",
+                "page_number": 106,
+                "line_number": 15,
+                "text_uthmani": "\u0671\u0644\u0652\u0625\u0650\u062b\u0652\u0645\u0650"
+            },
+            {
+                "id": 14112,
+                "char_type_name": "word",
+                "location": "5:2:46",
+                "page_number": 106,
+                "line_number": 15,
+                "text_uthmani": "\u0648\u064e\u0671\u0644\u0652\u0639\u064f\u062f\u0652\u0648\u064e\u0670\u0646\u0650 \u06da"
+            },
+            {
+                "id": 14113,
+                "char_type_name": "word",
+                "location": "5:2:47",
+                "page_number": 106,
+                "line_number": 15,
+                "text_uthmani": "\u0648\u064e\u0671\u062a\u0651\u064e\u0642\u064f\u0648\u0627\u06df"
+            },
+            {
+                "id": 14114,
+                "char_type_name": "word",
+                "location": "5:2:48",
+                "page_number": 106,
+                "line_number": 15,
+                "text_uthmani": "\u0671\u0644\u0644\u0651\u064e\u0647\u064e \u06d6"
+            },
+            {
+                "id": 14115,
+                "char_type_name": "word",
+                "location": "5:2:49",
+                "page_number": 106,
+                "line_number": 15,
+                "text_uthmani": "\u0625\u0650\u0646\u0651\u064e"
+            },
+            {
+                "id": 14116,
+                "char_type_name": "word",
+                "location": "5:2:50",
+                "page_number": 106,
+                "line_number": 15,
+                "text_uthmani": "\u0671\u0644\u0644\u0651\u064e\u0647\u064e"
+            },
+            {
+                "id": 14117,
+                "char_type_name": "word",
+                "location": "5:2:51",
+                "page_number": 106,
+                "line_number": 15,
+                "text_uthmani": "\u0634\u064e\u062f\u0650\u064a\u062f\u064f"
+            },
+            {
+                "id": 14118,
+                "char_type_name": "word",
+                "location": "5:2:52",
+                "page_number": 106,
+                "line_number": 15,
+                "text_uthmani": "\u0671\u0644\u0652\u0639\u0650\u0642\u064e\u0627\u0628\u0650"
+            },
+            {
+                "id": 14119,
+                "char_type_name": "end",
+                "location": "5:2:53",
+                "page_number": 106,
+                "line_number": 15,
+                "text_uthmani": "\u0662"
+            }
+        ]
+    }
+]

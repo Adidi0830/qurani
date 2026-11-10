@@ -1,0 +1,276 @@
+{
+  "billing": {
+    "title": "Penagihan",
+    "subtitle": "Kelola paket Qurani, pemakaian, dan riwayat transaksi.",
+    "credit_label": "Saldo Kredit Qurani",
+    "summary": {
+      "active_plan": "Paket Aktif",
+      "active_plan_value": "Expert 1 Tahun",
+      "active_plan_ends": "Berakhir {{date}}",
+      "mau": "Pengguna Aktif Bulanan",
+      "human_agents": "Agen Manusia",
+      "ai_responses": "Respons AI",
+      "of_quota": "dari {{quota}} kuota"
+    },
+    "periods": {
+      "monthly": "Bulanan",
+      "half_yearly": "6 Bulan",
+      "yearly": "Tahunan"
+    },
+    "period_label": {
+      "month": "per bulan"
+    },
+    "plans": {
+      "badges": {
+        "save_50": "Hemat 50%",
+        "best_value": "Nilai terbaik"
+      },
+      "basic": {
+        "name": "Basic",
+        "features": {
+          "0": "10.000 Respons AI",
+          "1": "2.000 Pengguna Aktif Bulanan",
+          "2": "3 Agen Manusia",
+          "3": "1 WhatsApp & 1 Telegram",
+          "4": "Grup Qurani tanpa batas",
+          "5": "Dasbor & Laporan dasar"
+        }
+      },
+      "pro": {
+        "name": "Pro",
+        "features": {
+          "0": "50.000 Respons AI",
+          "1": "10.000 Pengguna Aktif Bulanan",
+          "2": "7 Agen Manusia",
+          "3": "3 WhatsApp & 2 Telegram",
+          "4": "Dukungan Prioritas",
+          "5": "Integrasi API dasar"
+        }
+      },
+      "expert": {
+        "name": "Expert",
+        "features": {
+          "0": "150.000 Respons AI",
+          "1": "30.000 Pengguna Aktif Bulanan",
+          "2": "15 Agen Manusia",
+          "3": "4 WhatsApp & 4 Telegram",
+          "4": "SLA & Dukungan Prioritas",
+          "5": "Integrasi API lanjutan"
+        }
+      }
+    },
+    "plan_features": "Fitur Paket",
+    "buy_package": "Beli Paket",
+    "no_plans_title": "Paket untuk periode ini belum tersedia.",
+    "no_plans_desc": "Silakan hubungi admin untuk mengaktifkan paket {{period}}.",
+    "recent": {
+      "title": "Transaksi Terbaru",
+      "subtitle": "Riwayat pembayaran paket Qurani Anda.",
+      "view_all": "Lihat semua"
+    },
+    "table": {
+      "order_date": "Tanggal Pesanan",
+      "order_id": "ID Pesanan",
+      "package_name": "Nama Paket",
+      "price": "Harga",
+      "discount": "Diskon",
+      "quantity": "Qty",
+      "total_price": "Total Harga",
+      "status": "Status",
+      "action": "Aksi"
+    },
+    "action": {
+      "detail": "Detail"
+    },
+    "empty_transactions": "Belum ada transaksi.",
+    "modal": {
+      "title": "Transaksi",
+      "order_id": "ID Pesanan",
+      "order_date": "Tanggal Pesanan",
+      "payment_date": "Tanggal Pembayaran",
+      "product": "Produk",
+      "quantity": "Jumlah: {{quantity}}",
+      "price": "Harga",
+      "discount": "Diskon",
+      "total": "Total Harga",
+      "close": "Tutup"
+    },
+    "status": {
+      "paid": "Lunas",
+      "pending": "Menunggu"
+    },
+    "transactions": {
+      "expert_year": "Expert 1 Tahun",
+      "pro_monthly": "Pro Bulanan"
+    },
+    "courses": {
+      "title": "Paket Guru",
+      "free": "Gratis",
+      "close": "Tutup",
+      "cancel": "Batal",
+      "reset": "Reset",
+      "updating": "Memperbarui...",
+      "applyWithCount": "Terapkan ({{count}})",
+      "searchPlaceholder": "Cari nama paket...",
+      "searchButton": "Cari",
+      "loading": "Memuat course...",
+      "empty": "Tidak ada course yang sesuai filter.",
+      "certificate": "Sertifikat",
+      "teacherFallback": "Guru Qurani",
+      "sessionsCount": "{{count}} sesi",
+      "minutesCount": "{{count}} menit",
+      "studentsCount": "{{count}} murid",
+      "summary": {
+        "total": "Total Course",
+        "published": "Published",
+        "verified": "Verified",
+        "featured": "Featured",
+        "revenue": "Revenue"
+      },
+      "filters": {
+        "all": "Semua",
+        "allVerification": "Semua Verifikasi",
+        "verified": "Verified",
+        "unverified": "Belum Verified"
+      },
+      "filter": {
+        "button": "Filter Guru",
+        "title": "Filter per Guru",
+        "subtitle": "Pilih satu atau lebih guru",
+        "searchTeacher": "Cari nama guru...",
+        "selectVisible": "Pilih semua",
+        "clearVisible": "Hapus pilihan",
+        "selected": "{{count}} dipilih",
+        "courseCount": "{{count}} kursus"
+      },
+      "bulk": {
+        "title": "Bulk Actions",
+        "selected": "{{count}} dipilih",
+        "update": "Update",
+        "status": "Status",
+        "noChange": "No Change",
+        "chooseAction": "Pilih aksi",
+        "apply": "Terapkan",
+        "publishDescription": "Tampilkan paket terpilih ke pengguna.",
+        "unpublishDescription": "Sembunyikan paket terpilih dari pengguna."
+      },
+      "table": {
+        "course": "Paket",
+        "teacher": "Guru",
+        "info": "Info",
+        "sessions": "Sesi",
+        "price": "Harga",
+        "status": "Status",
+        "performance": "Performa",
+        "actions": "Aksi"
+      },
+      "status": {
+        "published": "Published",
+        "unpublished": "Unpublished",
+        "draft": "Draft",
+        "archived": "Archived"
+      },
+      "mode": {
+        "1": "Online",
+        "2": "Offline",
+        "3": "Hybrid"
+      },
+      "actions": {
+        "open": "Buka aksi",
+        "detail": "Detail",
+        "publish": "Publish",
+        "unpublish": "Unpublish",
+        "verify": "Verify",
+        "unverify": "Unverify",
+        "feature": "Feature",
+        "unfeature": "Unfeature"
+      },
+      "pagination": {
+        "showing": "Menampilkan {{from}}-{{to}} dari {{total}} data",
+        "selected": "{{count}} dipilih"
+      },
+      "detail": {
+        "title": "Detail Course",
+        "durationLine": "{{sessions}} sesi - {{duration}} menit/sesi",
+        "noDescription": "Belum ada deskripsi.",
+        "category": "Kategori",
+        "level": "Level",
+        "mode": "Mode",
+        "type": "Tipe",
+        "learningOutcomes": "Learning Outcomes",
+        "requirements": "Requirements",
+        "noOutcomes": "Belum ada outcome.",
+        "noRequirements": "Tidak ada prasyarat khusus.",
+        "syllabus": "Syllabus",
+        "noSyllabus": "Belum ada syllabus."
+      }
+    },
+    "payments": {
+      "title": "Pembayaran",
+      "searchPlaceholder": "Cari UserId, TrainerId, Status...",
+      "searchButton": "Cari",
+      "tabs": {
+        "payments": "Daftar Pembayaran",
+        "disputes": "Sengketa"
+      },
+      "disputes": {
+        "table": {
+          "type": "Tipe"
+        },
+        "action": {
+          "detail": "Lihat Detail",
+          "reply": "Balas",
+          "resolve": "Selesaikan"
+        }
+      },
+      "summary": {
+        "total": "Total Pembayaran",
+        "revenue": "Pendapatan",
+        "pendingRefunds": "Pending Refunds",
+        "pendingPayouts": "Pending Payouts"
+      },
+      "table": {
+        "id": "ID",
+        "user": "User",
+        "trainer": "Trainer",
+        "amount": "Nominal",
+        "status": "Status",
+        "paymentMethod": "Metode",
+        "date": "Tanggal",
+        "actions": "Aksi"
+      },
+      "status": {
+        "paid": "Dibayar",
+        "pending": "Menunggu",
+        "failed": "Gagal",
+        "refunded": "Dikembalikan",
+        "disputed": "Bermasalah"
+      },
+      "actions": {
+        "processRefund": "Process Refund",
+        "markPayout": "Mark Payout",
+        "updateStatus": "Update Status"
+      },
+      "modal": {
+        "processRefundTitle": "Proses Refund",
+        "markPayoutTitle": "Tandai Payout",
+        "updateStatusTitle": "Update Status",
+        "bulkPayoutTitle": "Bulk Payout",
+        "approve": "Setujui",
+        "reject": "Tolak",
+        "notes": "Catatan",
+        "payoutReference": "Referensi Payout",
+        "submit": "Simpan",
+        "cancel": "Batal",
+        "failureReason": "Alasan Gagal"
+      },
+      "bulk": {
+        "selected": "{{count}} dipilih",
+        "actions": "Bulk Actions",
+        "markPayout": "Bulk Mark Payout"
+      },
+      "empty": "Tidak ada pembayaran yang ditemukan.",
+      "loading": "Memuat data pembayaran..."
+    }
+  }
+}

@@ -1,0 +1,43 @@
+{
+    "title": "Kategori",
+    "search_placeholder": "Cari berdasar nama kategori",
+    "create_button": "Buat",
+    "empty": "Belum ada grup di kategori ini",
+    "search": "Cari",
+    "table_headers": {
+        "name": "Nama",
+        "total_group": "Total Grup",
+        "actions": "Aksi"
+    },
+    "actions": {
+        "edit": "Edit",
+        "delete": "Hapus"
+    },
+    "edit_category": {
+        "title": "Edit kategori",
+        "category_label": "Kategori",
+        "category_placeholder": "Masukkan Nama Kategori...",
+        "cancel": "Batal",
+        "save": "Simpan",
+        "saving": "Menyimpan..."
+    },
+    "create_category": {
+        "title": "Buat kategori",
+        "category_label": "Kategori",
+        "category_placeholder": "Masukkan Nama Kategori...",
+        "cancel": "Batal",
+        "save": "Simpan",
+        "saving": "Menyimpan..."
+    },
+    "delete_category": {
+        "title": "Hapus Kategori",
+        "message": "Apakah Anda yakin ingin menghapus kategori ini? Tindakan ini tidak dapat dibatalkan.",
+        "delete": "Hapus",
+        "deleting": "Menghapus..."
+    },
+    "pagination": {
+        "showing": "Menampilkan {start} - {end} dari {total} kategori"
+    },
+    "no_results": "Tidak ada kategori yang ditemukan",
+    "no_categories": "Belum ada kategori"
+}

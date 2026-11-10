@@ -1,0 +1,33 @@
+{
+  "test_invitation": {
+    "title": "Group Invitation Notification Test",
+    "group_id_label": "Test Group ID",
+    "group_id_placeholder": "Enter group ID for testing",
+    "group_id_help": "Group ID that will be used to send test invitations",
+    "email_label": "Invitation Email",
+    "email_help": "Enter the email that will receive the group invitation",
+    "sending": "Sending Invitation...",
+    "send_button": "Send Test Invitation",
+    "instructions_title": "Testing Steps:",
+    "instructions": {
+      "0": "Enter a target email that is already registered in the system",
+      "1": "The system will create a group invitation notification",
+      "2": "Log in with the target account on the notifications page",
+      "3": "View the invitation notification and test the Accept/Reject buttons"
+    },
+    "features_title": "Implemented Features:",
+    "features": {
+      "0": "API to send group invitations",
+      "1": "Real-time notifications",
+      "2": "Accept invitation button",
+      "3": "Reject invitation button",
+      "4": "Notification status updates",
+      "5": "Validation and error handling"
+    },
+    "errors": {
+      "email_empty": "Email cannot be empty",
+      "email_invalid": "Invalid email format",
+      "send_failed": "Failed to send invitation"
+    }
+  }
+}

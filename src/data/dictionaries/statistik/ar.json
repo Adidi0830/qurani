@@ -1,0 +1,33 @@
+{
+    "statistik": {
+        "dashboard": "لوحة التحكم",
+        "this_month": "هذا الشهر",
+        "deposit_this_month": "إيداع هذا الشهر",
+        "users_all": "جميع المستخدمين",
+        "users_this_year": "مستخدمون هذا العام",
+        "users_this_month": "المستخدمون هذا الشهر",
+        "users_month": "مستخدمون {{month}} {{year}}",
+        "deposit_today": "إيداع اليوم",
+        "popular_surah": "السورة الأكثر شعبية",
+        "groups_all": "جميع المجموعات",
+        "groups_this_year": "مجموعات هذا العام",
+        "groups_this_month": "مجموعات هذا الشهر",
+        "groups_month": "مجموعات {{month}} {{year}}",
+        "most_deposit_type": "نوع الإيداع الأكثر",
+        "most_deposit_group": "مجموعة الإيداع الأكثر",
+        "months": {
+            "january": "يناير",
+            "february": "فبراير",
+            "march": "مارس",
+            "april": "أبريل",
+            "may": "مايو",
+            "june": "يونيو",
+            "july": "يوليو",
+            "august": "أغسطس",
+            "september": "سبتمبر",
+            "october": "أكتوبر",
+            "november": "نوفمبر",
+            "december": "ديسمبر"
+        }
+    }
+}

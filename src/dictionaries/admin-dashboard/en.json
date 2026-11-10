@@ -1,0 +1,31 @@
+{
+  "cards": {
+    "total_users": "Users",
+    "total_admins": "Admins",
+    "active_users": "Active Users",
+    "blocked_users": "Blocked Users"
+  },
+  "charts": {
+    "gender": "Gender",
+    "top_countries": "Top Countries",
+    "top_states": "Top States",
+    "top_cities": "Top Cities",
+    "user_distribution": "User distribution",
+    "top_locations": "Top locations by users"
+  },
+  "legend": {
+    "male": "Male",
+    "female": "Female",
+    "unknown": "Unknown"
+  },
+  "labels": {
+    "users": "Users"
+  },
+  "empty": "No data available",
+  "aria": {
+    "view": "View {{title}}"
+  },
+  "errors": {
+    "title": "Dashboard error"
+  }
+}

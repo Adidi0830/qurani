@@ -1,0 +1,161 @@
+{
+  "header": {
+    "aria_home": "Qurani - Home",
+    "aria_login": "Login to your Qurani account",
+    "login": "Log in"
+  },
+  "hero": {
+    "title": "Memorize",
+    "cta": "Get Started",
+    "video_aria": "Background video showing Quran memorization",
+    "video_fallback": "Your browser does not support the video tag. Please use a modern browser to view this content.",
+    "rolling": {
+      "anytime": "anytime",
+      "faster": "faster",
+      "smarter": "smarter",
+      "easier": "easier",
+      "stronger": "stronger",
+      "anywhere": "anywhere",
+      "confidently": "confidently",
+      "independently": "independently"
+    }
+  },
+  "features": {
+    "title": "Memorize more",
+    "subtitle": "Make your memorization a premium experience.",
+    "cta": "Get Started",
+    "cta_aria": "Start your Quran memorization journey",
+    "video_fallback": "Your browser does not support the video tag.",
+    "nav_left": "Scroll left to see previous features",
+    "nav_right": "Scroll right to see more features",
+    "items": {
+      "0": {
+        "title": "Memorization",
+        "subtitle": "Mistake Detection",
+        "description": "Our flagship feature: Qurani's AI will detect missed, incorrect and skipped words in your recitation and alert you in real time.",
+        "video_alt": "Video showing mistake detection feature"
+      },
+      "1": {
+        "title": "Memorization Planning",
+        "description": "Tailor your memorization journey to your learning style and preferences using Qurani's intuitive planning tools.",
+        "video_alt": "Video showing memorization planning feature"
+      },
+      "2": {
+        "title": "Goals",
+        "description": "Set goals for yourself and track your progress as you memorize the Quran.",
+        "video_alt": "Video showing goals feature"
+      }
+    }
+  },
+  "stats": {
+    "title_prefix": "What's the",
+    "title_emphasis": "big",
+    "title_mid": "deal with",
+    "title_brand": "Qurani",
+    "title_premium": "Premium",
+    "title_suffix": "anyway?",
+    "stars_aria": "5 out of 5 stars",
+    "reviews": "91,000+ 5 Star Reviews",
+    "thumbnail_alt": "Qurani Premium features demonstration - Video showing advanced mistake detection and personalized learning features",
+    "play_aria": "Play Qurani Premium demonstration video"
+  },
+  "testimonials": {
+    "podcast_title": "re:Verses Podcast",
+    "podcast_prev": "Previous podcast episodes",
+    "podcast_next": "Next podcast episodes",
+    "blog_title": "Qurani Blog",
+    "blog_prev": "Previous blog posts",
+    "blog_next": "Next blog posts",
+    "thumbnail_podcast": "Thumbnail for {{title}} - {{subtitle}}",
+    "thumbnail_blog": "Thumbnail for blog post: {{title}}"
+  },
+  "faq": {
+    "title": "Frequently Asked Questions",
+    "items": {
+      "0": {
+        "question": "What is Qurani?",
+        "answer": "Qurani is a digital platform that helps Muslims memorize the Quran. The application provides a memorization tracking system, progress monitoring, and community features to make your Quran memorization journey easier and more effective."
+      },
+      "1": {
+        "question": "How do I use Qurani?",
+        "answer": "After registering, you can start by creating daily memorization reports, joining memorization groups, and tracking your progress. The application also provides a digital mushaf for easy Quran reading and memorization."
+      },
+      "2": {
+        "question": "Is Qurani free?",
+        "answer": "Yes, Qurani provides basic features for free including the memorization tracking system, progress monitoring, and access to the digital mushaf. Some premium features may be available for a more complete experience."
+      },
+      "3": {
+        "question": "How do I join a memorization group?",
+        "answer": "You can search for available memorization groups in the 'Find Group' menu or create your own group in 'My Groups'. After joining, you can interact with other group members and track progress together."
+      },
+      "4": {
+        "question": "How does the memorization tracking system work?",
+        "answer": "The memorization tracking system allows you to report your daily memorization. You can select the surah or juz you have memorized, and the system will record your progress. You can view your memorization results in the dashboard to monitor your development."
+      },
+      "5": {
+        "question": "Are there features to track memorization progress?",
+        "answer": "Yes, Qurani provides comprehensive statistics to track your memorization progress. You can view daily, weekly, and monthly progress. A recap feature is also available to see a summary of your achievements."
+      },
+      "6": {
+        "question": "How do I add friends on Qurani?",
+        "answer": "You can search for friends in the 'Find Friends' menu and send friend requests. After becoming friends, you can view each other's memorization progress and provide mutual motivation."
+      },
+      "7": {
+        "question": "Are there notifications to remind me about memorization?",
+        "answer": "Yes, Qurani's notification system will remind you about daily memorization reports, friend requests, and group activities. You can customize your notification preferences according to your needs."
+      },
+      "8": {
+        "question": "How do I use the digital mushaf?",
+        "answer": "The digital mushaf is available with easy-to-read Arabic fonts. You can navigate by surah or juz and use features like zoom and bookmark to facilitate the memorization process."
+      },
+      "9": {
+        "question": "Is my memorization data secure?",
+        "answer": "Yes, all your memorization data and personal information are protected with strict security systems. Your data can only be accessed by you and people you authorize within your memorization groups."
+      }
+    }
+  },
+  "footer": {
+    "aria_home": "Qurani - Home",
+    "social_aria": "Social media links",
+    "social": {
+      "instagram": "Follow us on Instagram",
+      "youtube": "Subscribe to our YouTube channel",
+      "twitter": "Follow us on Twitter",
+      "discord": "Join our Discord community",
+      "github": "View our GitHub repository"
+    },
+    "product": {
+      "title": "Product",
+      "pricing": "Pricing",
+      "gift_cards": "Gift Cards",
+      "family_plan": "Family Plan",
+      "mobile_app": "Mobile App"
+    },
+    "company": {
+      "title": "Company",
+      "blog": "Blog",
+      "careers": "Careers",
+      "scholarship": "Scholarship",
+      "about": "About Us"
+    },
+    "support": {
+      "title": "Support",
+      "center": "Support Center",
+      "requests": "Feature Requests",
+      "contact": "Contact Us"
+    },
+    "community": {
+      "title": "Community",
+      "podcast": "re:Verses Podcast",
+      "network": "Hifz Network",
+      "glossary": "Glossary",
+      "ramadan": "Ramadan",
+      "discord": "Discord"
+    },
+    "copyright": "Copyright 2025 Qurani, Inc. All rights reserved.",
+    "privacy": "Privacy Policy",
+    "terms": "Terms of Service",
+    "language_aria": "Language selector - English",
+    "language_label": "English"
+  }
+}

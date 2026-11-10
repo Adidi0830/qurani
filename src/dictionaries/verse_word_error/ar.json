@@ -1,0 +1,25 @@
+{
+  "verse_errors": {
+    "Ayat Lupa": "آية منسية",
+    "Ayat Waqaf atau Washal": "آية وقف أو وصل",
+    "Ayat Waqaf Ibtda": "آية وقف وابتداء",
+    "Ayat Tertukar": "آية مبدلة",
+    "Lainnya(Global)": "أخرى (عام)"
+  },
+  "word_errors": {
+    "Gharib": "غريب",
+    "Ghunnah": "غنة",
+    "Harakat tertukar": "تبديل الحركات",
+    "Huruf Tambah Kurang": "حرف زائد أو ناقص",
+    "Lupa": "منسي",
+    "Mad": "مدّ",
+    "Makhroj": "مخرج",
+    "Nun Mati Tanwin": "نون ساكنة أو تنوين",
+    "Qalqalah": "قلقلة",
+    "Tasydid": "شدة",
+    "Urutan Huruf / Kata": "ترتيب الحروف/الكلمات غير صحيح",
+    "Waqaf Ibtida": "وقف ابتداء",
+    "Waqof Washal": "وقف وصل",
+    "Lainnya": "أخرى"
+  }
+}

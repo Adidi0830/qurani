@@ -1,0 +1,25 @@
+{
+  "verse_errors": {
+    "Ayat Lupa": "Forgotten Verse",
+    "Ayat Waqaf atau Washal": "Verse Waqaf or Washal",
+    "Ayat Waqaf Ibtda": "Verse Waqaf and Ibtida",
+    "Ayat Tertukar": "Swapped Verse",
+    "Lainnya(Global)": "Others (Global)"
+  },
+  "word_errors": {
+    "Gharib": "Gharib",
+    "Ghunnah": "Ghunnah",
+    "Harakat tertukar": "Swapped Harakat",
+    "Huruf Tambah Kurang": "Extra or Missing Letter",
+    "Lupa": "Forgotten",
+    "Mad": "Madd",
+    "Makhroj": "Makhraj",
+    "Nun Mati Tanwin": "Nun Sakinah or Tanwin",
+    "Qalqalah": "Qalqalah",
+    "Tasydid": "Shaddah",
+    "Urutan Huruf / Kata": "Incorrect Letter/Word Order",
+    "Waqaf Ibtida": "Waqaf Ibtida",
+    "Waqof Washal": "Waqaf Washal",
+    "Lainnya": "Others"
+  }
+}

@@ -1,0 +1,28 @@
+{
+  "modal": {
+    "title": {
+      "word_error": "Word Error",
+      "verse_error": "Verse Error",
+      "select_error": "Select Error",
+      "word_error_with_text": "Word Error: {{text}}",
+      "verse_error_with_number": "Verse Error: {{number}}"
+    },
+    "badges": {
+      "word_error": "Word Error",
+      "verse_error": "Verse Error"
+    },
+    "existing_error": {
+      "current_error": "Current error:",
+      "hukum_bacaan": "Reading Rule:",
+      "remove_error": "Remove Error",
+      "default_verse_error": "Verse Error"
+    },
+    "buttons": {
+      "cancel": "Cancel",
+      "close": "Close"
+    },
+    "accessibility": {
+      "select_error_type": "Select error type: {{type}}"
+    }
+  }
+}

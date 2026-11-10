@@ -1,0 +1,354 @@
+{
+  "teacher_detail": {
+    "status": {
+      "verified": "Verified",
+      "pending": "Pending Verification",
+      "suspended": "Suspended",
+      "rejected": "Rejected",
+      "seleksi": "Seleksi"
+    },
+    "mode": {
+      "online": "Online",
+      "offline": "Offline",
+      "hybrid": "Online & Offline"
+    },
+    "common": {
+      "back": "Back",
+      "cancel": "Cancel",
+      "save": "Save",
+      "not_found": "Teacher data not found",
+      "user_id": "User ID",
+      "copy_user_id": "Copy User ID",
+      "copied": "Copied!",
+      "copied_clipboard": "Copied to clipboard",
+      "view_user_profile": "View User Profile",
+      "title": "Teacher Profile",
+      "rejection_default": "Rejected by admin",
+      "verified_by_admin": "Verified by Admin",
+      "related_institution": "Related Institution"
+    },
+    "modal": {
+      "reject_title": "Reject Teacher Application",
+      "reason_label": "Rejection Reason",
+      "reason_placeholder": "Write the reason why this teacher is rejected...",
+      "reason_hint": "This reason will be sent to the teacher's email.",
+      "cancel": "Cancel",
+      "confirm": "Confirm Rejection"
+    },
+    "toasts": {
+      "failed": "Failed",
+      "no_token": "Login token not found",
+      "approve": "Teacher application accepted",
+      "reject": "Teacher application rejected",
+      "suspend": "Teacher suspended",
+      "unsuspend": "Teacher reactivated",
+      "bg_requested": "Background Check Requested",
+      "bg_success": "Background check request for {{name}} sent successfully.",
+      "bg_mocked": "Background Check Requested (Mocked)",
+      "bg_mock_message": "Successfully mocked background check request for {{name}} due to API error.",
+      "doc_verified": "Document Verified",
+      "doc_verified_message": "Document {{name}} has been marked valid.",
+      "doc_verified_mocked": "Document Verified (Mocked)",
+      "doc_verified_mock_message": "Successfully mocked document validation for {{label}}."
+    },
+    "manage": {
+      "headline_fallback": "Qur'an Teacher Candidate",
+      "experience_years": "{{count}} yrs experience",
+      "registered_at": "Registered {{date}}",
+      "stats": {
+        "courses": "Courses",
+        "courses_sub": "active packages",
+        "students": "Students",
+        "students_sub": "enrolled",
+        "rating": "Rating",
+        "rating_sub": "{{count}} reviews",
+        "rate": "Rate/Hour",
+        "rate_sub": "per hour"
+      },
+      "tabs": {
+        "info": "Info",
+        "package": "Package",
+        "orders": "Orders",
+        "wallet": "Wallet",
+        "gallery": "Gallery",
+        "reviews": "Reviews"
+      },
+      "info": {
+        "about_title": "About the Teacher",
+        "about_empty": "This teacher has not filled in a self description.",
+        "skills_title": "Skills & Teaching Methods",
+        "skills_empty": "No skills submitted yet.",
+        "certs_title": "Credentials & Certifications",
+        "certs_count": "{{count}} certificates",
+        "certs_empty": "No certificates uploaded yet.",
+        "certs_empty_hint": "Teacher needs to upload diploma/certificate for verification.",
+        "cert_fallback": "Certificate {{count}}",
+        "issued_label": "Issued:",
+        "expiry_label": "Valid until:",
+        "open_doc": "Open Document",
+        "mark_valid": "Mark Valid",
+        "portfolio_title": "Portfolio & Media",
+        "portfolio_count": "{{count}} items",
+        "media_kind_video": "📹 Video",
+        "media_kind_image": "🖼️ Image",
+        "media_kind_link": "🔗 Link",
+        "portfolio_number": "Portfolio #{{count}}"
+      },
+      "package": {
+        "load_error": "Failed to load packages",
+        "empty": "No packages created by this teacher yet.",
+        "sessions": "{{count}} Sessions",
+        "draft": "Draft",
+        "price_label": "Package Price",
+        "free": "Free",
+        "students": "{{count}} Enrolled"
+      },
+      "gallery": {
+        "photo_alt": "Activity photo {{count}}",
+        "photo_title": "Teaching Activity Photo {{count}}",
+        "photo_sub": "Teacher teaching portfolio",
+        "open_link": "Open link"
+      },
+      "reviews": {
+        "empty": "No reviews from students for this teacher yet.",
+        "count": "{{count}} reviews",
+        "no_comment": "No comment."
+      },
+      "actions": {
+        "title": "Admin Actions",
+        "bg_title": "Background Verification",
+        "bg_passed": "Background Check Passed",
+        "bg_running": "Check Running...",
+        "bg_request": "Request Background Check",
+        "bg_testing_done": "[Testing] Complete Check",
+        "status_label": "Teacher Status",
+        "suspend": "Suspend Teacher",
+        "unsuspend": "Reactivate Teacher",
+        "accept_now": "Accept Now"
+      },
+      "account": {
+        "title": "Account Info",
+        "user_id": "User ID",
+        "joined": "Joined",
+        "mode": "Mode",
+        "rate": "Rate/Hour"
+      },
+      "stats_teaching": {
+        "title": "Teaching Stats",
+        "reviews": "{{count}} reviews",
+        "total_courses": "Total Courses",
+        "total_students": "Total Students",
+        "certificates": "Certificates",
+        "portfolio": "Portfolio",
+        "portfolio_value": "{{count}} items"
+      },
+      "course_modal": {
+        "title": "Course Detail",
+        "id": "ID: {{id}}",
+        "published": "Published",
+        "unpublished": "Unpublished",
+        "sessions": "{{count}} Sessions",
+        "price_label": "Package Price",
+        "free": "Free",
+        "sessions_lower": "{{count}} sessions",
+        "students": "{{count}} Enrolled",
+        "rating": "Rating"
+      },
+      "requirements": {
+        "no_data": "No submitted data for this requirement yet.",
+        "media_verification": "Memorization Verification Media",
+        "no_link": "No link submitted yet",
+        "cert_docs": "Certificate Documents",
+        "open": "Open",
+        "no_doc": "No document yet",
+        "mark_valid": "Mark Document Valid",
+        "open_doc": "Open document"
+      },
+      "evidence": {
+        "full_name": "Full Name & Title",
+        "domicile": "Domicile",
+        "experience": "Teaching Experience",
+        "years": "{{count}} Years",
+        "headline": "Headline / Slogan",
+        "bio": "Short Biography",
+        "expertise": "Skills / Specialization",
+        "mode": "Teaching Mode",
+        "mode_online": "Online",
+        "mode_offline": "Offline",
+        "mode_hybrid": "Online & Offline",
+        "rate_per_hour": "Hourly Teaching Rate",
+        "cert_label": "Certificate / Diploma: {{name}}",
+        "cert_value_parts": {
+          "issuer": "Issuer: {{issuer}}",
+          "issued": "Issued: {{date}}",
+          "expiry": "Valid until: {{date}}"
+        },
+        "cert_value": "{{issuer}} | {{issued}}{{expiry}}",
+        "fatihah_video": "Al-Fatihah Recitation Video Link",
+        "short_surah_video": "Short Surah / Portfolio Video Link",
+        "photo": "Portfolio Photo",
+        "media_portfolio": "Portfolio Media"
+      },
+      "requirement_titles": {
+        "profil_kontak": "Basic Profile",
+        "profil_kontak_sub": "Name, domicile & experience",
+        "kualifikasi_metode": "Qualification & Methods",
+        "kualifikasi_metode_sub": "Headline, bio, skills & rate",
+        "sertifikat": "Certificate / Diploma",
+        "sertifikat_sub": "Education & certification documents",
+        "media_portofolio": "Portfolio & Media",
+        "media_portofolio_sub": "Memorization videos or teaching activity photos"
+      }
+    },
+    "review": {
+      "title": "Applicant Review",
+      "rejected_banner": "Application Rejected",
+      "pick_penguji": "Select reviewer team...",
+      "search_penguji": "Search name or specialization...",
+      "penguji_not_found": "No reviewer found",
+      "sections": {
+        "profile": "Profile & Headline",
+        "expertise": "Skills & Categories",
+        "rate": "Rate & Availability",
+        "portfolio": "Portfolio & Certifications"
+      },
+      "fields": {
+        "headline": "Headline / Profile Tagline",
+        "bio": "Short Biography",
+        "location": "Location / City",
+        "empty": "Not filled",
+        "registered": "Registered: {{date}}",
+        "expertise_label": "Skills / Teaching Methods",
+        "expertise_empty": "No skills selected",
+        "category_label": "Categories",
+        "category_empty": "No categories selected",
+        "rate_hour": "Rate per Hour",
+        "experience": "Teaching Experience",
+        "years": "{{count}} Years",
+        "mode": "Teaching Mode",
+        "online": "Online",
+        "online_sub": "Via Zoom, Google Meet, etc",
+        "offline": "Offline / In-person",
+        "offline_sub": "Visit student's home",
+        "video_portfolio": "Video Portfolio",
+        "video_count": "{{count}} videos added",
+        "video_empty": "No portfolio videos yet",
+        "watch_youtube": "Watch on YouTube",
+        "certification_label": "Certification / Syahadah",
+        "cert_count": "{{count}} certificates",
+        "cert_empty": "No certificates added yet",
+        "cert_number": "Certificate {{count}}",
+        "cert_name": "Certificate Name",
+        "issuer": "Issuer",
+        "credential_id": "Credential ID",
+        "issued_date": "Issued Date",
+        "expiry_date": "Expiry Date",
+        "none": "None",
+        "cert_url": "Certificate URL",
+        "mark_valid": "Mark Document Valid"
+      },
+      "verification": {
+        "title": "Verification Decision",
+        "warning": "Some required data has not been completed by the applicant",
+        "check_profil": "Basic profile (name & location)",
+        "check_expertise": "Skills & teaching methods",
+        "check_cert": "Certificate / diploma",
+        "check_video": "Portfolio video",
+        "accept": "Accept & Schedule Seleksi",
+        "reject": "Reject",
+        "already_status": "This applicant is already in status {{status}}."
+      },
+      "seleksi_modal": {
+        "title": "Schedule Selection Interview",
+        "date": "Selection Date",
+        "time": "Selection Time",
+        "duration": "Duration: {{value}}",
+        "penguji": "Reviewer / Selection Team",
+        "method": "Method",
+        "online": "Online",
+        "offline": "Offline",
+        "online_link": "Meeting Link (Zoom / Google Meet)",
+        "offline_location": "Meeting Location / Address",
+        "applicant_location": "Applicant location: {{location}}",
+        "notes": "Additional Notes",
+        "cancel": "Cancel",
+        "save": "Save"
+      },
+      "email_preview": {
+        "title": "Confirm Email Send",
+        "subtitle": "Notification to teacher candidate",
+        "summary": "Email Summary to be Sent",
+        "recipient": "Recipient",
+        "schedule": "Schedule",
+        "method_link": "Method & Link",
+        "penguji": "Reviewer",
+        "info": "The email will contain an Attending Confirmation and Request Reschedule button for the candidate.",
+        "edit": "Edit",
+        "sending": "Sending...",
+        "send_email": "Send Email"
+      },
+      "toasts": {
+        "pick_penguji": "Select Reviewer Team",
+        "pick_penguji_msg": "Please select a reviewer from the dropdown.",
+        "rejected": "Teacher application rejected",
+        "saved_mock": "Schedule Saved (Email Simulated)",
+        "email_sent": "📧 Email Sent!",
+        "email_mock_msg": "Data saved. Email to {{email}} will be active once Gmail is configured.",
+        "email_sent_msg": "Selection invitation email sent to {{recipient}}.",
+        "send_failed": "Failed to Send Email",
+        "send_failed_msg": "{{error}}",
+        "network_error": "Network error."
+      }
+    },
+    "orders_tab": {
+      "search": "Search order, student name, or package...",
+      "filter": "Filter",
+      "filter_label": "Filter Status",
+      "loading": "Loading order data...",
+      "empty": "No orders found.",
+      "empty_all": "No orders for this teacher yet.",
+      "empty_filter": "No orders match this filter.",
+      "show_all": "Show all ({{count}})",
+      "session_count": "{{count}} sessions",
+      "footer": "Showing {{shown}} of {{total}} orders",
+      "columns": {
+        "id": "Order ID",
+        "member": "Student",
+        "package": "Package",
+        "mode": "Mode",
+        "amount": "Amount",
+        "status": "Status",
+        "date": "Date"
+      },
+      "status": {
+        "all": "All",
+        "pending": "Pending",
+        "active": "Active",
+        "cancelled": "Cancelled",
+        "completed": "Completed",
+        "waiting_teacher": "Waiting Teacher"
+      }
+    },
+    "wallet_tab": {
+      "active_balance": "Active Balance (Paid Out)",
+      "pending_balance": "Pending Balance",
+      "pending_hint": "Will be manually paid out by admin via the Payout menu.",
+      "history_title": "Payout Transaction History",
+      "loading": "Loading transaction history...",
+      "empty": "No payout transaction history yet.",
+      "columns": {
+        "id": "ID / Reference",
+        "date": "Date",
+        "amount": "Amount",
+        "method": "Method",
+        "status": "Status"
+      },
+      "bank_transfer": "Bank Transfer",
+      "status": {
+        "approved": "Approved",
+        "pending": "Pending",
+        "rejected": "Rejected"
+      }
+    }
+  }
+}

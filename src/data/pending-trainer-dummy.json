@@ -1,0 +1,41 @@
+{
+  "id": 8888111,
+  "userId": 8888111,
+  "userName": "irwan",
+  "username": "irwan22",
+  "email": "elshoegaze1@gmail.com",
+  "headline": "Pengajar Tahsin & Tajwid Bersertifikat",
+  "bio": "Lulusan Universitas Islam dengan pengalaman mengajar 5 tahun. Spesialisasi dalam perbaikan makhraj dan tajwid.",
+  "expertise": [
+    "Tahsin",
+    "Tajwid",
+    "Tafsir"
+  ],
+  "certifications": [
+    {
+      "name": "Sertifikasi Pengajar Al-Qur'an Metode Qiroati",
+      "issuer": "Lembaga Qiroati Pusat",
+      "credentialId": "QR-2023-8888",
+      "issuedDate": "2023-05-10T00:00:00Z",
+      "expiryDate": "",
+      "url": "https://example.com/sertifikat-qiroati.pdf"
+    }
+  ],
+  "portfolioUrls": [
+    "https://youtu.be/Vm6avc0fSIY?si=xYgPUURiq4oioqHq",
+    "https://example.com/sertifikat.pdf"
+  ],
+  "hourlyRate": 75000,
+  "currency": "IDR",
+  "experienceYears": 5,
+  "isOnline": 1,
+  "isOffline": 1,
+  "location": "Jakarta Selatan, Indonesia",
+  "timezone": "Asia/Jakarta",
+  "categoryIds": [
+    1,
+    2
+  ],
+  "status": "pending",
+  "createdAt": "2026-06-16T10:00:00Z"
+}

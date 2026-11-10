@@ -1,0 +1,131 @@
+{
+    "recitation": {
+        "title": "Setoran Alquran",
+        "reciter": "Penyetor",
+        "friend": "Teman",
+        "group": "Grup",
+        "label_select_friend": "Pilih Teman",
+        "label_select_group": "Pilih Grup",
+        "member_group": "Pilih Anggota",
+        "recitation": "Tipe Bacaan",
+        "display": "Tampilan",
+        "surah": "Surat",
+        "page": "Halaman",
+        "label_select_surah": "Pilih Surat",
+        "label_select_juz": "Pilih Juz",
+        "label_select_page": "Pilih Halaman",
+        "label_select_praquran": "Pilih Pra Quran",
+        "start": "Mulai",
+        "interactive_map": "Statistik",
+        "search_friend_no_results": "Teman tidak ditemukan",
+        "search_group_no_results": "Group tidak ditemukan",
+        "search_member_no_results": "Anggota tidak ditemukan",
+        "back": "Kembali",
+        "distribution": "Distribusi setoran hafalan",
+        "loading": {
+            "friends": "Memuat teman...",
+            "groups": "Memuat grup...",
+            "members": "Memuat anggota...",
+            "saving": "Menyimpan bacaan...",
+            "preparing": "Memuat..."
+        },
+        "empty_state": {
+            "no_friends": "Belum ada teman",
+            "no_groups": "Belum ada grup",
+            "no_members": "Belum ada anggota"
+        },
+        "errors": {
+            "complete_required_data": "Harap lengkapi semua data yang diperlukan",
+            "failed_load_members": "Gagal memuat anggota grup",
+            "failed_load_data": "Gagal memuat data. Silakan coba lagi.",
+            "error_load_data": "Terjadi kesalahan saat memuat data.",
+            "reciter_required": "Penyetor harus dipilih",
+            "friend_required": "Silakan pilih teman",
+            "group_member_required": "Silakan pilih anggota grup",
+            "group_required": "Silakan pilih grup",
+            "recitation_type_required": "Tipe bacaan harus dipilih",
+            "display_type_required": "Jenis tampilan harus dipilih",
+            "item_required": "Silakan pilih item",
+            "page_required": "Silakan pilih halaman"
+        },
+        "buttons": {
+            "create_group": "Buat Grup",
+            "find_friends": "Cari Teman",
+            "reset": "Reset"
+        },
+        "search": {
+            "surah": "Cari Surat",
+            "juz": "Cari Juz", 
+            "page": "Cari Halaman",
+            "praquran": "Cari Pra Quran",
+            "no_results": "Tidak ditemukan {type}.",
+            "select_month": "Pilih Bulan",
+            "all": "Semua",
+            "friend": "Cari teman...",
+            "group": "Cari grup...",
+            "member": "Cari anggota..."
+        },
+        "tab": {
+            "recitation": "Setoran",
+            "user": "Pengguna"
+        },
+        "map": {
+            "unknown_city": "Kota Tidak Diketahui"
+        }
+    },
+    "recap": {
+        "verses": "Ayat",
+        "words": "Kata",
+        "recitation_summary": "Setoran",
+        "back": "Kembali",
+        "preview": "Pratinjau",
+        "recitation_details": "Detail Bacaan",
+        "mistakes_summary": "Ringkasan",
+        "verse_errors": "Kesalahan Ayat",
+        "word_errors": "Kesalahan Kata",
+        "conclusion": "Kesimpulan",
+        "notes": "Catatan",
+        "select_conclusion": "Pilih Kesimpulan",
+        "special_notes": "Catatan Khusus",
+        "page": "Halaman",
+        "verse": "Ayat",
+        "memorization_range": "Rentang Hafalan",
+        "assessment": "Penilaian",
+        "conclusion_options": {
+            "excellent": "Sempurna",
+            "very_good": "Baik Sekali",
+            "good": "Baik",
+            "pass": "Lulus",
+            "weak": "Lemah",
+            "not_pass": "Tidak Lulus"
+        },
+        "form": {
+            "participant": "Penyetor",
+            "start_surah": "Awal Surah",
+            "select_start_surah": "Pilih Surah Awal",
+            "start_verse": "Ayat Awal",
+            "page": "Halaman",
+            "select_start_verse": "Pilih Ayat Awal",
+            "end_surah": "Akhir Surah",
+            "select_end_surah": "Pilih Surah Akhir",
+            "end_verse": "Ayat Akhir",
+            "select_end_verse": "Pilih Ayat Akhir",
+            "conclusion": "Kesimpulan",
+            "select_conclusion": "Pilih Kesimpulan",
+            "notes_optional": "Catatan",
+            "notes_placeholder": "Catatan tambahan...",
+            "notes_empty": "Tidak ada catatan tambahan",
+            "conclusion_empty": "Tidak ada kesimpulan yang diberikan",
+            "show_mushaf": "Lihat Mushaf",
+            "loading": "Memuat...",
+            "save": "Simpan",
+            "saving": "Menyimpan...",
+            "finishing": "Menyelesaikan...",
+            "finish": "Selesai",
+            "brush_size": "Ukuran Kuas",
+            "conclusion_required": "Kesimpulan harus diisi",
+            "success": "Sukses",
+            "failed": "Terjadi Kesalahan"
+        }
+    }
+}

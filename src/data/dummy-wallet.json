@@ -1,0 +1,979 @@
+{
+    "statistics":  {
+                       "totalWallets":  1500,
+                       "activeWallets":  1450,
+                       "totalBalance":  15000000,
+                       "totalPendingTopups":  25,
+                       "totalPendingWithdraws":  12,
+                       "volumeToday":  25000000,
+                       "volumeThisMonth":  450000000
+                   },
+    "pendingTopups":  [
+                          {
+                              "id":  889977665544101,
+                              "userId":  501,
+                              "user":  {
+                                           "id":  501,
+                                           "name":  "Ahmad Fauzan",
+                                           "email":  "ahmad.fauzan@gmail.com",
+                                           "username":  "fauzan_ahmad"
+                                       },
+                              "amount":  200000,
+                              "status":  "PENDING",
+                              "paymentMethod":  "BCA Virtual Account",
+                              "createdAt":  "2026-07-22T01:15:43.999Z",
+                              "externalReference":  null
+                          },
+                          {
+                              "id":  889977665544102,
+                              "userId":  502,
+                              "user":  {
+                                           "id":  502,
+                                           "name":  "Siti Rahmawati",
+                                           "email":  "siti.rahmawati@yahoo.com",
+                                           "username":  "siti_rahma"
+                                       },
+                              "amount":  300000,
+                              "status":  "PENDING",
+                              "paymentMethod":  "Mandiri Virtual Account",
+                              "createdAt":  "2026-07-22T00:15:44.001Z",
+                              "externalReference":  null
+                          },
+                          {
+                              "id":  889977665544103,
+                              "userId":  503,
+                              "user":  {
+                                           "id":  503,
+                                           "name":  "Muhammad Rizki",
+                                           "email":  "m.rizki.santoso@gmail.com",
+                                           "username":  "rizki_santoso"
+                                       },
+                              "amount":  400000,
+                              "status":  "PENDING",
+                              "paymentMethod":  "GoPay",
+                              "createdAt":  "2026-07-21T23:15:44.001Z",
+                              "externalReference":  null
+                          },
+                          {
+                              "id":  889977665544104,
+                              "userId":  504,
+                              "user":  {
+                                           "id":  504,
+                                           "name":  "Dewi Lestari",
+                                           "email":  "dewi.lestari88@gmail.com",
+                                           "username":  "dewilestari88"
+                                       },
+                              "amount":  500000,
+                              "status":  "PENDING",
+                              "paymentMethod":  "OVO",
+                              "createdAt":  "2026-07-21T22:15:44.001Z",
+                              "externalReference":  null
+                          },
+                          {
+                              "id":  889977665544105,
+                              "userId":  505,
+                              "user":  {
+                                           "id":  505,
+                                           "name":  "Andi Kurniawan",
+                                           "email":  "andi.kurniawan@outlook.com",
+                                           "username":  "andikurniawan"
+                                       },
+                              "amount":  100000,
+                              "status":  "PENDING",
+                              "paymentMethod":  "DANA",
+                              "createdAt":  "2026-07-21T21:15:44.001Z",
+                              "externalReference":  null
+                          },
+                          {
+                              "id":  889977665544106,
+                              "userId":  506,
+                              "user":  {
+                                           "id":  506,
+                                           "name":  "Nur Azizah",
+                                           "email":  "nurazizah.97@gmail.com",
+                                           "username":  "nur_azizah97"
+                                       },
+                              "amount":  200000,
+                              "status":  "PENDING",
+                              "paymentMethod":  "BCA Virtual Account",
+                              "createdAt":  "2026-07-21T20:15:44.001Z",
+                              "externalReference":  null
+                          },
+                          {
+                              "id":  889977665544107,
+                              "userId":  507,
+                              "user":  {
+                                           "id":  507,
+                                           "name":  "Bagas Pratama",
+                                           "email":  "bagas.pratama@gmail.com",
+                                           "username":  "bagaspratama"
+                                       },
+                              "amount":  300000,
+                              "status":  "PENDING",
+                              "paymentMethod":  "BNI Virtual Account",
+                              "createdAt":  "2026-07-21T19:15:44.001Z",
+                              "externalReference":  null
+                          },
+                          {
+                              "id":  889977665544108,
+                              "userId":  508,
+                              "user":  {
+                                           "id":  508,
+                                           "name":  "Rina Fitriana",
+                                           "email":  "rina.fitriana@qurani.id",
+                                           "username":  "rinafitriana"
+                                       },
+                              "amount":  400000,
+                              "status":  "PENDING",
+                              "paymentMethod":  "GoPay",
+                              "createdAt":  "2026-07-21T18:15:44.001Z",
+                              "externalReference":  null
+                          },
+                          {
+                              "id":  889977665544109,
+                              "userId":  509,
+                              "user":  {
+                                           "id":  509,
+                                           "name":  "Hendra Saputra",
+                                           "email":  "hendra.saputra21@gmail.com",
+                                           "username":  "hendrasaputra"
+                                       },
+                              "amount":  500000,
+                              "status":  "PENDING",
+                              "paymentMethod":  "BCA Virtual Account",
+                              "createdAt":  "2026-07-21T17:15:44.001Z",
+                              "externalReference":  null
+                          },
+                          {
+                              "id":  889977665544110,
+                              "userId":  510,
+                              "user":  {
+                                           "id":  510,
+                                           "name":  "Laila Maghfiroh",
+                                           "email":  "laila.maghfiroh@gmail.com",
+                                           "username":  "lailamaghfiroh"
+                                       },
+                              "amount":  100000,
+                              "status":  "PENDING",
+                              "paymentMethod":  "QRIS",
+                              "createdAt":  "2026-07-21T16:15:44.001Z",
+                              "externalReference":  null
+                          },
+                          {
+                              "id":  111,
+                              "userId":  511,
+                              "user":  {
+                                           "id":  511,
+                                           "name":  "Fadhil Ramadhan",
+                                           "email":  "fadhil.ramadhan@gmail.com",
+                                           "username":  "fadhilram"
+                                       },
+                              "amount":  200000,
+                              "status":  "PENDING",
+                              "paymentMethod":  "Mandiri Virtual Account",
+                              "createdAt":  "2026-07-21T15:15:44.001Z",
+                              "externalReference":  null
+                          },
+                          {
+                              "id":  112,
+                              "userId":  512,
+                              "user":  {
+                                           "id":  512,
+                                           "name":  "Annisa Putri",
+                                           "email":  "annisa.putri2001@gmail.com",
+                                           "username":  "annisaputri"
+                                       },
+                              "amount":  300000,
+                              "status":  "PENDING",
+                              "paymentMethod":  "OVO",
+                              "createdAt":  "2026-07-21T14:15:44.001Z",
+                              "externalReference":  null
+                          },
+                          {
+                              "id":  113,
+                              "userId":  513,
+                              "user":  {
+                                           "id":  513,
+                                           "name":  "Dicky Firmansyah",
+                                           "email":  "dicky.firmansyah@gmail.com",
+                                           "username":  "dickyfirman"
+                                       },
+                              "amount":  400000,
+                              "status":  "PENDING",
+                              "paymentMethod":  "DANA",
+                              "createdAt":  "2026-07-21T13:15:44.001Z",
+                              "externalReference":  null
+                          },
+                          {
+                              "id":  114,
+                              "userId":  514,
+                              "user":  {
+                                           "id":  514,
+                                           "name":  "Yuliana Sari",
+                                           "email":  "yuliana.sari@qurani.id",
+                                           "username":  "yuliasari"
+                                       },
+                              "amount":  500000,
+                              "status":  "PENDING",
+                              "paymentMethod":  "BCA Virtual Account",
+                              "createdAt":  "2026-07-21T12:15:44.001Z",
+                              "externalReference":  null
+                          },
+                          {
+                              "id":  115,
+                              "userId":  515,
+                              "user":  {
+                                           "id":  515,
+                                           "name":  "Agus Setiawan",
+                                           "email":  "agus.setiawan55@gmail.com",
+                                           "username":  "agussetiawan"
+                                       },
+                              "amount":  100000,
+                              "status":  "PENDING",
+                              "paymentMethod":  "GoPay",
+                              "createdAt":  "2026-07-21T11:15:44.001Z",
+                              "externalReference":  null
+                          }
+                      ],
+    "pendingWithdraws":  [
+                             {
+                                 "id":  201,
+                                 "userId":  501,
+                                 "user":  {
+                                              "id":  501,
+                                              "name":  "Ahmad Fauzan",
+                                              "email":  "ahmad.fauzan@gmail.com",
+                                              "username":  "fauzan_ahmad"
+                                          },
+                                 "amount":  200000,
+                                 "status":  "PENDING",
+                                 "paymentMethod":  "Bank Mandiri",
+                                 "createdAt":  "2026-07-22T01:15:44.001Z",
+                                 "externalReference":  null,
+                                 "bankCode":  "MANDIRI",
+                                 "accountNumber":  "1400087654321",
+                                 "accountName":  "Ahmad Fauzan"
+                             },
+                             {
+                                 "id":  202,
+                                 "userId":  502,
+                                 "user":  {
+                                              "id":  502,
+                                              "name":  "Siti Rahmawati",
+                                              "email":  "siti.rahmawati@yahoo.com",
+                                              "username":  "siti_rahma"
+                                          },
+                                 "amount":  300000,
+                                 "status":  "PENDING",
+                                 "paymentMethod":  "Bank BCA",
+                                 "createdAt":  "2026-07-22T00:15:44.001Z",
+                                 "externalReference":  null,
+                                 "bankCode":  "BCA",
+                                 "accountNumber":  "8877665544",
+                                 "accountName":  "Siti Rahmawati"
+                             },
+                             {
+                                 "id":  203,
+                                 "userId":  503,
+                                 "user":  {
+                                              "id":  503,
+                                              "name":  "Muhammad Rizki",
+                                              "email":  "m.rizki.santoso@gmail.com",
+                                              "username":  "rizki_santoso"
+                                          },
+                                 "amount":  400000,
+                                 "status":  "PENDING",
+                                 "paymentMethod":  "Bank BNI",
+                                 "createdAt":  "2026-07-21T23:15:44.001Z",
+                                 "externalReference":  null,
+                                 "bankCode":  "BNI",
+                                 "accountNumber":  "0217654321",
+                                 "accountName":  "Muhammad Rizki S"
+                             },
+                             {
+                                 "id":  204,
+                                 "userId":  504,
+                                 "user":  {
+                                              "id":  504,
+                                              "name":  "Dewi Lestari",
+                                              "email":  "dewi.lestari88@gmail.com",
+                                              "username":  "dewilestari88"
+                                          },
+                                 "amount":  500000,
+                                 "status":  "PENDING",
+                                 "paymentMethod":  "Bank BRI",
+                                 "createdAt":  "2026-07-21T22:15:44.001Z",
+                                 "externalReference":  null,
+                                 "bankCode":  "BRI",
+                                 "accountNumber":  "0016543219",
+                                 "accountName":  "Dewi Lestari"
+                             },
+                             {
+                                 "id":  205,
+                                 "userId":  505,
+                                 "user":  {
+                                              "id":  505,
+                                              "name":  "Andi Kurniawan",
+                                              "email":  "andi.kurniawan@outlook.com",
+                                              "username":  "andikurniawan"
+                                          },
+                                 "amount":  100000,
+                                 "status":  "PENDING",
+                                 "paymentMethod":  "Bank Mandiri",
+                                 "createdAt":  "2026-07-21T21:15:44.001Z",
+                                 "externalReference":  null,
+                                 "bankCode":  "MANDIRI",
+                                 "accountNumber":  "1200098765432",
+                                 "accountName":  "Andi Kurniawan"
+                             },
+                             {
+                                 "id":  206,
+                                 "userId":  506,
+                                 "user":  {
+                                              "id":  506,
+                                              "name":  "Nur Azizah",
+                                              "email":  "nurazizah.97@gmail.com",
+                                              "username":  "nur_azizah97"
+                                          },
+                                 "amount":  200000,
+                                 "status":  "PENDING",
+                                 "paymentMethod":  "Bank BCA",
+                                 "createdAt":  "2026-07-21T20:15:44.001Z",
+                                 "externalReference":  null,
+                                 "bankCode":  "BCA",
+                                 "accountNumber":  "6633445566",
+                                 "accountName":  "Nur Azizah"
+                             },
+                             {
+                                 "id":  207,
+                                 "userId":  507,
+                                 "user":  {
+                                              "id":  507,
+                                              "name":  "Bagas Pratama",
+                                              "email":  "bagas.pratama@gmail.com",
+                                              "username":  "bagaspratama"
+                                          },
+                                 "amount":  300000,
+                                 "status":  "PENDING",
+                                 "paymentMethod":  "Bank Mandiri",
+                                 "createdAt":  "2026-07-21T19:15:44.001Z",
+                                 "externalReference":  null,
+                                 "bankCode":  "MANDIRI",
+                                 "accountNumber":  "1430098123456",
+                                 "accountName":  "Bagas Pratama"
+                             },
+                             {
+                                 "id":  208,
+                                 "userId":  508,
+                                 "user":  {
+                                              "id":  508,
+                                              "name":  "Rina Fitriana",
+                                              "email":  "rina.fitriana@qurani.id",
+                                              "username":  "rinafitriana"
+                                          },
+                                 "amount":  400000,
+                                 "status":  "PENDING",
+                                 "paymentMethod":  "Bank BNI",
+                                 "createdAt":  "2026-07-21T18:15:44.001Z",
+                                 "externalReference":  null,
+                                 "bankCode":  "BNI",
+                                 "accountNumber":  "0381234567",
+                                 "accountName":  "Rina Fitriana"
+                             },
+                             {
+                                 "id":  209,
+                                 "userId":  509,
+                                 "user":  {
+                                              "id":  509,
+                                              "name":  "Hendra Saputra",
+                                              "email":  "hendra.saputra21@gmail.com",
+                                              "username":  "hendrasaputra"
+                                          },
+                                 "amount":  500000,
+                                 "status":  "PENDING",
+                                 "paymentMethod":  "Bank BRI",
+                                 "createdAt":  "2026-07-21T17:15:44.001Z",
+                                 "externalReference":  null,
+                                 "bankCode":  "BRI",
+                                 "accountNumber":  "0018765432",
+                                 "accountName":  "Hendra Saputra"
+                             },
+                             {
+                                 "id":  210,
+                                 "userId":  510,
+                                 "user":  {
+                                              "id":  510,
+                                              "name":  "Laila Maghfiroh",
+                                              "email":  "laila.maghfiroh@gmail.com",
+                                              "username":  "lailamaghfiroh"
+                                          },
+                                 "amount":  100000,
+                                 "status":  "PENDING",
+                                 "paymentMethod":  "Bank BCA",
+                                 "createdAt":  "2026-07-21T16:15:44.001Z",
+                                 "externalReference":  null,
+                                 "bankCode":  "BCA",
+                                 "accountNumber":  "4499887766",
+                                 "accountName":  "Laila Maghfiroh"
+                             },
+                             {
+                                 "id":  211,
+                                 "userId":  511,
+                                 "user":  {
+                                              "id":  511,
+                                              "name":  "Fadhil Ramadhan",
+                                              "email":  "fadhil.ramadhan@gmail.com",
+                                              "username":  "fadhilram"
+                                          },
+                                 "amount":  200000,
+                                 "status":  "PENDING",
+                                 "paymentMethod":  "Bank Mandiri",
+                                 "createdAt":  "2026-07-21T15:15:44.001Z",
+                                 "externalReference":  null,
+                                 "bankCode":  "MANDIRI",
+                                 "accountNumber":  "1470056789012",
+                                 "accountName":  "Fadhil Ramadhan"
+                             },
+                             {
+                                 "id":  212,
+                                 "userId":  512,
+                                 "user":  {
+                                              "id":  512,
+                                              "name":  "Annisa Putri",
+                                              "email":  "annisa.putri2001@gmail.com",
+                                              "username":  "annisaputri"
+                                          },
+                                 "amount":  300000,
+                                 "status":  "PENDING",
+                                 "paymentMethod":  "Bank BRI",
+                                 "createdAt":  "2026-07-21T14:15:44.001Z",
+                                 "externalReference":  null,
+                                 "bankCode":  "BRI",
+                                 "accountNumber":  "0013456789",
+                                 "accountName":  "Annisa Putri"
+                             },
+                             {
+                                 "id":  213,
+                                 "userId":  513,
+                                 "user":  {
+                                              "id":  513,
+                                              "name":  "Dicky Firmansyah",
+                                              "email":  "dicky.firmansyah@gmail.com",
+                                              "username":  "dickyfirman"
+                                          },
+                                 "amount":  400000,
+                                 "status":  "PENDING",
+                                 "paymentMethod":  "Bank BCA",
+                                 "createdAt":  "2026-07-21T13:15:44.001Z",
+                                 "externalReference":  null,
+                                 "bankCode":  "BCA",
+                                 "accountNumber":  "3344556677",
+                                 "accountName":  "Dicky Firmansyah"
+                             },
+                             {
+                                 "id":  214,
+                                 "userId":  514,
+                                 "user":  {
+                                              "id":  514,
+                                              "name":  "Yuliana Sari",
+                                              "email":  "yuliana.sari@qurani.id",
+                                              "username":  "yuliasari"
+                                          },
+                                 "amount":  500000,
+                                 "status":  "PENDING",
+                                 "paymentMethod":  "Bank Mandiri",
+                                 "createdAt":  "2026-07-21T12:15:44.001Z",
+                                 "externalReference":  null,
+                                 "bankCode":  "MANDIRI",
+                                 "accountNumber":  "1600012345678",
+                                 "accountName":  "Yuliana Sari"
+                             },
+                             {
+                                 "id":  215,
+                                 "userId":  515,
+                                 "user":  {
+                                              "id":  515,
+                                              "name":  "Agus Setiawan",
+                                              "email":  "agus.setiawan55@gmail.com",
+                                              "username":  "agussetiawan"
+                                          },
+                                 "amount":  100000,
+                                 "status":  "PENDING",
+                                 "paymentMethod":  "Bank BNI",
+                                 "createdAt":  "2026-07-21T11:15:44.001Z",
+                                 "externalReference":  null,
+                                 "bankCode":  "BNI",
+                                 "accountNumber":  "0456789123",
+                                 "accountName":  "Agus Setiawan"
+                             }
+                         ],
+    "topupHistory":  [
+                         {
+                             "id":  1101,
+                             "userId":  501,
+                             "user":  {
+                                          "id":  501,
+                                          "name":  "Ahmad Fauzan",
+                                          "email":  "ahmad.fauzan@gmail.com",
+                                          "username":  "fauzan_ahmad"
+                                      },
+                             "amount":  200000,
+                             "status":  "COMPLETED",
+                             "paymentMethod":  "BCA Virtual Account",
+                             "createdAt":  "2026-07-22T01:15:44.001Z",
+                             "completedAt":  "2026-07-22T01:45:44.001Z",
+                             "externalReference":  "EXT-1784686544001-1",
+                             "rejectionReason":  null
+                         },
+                         {
+                             "id":  1102,
+                             "userId":  502,
+                             "user":  {
+                                          "id":  502,
+                                          "name":  "Siti Rahmawati",
+                                          "email":  "siti.rahmawati@yahoo.com",
+                                          "username":  "siti_rahma"
+                                      },
+                             "amount":  300000,
+                             "status":  "COMPLETED",
+                             "paymentMethod":  "Mandiri Virtual Account",
+                             "createdAt":  "2026-07-22T00:15:44.001Z",
+                             "completedAt":  "2026-07-22T00:45:44.001Z",
+                             "externalReference":  "EXT-1784686544001-2",
+                             "rejectionReason":  null
+                         },
+                         {
+                             "id":  1103,
+                             "userId":  503,
+                             "user":  {
+                                          "id":  503,
+                                          "name":  "Muhammad Rizki",
+                                          "email":  "m.rizki.santoso@gmail.com",
+                                          "username":  "rizki_santoso"
+                                      },
+                             "amount":  400000,
+                             "status":  "REJECTED",
+                             "paymentMethod":  "GoPay",
+                             "createdAt":  "2026-07-21T23:15:44.001Z",
+                             "completedAt":  "2026-07-21T23:45:44.001Z",
+                             "externalReference":  "EXT-1784686544001-3",
+                             "rejectionReason":  "Bukti transfer tidak valid. Nama pengirim tidak sesuai dengan nama akun yang terdaftar. Harap ulangi proses topup dengan bukti transfer yang benar."
+                         },
+                         {
+                             "id":  1104,
+                             "userId":  504,
+                             "user":  {
+                                          "id":  504,
+                                          "name":  "Dewi Lestari",
+                                          "email":  "dewi.lestari88@gmail.com",
+                                          "username":  "dewilestari88"
+                                      },
+                             "amount":  500000,
+                             "status":  "COMPLETED",
+                             "paymentMethod":  "OVO",
+                             "createdAt":  "2026-07-21T22:15:44.001Z",
+                             "completedAt":  "2026-07-21T22:45:44.001Z",
+                             "externalReference":  "EXT-1784686544001-4",
+                             "rejectionReason":  null
+                         },
+                         {
+                             "id":  1105,
+                             "userId":  505,
+                             "user":  {
+                                          "id":  505,
+                                          "name":  "Andi Kurniawan",
+                                          "email":  "andi.kurniawan@outlook.com",
+                                          "username":  "andikurniawan"
+                                      },
+                             "amount":  100000,
+                             "status":  "COMPLETED",
+                             "paymentMethod":  "DANA",
+                             "createdAt":  "2026-07-21T21:15:44.001Z",
+                             "completedAt":  "2026-07-21T21:45:44.002Z",
+                             "externalReference":  "EXT-1784686544002-5",
+                             "rejectionReason":  null
+                         },
+                         {
+                             "id":  1106,
+                             "userId":  506,
+                             "user":  {
+                                          "id":  506,
+                                          "name":  "Nur Azizah",
+                                          "email":  "nurazizah.97@gmail.com",
+                                          "username":  "nur_azizah97"
+                                      },
+                             "amount":  200000,
+                             "status":  "REJECTED",
+                             "paymentMethod":  "BCA Virtual Account",
+                             "createdAt":  "2026-07-21T20:15:44.002Z",
+                             "completedAt":  "2026-07-21T20:45:44.002Z",
+                             "externalReference":  "EXT-1784686544002-6",
+                             "rejectionReason":  "Nominal transfer tidak sesuai. Anda mentransfer Rp 150.000 namun mengajukan topup Rp 200.000. Mohon transfer sesuai nominal yang diminta."
+                         },
+                         {
+                             "id":  1107,
+                             "userId":  507,
+                             "user":  {
+                                          "id":  507,
+                                          "name":  "Bagas Pratama",
+                                          "email":  "bagas.pratama@gmail.com",
+                                          "username":  "bagaspratama"
+                                      },
+                             "amount":  300000,
+                             "status":  "COMPLETED",
+                             "paymentMethod":  "BNI Virtual Account",
+                             "createdAt":  "2026-07-21T19:15:44.002Z",
+                             "completedAt":  "2026-07-21T19:45:44.002Z",
+                             "externalReference":  "EXT-1784686544002-7",
+                             "rejectionReason":  null
+                         },
+                         {
+                             "id":  1108,
+                             "userId":  508,
+                             "user":  {
+                                          "id":  508,
+                                          "name":  "Rina Fitriana",
+                                          "email":  "rina.fitriana@qurani.id",
+                                          "username":  "rinafitriana"
+                                      },
+                             "amount":  400000,
+                             "status":  "COMPLETED",
+                             "paymentMethod":  "GoPay",
+                             "createdAt":  "2026-07-21T18:15:44.002Z",
+                             "completedAt":  "2026-07-21T18:45:44.002Z",
+                             "externalReference":  "EXT-1784686544002-8",
+                             "rejectionReason":  null
+                         },
+                         {
+                             "id":  1109,
+                             "userId":  509,
+                             "user":  {
+                                          "id":  509,
+                                          "name":  "Hendra Saputra",
+                                          "email":  "hendra.saputra21@gmail.com",
+                                          "username":  "hendrasaputra"
+                                      },
+                             "amount":  500000,
+                             "status":  "REJECTED",
+                             "paymentMethod":  "BCA Virtual Account",
+                             "createdAt":  "2026-07-21T17:15:44.002Z",
+                             "completedAt":  "2026-07-21T17:45:44.002Z",
+                             "externalReference":  "EXT-1784686544002-9",
+                             "rejectionReason":  "Transaksi tidak terverifikasi dalam sistem pembayaran. Kemungkinan transfer gagal di pihak bank. Silakan cek mutasi rekening dan coba kembali."
+                         },
+                         {
+                             "id":  1110,
+                             "userId":  510,
+                             "user":  {
+                                          "id":  510,
+                                          "name":  "Laila Maghfiroh",
+                                          "email":  "laila.maghfiroh@gmail.com",
+                                          "username":  "lailamaghfiroh"
+                                      },
+                             "amount":  100000,
+                             "status":  "COMPLETED",
+                             "paymentMethod":  "QRIS",
+                             "createdAt":  "2026-07-21T16:15:44.002Z",
+                             "completedAt":  "2026-07-21T16:45:44.002Z",
+                             "externalReference":  "EXT-1784686544002-10",
+                             "rejectionReason":  null
+                         },
+                         {
+                             "id":  1111,
+                             "userId":  511,
+                             "user":  {
+                                          "id":  511,
+                                          "name":  "Fadhil Ramadhan",
+                                          "email":  "fadhil.ramadhan@gmail.com",
+                                          "username":  "fadhilram"
+                                      },
+                             "amount":  200000,
+                             "status":  "COMPLETED",
+                             "paymentMethod":  "Mandiri Virtual Account",
+                             "createdAt":  "2026-07-21T15:15:44.002Z",
+                             "completedAt":  "2026-07-21T15:45:44.002Z",
+                             "externalReference":  "EXT-1784686544002-11",
+                             "rejectionReason":  null
+                         },
+                         {
+                             "id":  1112,
+                             "userId":  512,
+                             "user":  {
+                                          "id":  512,
+                                          "name":  "Annisa Putri",
+                                          "email":  "annisa.putri2001@gmail.com",
+                                          "username":  "annisaputri"
+                                      },
+                             "amount":  300000,
+                             "status":  "REJECTED",
+                             "paymentMethod":  "OVO",
+                             "createdAt":  "2026-07-21T14:15:44.002Z",
+                             "completedAt":  "2026-07-21T14:45:44.002Z",
+                             "externalReference":  "EXT-1784686544002-12",
+                             "rejectionReason":  "Akun e-wallet sumber tidak aktif atau terblokir. Topup dari OVO tidak dapat diproses. Gunakan metode pembayaran lain atau hubungi CS OVO."
+                         },
+                         {
+                             "id":  1113,
+                             "userId":  513,
+                             "user":  {
+                                          "id":  513,
+                                          "name":  "Dicky Firmansyah",
+                                          "email":  "dicky.firmansyah@gmail.com",
+                                          "username":  "dickyfirman"
+                                      },
+                             "amount":  400000,
+                             "status":  "COMPLETED",
+                             "paymentMethod":  "DANA",
+                             "createdAt":  "2026-07-21T13:15:44.002Z",
+                             "completedAt":  "2026-07-21T13:45:44.002Z",
+                             "externalReference":  "EXT-1784686544002-13",
+                             "rejectionReason":  null
+                         },
+                         {
+                             "id":  1114,
+                             "userId":  514,
+                             "user":  {
+                                          "id":  514,
+                                          "name":  "Yuliana Sari",
+                                          "email":  "yuliana.sari@qurani.id",
+                                          "username":  "yuliasari"
+                                      },
+                             "amount":  500000,
+                             "status":  "COMPLETED",
+                             "paymentMethod":  "BCA Virtual Account",
+                             "createdAt":  "2026-07-21T12:15:44.002Z",
+                             "completedAt":  "2026-07-21T12:45:44.002Z",
+                             "externalReference":  "EXT-1784686544002-14",
+                             "rejectionReason":  null
+                         },
+                         {
+                             "id":  1115,
+                             "userId":  515,
+                             "user":  {
+                                          "id":  515,
+                                          "name":  "Agus Setiawan",
+                                          "email":  "agus.setiawan55@gmail.com",
+                                          "username":  "agussetiawan"
+                                      },
+                             "amount":  100000,
+                             "status":  "REJECTED",
+                             "paymentMethod":  "GoPay",
+                             "createdAt":  "2026-07-21T11:15:44.002Z",
+                             "completedAt":  "2026-07-21T11:45:44.002Z",
+                             "externalReference":  "EXT-1784686544002-15",
+                             "rejectionReason":  "Batas maksimum topup harian terlampaui. Saldo yang diajukan melebihi limit harian Rp 500.000. Coba kembali esok hari."
+                         },
+                         {
+                             "id":  1116,
+                             "userId":  516,
+                             "user":  {
+                                          "id":  516,
+                                          "name":  "Reza Maulana",
+                                          "email":  "reza.maulana@gmail.com",
+                                          "username":  "rezamaulana"
+                                      },
+                             "amount":  200000,
+                             "status":  "COMPLETED",
+                             "paymentMethod":  "BCA Virtual Account",
+                             "createdAt":  "2026-07-21T10:15:44.002Z",
+                             "completedAt":  "2026-07-21T10:45:44.002Z",
+                             "externalReference":  "EXT-1784686544002-16",
+                             "rejectionReason":  null
+                         },
+                         {
+                             "id":  1117,
+                             "userId":  517,
+                             "user":  {
+                                          "id":  517,
+                                          "name":  "Fitriani Hidayah",
+                                          "email":  "fitriani.hidayah@gmail.com",
+                                          "username":  "fitrianihidayah"
+                                      },
+                             "amount":  300000,
+                             "status":  "COMPLETED",
+                             "paymentMethod":  "QRIS",
+                             "createdAt":  "2026-07-21T09:15:44.002Z",
+                             "completedAt":  "2026-07-21T09:45:44.002Z",
+                             "externalReference":  "EXT-1784686544002-17",
+                             "rejectionReason":  null
+                         },
+                         {
+                             "id":  1118,
+                             "userId":  518,
+                             "user":  {
+                                          "id":  518,
+                                          "name":  "Irfan Hakim",
+                                          "email":  "irfan.hakim.88@gmail.com",
+                                          "username":  "irfanhakim88"
+                                      },
+                             "amount":  400000,
+                             "status":  "REJECTED",
+                             "paymentMethod":  "BNI Virtual Account",
+                             "createdAt":  "2026-07-21T08:15:44.002Z",
+                             "completedAt":  "2026-07-21T08:45:44.002Z",
+                             "externalReference":  "EXT-1784686544002-18",
+                             "rejectionReason":  "Virtual Account sudah kedaluwarsa. Waktu pembayaran melebihi 2 jam dari waktu pembuatan VA. Silakan buat permintaan topup baru."
+                         },
+                         {
+                             "id":  1119,
+                             "userId":  519,
+                             "user":  {
+                                          "id":  519,
+                                          "name":  "Khadijah Amalia",
+                                          "email":  "khadijah.amalia@qurani.id",
+                                          "username":  "khadijahAmalia"
+                                      },
+                             "amount":  500000,
+                             "status":  "COMPLETED",
+                             "paymentMethod":  "Mandiri Virtual Account",
+                             "createdAt":  "2026-07-21T07:15:44.002Z",
+                             "completedAt":  "2026-07-21T07:45:44.002Z",
+                             "externalReference":  "EXT-1784686544002-19",
+                             "rejectionReason":  null
+                         },
+                         {
+                             "id":  1120,
+                             "userId":  520,
+                             "user":  {
+                                          "id":  520,
+                                          "name":  "Lutfi Anshari",
+                                          "email":  "lutfi.anshari@gmail.com",
+                                          "username":  "lutfianshari"
+                                      },
+                             "amount":  100000,
+                             "status":  "COMPLETED",
+                             "paymentMethod":  "DANA",
+                             "createdAt":  "2026-07-21T06:15:44.002Z",
+                             "completedAt":  "2026-07-21T06:45:44.002Z",
+                             "externalReference":  "EXT-1784686544002-20",
+                             "rejectionReason":  null
+                         },
+                         {
+                             "id":  1121,
+                             "userId":  521,
+                             "user":  {
+                                          "id":  521,
+                                          "name":  "Maysarah Nadhira",
+                                          "email":  "maysarah.nadhira@gmail.com",
+                                          "username":  "maysarahN"
+                                      },
+                             "amount":  200000,
+                             "status":  "REJECTED",
+                             "paymentMethod":  "OVO",
+                             "createdAt":  "2026-07-21T05:15:44.002Z",
+                             "completedAt":  "2026-07-21T05:45:44.002Z",
+                             "externalReference":  "EXT-1784686544002-21",
+                             "rejectionReason":  "Data akun tidak sesuai. Nama pemilik akun OVO berbeda dengan nama pengguna Qurani yang terdaftar. Verifikasi identitas diperlukan sebelum melanjutkan topup."
+                         },
+                         {
+                             "id":  1122,
+                             "userId":  522,
+                             "user":  {
+                                          "id":  522,
+                                          "name":  "Naufal Baihaqi",
+                                          "email":  "naufal.baihaqi@gmail.com",
+                                          "username":  "naufalbaihaqi"
+                                      },
+                             "amount":  300000,
+                             "status":  "COMPLETED",
+                             "paymentMethod":  "BCA Virtual Account",
+                             "createdAt":  "2026-07-21T04:15:44.002Z",
+                             "completedAt":  "2026-07-21T04:45:44.002Z",
+                             "externalReference":  "EXT-1784686544002-22",
+                             "rejectionReason":  null
+                         },
+                         {
+                             "id":  1123,
+                             "userId":  523,
+                             "user":  {
+                                          "id":  523,
+                                          "name":  "Octavia Permata",
+                                          "email":  "octavia.permata@gmail.com",
+                                          "username":  "octaviapermata"
+                                      },
+                             "amount":  400000,
+                             "status":  "COMPLETED",
+                             "paymentMethod":  "GoPay",
+                             "createdAt":  "2026-07-21T03:15:44.002Z",
+                             "completedAt":  "2026-07-21T03:45:44.002Z",
+                             "externalReference":  "EXT-1784686544002-23",
+                             "rejectionReason":  null
+                         },
+                         {
+                             "id":  1124,
+                             "userId":  524,
+                             "user":  {
+                                          "id":  524,
+                                          "name":  "Putra Wahyudi",
+                                          "email":  "putra.wahyudi99@gmail.com",
+                                          "username":  "putrawahyudi"
+                                      },
+                             "amount":  500000,
+                             "status":  "REJECTED",
+                             "paymentMethod":  "QRIS",
+                             "createdAt":  "2026-07-21T02:15:44.002Z",
+                             "completedAt":  "2026-07-21T02:45:44.002Z",
+                             "externalReference":  "EXT-1784686544002-24",
+                             "rejectionReason":  "Kode QR sudah tidak berlaku. Silakan scan ulang kode QR yang baru dari halaman topup. Jangan gunakan QR yang tersimpan di galeri."
+                         },
+                         {
+                             "id":  1125,
+                             "userId":  525,
+                             "user":  {
+                                          "id":  525,
+                                          "name":  "Qonita Zahra",
+                                          "email":  "qonita.zahra@qurani.id",
+                                          "username":  "qonitatuz"
+                                      },
+                             "amount":  100000,
+                             "status":  "COMPLETED",
+                             "paymentMethod":  "BCA Virtual Account",
+                             "createdAt":  "2026-07-21T01:15:44.002Z",
+                             "completedAt":  "2026-07-21T01:45:44.002Z",
+                             "externalReference":  "EXT-1784686544002-25",
+                             "rejectionReason":  null
+                         }
+                     ],
+    "withdrawHistory":  [
+                            {
+                                "id":  1201,
+                                "userId":  501,
+                                "user":  {
+                                             "id":  501,
+                                             "name":  "Ahmad Fauz",
+                                             "email":  "ahmad.fauz@gmail.com",
+                                             "username":  "fauz_ahmad"
+                                         },
+                                "amount":  200000,
+                                "status":  "COMPLETED",
+                                "paymentMethod":  "Bank Mandiri",
+                                "createdAt":  "2026-07-22T01:15:44.001Z",
+                                "completedAt":  "2026-07-22T02:00:00.000Z",
+                                "externalReference":  "EXT-WD-1",
+                                "bankCode":  "MANDIRI",
+                                "accountNumber":  "1400087654321",
+                                "accountName":  "Ahmad Fauz",
+                                "rejectionReason":  null
+                            },
+                            {
+                                "id":  1202,
+                                "userId":  502,
+                                "user":  {
+                                             "id":  502,
+                                             "name":  "Siti Rahmawati",
+                                             "email":  "siti.rahmawati@yahoo.com",
+                                             "username":  "siti_rahma"
+                                         },
+                                "amount":  300000,
+                                "status":  "REJECTED",
+                                "paymentMethod":  "Bank BCA",
+                                "createdAt":  "2026-07-22T00:15:44.001Z",
+                                "completedAt":  "2026-07-22T01:00:00.000Z",
+                                "externalReference":  "EXT-WD-2",
+                                "bankCode":  "BCA",
+                                "accountNumber":  "8877665544",
+                                "accountName":  "Siti Rahmawati",
+                                "rejectionReason":  "Nomor rekening tidak valid atau tidak ditemukan."
+                            }
+                        ]
+}

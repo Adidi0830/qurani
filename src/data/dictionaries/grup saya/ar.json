@@ -1,0 +1,117 @@
+{
+  "grup saya": {
+    "header": {
+      "title": "مجموعاتي"
+    },
+    "tabs": {
+      "owned": "المجموعات التي تملكها ({count})",
+      "owned_short": "مملوكة",
+      "member": "المجموعات التي انضممت إليها ({count})",
+      "member_short": "عضو",
+      "search": "بحث"
+    },
+    "search": {
+      "placeholder": "ابحث عن المجموعات...",
+      "button": "بحث"
+    },
+    "create": {
+      "button": "إنشاء مجموعة",
+      "button_short": "إنشاء",
+      "modal_title": "إنشاء مجموعة جديدة",
+      "modal_description": "أنشئ مجموعة جديدة للتواصل والتعلم معًا",
+      "photo_label": "صورة الملف الشخصي (اختيارية)",
+      "name_label": "اسم المجموعة *",
+      "name_placeholder": "اسم المجموعة...",
+      "description_label": "الوصف",
+      "description_placeholder": "وصف المجموعة...",
+      "status_label": "الحالة",
+      "category_placeholder": "اختر تصنيفًا...",
+      "private": "خاصة",
+      "public": "عامة",
+      "secret": "سرية",
+      "cancel": "إلغاء",
+      "done": "تم",
+      "creating": "جارٍ الإنشاء...",
+      "create_action": "إنشاء مجموعة",
+      "category_label": "التصنيف"
+    },
+    "validation": {
+      "login_required": "يجب تسجيل الدخول أولاً",
+      "name_empty": "لا يمكن أن يكون اسم المجموعة فارغًا",
+      "name_min_length": "يجب أن يكون اسم المجموعة 3 أحرف على الأقل",
+      "name_max_length": "يجب أن يكون اسم المجموعة أقل من 50 حرفًا",
+      "category_empty": "لا يمكن أن يكون التصنيف فارغًا",
+      "description_max_length": "يجب أن يكون الوصف أقل من 500 حرف",
+      "photo_size_limit": "يجب أن يكون حجم الصورة أقل من 5 ميجابايت",
+      "photo_format": "يجب أن تكون الصورة بصيغة JPEG أو PNG أو WebP",
+      "photo_size_exceeded": "حجم الملف يجب ألا يتجاوز 3 ميجابايت"
+    },
+    "results": {
+      "showing": "عرض {current} من {total} مجموعات",
+      "showing_singular": "عرض {current} من {total} مجموعة"
+    },
+    "card": {
+      "no_description": "لا يوجد وصف متاح",
+      "created_prefix": "أُنشئت",
+      "members": "الأعضاء",
+      "manage": "إدارة",
+      "details": "التفاصيل",
+      "leave": "مغادرة",
+      "restore": "استعادة",
+      "day": "يوم"
+    },
+    "loading": {
+      "text": "جارٍ تحميل مجموعاتك..."
+    },
+    "empty": {
+      "owned_title": "لا توجد مجموعات مملوكة",
+      "member_title": "لم تنضم لأي مجموعات",
+      "owned_description": "أنشئ مجموعتك الأولى لبدء إدارة مجموعات الدراسة الخاصة بك.",
+      "member_description": "انضم إلى مجموعات موجودة أو أنشئ مجموعتك الخاصة لبدء التعلم معًا.",
+      "create_button": "إنشاء مجموعة"
+    },
+    "report": {
+      "report": "الإبلاغ",
+      "title": "الإبلاغ عن مجموعة",
+      "violation_type": "نوع المخالفة",
+      "violation_placeholder": "اختر نوع المخالفة",
+      "violation_options": {
+        "spam": "رسائل مزعجة",
+        "harassment": "تحرش",
+        "inappropriate": "محتوى غير لائق",
+        "scam": "احتيال",
+        "other": "أخرى"
+      },
+      "report_title": "عنوان التقرير",
+      "report_title_placeholder": "مثال: هذه المجموعة تنشر رسائل مزعجة",
+      "report_description": "محتوى التقرير",
+      "report_description_placeholder": "اشرح تفاصيل المخالفة...",
+      "evidence_label": "الدليل (اختياري)",
+      "evidence_upload_text": "انقر للرفع",
+      "evidence_hint": "JPG, PNG • الحد الأقصى 5 ميجابايت",
+      "warning_title": "هام:",
+      "warning_items": {
+        "one": "يجب أن يستند التقرير المقدم إلى الحقائق والأدلة الواضحة.",
+        "two": "قد يؤدي تقديم تقارير كاذبة إلى فرض عقوبات وفقًا للوائح.",
+        "three": "سيتم مراجعة التقرير من قبل فريقنا في غضون 1-3 أيام عمل."
+      },
+      "button_cancel": "إلغاء",
+      "button_send": "إرسال",
+      "char_count": "حرف"
+    },
+    "toast": {
+      "load_failed": "فشل في تحميل بيانات المجموعة",
+      "load_error": "حدث خطأ أثناء جلب بيانات المجموعة",
+      "leave_success": "تم مغادرة المجموعة بنجاح",
+      "leave_error": "حدث خطأ أثناء مغادرة المجموعة",
+      "create_success": "تم إنشاء المجموعة بنجاح!",
+      "create_failed": "فشل في إنشاء المجموعة",
+      "create_error": "حدث خطأ أثناء إنشاء المجموعة",
+      "join_success": "تم الانضمام إلى المجموعة بنجاح",
+      "join_request": "تم إرسال طلب الانضمام بنجاح",
+      "join_error": "فشل إرسال طلب الانضمام"
+    },
+    "success": "نجاح",
+    "error": "فشل"
+  }
+}

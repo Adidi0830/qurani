@@ -1,0 +1,45 @@
+{
+  "search": {
+    "find_friends": "Cari Pengguna",
+    "search_placeholder": "Cari pengguna berdasar nama atau username...",
+    "searching_users": "Mencari pengguna...",
+    "no_users_found": "Tidak ada pengguna ditemukan",
+    "try_different_keywords": "Coba cari dengan kata kunci yang berbeda",
+    "all_users_friends": "Semua pengguna sudah menjadi teman Anda",
+    "find_new_friends": "Coba cari dengan kata kunci yang berbeda untuk menemukan teman baru",
+    "connection_error": "Kesalahan Koneksi",
+    "unable_to_search": "Tidak dapat mencari pengguna. Silakan periksa koneksi Anda dan coba lagi.",
+    "try_again": "Coba Lagi",
+    "start_searching": "Cari pengguna",
+    "enter_name_username": "Masukkan nama atau username untuk menemukan pengguna",
+    "showing_users": "Menampilkan {count} dari {total} pengguna",
+    "scroll_for_more": "(scroll untuk lebih banyak)",
+    "loading_more_users": "Memuat lebih banyak pengguna...",
+    "add": "Tambah",
+    "follow": "Ikuti",
+    "unfollow": "Berhenti Ikuti",
+    "cancel": "Batal",
+    "accept": "Ikuti Balik",
+    "reject": "Tolak",
+    "unknown": "Tidak Diketahui",
+    "user": "Pengguna",
+    "user_initial": "U",
+    "validation_min_chars": "Masukkan minimal 3 karakter untuk mencari",
+    "messages": {
+      "friend_request_sent": "Permintaan teman berhasil dikirim",
+      "friend_request_accepted": "Permintaan teman diterima",
+      "friend_request_rejected": "Permintaan teman ditolak",
+      "friend_request_unfoll": "Batal ikuti teman",
+      "search_failed": "Gagal mencari pengguna. Silakan coba lagi.",
+      "load_more_failed": "Gagal memuat lebih banyak pengguna. Silakan coba lagi.",
+      "action_failed": "Gagal {action} permintaan",
+      "network_error": "Kesalahan jaringan. Silakan periksa koneksi internet Anda.",
+      "timeout_error": "Permintaan timeout. Silakan coba lagi.",
+      "config_error": "Kesalahan konfigurasi. Silakan hubungi dukungan."
+    },
+    "filter": {
+      "cancel": "Batal",
+      "apply": "Terapkan"
+    }
+  }
+}

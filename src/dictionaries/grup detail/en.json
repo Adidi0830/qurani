@@ -1,0 +1,80 @@
+{
+  "grup detail": {
+    "header": {
+      "group_info": "Group Information"
+    },
+    "stats": {
+      "total_members": "Members",
+      "group_type": "Type",
+      "created_date": "Created Date",
+      "created": "Created",
+      "private": "Private",
+      "public": "Public"
+    },
+    "members": {
+      "title": "Group Members",
+      "search_placeholder": "Search members...",
+      "owner": "Owner",
+      "admin": "Admin",
+      "member": "Member",
+      "members_text": "Members",
+      "member_singular": "member",
+      "member_plural": "members",
+      "and": "and",
+      "unknown": "Unknown",
+      "no_members_found": "No members found",
+      "try_different_search": "Try different search keywords"
+    },
+    "manage": {
+      "title": "Manage Group",
+      "description": "You can manage this group as an admin.",
+      "manage_button": "Manage",
+      "edit_group": "Edit Group",
+      "qurani_settings": "Qurani Settings"
+    },
+    "leave_group": {
+      "title": "Leave Group",
+      "description": "You can leave this group at any time. This action cannot be undone.",
+      "button": "Leave",
+      "dialog_title": "Leave Group",
+      "dialog_description_before": "Are you sure you want to leave",
+      "dialog_description_after": "This action cannot be undone and you'll need to be re-invited to join again.",
+      "warning_message": "You will lose access to all group conversations and files.",
+      "cancel": "Cancel",
+      "leaving": "Leaving...",
+      "leave": "Leave",
+      "leave_group": "Leave Group",
+      "no": "No",
+      "yes": "Yes"
+    },
+    "general": {
+      "no_description_available": "No description available",
+      "private": "Private",
+      "public": "Public"
+    },
+    "toast": {
+      "leave_success": "Successfully left the group",
+      "leave_failed": "Failed to leave the group",
+      "leave_error": "An error occurred while leaving the group"
+    },
+    "search": {
+      "no_members_match": "No members match the search"
+    },
+    "errors": {
+      "group_not_found": "Group not found",
+      "group_not_found_description": "The group you're looking for may have been deleted or you don't have access",
+      "access_denied": "Access Denied",
+      "access_denied_description": "You don't have permission to view this group"
+    },
+    "filter": {
+      "category": "Category",
+      "category_placeholder": "Select Category...",
+      "all": "All",
+      "reset": "Reset",
+      "cancel": "Cancel",
+      "apply": "Apply",
+      "active": "Active",
+      "deleted": "Deleted"
+    }
+  }
+}

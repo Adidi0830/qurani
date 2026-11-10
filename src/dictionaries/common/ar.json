@@ -1,0 +1,35 @@
+{
+  "common": {
+    "loading": "جاري التحميل...",
+    "error": "حدث خطأ",
+    "success": "نجاح",
+    "cancel": "إلغاء",
+    "continue": "متابعة",
+    "save": "حفظ",
+    "edit": "تعديل",
+    "delete": "حذف",
+    "confirm": "تأكيد",
+    "back": "رجوع",
+    "next": "التالي",
+    "previous": "السابق",
+    "search": "بحث",
+    "filter": "تصفية",
+    "sort": "ترتيب",
+    "settings": "الإعدادات",
+    "profile": "الملف الشخصي",
+    "logout": "تسجيل الخروج"
+  },
+  "errors": {
+    "404": "الصفحة غير موجودة",
+    "500": "حدث خطأ في الخادم",
+    "network_error": "خطأ في الشبكة",
+    "unauthorized": "غير مصرح",
+    "forbidden": "ممنوع الوصول",
+    "validation_error": "خطأ في التحقق",
+    "required_field": "هذا الحقل مطلوب",
+    "invalid_email": "بريد إلكتروني غير صحيح",
+    "password_too_short": "كلمة المرور قصيرة جداً",
+    "passwords_not_match": "كلمات المرور غير متطابقة",
+    "username_not_available": "اسم المستخدم غير متاح"
+  }
+}

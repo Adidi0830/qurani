@@ -1,0 +1,46 @@
+{
+  "cari grup": {
+    "header": {
+      "title": "Find Groups"
+    },
+    "search": {
+      "placeholder": "Search group name"
+    },
+    "loading": {
+      "searching": "Searching groups..."
+    },
+    "empty": {
+      "title": "No groups found",
+      "subtitle": "Try searching with different keywords"
+    },
+    "initial": {
+      "title": "Start searching for groups",
+      "subtitle": "Enter group name or description to discover study groups"
+    },
+    "error": {
+      "title": "Connection Error",
+      "description": "Unable to search groups. Please check your connection and try again.",
+      "retry": "Try Again"
+    },
+    "results": {
+      "found_singular": "Found {count} group",
+      "found_plural": "Found {count} groups"
+    },
+    "card": {
+      "no_description": "No description available",
+      "created_prefix": "Created",
+      "members": "Members"
+    },
+    "actions": {
+      "join": "Join Group",
+      "request_sent": "Request Sent",
+      "request_join": "Request to Join"
+    },
+    "toast": {
+      "search_failed": "Failed to search groups. Please try again.",
+      "join_failed": "Failed to join group."
+    }
+  }
+}
+
+

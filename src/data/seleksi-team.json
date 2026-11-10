@@ -1,0 +1,62 @@
+[
+  {
+    "id": 5821,
+    "username": "hamid.alhafidz",
+    "name": "Hamid Al-Hafidz",
+    "role": "Penyeleksi Guru",
+    "email": "hamid@qurani.com",
+    "zoomLink": "https://us05web.zoom.us/j/8286064247?pwd=CWNog9Kh0E96B6LYRS0NMerOuOqPQW.1",
+    "skills": ["Tahfidz", "Tajwid", "Makharijul Huruf"],
+    "avatar": "HA",
+    "totalSeleksi": 42,
+    "rating": 4.9
+  },
+  {
+    "id": 3047,
+    "username": "siti.aisyah",
+    "name": "Siti Aisyah",
+    "role": "Penyeleksi Guru",
+    "email": "siti@qurani.com",
+    "zoomLink": "https://zoom.us/j/85623456789?pwd=def456ghi789",
+    "skills": ["Tartil", "Tilawati", "Makharijul Huruf"],
+    "avatar": "SA",
+    "totalSeleksi": 38,
+    "rating": 4.8
+  },
+  {
+    "id": 7193,
+    "username": "farid.yusuf",
+    "name": "Farid Yusuf",
+    "role": "Penyeleksi Guru",
+    "email": "farid@qurani.com",
+    "zoomLink": "https://meet.google.com/abc-defg-hij",
+    "skills": ["Qiraati", "Fiqih Ibadah", "Tafsir Dasar"],
+    "avatar": "FY",
+    "totalSeleksi": 27,
+    "rating": 4.7
+  },
+  {
+    "id": 6408,
+    "username": "nurul.hidayah",
+    "name": "Nurul Hidayah",
+    "role": "Penyeleksi Guru",
+    "email": "nurul@qurani.com",
+    "zoomLink": "https://zoom.us/j/76734567890?pwd=ghi789jkl012",
+    "skills": ["Ummi", "Tajwid Dasar", "Tahsin"],
+    "avatar": "NH",
+    "totalSeleksi": 31,
+    "rating": 4.8
+  },
+  {
+    "id": 2965,
+    "username": "bilal.ramadhan",
+    "name": "Bilal Ramadhan",
+    "role": "Penyeleksi Guru",
+    "email": "bilal@qurani.com",
+    "zoomLink": "https://meet.google.com/xyz-uvwx-yz1",
+    "skills": ["Qiraati", "Tahfidz", "Al-Baghdadi"],
+    "avatar": "BR",
+    "totalSeleksi": 15,
+    "rating": 4.6
+  }
+]
