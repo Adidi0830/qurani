@@ -23,6 +23,7 @@ import {
 import { Tooltip } from "@/components/ui/sidebar/custom-tooltip"
 import { useSidebar } from "@/components/ui/sidebar/custom-sidebar"
 import { useAuth } from "@/hooks/use-auth"
+import { useUserProfile } from "@/hooks/use-user-profile"
 import { BtnLogout } from "./btn-logout/btn-logout"
 import { useI18n } from "@/components/providers/i18n-provider"
 import * as React from "react"
@@ -31,7 +32,8 @@ import { getInitials } from "@/utils/helpers/get-initials"
 import signOut from "@/utils/Auth/logout"
 import { useLocalizedRouter as useRouter } from "@/hooks/use-localized-router"
 export const NavUser = React.memo(function NavUser() {
-  const { profile } = useAuth()
+  const { profile, isAuthenticated } = useAuth()
+  const { profile: userProfile } = useUserProfile(isAuthenticated ? "me" : null)
   const router = useRouter()
   const [showDialog, setShowDialog] = useState(false)
   const [isExpandedDropdownOpen, setIsExpandedDropdownOpen] = useState(false)
@@ -39,12 +41,15 @@ export const NavUser = React.memo(function NavUser() {
   const { state, isMobile } = useSidebar()
   const isCollapsed = state === "collapsed" && !isMobile // Di mobile, tidak pernah collapsed
 
-  const displayData = React.useMemo(() => ({
-    displayName: profile?.name || 'User',
-    displayUsername: profile?.username || null,
-    initial: getInitials(profile?.name || 'User'),
-    avatar: profile?.avatar || ""
-  }), [profile])
+  const displayData = React.useMemo(() => {
+    const active = profile?.avatar ? profile : (userProfile || profile)
+    return {
+      displayName: active?.name || 'User',
+      displayUsername: active?.username || null,
+      initial: getInitials(active?.name || 'User'),
+      avatar: active?.avatar || ""
+    }
+  }, [profile, userProfile])
 
   // Memoized handlers for better performance
   const handleProfileClick = React.useCallback(() => {

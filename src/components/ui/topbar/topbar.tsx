@@ -23,10 +23,12 @@ import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip
 import { useTheme } from "next-themes"
 import signOut from "@/utils/Auth/logout"
 import { getInitials } from "@/utils/helpers/get-initials"
+import { useUserProfile } from "@/hooks/use-user-profile"
 
 export const Topbar = React.memo(function Topbar() {
   const router = useRouter()
   const { profile, userId, isAuthenticated } = useAuth()
+  const { profile: userProfile } = useUserProfile(isAuthenticated ? "me" : null)
   const { unreadCount } = useUnreadCount(isAuthenticated ? userId : undefined)
   const { t } = useI18n()
   const { state, isMobile } = useSidebar()
@@ -40,15 +42,15 @@ export const Topbar = React.memo(function Topbar() {
 
   const isCollapsed = mounted ? state === "collapsed" && !isMobile : false
 
-  const displayData = React.useMemo(
-    () => ({
-      displayName: profile?.name || "User",
-      displayUsername: profile?.username || null,
-      initial: getInitials(profile?.name || "User"),
-      avatar: profile?.avatar || "",
-    }),
-    [profile]
-  )
+  const displayData = React.useMemo(() => {
+    const active = profile?.avatar ? profile : (userProfile || profile)
+    return {
+      displayName: active?.name || "User",
+      displayUsername: active?.username || null,
+      initial: getInitials(active?.name || "User"),
+      avatar: active?.avatar || "",
+    }
+  }, [profile, userProfile])
 
   const handleSearch = React.useCallback(
     (e: React.FormEvent) => {
