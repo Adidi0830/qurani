@@ -12,6 +12,7 @@ import {
 import dummyData from "@/data/billing-dummy.json"
 import { ToastContainer, showToast } from "@/components/ui/toast-sim"
 import { SmartPagination } from "@/components/ui/smart-pagination"
+import { useI18n } from "@/components/providers/i18n-provider"
 
 // ── API Config ─────────────────────────────────────────────────────────────────
 const API_BASE = process.env.NEXT_PUBLIC_MYQURANI_API_URL || "https://api.myqurani.com"
@@ -39,13 +40,13 @@ function authHeaders(): HeadersInit {
 function formatRupiah(n: number) {
     return new Intl.NumberFormat("id-ID", { style: "currency", currency: "IDR", minimumFractionDigits: 0, maximumFractionDigits: 0 }).format(n)
 }
-function formatDate(iso: string) {
+function formatDate(iso: string, locale = "id-ID") {
     if (!iso) return "-"
-    return new Date(iso).toLocaleDateString("id-ID", { day: "2-digit", month: "short", year: "numeric" })
+    return new Date(iso).toLocaleDateString(locale, { day: "2-digit", month: "short", year: "numeric" })
 }
-function formatDateTime(iso: string) {
+function formatDateTime(iso: string, locale = "id-ID") {
     if (!iso) return "-"
-    return new Date(iso).toLocaleString("id-ID", { day: "2-digit", month: "short", year: "numeric", hour: "2-digit", minute: "2-digit" })
+    return new Date(iso).toLocaleString(locale, { day: "2-digit", month: "short", year: "numeric", hour: "2-digit", minute: "2-digit" })
 }
 function isExpired(until: string) { return new Date(until) < new Date() }
 function isUpcoming(from: string) { return new Date(from) > new Date() }
@@ -204,6 +205,7 @@ function ConfirmModal({ open, title, message, onConfirm, onCancel, loading }: {
     open: boolean; title: string; message: string
     onConfirm: () => void; onCancel: () => void; loading?: boolean
 }) {
+    const { t } = useI18n()
     if (!open) return null
     return (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 backdrop-blur-sm p-4">
@@ -211,9 +213,11 @@ function ConfirmModal({ open, title, message, onConfirm, onCancel, loading }: {
                 <h3 className="text-base font-bold text-gray-900 dark:text-white mb-2">{title}</h3>
                 <p className="text-sm text-gray-500 dark:text-gray-400 mb-4">{message}</p>
                 <div className="flex gap-2 justify-end">
-                    <button onClick={onCancel} disabled={loading} className="px-4 py-2 text-sm text-gray-600 dark:text-gray-400 border border-gray-200 dark:border-gray-700 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors disabled:opacity-50">Batal</button>
+                    <button onClick={onCancel} disabled={loading} className="px-4 py-2 text-sm text-gray-600 dark:text-gray-400 border border-gray-200 dark:border-gray-700 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors disabled:opacity-50">
+                        {t("billing.discount_codes.confirm_modal.cancel") || "Batal"}
+                    </button>
                     <button onClick={onConfirm} disabled={loading} className="flex items-center gap-2 px-4 py-2 text-sm font-semibold text-white bg-red-500 hover:bg-red-600 rounded-lg transition-colors disabled:opacity-50">
-                        {loading && <Loader2 className="w-3.5 h-3.5 animate-spin" />} Konfirmasi
+                        {loading && <Loader2 className="w-3.5 h-3.5 animate-spin" />} {t("billing.discount_codes.confirm_modal.confirm") || "Konfirmasi"}
                     </button>
                 </div>
             </div>
@@ -227,6 +231,7 @@ function CodeFormModal({ open, editItem, onSave, onClose, saving }: {
     onSave: (form: FormState, isEdit: boolean) => void
     onClose: () => void; saving: boolean
 }) {
+    const { t } = useI18n()
     const [form, setForm] = useState<FormState>(EMPTY_FORM)
 
     useMemo(() => {
@@ -251,73 +256,79 @@ function CodeFormModal({ open, editItem, onSave, onClose, saving }: {
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 backdrop-blur-sm p-4">
             <div className="bg-white dark:bg-gray-900 rounded-2xl shadow-2xl max-w-lg w-full border border-gray-200 dark:border-gray-700 overflow-y-auto max-h-[90vh]">
                 <div className="flex items-center justify-between px-6 py-4 border-b border-gray-100 dark:border-gray-800">
-                    <h3 className="text-base font-bold text-gray-900 dark:text-white">{editItem ? "Edit Kode Diskon" : "Buat Kode Diskon Baru"}</h3>
+                    <h3 className="text-base font-bold text-gray-900 dark:text-white">
+                        {editItem ? (t("billing.discount_codes.form_modal.title_edit") || "Edit Kode Diskon") : (t("billing.discount_codes.form_modal.title_create") || "Buat Kode Diskon Baru")}
+                    </h3>
                     <button onClick={onClose} className="text-gray-400 hover:text-gray-600 dark:hover:text-gray-200 transition-colors text-xl font-light">×</button>
                 </div>
                 <div className="px-6 py-4 space-y-4">
                     <div className="grid grid-cols-2 gap-3">
                         <div>
-                            <label className="block text-xs font-semibold text-gray-700 dark:text-gray-300 mb-1">Kode Promo *</label>
-                            <input value={form.code} onChange={e => f("code", e.target.value.toUpperCase())} placeholder="HEMAT25..." disabled={!!editItem}
+                            <label className="block text-xs font-semibold text-gray-700 dark:text-gray-300 mb-1">{t("billing.discount_codes.form_modal.code_label") || "Kode Promo *"}</label>
+                            <input value={form.code} onChange={e => f("code", e.target.value.toUpperCase())} placeholder={t("billing.discount_codes.form_modal.code_placeholder") || "HEMAT25..."} disabled={!!editItem}
                                 className="w-full px-3 py-2 text-sm font-mono rounded-lg border border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-emerald-500/30 focus:border-emerald-500 text-gray-900 dark:text-white disabled:opacity-60" />
                         </div>
                         <div>
-                            <label className="block text-xs font-semibold text-gray-700 dark:text-gray-300 mb-1">Nama Promo</label>
-                            <input value={form.name} onChange={e => f("name", e.target.value)} placeholder="Diskon Ramadan 2026"
+                            <label className="block text-xs font-semibold text-gray-700 dark:text-gray-300 mb-1">{t("billing.discount_codes.form_modal.name_label") || "Nama Promo"}</label>
+                            <input value={form.name} onChange={e => f("name", e.target.value)} placeholder={t("billing.discount_codes.form_modal.name_placeholder") || "Diskon Ramadan 2026"}
                                 className="w-full px-3 py-2 text-sm rounded-lg border border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-emerald-500/30 focus:border-emerald-500 text-gray-900 dark:text-white" />
                         </div>
                     </div>
                     <div>
-                        <label className="block text-xs font-semibold text-gray-700 dark:text-gray-300 mb-1">Deskripsi</label>
-                        <textarea value={form.description} onChange={e => f("description", e.target.value)} rows={2} placeholder="Deskripsi singkat..."
+                        <label className="block text-xs font-semibold text-gray-700 dark:text-gray-300 mb-1">{t("billing.discount_codes.form_modal.description_label") || "Deskripsi"}</label>
+                        <textarea value={form.description} onChange={e => f("description", e.target.value)} rows={2} placeholder={t("billing.discount_codes.form_modal.description_placeholder") || "Deskripsi singkat..."}
                             className="w-full px-3 py-2 text-sm rounded-lg border border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-emerald-500/30 text-gray-900 dark:text-white resize-none" />
                     </div>
                     <div className="grid grid-cols-2 gap-3">
                         <div>
-                            <label className="block text-xs font-semibold text-gray-700 dark:text-gray-300 mb-1">Tipe Diskon *</label>
+                            <label className="block text-xs font-semibold text-gray-700 dark:text-gray-300 mb-1">{t("billing.discount_codes.form_modal.type_label") || "Tipe Diskon *"}</label>
                             <select value={form.type} onChange={e => f("type", e.target.value)}
                                 className="w-full px-3 py-2 text-sm rounded-lg border border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-emerald-500/30 text-gray-900 dark:text-white">
-                                <option value="percentage">Persentase (%)</option>
-                                <option value="fixed">Nominal (Rp)</option>
+                                <option value="percentage">{t("billing.discount_codes.form_modal.type_percentage") || "Persentase (%)"}</option>
+                                <option value="fixed">{t("billing.discount_codes.form_modal.type_fixed") || "Nominal (Rp)"}</option>
                             </select>
                         </div>
                         <div>
-                            <label className="block text-xs font-semibold text-gray-700 dark:text-gray-300 mb-1">Nilai {form.type === "percentage" ? "(%)" : "(Rp)"} *</label>
+                            <label className="block text-xs font-semibold text-gray-700 dark:text-gray-300 mb-1">{t("billing.discount_codes.form_modal.value_label") || "Nilai"} {form.type === "percentage" ? "(%)" : "(Rp)"} *</label>
                             <input type="number" value={form.value} onChange={e => f("value", e.target.value)} placeholder={form.type === "percentage" ? "15" : "50000"}
                                 className="w-full px-3 py-2 text-sm rounded-lg border border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-emerald-500/30 text-gray-900 dark:text-white" />
                         </div>
                     </div>
                     <div>
-                        <label className="block text-xs font-semibold text-gray-700 dark:text-gray-300 mb-1">Maks. Diskon (IDR)</label>
+                        <label className="block text-xs font-semibold text-gray-700 dark:text-gray-300 mb-1">{t("billing.discount_codes.form_modal.max_discount_label") || "Maks. Diskon (IDR)"}</label>
                         <input type="number" value={form.maxDiscountAmount} onChange={e => f("maxDiscountAmount", e.target.value)}
                             className="w-full px-3 py-2 text-sm rounded-lg border border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-emerald-500/30 text-gray-900 dark:text-white" />
                     </div>
                     <div className="grid grid-cols-2 gap-3">
                         <div>
-                            <label className="block text-xs font-semibold text-gray-700 dark:text-gray-300 mb-1">Min. Pembelian (Rp)</label>
+                            <label className="block text-xs font-semibold text-gray-700 dark:text-gray-300 mb-1">{t("billing.discount_codes.form_modal.min_purchase_label") || "Min. Pembelian (Rp)"}</label>
                             <input type="number" value={form.minOrderAmount} onChange={e => f("minOrderAmount", e.target.value)}
                                 className="w-full px-3 py-2 text-sm rounded-lg border border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-emerald-500/30 text-gray-900 dark:text-white" />
                         </div>
                         <div>
-                            <label className="block text-xs font-semibold text-gray-700 dark:text-gray-300 mb-1">Maks. Penggunaan</label>
+                            <label className="block text-xs font-semibold text-gray-700 dark:text-gray-300 mb-1">{t("billing.discount_codes.form_modal.max_uses_label") || "Maks. Penggunaan"}</label>
                             <input type="number" value={form.usageLimit} onChange={e => f("usageLimit", e.target.value)}
                                 className="w-full px-3 py-2 text-sm rounded-lg border border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-emerald-500/30 text-gray-900 dark:text-white" />
                         </div>
                     </div>
                     <div className="grid grid-cols-2 gap-3">
                         <div>
-                            <label className="block text-xs font-semibold text-gray-700 dark:text-gray-300 mb-1">Berlaku Dari *</label>
+                            <label className="block text-xs font-semibold text-gray-700 dark:text-gray-300 mb-1">{t("billing.discount_codes.form_modal.valid_from_label") || "Berlaku Dari *"}</label>
                             <input type="date" value={form.validFrom} onChange={e => f("validFrom", e.target.value)}
                                 className="w-full px-3 py-2 text-sm rounded-lg border border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-emerald-500/30 text-gray-900 dark:text-white" />
                         </div>
                         <div>
-                            <label className="block text-xs font-semibold text-gray-700 dark:text-gray-300 mb-1">Berlaku Sampai *</label>
+                            <label className="block text-xs font-semibold text-gray-700 dark:text-gray-300 mb-1">{t("billing.discount_codes.form_modal.valid_until_label") || "Berlaku Sampai *"}</label>
                             <input type="date" value={form.validUntil} onChange={e => f("validUntil", e.target.value)}
                                 className="w-full px-3 py-2 text-sm rounded-lg border border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-emerald-500/30 text-gray-900 dark:text-white" />
                         </div>
                     </div>
                     <div className="flex items-center gap-6">
-                        {([["isReferral", "Kode Referral"], ["firstTimeOnly", "First-Time Only"], ["stackable", "Stackable"]] as [keyof FormState, string][]).map(([k, lbl]) => (
+                        {([
+                            ["isReferral", t("billing.discount_codes.form_modal.is_referral") || "Kode Referral"], 
+                            ["firstTimeOnly", t("billing.discount_codes.form_modal.first_time_only") || "First-Time Only"], 
+                            ["stackable", t("billing.discount_codes.form_modal.stackable") || "Stackable"]
+                        ] as [keyof FormState, string][]).map(([k, lbl]) => (
                             <label key={k} className="flex items-center gap-2 cursor-pointer">
                                 <input type="checkbox" checked={form[k] as boolean} onChange={e => f(k, e.target.checked)} className="w-4 h-4 accent-emerald-500" />
                                 <span className="text-xs font-semibold text-gray-700 dark:text-gray-300">{lbl}</span>
@@ -326,11 +337,13 @@ function CodeFormModal({ open, editItem, onSave, onClose, saving }: {
                     </div>
                 </div>
                 <div className="flex gap-2 justify-end px-6 py-4 border-t border-gray-100 dark:border-gray-800">
-                    <button onClick={onClose} disabled={saving} className="px-4 py-2 text-sm text-gray-600 dark:text-gray-400 border border-gray-200 dark:border-gray-700 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors disabled:opacity-50">Batal</button>
+                    <button onClick={onClose} disabled={saving} className="px-4 py-2 text-sm text-gray-600 dark:text-gray-400 border border-gray-200 dark:border-gray-700 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors disabled:opacity-50">
+                        {t("billing.discount_codes.form_modal.cancel") || "Batal"}
+                    </button>
                     <button onClick={() => onSave(form, !!editItem)} disabled={saving}
                         className="flex items-center gap-2 px-4 py-2 text-sm font-semibold text-white bg-emerald-500 hover:bg-emerald-600 rounded-lg transition-colors disabled:opacity-50">
                         {saving && <Loader2 className="w-3.5 h-3.5 animate-spin" />}
-                        {editItem ? "Simpan Perubahan" : "Buat Kode"}
+                        {editItem ? (t("billing.discount_codes.form_modal.save_changes") || "Simpan Perubahan") : (t("billing.discount_codes.form_modal.create_code") || "Buat Kode")}
                     </button>
                 </div>
             </div>
@@ -344,6 +357,7 @@ function BulkModal({ open, onClose, onGenerate, saving }: {
     onGenerate: (opts: { prefix: string; count: number; codeLength: number; type: string; value: number; validFrom: string; validUntil: string; maxUsesPerCode: number | null; campaignName: string }) => void
     saving: boolean
 }) {
+    const { t } = useI18n()
     const [prefix, setPrefix] = useState("BULK")
     const [count, setCount] = useState(5)
     const [codeLength, setCodeLength] = useState(8)
@@ -362,7 +376,7 @@ function BulkModal({ open, onClose, onGenerate, saving }: {
             <div className="bg-white dark:bg-gray-900 rounded-2xl shadow-2xl max-w-md w-full border border-gray-200 dark:border-gray-700 overflow-y-auto max-h-[90vh]">
                 <div className="flex items-center justify-between px-6 py-4 border-b border-gray-100 dark:border-gray-800">
                     <div>
-                        <h3 className="text-base font-bold text-gray-900 dark:text-white">Bulk Generate Kode</h3>
+                        <h3 className="text-base font-bold text-gray-900 dark:text-white">{t("billing.discount_codes.bulk_modal.title") || "Bulk Generate Kode"}</h3>
                         <p className="text-xs text-gray-400 mt-0.5">POST /api/v1/DiscountCodes/bulk-generate</p>
                     </div>
                     <button onClick={onClose} className="text-gray-400 hover:text-gray-600 dark:hover:text-gray-200 text-xl font-light">×</button>
@@ -370,67 +384,69 @@ function BulkModal({ open, onClose, onGenerate, saving }: {
                 <div className="px-6 py-4 space-y-3">
                     <div className="grid grid-cols-2 gap-3">
                         <div>
-                            <label className="block text-xs font-semibold text-gray-700 dark:text-gray-300 mb-1">Prefix *</label>
+                            <label className="block text-xs font-semibold text-gray-700 dark:text-gray-300 mb-1">{t("billing.discount_codes.bulk_modal.prefix") || "Prefix *"}</label>
                             <input value={prefix} onChange={e => setPrefix(e.target.value.toUpperCase())}
                                 className="w-full px-3 py-2 text-sm font-mono rounded-lg border border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-800 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-violet-500/30" />
                         </div>
                         <div>
-                            <label className="block text-xs font-semibold text-gray-700 dark:text-gray-300 mb-1">Jumlah Kode * (1–1000)</label>
+                            <label className="block text-xs font-semibold text-gray-700 dark:text-gray-300 mb-1">{t("billing.discount_codes.bulk_modal.count") || "Jumlah Kode * (1–1000)"}</label>
                             <input type="number" min={1} max={1000} value={count} onChange={e => setCount(Number(e.target.value))}
                                 className="w-full px-3 py-2 text-sm rounded-lg border border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-800 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-violet-500/30" />
                         </div>
                     </div>
                     <div className="grid grid-cols-2 gap-3">
                         <div>
-                            <label className="block text-xs font-semibold text-gray-700 dark:text-gray-300 mb-1">Tipe Diskon *</label>
+                            <label className="block text-xs font-semibold text-gray-700 dark:text-gray-300 mb-1">{t("billing.discount_codes.bulk_modal.discount_type") || "Tipe Diskon *"}</label>
                             <select value={type} onChange={e => setType(e.target.value)}
                                 className="w-full px-3 py-2 text-sm rounded-lg border border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-800 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-violet-500/30">
-                                <option value="percentage">Persentase (%)</option>
-                                <option value="fixed">Nominal (Rp)</option>
+                                <option value="percentage">{t("billing.discount_codes.form_modal.type_percentage") || "Persentase (%)"}</option>
+                                <option value="fixed">{t("billing.discount_codes.form_modal.type_fixed") || "Nominal (Rp)"}</option>
                             </select>
                         </div>
                         <div>
-                            <label className="block text-xs font-semibold text-gray-700 dark:text-gray-300 mb-1">Nilai *</label>
+                            <label className="block text-xs font-semibold text-gray-700 dark:text-gray-300 mb-1">{t("billing.discount_codes.bulk_modal.value") || "Nilai *"}</label>
                             <input type="number" min={0.01} value={value} onChange={e => setValue(Number(e.target.value))}
                                 className="w-full px-3 py-2 text-sm rounded-lg border border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-800 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-violet-500/30" />
                         </div>
                     </div>
                     <div className="grid grid-cols-2 gap-3">
                         <div>
-                            <label className="block text-xs font-semibold text-gray-700 dark:text-gray-300 mb-1">Panjang Kode (4–12)</label>
+                            <label className="block text-xs font-semibold text-gray-700 dark:text-gray-300 mb-1">{t("billing.discount_codes.bulk_modal.code_length") || "Panjang Kode (4–12)"}</label>
                             <input type="number" min={4} max={12} value={codeLength} onChange={e => setCodeLength(Number(e.target.value))}
                                 className="w-full px-3 py-2 text-sm rounded-lg border border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-800 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-violet-500/30" />
                         </div>
                         <div>
-                            <label className="block text-xs font-semibold text-gray-700 dark:text-gray-300 mb-1">Maks. Penggunaan/Kode</label>
-                            <input type="number" min={1} value={maxUses} onChange={e => setMaxUses(e.target.value)} placeholder="Tidak terbatas"
+                            <label className="block text-xs font-semibold text-gray-700 dark:text-gray-300 mb-1">{t("billing.discount_codes.bulk_modal.max_uses") || "Maks. Penggunaan/Kode"}</label>
+                            <input type="number" min={1} value={maxUses} onChange={e => setMaxUses(e.target.value)} placeholder={t("billing.discount_codes.bulk_modal.unlimited") || "Tidak terbatas"}
                                 className="w-full px-3 py-2 text-sm rounded-lg border border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-800 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-violet-500/30" />
                         </div>
                     </div>
                     <div className="grid grid-cols-2 gap-3">
                         <div>
-                            <label className="block text-xs font-semibold text-gray-700 dark:text-gray-300 mb-1">Berlaku Dari</label>
+                            <label className="block text-xs font-semibold text-gray-700 dark:text-gray-300 mb-1">{t("billing.discount_codes.bulk_modal.valid_from") || "Berlaku Dari"}</label>
                             <input type="date" value={validFrom} onChange={e => setValidFrom(e.target.value)}
                                 className="w-full px-3 py-2 text-sm rounded-lg border border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-800 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-violet-500/30" />
                         </div>
                         <div>
-                            <label className="block text-xs font-semibold text-gray-700 dark:text-gray-300 mb-1">Berlaku Sampai</label>
+                            <label className="block text-xs font-semibold text-gray-700 dark:text-gray-300 mb-1">{t("billing.discount_codes.bulk_modal.valid_until") || "Berlaku Sampai"}</label>
                             <input type="date" value={validUntil} onChange={e => setValidUntil(e.target.value)}
                                 className="w-full px-3 py-2 text-sm rounded-lg border border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-800 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-violet-500/30" />
                         </div>
                     </div>
                     <div>
-                        <label className="block text-xs font-semibold text-gray-700 dark:text-gray-300 mb-1">Nama Kampanye</label>
-                        <input value={campaignName} onChange={e => setCampaignName(e.target.value)} placeholder="Contoh: FLASH-SALE-Q3"
+                        <label className="block text-xs font-semibold text-gray-700 dark:text-gray-300 mb-1">{t("billing.discount_codes.bulk_modal.campaign_name") || "Nama Kampanye"}</label>
+                        <input value={campaignName} onChange={e => setCampaignName(e.target.value)} placeholder={t("billing.discount_codes.bulk_modal.campaign_placeholder") || "Contoh: FLASH-SALE-Q3"}
                             className="w-full px-3 py-2 text-sm rounded-lg border border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-800 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-violet-500/30" />
                     </div>
                 </div>
                 <div className="flex gap-2 justify-end px-6 py-4 border-t border-gray-100 dark:border-gray-800">
-                    <button onClick={onClose} disabled={saving} className="px-4 py-2 text-sm text-gray-600 dark:text-gray-400 border border-gray-200 dark:border-gray-700 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors disabled:opacity-50">Batal</button>
+                    <button onClick={onClose} disabled={saving} className="px-4 py-2 text-sm text-gray-600 dark:text-gray-400 border border-gray-200 dark:border-gray-700 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors disabled:opacity-50">
+                        {t("billing.discount_codes.bulk_modal.cancel") || "Batal"}
+                    </button>
                     <button onClick={() => onGenerate({ prefix, count, codeLength, type, value, validFrom: validFrom + "T00:00:00Z", validUntil: validUntil + "T23:59:59Z", maxUsesPerCode: maxUses ? Number(maxUses) : null, campaignName: campaignName || "" })} disabled={saving}
                         className="flex items-center gap-1.5 px-4 py-2 text-sm font-semibold text-white bg-violet-500 hover:bg-violet-600 rounded-lg transition-colors disabled:opacity-50">
                         {saving ? <Loader2 className="w-3.5 h-3.5 animate-spin" /> : <Zap className="w-3.5 h-3.5" />}
-                        Generate {count} Kode
+                        {t("billing.discount_codes.bulk_modal.generate_btn", undefined, { count }) || `Generate ${count} Kode`}
                     </button>
                 </div>
             </div>
@@ -440,6 +456,7 @@ function BulkModal({ open, onClose, onGenerate, saving }: {
 
 // ── Export Modal (GET /api/v1/DiscountCodes/export) ─────────────────────────────
 function ExportModal({ open, onClose }: { open: boolean; onClose: () => void }) {
+    const { t } = useI18n()
     const [startDate, setStartDate] = useState("")
     const [endDate, setEndDate] = useState("")
     const [campaignId, setCampaignId] = useState("")
@@ -479,7 +496,7 @@ function ExportModal({ open, onClose }: { open: boolean; onClose: () => void }) 
                 <div className="flex items-center justify-between px-6 py-4 border-b border-gray-100 dark:border-gray-800">
                     <div>
                         <h3 className="text-base font-bold text-gray-900 dark:text-white flex items-center gap-2">
-                            <Download className="w-4 h-4 text-emerald-500" /> Export ke CSV
+                            <Download className="w-4 h-4 text-emerald-500" /> {t("billing.discount_codes.export_modal.title") || "Export ke CSV"}
                         </h3>
                         <p className="text-xs text-gray-400 mt-0.5">GET /api/v1/DiscountCodes/export</p>
                     </div>
@@ -488,41 +505,43 @@ function ExportModal({ open, onClose }: { open: boolean; onClose: () => void }) 
                 <div className="px-6 py-4 space-y-3">
                     <div className="grid grid-cols-2 gap-3">
                         <div>
-                            <label className="block text-xs font-semibold text-gray-700 dark:text-gray-300 mb-1">Tanggal Mulai</label>
+                            <label className="block text-xs font-semibold text-gray-700 dark:text-gray-300 mb-1">{t("billing.discount_codes.export_modal.start_date") || "Tanggal Mulai"}</label>
                             <input type="date" value={startDate} onChange={e => setStartDate(e.target.value)}
                                 className="w-full px-3 py-2 text-sm rounded-lg border border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-800 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-emerald-500/30" />
                         </div>
                         <div>
-                            <label className="block text-xs font-semibold text-gray-700 dark:text-gray-300 mb-1">Tanggal Selesai</label>
+                            <label className="block text-xs font-semibold text-gray-700 dark:text-gray-300 mb-1">{t("billing.discount_codes.export_modal.end_date") || "Tanggal Selesai"}</label>
                             <input type="date" value={endDate} onChange={e => setEndDate(e.target.value)}
                                 className="w-full px-3 py-2 text-sm rounded-lg border border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-800 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-emerald-500/30" />
                         </div>
                     </div>
                     <div>
-                        <label className="block text-xs font-semibold text-gray-700 dark:text-gray-300 mb-1">Campaign ID (opsional)</label>
-                        <input value={campaignId} onChange={e => setCampaignId(e.target.value)} placeholder="Contoh: CAMP-2026-RAMADAN"
+                        <label className="block text-xs font-semibold text-gray-700 dark:text-gray-300 mb-1">{t("billing.discount_codes.export_modal.campaign_id") || "Campaign ID (opsional)"}</label>
+                        <input value={campaignId} onChange={e => setCampaignId(e.target.value)} placeholder={t("billing.discount_codes.export_modal.campaign_placeholder") || "Contoh: CAMP-2026-RAMADAN"}
                             className="w-full px-3 py-2 text-sm rounded-lg border border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-800 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-emerald-500/30" />
                     </div>
-                    <p className="text-xs text-gray-400 dark:text-gray-500">Kosongkan tanggal untuk mengexport semua data.</p>
+                    <p className="text-xs text-gray-400 dark:text-gray-500">{t("billing.discount_codes.export_modal.hint") || "Kosongkan tanggal untuk mengexport semua data."}</p>
                 </div>
                 <div className="flex gap-2 justify-end px-6 py-4 border-t border-gray-100 dark:border-gray-800">
-                    <button onClick={onClose} disabled={loading} className="px-4 py-2 text-sm text-gray-600 dark:text-gray-400 border border-gray-200 dark:border-gray-700 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors disabled:opacity-50">Batal</button>
+                    <button onClick={onClose} disabled={loading} className="px-4 py-2 text-sm text-gray-600 dark:text-gray-400 border border-gray-200 dark:border-gray-700 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors disabled:opacity-50">
+                        {t("billing.discount_codes.export_modal.cancel") || "Batal"}
+                    </button>
                     <button onClick={handleExport} disabled={loading}
                         className="flex items-center gap-2 px-4 py-2 text-sm font-semibold text-white bg-emerald-500 hover:bg-emerald-600 rounded-lg transition-colors disabled:opacity-50">
                         {loading ? <Loader2 className="w-3.5 h-3.5 animate-spin" /> : <Download className="w-3.5 h-3.5" />}
-                        Export CSV
+                        {t("billing.discount_codes.export_modal.export_btn") || "Export CSV"}
                     </button>
                 </div>
             </div>
         </div>
     )
 }
-
 // ── A/B Test Modal (POST /api/v1/DiscountCodes/ab-test) ─────────────────────────
 function AbTestModal({ open, onClose, onSave, saving }: {
     open: boolean; onClose: () => void
     onSave: (data: object) => void; saving: boolean
 }) {
+    const { t } = useI18n()
     const [testName, setTestName] = useState("")
     const [codePrefix, setCodePrefix] = useState("")
     const now = new Date()
@@ -547,7 +566,7 @@ function AbTestModal({ open, onClose, onSave, saving }: {
                 <div className="flex items-center justify-between px-6 py-4 border-b border-gray-100 dark:border-gray-800">
                     <div>
                         <h3 className="text-base font-bold text-gray-900 dark:text-white flex items-center gap-2">
-                            <FlaskConical className="w-4 h-4 text-pink-500" /> Buat A/B Test
+                            <FlaskConical className="w-4 h-4 text-pink-500" /> {t("billing.discount_codes.ab_test_modal.title") || "Buat A/B Test"}
                         </h3>
                         <p className="text-xs text-gray-400 mt-0.5">POST /api/v1/DiscountCodes/ab-test</p>
                     </div>
@@ -556,24 +575,24 @@ function AbTestModal({ open, onClose, onSave, saving }: {
                 <div className="px-6 py-4 space-y-4">
                     <div className="grid grid-cols-2 gap-3">
                         <div>
-                            <label className="block text-xs font-semibold text-gray-700 dark:text-gray-300 mb-1">Nama Test *</label>
-                            <input value={testName} onChange={e => setTestName(e.target.value)} placeholder="Ramadan AB Test"
+                            <label className="block text-xs font-semibold text-gray-700 dark:text-gray-300 mb-1">{t("billing.discount_codes.ab_test_modal.test_name") || "Nama Test *"}</label>
+                            <input value={testName} onChange={e => setTestName(e.target.value)} placeholder={t("billing.discount_codes.ab_test_modal.test_name_placeholder") || "Ramadan AB Test"}
                                 className="w-full px-3 py-2 text-sm rounded-lg border border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-800 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-pink-500/30" />
                         </div>
                         <div>
-                            <label className="block text-xs font-semibold text-gray-700 dark:text-gray-300 mb-1">Prefix Kode *</label>
-                            <input value={codePrefix} onChange={e => setCodePrefix(e.target.value.toUpperCase())} placeholder="ABTEST"
+                            <label className="block text-xs font-semibold text-gray-700 dark:text-gray-300 mb-1">{t("billing.discount_codes.ab_test_modal.code_prefix") || "Prefix Kode *"}</label>
+                            <input value={codePrefix} onChange={e => setCodePrefix(e.target.value.toUpperCase())} placeholder={t("billing.discount_codes.ab_test_modal.code_prefix_placeholder") || "ABTEST"}
                                 className="w-full px-3 py-2 text-sm font-mono rounded-lg border border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-800 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-pink-500/30" />
                         </div>
                     </div>
                     <div className="grid grid-cols-2 gap-3">
                         <div>
-                            <label className="block text-xs font-semibold text-gray-700 dark:text-gray-300 mb-1">Berlaku Dari *</label>
+                            <label className="block text-xs font-semibold text-gray-700 dark:text-gray-300 mb-1">{t("billing.discount_codes.ab_test_modal.valid_from") || "Berlaku Dari *"}</label>
                             <input type="date" value={validFrom} onChange={e => setValidFrom(e.target.value)}
                                 className="w-full px-3 py-2 text-sm rounded-lg border border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-800 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-pink-500/30" />
                         </div>
                         <div>
-                            <label className="block text-xs font-semibold text-gray-700 dark:text-gray-300 mb-1">Berlaku Sampai *</label>
+                            <label className="block text-xs font-semibold text-gray-700 dark:text-gray-300 mb-1">{t("billing.discount_codes.ab_test_modal.valid_until") || "Berlaku Sampai *"}</label>
                             <input type="date" value={validUntil} onChange={e => setValidUntil(e.target.value)}
                                 className="w-full px-3 py-2 text-sm rounded-lg border border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-800 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-pink-500/30" />
                         </div>
@@ -581,22 +600,22 @@ function AbTestModal({ open, onClose, onSave, saving }: {
                     {/* Variants */}
                     <div>
                         <div className="flex items-center justify-between mb-2">
-                            <p className="text-xs font-semibold text-gray-700 dark:text-gray-300">Variants *</p>
+                            <p className="text-xs font-semibold text-gray-700 dark:text-gray-300">{t("billing.discount_codes.ab_test_modal.variants") || "Variants *"}</p>
                             <button onClick={() => setVariants(prev => [...prev, { name: `Variant ${String.fromCharCode(65 + prev.length)}`, type: "percentage", value: 10, weight: 1 }])}
                                 className="text-xs text-pink-500 hover:text-pink-600 font-semibold flex items-center gap-1">
-                                <Plus className="w-3 h-3" /> Tambah
+                                <Plus className="w-3 h-3" /> {t("billing.discount_codes.ab_test_modal.add_variant") || "Tambah"}
                             </button>
                         </div>
                         <div className="space-y-2">
                             {variants.map((v, i) => (
                                 <div key={i} className="grid grid-cols-4 gap-2 items-end p-3 bg-gray-50 dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700">
                                     <div>
-                                        <label className="block text-[10px] font-semibold text-gray-500 mb-0.5">Nama</label>
+                                        <label className="block text-[10px] font-semibold text-gray-500 mb-0.5">{t("billing.discount_codes.ab_test_modal.var_name") || "Nama"}</label>
                                         <input value={v.name} onChange={e => updateVariant(i, "name", e.target.value)}
                                             className="w-full px-2 py-1.5 text-xs rounded-md border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-900 text-gray-900 dark:text-white focus:outline-none" />
                                     </div>
                                     <div>
-                                        <label className="block text-[10px] font-semibold text-gray-500 mb-0.5">Tipe</label>
+                                        <label className="block text-[10px] font-semibold text-gray-500 mb-0.5">{t("billing.discount_codes.ab_test_modal.var_type") || "Tipe"}</label>
                                         <select value={v.type} onChange={e => updateVariant(i, "type", e.target.value)}
                                             className="w-full px-2 py-1.5 text-xs rounded-md border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-900 text-gray-900 dark:text-white focus:outline-none">
                                             <option value="percentage">%</option>
@@ -604,13 +623,13 @@ function AbTestModal({ open, onClose, onSave, saving }: {
                                         </select>
                                     </div>
                                     <div>
-                                        <label className="block text-[10px] font-semibold text-gray-500 mb-0.5">Nilai</label>
+                                        <label className="block text-[10px] font-semibold text-gray-500 mb-0.5">{t("billing.discount_codes.ab_test_modal.var_value") || "Nilai"}</label>
                                         <input type="number" value={v.value} onChange={e => updateVariant(i, "value", Number(e.target.value))}
                                             className="w-full px-2 py-1.5 text-xs rounded-md border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-900 text-gray-900 dark:text-white focus:outline-none" />
                                     </div>
                                     <div className="flex items-end gap-1">
                                         <div className="flex-1">
-                                            <label className="block text-[10px] font-semibold text-gray-500 mb-0.5">Bobot</label>
+                                            <label className="block text-[10px] font-semibold text-gray-500 mb-0.5">{t("billing.discount_codes.ab_test_modal.var_weight") || "Bobot"}</label>
                                             <input type="number" min={1} value={v.weight} onChange={e => updateVariant(i, "weight", Number(e.target.value))}
                                                 className="w-full px-2 py-1.5 text-xs rounded-md border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-900 text-gray-900 dark:text-white focus:outline-none" />
                                         </div>
@@ -626,12 +645,14 @@ function AbTestModal({ open, onClose, onSave, saving }: {
                     </div>
                 </div>
                 <div className="flex gap-2 justify-end px-6 py-4 border-t border-gray-100 dark:border-gray-800">
-                    <button onClick={onClose} disabled={saving} className="px-4 py-2 text-sm text-gray-600 dark:text-gray-400 border border-gray-200 dark:border-gray-700 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors disabled:opacity-50">Batal</button>
+                    <button onClick={onClose} disabled={saving} className="px-4 py-2 text-sm text-gray-600 dark:text-gray-400 border border-gray-200 dark:border-gray-700 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors disabled:opacity-50">
+                        {t("billing.discount_codes.ab_test_modal.cancel") || "Batal"}
+                    </button>
                     <button onClick={() => onSave({ testName, codePrefix, variants, currency, validFrom: validFrom + "T00:00:00Z", validUntil: validUntil + "T23:59:59Z" })}
                         disabled={saving || !testName || !codePrefix}
                         className="flex items-center gap-2 px-4 py-2 text-sm font-semibold text-white bg-pink-500 hover:bg-pink-600 rounded-lg transition-colors disabled:opacity-50">
                         {saving ? <Loader2 className="w-3.5 h-3.5 animate-spin" /> : <FlaskConical className="w-3.5 h-3.5" />}
-                        Buat A/B Test
+                        {t("billing.discount_codes.ab_test_modal.create_btn") || "Buat A/B Test"}
                     </button>
                 </div>
             </div>
@@ -644,6 +665,7 @@ function FilterModal({ open, initial, onClose, onApply }: {
     open: boolean; initial: FilterState
     onClose: () => void; onApply: (f: FilterState) => void
 }) {
+    const { t } = useI18n()
     const [draft, setDraft] = useState<FilterState>(initial)
 
     useEffect(() => { if (open) setDraft(initial) }, [open, initial])
@@ -663,41 +685,46 @@ function FilterModal({ open, initial, onClose, onApply }: {
                 <div className="flex items-center justify-between px-6 py-4 border-b border-gray-100 dark:border-gray-800">
                     <div className="flex items-center gap-2">
                         <Filter className="w-4 h-4 text-gray-500" />
-                        <h3 className="text-base font-bold text-gray-900 dark:text-white">Filter Data</h3>
+                        <h3 className="text-base font-bold text-gray-900 dark:text-white">{t("billing.discount_codes.filter_modal.title") || "Filter Data"}</h3>
                     </div>
                     <button onClick={onClose} className="text-gray-400 hover:text-gray-600 dark:hover:text-gray-200 text-xl font-light">×</button>
                 </div>
                 <div className="px-6 py-4 space-y-5">
                     <div>
-                        <label className="block text-xs font-semibold text-gray-700 dark:text-gray-300 mb-2">Status Promo</label>
+                        <label className="block text-xs font-semibold text-gray-700 dark:text-gray-300 mb-2">{t("billing.discount_codes.filter_modal.promo_status") || "Status Promo"}</label>
                         <div className="flex flex-wrap gap-2">
-                            <Chip label="Semua" active={draft.statuses.length === 0} onClick={() => setDraft(p => ({ ...p, statuses: [] }))} />
-                            {[{ id: "active", label: "Aktif" }, { id: "inactive", label: "Nonaktif" }, { id: "referral", label: "Referral" }, { id: "expired", label: "Kedaluwarsa" }].map(s => (
+                            <Chip label={t("billing.discount_codes.filter_modal.all") || "Semua"} active={draft.statuses.length === 0} onClick={() => setDraft(p => ({ ...p, statuses: [] }))} />
+                            {[
+                                { id: "active", label: t("billing.discount_codes.filter_modal.active") || "Aktif" }, 
+                                { id: "inactive", label: t("billing.discount_codes.filter_modal.inactive") || "Nonaktif" }, 
+                                { id: "referral", label: t("billing.discount_codes.filter_modal.referral") || "Referral" }, 
+                                { id: "expired", label: t("billing.discount_codes.filter_modal.expired") || "Kedaluwarsa" }
+                            ].map(s => (
                                 <Chip key={s.id} label={s.label} active={draft.statuses.includes(s.id)} onClick={() => setDraft(p => ({ ...p, statuses: toggleArr(p.statuses, s.id) }))} />
                             ))}
                         </div>
                     </div>
                     <div>
-                        <label className="block text-xs font-semibold text-gray-700 dark:text-gray-300 mb-2">Tipe Diskon</label>
+                        <label className="block text-xs font-semibold text-gray-700 dark:text-gray-300 mb-2">{t("billing.discount_codes.filter_modal.discount_type") || "Tipe Diskon"}</label>
                         <div className="flex flex-wrap gap-2">
-                            <Chip label="Semua" active={draft.types.length === 0} onClick={() => setDraft(p => ({ ...p, types: [] }))} />
-                            <Chip label="Persen (%)" active={draft.types.includes("percentage")} onClick={() => setDraft(p => ({ ...p, types: toggleArr(p.types, "percentage") }))} />
-                            <Chip label="Nominal (Rp)" active={draft.types.includes("fixed")} onClick={() => setDraft(p => ({ ...p, types: toggleArr(p.types, "fixed") }))} />
+                            <Chip label={t("billing.discount_codes.filter_modal.all") || "Semua"} active={draft.types.length === 0} onClick={() => setDraft(p => ({ ...p, types: [] }))} />
+                            <Chip label={t("billing.discount_codes.filter_modal.percentage") || "Persen (%)"} active={draft.types.includes("percentage")} onClick={() => setDraft(p => ({ ...p, types: toggleArr(p.types, "percentage") }))} />
+                            <Chip label={t("billing.discount_codes.filter_modal.fixed") || "Nominal (Rp)"} active={draft.types.includes("fixed")} onClick={() => setDraft(p => ({ ...p, types: toggleArr(p.types, "fixed") }))} />
                         </div>
                     </div>
                     <div>
-                        <label className="block text-xs font-semibold text-gray-700 dark:text-gray-300 mb-2">Campaign ID</label>
-                        <input type="text" value={draft.campaignId} onChange={e => setDraft(p => ({ ...p, campaignId: e.target.value }))} placeholder="Masukkan ID Campaign..."
+                        <label className="block text-xs font-semibold text-gray-700 dark:text-gray-300 mb-2">{t("billing.discount_codes.filter_modal.campaign_id") || "Campaign ID"}</label>
+                        <input type="text" value={draft.campaignId} onChange={e => setDraft(p => ({ ...p, campaignId: e.target.value }))} placeholder={t("billing.discount_codes.filter_modal.campaign_placeholder") || "Masukkan ID Campaign..."}
                             className="w-full px-3 py-2 text-sm rounded-lg border border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-800 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-emerald-500/30" />
                     </div>
                     <div className="grid grid-cols-2 gap-3">
                         <div>
-                            <label className="block text-xs font-semibold text-gray-700 dark:text-gray-300 mb-1">Berlaku Dari</label>
+                            <label className="block text-xs font-semibold text-gray-700 dark:text-gray-300 mb-1">{t("billing.discount_codes.filter_modal.valid_from") || "Berlaku Dari"}</label>
                             <input type="date" value={draft.validFrom} onChange={e => setDraft(p => ({ ...p, validFrom: e.target.value }))}
                                 className="w-full px-3 py-2 text-sm rounded-lg border border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-800 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-emerald-500/30" />
                         </div>
                         <div>
-                            <label className="block text-xs font-semibold text-gray-700 dark:text-gray-300 mb-1">Berlaku Sampai</label>
+                            <label className="block text-xs font-semibold text-gray-700 dark:text-gray-300 mb-1">{t("billing.discount_codes.filter_modal.valid_until") || "Berlaku Sampai"}</label>
                             <input type="date" value={draft.validUntil} onChange={e => setDraft(p => ({ ...p, validUntil: e.target.value }))}
                                 className="w-full px-3 py-2 text-sm rounded-lg border border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-800 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-emerald-500/30" />
                         </div>
@@ -705,10 +732,14 @@ function FilterModal({ open, initial, onClose, onApply }: {
                 </div>
                 <div className="flex gap-2 justify-end px-6 py-4 border-t border-gray-100 dark:border-gray-800">
                     <button onClick={() => setDraft(EMPTY_FILTER)} className="flex items-center gap-1.5 px-3 py-2 text-sm text-gray-500 hover:text-gray-700 transition-colors mr-auto">
-                        Reset
+                        {t("billing.discount_codes.filter_modal.reset") || "Reset"}
                     </button>
-                    <button onClick={onClose} className="px-4 py-2 text-sm text-gray-600 dark:text-gray-400 border border-gray-200 dark:border-gray-700 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors">Batal</button>
-                    <button onClick={() => onApply(draft)} className="px-5 py-2 text-sm font-semibold text-white bg-emerald-500 hover:bg-emerald-600 rounded-lg transition-colors">Terapkan Filter</button>
+                    <button onClick={onClose} className="px-4 py-2 text-sm text-gray-600 dark:text-gray-400 border border-gray-200 dark:border-gray-700 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors">
+                        {t("billing.discount_codes.filter_modal.cancel") || "Batal"}
+                    </button>
+                    <button onClick={() => onApply(draft)} className="px-5 py-2 text-sm font-semibold text-white bg-emerald-500 hover:bg-emerald-600 rounded-lg transition-colors">
+                        {t("billing.discount_codes.filter_modal.apply") || "Terapkan Filter"}
+                    </button>
                 </div>
             </div>
         </div>
@@ -719,7 +750,11 @@ function FilterModal({ open, initial, onClose, onApply }: {
 // MAIN CONTENT
 // ═══════════════════════════════════════════════════════════════════════════════
 function DiscountCodesContent() {
+    const { t, locale } = useI18n()
     const router = useRouter()
+    const langCode = locale || 'en'
+    const dateLocale = locale === "id" ? "id-ID" : locale === "ar" ? "ar-SA" : "en-US"
+
     const [codes, setCodes] = useState<DiscountCode[]>([])
     const [isLoading, setIsLoading] = useState(true)
     const [mutating, setMutating] = useState(false)
@@ -790,13 +825,13 @@ function DiscountCodesContent() {
                 
                 let matchStatus = true
                 if (filterState.statuses.length > 0) {
-                    const st = getCodeStatus(c).label.toLowerCase()
                     const isRef = c.isReferral
+                    const isExp = isExpired(c.validUntil)
                     let matched = false
-                    if (filterState.statuses.includes("active") && c.isActive && st !== "kedaluwarsa") matched = true
+                    if (filterState.statuses.includes("active") && c.isActive && !isExp) matched = true
                     if (filterState.statuses.includes("inactive") && !c.isActive) matched = true
                     if (filterState.statuses.includes("referral") && isRef) matched = true
-                    if (filterState.statuses.includes("expired") && st === "kedaluwarsa") matched = true
+                    if (filterState.statuses.includes("expired") && isExp) matched = true
                     matchStatus = matched
                 }
 
@@ -841,11 +876,11 @@ function DiscountCodesContent() {
         setTimeout(() => setCopiedId(null), 1500)
     }
     function getCodeStatus(c: DiscountCode) {
-        if (!c.isActive) return { label: "Nonaktif", color: "bg-gray-100 dark:bg-gray-800 text-gray-500 dark:text-gray-400" }
-        if (isExpired(c.validUntil)) return { label: "Kedaluwarsa", color: "bg-red-100 dark:bg-red-900/30 text-red-600 dark:text-red-400" }
-        if (isUpcoming(c.validFrom)) return { label: "Terjadwal", color: "bg-blue-100 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400" }
-        if (c.usageLimit > 0 && c.usageCount >= c.usageLimit) return { label: "Habis", color: "bg-orange-100 dark:bg-orange-900/30 text-orange-600 dark:text-orange-400" }
-        return { label: "Aktif", color: "bg-emerald-100 dark:bg-emerald-900/30 text-emerald-700 dark:text-emerald-400" }
+        if (!c.isActive) return { label: t("billing.discount_codes.status.inactive") || "Nonaktif", color: "bg-gray-100 dark:bg-gray-800 text-gray-500 dark:text-gray-400" }
+        if (isExpired(c.validUntil)) return { label: t("billing.discount_codes.status.expired") || "Kedaluwarsa", color: "bg-red-100 dark:bg-red-900/30 text-red-600 dark:text-red-400" }
+        if (isUpcoming(c.validFrom)) return { label: t("billing.discount_codes.status.scheduled") || "Terjadwal", color: "bg-blue-100 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400" }
+        if (c.usageLimit > 0 && c.usageCount >= c.usageLimit) return { label: t("billing.discount_codes.status.exhausted") || "Habis", color: "bg-orange-100 dark:bg-orange-900/30 text-orange-600 dark:text-orange-400" }
+        return { label: t("billing.discount_codes.status.active") || "Aktif", color: "bg-emerald-100 dark:bg-emerald-900/30 text-emerald-700 dark:text-emerald-400" }
     }
 
     // ── CRUD ────────────────────────────────────────────────────────────────────
@@ -956,12 +991,16 @@ function DiscountCodesContent() {
 
             {/* Page Header */}
             <div className="mb-6 px-1">
-                <h1 className="text-2xl font-bold text-gray-900 dark:text-white">Promo & Kupon</h1>
+                <h1 className="text-2xl font-bold text-gray-900 dark:text-white">
+                    {t("billing.discount_codes.title", "Promo & Kupon")}
+                </h1>
             </div>
 
             {/* All Modals */}
-            <ConfirmModal open={!!confirmDelete} title={`Hapus kode "${confirmDelete?.code}"?`}
-                message="Kode yang sudah dihapus tidak bisa dikembalikan." loading={mutating}
+            <ConfirmModal open={!!confirmDelete} 
+                title={t("billing.discount_codes.confirm_modal.delete_title", `Hapus kode "${confirmDelete?.code}"?`, { code: confirmDelete?.code || "" })}
+                message={t("billing.discount_codes.confirm_modal.delete_message", "Kode yang sudah dihapus tidak bisa dikembalikan.")} 
+                loading={mutating}
                 onConfirm={() => confirmDelete && handleDelete(confirmDelete)} onCancel={() => setConfirmDelete(null)} />
             <CodeFormModal open={formOpen} editItem={editItem} onSave={handleSaveForm} onClose={() => { setFormOpen(false); setEditItem(null) }} saving={mutating} />
             <BulkModal open={bulkOpen} onClose={() => setBulkOpen(false)} onGenerate={handleBulkGenerate} saving={mutating} />
@@ -974,10 +1013,10 @@ function DiscountCodesContent() {
                 {/* Overview Cards */}
                 <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
                     {[
-                        { label: "Total Kode", value: stats.total, icon: Tag, color: "violet" },
-                        { label: "Aktif", value: stats.active, icon: CheckCircle2, color: "emerald" },
-                        { label: "Tingkat Penggunaan", value: stats.usageRate, icon: Zap, color: "orange", isPercent: true },
-                        { label: "Total Pemakaian", value: stats.totalUsage, icon: Users, color: "blue" },
+                        { label: t("billing.discount_codes.stats.total_codes", "Total Kode"), value: stats.total, icon: Tag, color: "violet" },
+                        { label: t("billing.discount_codes.stats.active", "Aktif"), value: stats.active, icon: CheckCircle2, color: "emerald" },
+                        { label: t("billing.discount_codes.stats.usage_rate", "Tingkat Penggunaan"), value: stats.usageRate, icon: Zap, color: "orange", isPercent: true },
+                        { label: t("billing.discount_codes.stats.total_usage", "Total Pemakaian"), value: stats.totalUsage, icon: Users, color: "blue" },
                     ].map(card => {
                         const Icon = card.icon
                         const clr: Record<string, { bg: string; icon: string }> = {
@@ -1007,7 +1046,7 @@ function DiscountCodesContent() {
                     {/* Search */}
                     <div className="flex items-center flex-1 min-w-[200px] md:max-w-sm h-10 shadow-sm rounded-lg overflow-hidden border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-900 transition-all focus-within:ring-2 focus-within:ring-emerald-400 focus-within:border-emerald-400">
                         <Search className="ml-3 h-4 w-4 text-gray-400 flex-shrink-0" />
-                        <input type="text" placeholder="Cari kode atau nama promo..." value={searchInput}
+                        <input type="text" placeholder={t("billing.discount_codes.toolbar.search_placeholder", "Cari kode atau nama promo...")} value={searchInput}
                             onChange={e => setSearchInput(e.target.value)}
                             onKeyDown={e => { if (e.key === "Enter") { setSearch(searchInput); setPage(1) } }}
                             className="w-full h-full px-3 text-sm bg-transparent border-0 focus:outline-none text-gray-700 dark:text-gray-200" />
@@ -1026,25 +1065,25 @@ function DiscountCodesContent() {
                             : "border-gray-200 dark:border-gray-700 text-gray-600 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-800 bg-white dark:bg-gray-900"
                         }`}
                     >
-                        <Filter className="w-4 h-4" /> Filter
+                        <Filter className="w-4 h-4" /> {t("billing.discount_codes.toolbar.filter", "Filter")}
                     </button>
                     {/* Action Buttons */}
                     <div className="flex items-center gap-2 ml-auto flex-wrap">
                         <button onClick={() => setExportOpen(true)} title="Export CSV"
                             className="flex items-center gap-1.5 px-3 py-2 text-sm font-semibold text-gray-600 dark:text-gray-300 bg-white dark:bg-gray-900 hover:bg-gray-50 dark:hover:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg transition-colors shadow-sm whitespace-nowrap">
-                            <Download className="w-4 h-4" /> Export
+                            <Download className="w-4 h-4" /> {t("billing.discount_codes.toolbar.export", "Export")}
                         </button>
                         <button onClick={() => setAbTestOpen(true)} title="A/B Test"
                             className="flex items-center gap-1.5 px-3 py-2 text-sm font-semibold text-pink-600 dark:text-pink-400 bg-pink-50 dark:bg-pink-900/20 hover:bg-pink-100 dark:hover:bg-pink-900/30 border border-pink-200 dark:border-pink-800 rounded-lg transition-colors shadow-sm whitespace-nowrap">
-                            <FlaskConical className="w-4 h-4" /> A/B Test
+                            <FlaskConical className="w-4 h-4" /> {t("billing.discount_codes.toolbar.ab_test", "A/B Test")}
                         </button>
                         <button onClick={() => setBulkOpen(true)}
                             className="flex items-center gap-1.5 px-3 py-2 text-sm font-semibold text-white bg-violet-500 hover:bg-violet-600 rounded-lg transition-colors shadow-sm whitespace-nowrap">
-                            <Zap className="w-4 h-4" /> Bulk
+                            <Zap className="w-4 h-4" /> {t("billing.discount_codes.toolbar.bulk", "Bulk")}
                         </button>
                         <button onClick={() => { setEditItem(null); setFormOpen(true) }}
                             className="flex items-center gap-1.5 px-3 py-2 text-sm font-semibold text-white bg-emerald-500 hover:bg-emerald-600 rounded-lg transition-colors shadow-sm whitespace-nowrap">
-                            <Plus className="w-4 h-4" /> Buat Promo
+                            <Plus className="w-4 h-4" /> {t("billing.discount_codes.toolbar.create_promo", "Buat Promo")}
                         </button>
                     </div>
                 </div>
@@ -1055,13 +1094,13 @@ function DiscountCodesContent() {
                         <table className="w-full text-sm">
                             <thead>
                                 <tr className="bg-gray-50 dark:bg-gray-800/60 border-b border-gray-200 dark:border-gray-700">
-                                    <th className="text-left text-xs font-bold text-gray-500 dark:text-gray-400 uppercase tracking-wide px-4 py-3 whitespace-nowrap cursor-pointer select-none" onClick={() => handleSort("code")}>Kode Promo <SortIcon field="code" /></th>
-                                    <th className="text-left text-xs font-bold text-gray-500 dark:text-gray-400 uppercase tracking-wide px-4 py-3">Nama / Deskripsi</th>
-                                    <th className="text-left text-xs font-bold text-gray-500 dark:text-gray-400 uppercase tracking-wide px-4 py-3 whitespace-nowrap cursor-pointer select-none" onClick={() => handleSort("value")}>Diskon <SortIcon field="value" /></th>
-                                    <th className="text-left text-xs font-bold text-gray-500 dark:text-gray-400 uppercase tracking-wide px-4 py-3 whitespace-nowrap">Status</th>
-                                    <th className="text-left text-xs font-bold text-gray-500 dark:text-gray-400 uppercase tracking-wide px-4 py-3 whitespace-nowrap cursor-pointer select-none" onClick={() => handleSort("usageCount")}>Penggunaan <SortIcon field="usageCount" /></th>
-                                    <th className="text-left text-xs font-bold text-gray-500 dark:text-gray-400 uppercase tracking-wide px-4 py-3 whitespace-nowrap cursor-pointer select-none" onClick={() => handleSort("validUntil")}>Berlaku <SortIcon field="validUntil" /></th>
-                                    <th className="text-left text-xs font-bold text-gray-500 dark:text-gray-400 uppercase tracking-wide px-4 py-3 whitespace-nowrap">Aksi</th>
+                                    <th className="text-left text-xs font-bold text-gray-500 dark:text-gray-400 uppercase tracking-wide px-4 py-3 whitespace-nowrap cursor-pointer select-none" onClick={() => handleSort("code")}>{t("billing.discount_codes.table.code", "Kode Promo")} <SortIcon field="code" /></th>
+                                    <th className="text-left text-xs font-bold text-gray-500 dark:text-gray-400 uppercase tracking-wide px-4 py-3">{t("billing.discount_codes.table.name_desc", "Nama / Deskripsi")}</th>
+                                    <th className="text-left text-xs font-bold text-gray-500 dark:text-gray-400 uppercase tracking-wide px-4 py-3 whitespace-nowrap cursor-pointer select-none" onClick={() => handleSort("value")}>{t("billing.discount_codes.table.discount", "Diskon")} <SortIcon field="value" /></th>
+                                    <th className="text-left text-xs font-bold text-gray-500 dark:text-gray-400 uppercase tracking-wide px-4 py-3 whitespace-nowrap">{t("billing.discount_codes.table.status", "Status")}</th>
+                                    <th className="text-left text-xs font-bold text-gray-500 dark:text-gray-400 uppercase tracking-wide px-4 py-3 whitespace-nowrap cursor-pointer select-none" onClick={() => handleSort("usageCount")}>{t("billing.discount_codes.table.usage", "Penggunaan")} <SortIcon field="usageCount" /></th>
+                                    <th className="text-left text-xs font-bold text-gray-500 dark:text-gray-400 uppercase tracking-wide px-4 py-3 whitespace-nowrap cursor-pointer select-none" onClick={() => handleSort("validUntil")}>{t("billing.discount_codes.table.validity", "Berlaku")} <SortIcon field="validUntil" /></th>
+                                    <th className="text-left text-xs font-bold text-gray-500 dark:text-gray-400 uppercase tracking-wide px-4 py-3 whitespace-nowrap">{t("billing.discount_codes.table.action", "Aksi")}</th>
                                 </tr>
                             </thead>
                             <tbody className="divide-y divide-gray-100 dark:divide-gray-800">
@@ -1075,20 +1114,20 @@ function DiscountCodesContent() {
                                     ))
                                 ) : paged.length === 0 ? (
                                     <tr><td colSpan={7} className="text-center py-16 text-gray-400 dark:text-gray-500">
-                                        <Tag className="w-8 h-8 mx-auto mb-2 opacity-40" /><p>Tidak ada kode diskon ditemukan</p>
+                                        <Tag className="w-8 h-8 mx-auto mb-2 opacity-40" /><p>{t("billing.discount_codes.table.empty") || "Tidak ada kode diskon ditemukan"}</p>
                                     </td></tr>
                                 ) : paged.map(c => {
                                     const st = getCodeStatus(c)
                                     const usagePercent = c.usageLimit > 0 ? Math.min(100, Math.round((c.usageCount / c.usageLimit) * 100)) : 0
                                     const barColor = usagePercent >= 100 ? "bg-red-500" : usagePercent >= 70 ? "bg-amber-500" : "bg-emerald-500"
                                     return (
-                                        <tr key={c.id} className="hover:bg-gray-50 dark:hover:bg-gray-800/50 transition-colors group cursor-pointer" onClick={() => router.push(`/billing/discountcodes/${c.id}`)}>
+                                        <tr key={c.id} className="hover:bg-gray-50 dark:hover:bg-gray-800/50 transition-colors group cursor-pointer" onClick={() => router.push(`/${langCode}/billing/discountcodes/${c.id}`)}>
                                             {/* Kode */}
                                             <td className="px-4 py-3" onClick={e => e.stopPropagation()}>
                                                 <div className="flex items-center gap-2">
                                                     <code className="font-mono font-bold text-xs text-emerald-700 dark:text-emerald-400 bg-emerald-50 dark:bg-emerald-900/20 px-2 py-0.5 rounded-md border border-emerald-200 dark:border-emerald-800 whitespace-nowrap">{c.code}</code>
                                                     <button onClick={() => handleCopy(c.id, c.code)} className="opacity-0 group-hover:opacity-100 text-gray-400 hover:text-emerald-500 transition-all flex-shrink-0"><Copy className="w-3.5 h-3.5" /></button>
-                                                    {copiedId === c.id && <span className="text-[10px] text-emerald-500 font-semibold animate-pulse">Disalin!</span>}
+                                                    {copiedId === c.id && <span className="text-[10px] text-emerald-500 font-semibold animate-pulse">{t("billing.discount_codes.table.copied", "Disalin!")}</span>}
                                                     {c.isReferral && <span className="text-[9px] font-bold px-1.5 py-0.5 bg-purple-100 dark:bg-purple-900/30 text-purple-600 dark:text-purple-400 rounded-full">REF</span>}
                                                 </div>
                                                 {c.campaignId && <p className="text-[10px] text-gray-400 mt-0.5 font-mono">{c.campaignId}</p>}
@@ -1104,12 +1143,12 @@ function DiscountCodesContent() {
                                                 {c.isReferral ? <span className="inline-flex items-center rounded-full px-2.5 py-1 text-xs font-bold bg-purple-100 dark:bg-purple-900/30 text-purple-700 dark:text-purple-400">{c.value}%</span>
                                                     : c.type === "percentage" ? <span className="inline-flex items-center rounded-full px-2.5 py-1 text-xs font-bold bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-400">{c.value}%</span>
                                                         : <span className="inline-flex items-center rounded-full px-2.5 py-1 text-xs font-bold bg-amber-100 dark:bg-amber-900/30 text-amber-700 dark:text-amber-400">{formatRupiah(c.value)}</span>}
-                                                {c.minOrderAmount > 0 && <p className="text-[9px] text-gray-400 mt-0.5 whitespace-nowrap">Min. {formatRupiah(c.minOrderAmount)}</p>}
+                                                {c.minOrderAmount > 0 && <p className="text-[9px] text-gray-400 mt-0.5 whitespace-nowrap">{t("billing.discount_codes.table.min_spend", `Min. ${formatRupiah(c.minOrderAmount)}`, { amount: formatRupiah(c.minOrderAmount) })}</p>}
                                             </td>
                                             {/* Status */}
                                             <td className="px-4 py-3">
                                                 <span className={`inline-flex items-center gap-1 rounded-full px-2.5 py-1 text-[10px] font-semibold whitespace-nowrap ${st.color}`}>
-                                                    {st.label === "Aktif" ? <CheckCircle2 className="w-3 h-3" /> : <XCircle className="w-3 h-3" />} {st.label}
+                                                    {c.isActive && !isExpired(c.validUntil) ? <CheckCircle2 className="w-3 h-3" /> : <XCircle className="w-3 h-3" />} {st.label}
                                                 </span>
                                             </td>
                                             {/* Penggunaan */}
@@ -1122,8 +1161,8 @@ function DiscountCodesContent() {
                                             </td>
                                             {/* Berlaku */}
                                             <td className="px-4 py-3 whitespace-nowrap">
-                                                <p className="text-xs text-gray-600 dark:text-gray-400">{formatDate(c.validFrom)}</p>
-                                                <p className="text-xs text-gray-400 dark:text-gray-500">s/d {formatDate(c.validUntil)}</p>
+                                                <p className="text-xs text-gray-600 dark:text-gray-400">{formatDate(c.validFrom, dateLocale)}</p>
+                                                <p className="text-xs text-gray-400 dark:text-gray-500">{t("billing.discount_codes.table.valid_until", `s/d ${formatDate(c.validUntil, dateLocale)}`, { date: formatDate(c.validUntil, dateLocale) })}</p>
                                             </td>
                                             {/* Aksi */}
                                             <td className="px-4 py-3 relative" onClick={e => e.stopPropagation()}>
@@ -1133,20 +1172,20 @@ function DiscountCodesContent() {
                                                 </button>
                                                 {openMenuId === c.id && (
                                                     <div className="absolute right-0 top-full mt-1 z-50 min-w-[180px] bg-white dark:bg-gray-900 rounded-xl shadow-xl border border-gray-200 dark:border-gray-700 py-1.5 overflow-hidden" onClick={(e) => e.stopPropagation()}>
-                                                        <button onClick={() => { router.push(`/billing/discountcodes/${c.id}`); setOpenMenuId(null) }} className="w-full flex items-center gap-2.5 px-4 py-2 text-xs font-medium text-emerald-600 dark:text-emerald-400 hover:bg-emerald-50 dark:hover:bg-emerald-900/20 transition-colors text-left">
-                                                            <ExternalLink className="w-3.5 h-3.5" /> Lihat Detail
+                                                        <button onClick={() => { router.push(`/${langCode}/billing/discountcodes/${c.id}`); setOpenMenuId(null) }} className="w-full flex items-center gap-2.5 px-4 py-2 text-xs font-medium text-emerald-600 dark:text-emerald-400 hover:bg-emerald-50 dark:hover:bg-emerald-900/20 transition-colors text-left">
+                                                            <ExternalLink className="w-3.5 h-3.5" /> {t("billing.discount_codes.actions.view_detail", "Lihat Detail")}
                                                         </button>
                                                         <div className="border-t border-gray-100 dark:border-gray-800 my-1" />
                                                         <button onClick={() => { handleToggle(c); setOpenMenuId(null) }} className="w-full flex items-center gap-2.5 px-4 py-2 text-xs font-medium text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors text-left">
                                                             {c.isActive ? <PauseCircle className="w-3.5 h-3.5 text-amber-500" /> : <Play className="w-3.5 h-3.5 text-emerald-500" />}
-                                                            {c.isActive ? "Jeda" : "Aktifkan"}
+                                                            {c.isActive ? t("billing.discount_codes.actions.pause", "Jeda") : t("billing.discount_codes.actions.activate", "Aktifkan")}
                                                         </button>
                                                         <div className="border-t border-gray-100 dark:border-gray-800 my-1" />
                                                         <button onClick={() => { setEditItem(c); setFormOpen(true); setOpenMenuId(null) }} className="w-full flex items-center gap-2.5 px-4 py-2 text-xs font-medium text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors text-left">
-                                                            <Pencil className="w-3.5 h-3.5 text-blue-500" /> Edit
+                                                            <Pencil className="w-3.5 h-3.5 text-blue-500" /> {t("billing.discount_codes.actions.edit", "Edit")}
                                                         </button>
                                                         <button onClick={() => { setConfirmDelete(c); setOpenMenuId(null) }} className="w-full flex items-center gap-2.5 px-4 py-2 text-xs font-medium text-red-600 dark:text-red-400 hover:bg-red-50 dark:hover:bg-red-900/20 transition-colors text-left">
-                                                            <Trash2 className="w-3.5 h-3.5" /> Hapus
+                                                            <Trash2 className="w-3.5 h-3.5" /> {t("billing.discount_codes.actions.delete", "Hapus")}
                                                         </button>
                                                     </div>
                                                 )}

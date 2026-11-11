@@ -26,6 +26,7 @@ import { SmartPagination } from "@/components/ui/smart-pagination"
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip"
 import { UserWalletModal } from "@/components/Wallet/UserWalletModal"
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter } from "@/components/ui/dialog"
+import { useI18n } from "@/components/providers/i18n-provider"
 
 // ─── Types ────────────────────────────────────────────────────────────────────
 // PipelineStatus comes from the Qurani booking API normalizer.
@@ -389,8 +390,41 @@ function SimModal({ onClose, onOrderCreated }: { onClose: () => void; onOrderCre
 // ─── Main Content ──────────────────────────────────────────────────────────────
 function PesananContent() {
     const router = useRouter()
+    const { t, locale } = useI18n()
     const rawParams = typeof window !== 'undefined' ? window.location.pathname.split('/')[1] : 'en'
-    const langCode = rawParams || 'en'
+    const langCode = locale || rawParams || 'en'
+
+    const statusLabel = useCallback((status: PipelineStatus) => {
+        switch (status) {
+            case "baru":
+            case "menunggu_guru":
+                return t("billing.orders.list.status.pending") || "Pending"
+            case "lunas":
+            case "aktif":
+                return t("billing.orders.list.status.active") || "Active"
+            case "selesai":
+                return t("billing.orders.list.status.completed") || "Completed"
+            case "gagal":
+                return t("billing.orders.list.status.cancelled") || "Cancelled"
+            default:
+                return status
+        }
+    }, [t])
+
+    const getStatusConfig = useCallback((status: PipelineStatus) => {
+        const base = STATUS_CONFIG[status] || STATUS_CONFIG.baru
+        return {
+            ...base,
+            label: statusLabel(status)
+        }
+    }, [statusLabel])
+
+    const statusActions = useMemo(() => [
+        { key: "baru" as PipelineStatus,         label: t("billing.orders.list.status.pending") || "Pending",  dot: "bg-amber-400",   text: "text-amber-700 dark:text-amber-400",   hover: "hover:bg-amber-50 dark:hover:bg-amber-900/20",   border: "border-amber-200 dark:border-amber-800" },
+        { key: "aktif" as PipelineStatus,        label: t("billing.orders.list.status.active") || "Active",           dot: "bg-sky-500",     text: "text-sky-700 dark:text-sky-400",       hover: "hover:bg-sky-50 dark:hover:bg-sky-900/20",       border: "border-sky-200 dark:border-sky-800" },
+        { key: "selesai" as PipelineStatus,      label: t("billing.orders.list.status.completed") || "Completed",         dot: "bg-blue-500",    text: "text-blue-700 dark:text-blue-400",     hover: "hover:bg-blue-50 dark:hover:bg-blue-900/20",     border: "border-blue-200 dark:border-blue-800" },
+        { key: "gagal" as PipelineStatus,        label: t("billing.orders.list.status.cancelled") || "Cancelled",           dot: "bg-rose-500",    text: "text-rose-700 dark:text-rose-400",     hover: "hover:bg-rose-50 dark:hover:bg-rose-900/20",     border: "border-rose-200 dark:border-rose-800" },
+    ], [t])
 
     // ── Search state — server-side via API Keyword param
     const [searchInput, setSearchInput] = useState("")
@@ -759,7 +793,7 @@ function PesananContent() {
                 <div className="mb-6">
                     <h1 className="text-2xl font-bold text-gray-900 dark:text-white flex items-center gap-2">
                         <ShoppingBag className="w-6 h-6 text-emerald-500" />
-                        Order
+                        {t("billing.orders.list.title") || "Orders"}
                     </h1>
                 </div>
 
@@ -768,28 +802,28 @@ function PesananContent() {
                     <div className="bg-white dark:bg-gray-800 p-4 rounded-xl border border-gray-200 dark:border-gray-700 shadow-sm flex items-center gap-4">
                         <div className="p-3 bg-amber-100 dark:bg-amber-900/30 rounded-lg flex-shrink-0"><Timer className="w-6 h-6 text-amber-600 dark:text-amber-400" /></div>
                         <div>
-                            <p className="text-sm text-gray-500 dark:text-gray-400 font-medium">Pending</p>
+                            <p className="text-sm text-gray-500 dark:text-gray-400 font-medium">{t("billing.orders.list.stat_pending") || "Pending"}</p>
                             <p className="text-xl font-bold text-gray-900 dark:text-white">{dateFiltered.filter(o => ['baru', 'menunggu_guru'].includes(o.status)).length}</p>
                         </div>
                     </div>
                     <div className="bg-white dark:bg-gray-800 p-4 rounded-xl border border-gray-200 dark:border-gray-700 shadow-sm flex items-center gap-4">
                         <div className="p-3 bg-sky-100 dark:bg-sky-900/30 rounded-lg flex-shrink-0"><BarChart2 className="w-6 h-6 text-sky-600 dark:text-sky-400" /></div>
                         <div>
-                            <p className="text-sm text-gray-500 dark:text-gray-400 font-medium">Aktif</p>
+                            <p className="text-sm text-gray-500 dark:text-gray-400 font-medium">{t("billing.orders.list.stat_active") || "Active"}</p>
                             <p className="text-xl font-bold text-gray-900 dark:text-white">{dateFiltered.filter(o => ['lunas', 'aktif'].includes(o.status)).length}</p>
                         </div>
                     </div>
                     <div className="bg-white dark:bg-gray-800 p-4 rounded-xl border border-gray-200 dark:border-gray-700 shadow-sm flex items-center gap-4">
                         <div className="p-3 bg-blue-100 dark:bg-blue-900/30 rounded-lg flex-shrink-0"><CheckCircle2 className="w-6 h-6 text-blue-600 dark:text-blue-400" /></div>
                         <div>
-                            <p className="text-sm text-gray-500 dark:text-gray-400 font-medium">Selesai</p>
+                            <p className="text-sm text-gray-500 dark:text-gray-400 font-medium">{t("billing.orders.list.stat_completed") || "Completed"}</p>
                             <p className="text-xl font-bold text-gray-900 dark:text-white">{dateFiltered.filter(o => ['selesai'].includes(o.status)).length}</p>
                         </div>
                     </div>
                     <div className="bg-white dark:bg-gray-800 p-4 rounded-xl border border-gray-200 dark:border-gray-700 shadow-sm flex items-center gap-4">
                         <div className="p-3 bg-rose-100 dark:bg-rose-900/30 rounded-lg flex-shrink-0"><XCircle className="w-6 h-6 text-rose-600 dark:text-rose-400" /></div>
                         <div>
-                            <p className="text-sm text-gray-500 dark:text-gray-400 font-medium">Batal</p>
+                            <p className="text-sm text-gray-500 dark:text-gray-400 font-medium">{t("billing.orders.list.stat_cancelled") || "Cancelled"}</p>
                             <p className="text-xl font-bold text-gray-900 dark:text-white">{dateFiltered.filter(o => ['gagal', 'batal'].includes(o.status)).length}</p>
                         </div>
                     </div>
@@ -808,7 +842,7 @@ function PesananContent() {
                                 )}
                                 <input
                                     type="text"
-                                    placeholder="Cari member, guru..."
+                                    placeholder={t("billing.orders.list.search_placeholder") || "Search member, teacher..."}
                                     value={searchInput}
                                     onChange={e => handleSearchChange(e.target.value)}
                                     onKeyDown={handleKeyPress}
@@ -820,7 +854,7 @@ function PesananContent() {
                                 className="px-3 sm:px-5 bg-emerald-500 hover:bg-emerald-600 text-white flex items-center justify-center gap-2 text-xs font-bold transition-all cursor-pointer h-10"
                             >
                                 <Search className="w-4 h-4 sm:hidden" />
-                                <span className="hidden sm:inline">Cari</span>
+                                <span className="hidden sm:inline">{t("billing.orders.list.search_btn") || "Search"}</span>
                             </button>
                         </div>
 
@@ -834,7 +868,7 @@ function PesananContent() {
                                 : "bg-white dark:bg-gray-900 border-gray-200 dark:border-gray-700 text-gray-400 cursor-not-allowed opacity-60"
                             }`}
                         >
-                            <span className="hidden sm:inline">Bulk</span>
+                            <span className="hidden sm:inline">{t("billing.orders.list.bulk_btn") || "Bulk"}</span>
                             {selectedIds.length > 0 && <span className="flex items-center justify-center min-w-[16px] h-4 px-1 rounded-full bg-white/20 text-white text-[10px]">{selectedIds.length}</span>}
                             <ChevronDown className="w-3.5 h-3.5" />
                         </button>
@@ -848,18 +882,18 @@ function PesananContent() {
                             }`}
                         >
                             <Filter className="w-4 h-4" />
-                            <span className="hidden sm:inline">Filter</span>
+                            <span className="hidden sm:inline">{t("billing.orders.list.filter_btn") || "Filter"}</span>
                         </button>
                     </div>
 
                     <Dialog open={filterOpen} onOpenChange={setFilterOpen}>
                         <DialogContent className="sm:max-w-[425px]">
                             <DialogHeader>
-                                <DialogTitle>Filter Data Pesanan</DialogTitle>
+                                <DialogTitle>{t("billing.orders.list.filter_dialog.title") || "Filter Data Pesanan"}</DialogTitle>
                             </DialogHeader>
                             <div className="space-y-4 py-2">
                                 <div>
-                                    <label className="block text-xs font-semibold text-gray-500 dark:text-gray-400 mb-1.5">Status</label>
+                                    <label className="block text-xs font-semibold text-gray-500 dark:text-gray-400 mb-1.5">{t("billing.orders.list.filter_dialog.status") || "Status"}</label>
                                     <div className="flex flex-wrap gap-2">
                                         {['', 'pending', 'aktif', 'selesai', 'gagal'].map(s => (
                                             <button
@@ -870,13 +904,21 @@ function PesananContent() {
                                                     : 'bg-gray-50 dark:bg-gray-800 text-gray-600 dark:text-gray-300 border-gray-200 dark:border-gray-700 hover:border-emerald-300'
                                                 }`}
                                             >
-                                                {s === '' ? 'Semua' : s === 'pending' ? 'Pending' : s === 'aktif' ? 'Aktif' : s === 'selesai' ? 'Selesai' : 'Batal'}
+                                                {s === '' 
+                                                    ? (t("billing.orders.list.filter_dialog.all") || 'Semua') 
+                                                    : s === 'pending' 
+                                                    ? (t("billing.orders.list.filter_dialog.pending") || 'Pending') 
+                                                    : s === 'aktif' 
+                                                    ? (t("billing.orders.list.filter_dialog.active") || 'Aktif') 
+                                                    : s === 'selesai' 
+                                                    ? (t("billing.orders.list.filter_dialog.completed") || 'Selesai') 
+                                                    : (t("billing.orders.list.filter_dialog.cancelled") || 'Batal')}
                                             </button>
                                         ))}
                                     </div>
                                 </div>
                                 <div>
-                                    <label className="block text-xs font-semibold text-gray-500 dark:text-gray-400 mb-1.5">Mode</label>
+                                    <label className="block text-xs font-semibold text-gray-500 dark:text-gray-400 mb-1.5">{t("billing.orders.list.filter_dialog.mode") || "Mode"}</label>
                                     <div className="flex flex-wrap gap-2">
                                         {['', 'online', 'offline'].map(s => (
                                             <button
@@ -887,45 +929,49 @@ function PesananContent() {
                                                     : 'bg-gray-50 dark:bg-gray-800 text-gray-600 dark:text-gray-300 border-gray-200 dark:border-gray-700 hover:border-emerald-300'
                                                 }`}
                                             >
-                                                {s === '' ? 'Semua' : s === 'online' ? 'Online' : 'Tatap Muka'}
+                                                {s === '' 
+                                                    ? (t("billing.orders.list.filter_dialog.all") || 'Semua') 
+                                                    : s === 'online' 
+                                                    ? (t("billing.orders.list.filter_dialog.online") || 'Online') 
+                                                    : (t("billing.orders.list.filter_dialog.offline") || 'Tatap Muka')}
                                             </button>
                                         ))}
                                     </div>
                                 </div>
                                 <div>
-                                    <label className="block text-xs font-semibold text-gray-500 dark:text-gray-400 mb-1.5 flex items-center gap-1"><Calendar className="w-3 h-3" />Rentang Tanggal</label>
+                                    <label className="block text-xs font-semibold text-gray-500 dark:text-gray-400 mb-1.5 flex items-center gap-1"><Calendar className="w-3 h-3" />{t("billing.orders.list.filter_dialog.date_range") || "Rentang Tanggal"}</label>
                                     <div className="grid grid-cols-2 gap-2">
                                         <div>
-                                            <p className="text-[10px] text-gray-400 mb-1">Dari</p>
+                                            <p className="text-[10px] text-gray-400 mb-1">{t("billing.orders.list.filter_dialog.from") || "Dari"}</p>
                                             <input type="date" value={filter.dateFrom} onChange={e => setFilter(f => ({ ...f, dateFrom: e.target.value }))}
                                                 className="w-full border border-gray-200 dark:border-gray-700 rounded-lg px-2 py-1.5 text-xs bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-emerald-500" />
                                         </div>
                                         <div>
-                                            <p className="text-[10px] text-gray-400 mb-1">Sampai</p>
+                                            <p className="text-[10px] text-gray-400 mb-1">{t("billing.orders.list.filter_dialog.to") || "Sampai"}</p>
                                             <input type="date" value={filter.dateTo} onChange={e => setFilter(f => ({ ...f, dateTo: e.target.value }))}
                                                 className="w-full border border-gray-200 dark:border-gray-700 rounded-lg px-2 py-1.5 text-xs bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-emerald-500" />
                                         </div>
                                     </div>
                                 </div>
                                 <div>
-                                    <label className="block text-xs font-semibold text-gray-500 dark:text-gray-400 mb-1.5">Harga</label>
+                                    <label className="block text-xs font-semibold text-gray-500 dark:text-gray-400 mb-1.5">{t("billing.orders.list.filter_dialog.price") || "Harga"}</label>
                                     <div className="grid grid-cols-2 gap-2">
                                         <div>
-                                            <p className="text-[10px] text-gray-400 mb-1">Minimum (Rp)</p>
+                                            <p className="text-[10px] text-gray-400 mb-1">{t("billing.orders.list.filter_dialog.min_price") || "Minimum (Rp)"}</p>
                                             <input type="number" value={filter.minPrice} onChange={e => setFilter(f => ({ ...f, minPrice: e.target.value }))} placeholder="0"
                                                 className="w-full border border-gray-200 dark:border-gray-700 rounded-lg px-2 py-1.5 text-xs bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-emerald-500" />
                                         </div>
                                         <div>
-                                            <p className="text-[10px] text-gray-400 mb-1">Maksimum (Rp)</p>
-                                            <input type="number" value={filter.maxPrice} onChange={e => setFilter(f => ({ ...f, maxPrice: e.target.value }))} placeholder="Tak terbatas"
+                                            <p className="text-[10px] text-gray-400 mb-1">{t("billing.orders.list.filter_dialog.max_price") || "Maksimum (Rp)"}</p>
+                                            <input type="number" value={filter.maxPrice} onChange={e => setFilter(f => ({ ...f, maxPrice: e.target.value }))} placeholder={t("billing.orders.list.filter_dialog.unlimited") || "Tak terbatas"}
                                                 className="w-full border border-gray-200 dark:border-gray-700 rounded-lg px-2 py-1.5 text-xs bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-emerald-500" />
                                         </div>
                                     </div>
                                 </div>
                             </div>
                             <DialogFooter className="flex gap-2 pt-2 border-t border-gray-100 dark:border-gray-800 sm:justify-between">
-                                <button onClick={resetFilter} className="flex-1 py-2 rounded-lg border border-gray-200 dark:border-gray-700 text-xs font-semibold text-gray-600 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors">Reset</button>
-                                <button onClick={applyFilter} className="flex-1 py-2 rounded-lg bg-emerald-500 hover:bg-emerald-600 text-white text-xs font-semibold transition-colors">Terapkan</button>
+                                <button onClick={resetFilter} className="flex-1 py-2 rounded-lg border border-gray-200 dark:border-gray-700 text-xs font-semibold text-gray-600 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors">{t("billing.orders.list.filter_dialog.reset") || "Reset"}</button>
+                                <button onClick={applyFilter} className="flex-1 py-2 rounded-lg bg-emerald-500 hover:bg-emerald-600 text-white text-xs font-semibold transition-colors">{t("billing.orders.list.filter_dialog.apply") || "Terapkan"}</button>
                             </DialogFooter>
                         </DialogContent>
                     </Dialog>
@@ -948,9 +994,9 @@ function PesananContent() {
                                     <Loader2 className="w-4 h-4 text-emerald-500 animate-spin" />
                                 </div>
                                 <div>
-                                    <p className="text-xs font-bold text-gray-800 dark:text-white">Memuat pesanan...</p>
+                                    <p className="text-xs font-bold text-gray-800 dark:text-white">{t("billing.orders.list.toast.loading") || "Memuat pesanan..."}</p>
                                     <p className="text-[10px] text-gray-400 font-medium">
-                                        {search ? `Mencari "${search}" via API Qurani` : "Mengambil data dari API Qurani"}
+                                        {search ? t("billing.orders.list.toast.searching_api", undefined, { search }) : (t("billing.orders.list.toast.fetching_api") || "Mengambil data dari API Qurani")}
                                     </p>
                                 </div>
                             </div>
@@ -961,8 +1007,8 @@ function PesananContent() {
                                     <AlertCircle className="w-4 h-4 text-amber-500" />
                                 </div>
                                 <div className="flex-1">
-                                    <p className="text-xs font-bold text-amber-700 dark:text-amber-400">API tidak tersedia</p>
-                                    <p className="text-[10px] text-gray-400 font-medium">Menampilkan data lokal</p>
+                                    <p className="text-xs font-bold text-amber-700 dark:text-amber-400">{t("billing.orders.list.toast.api_unavailable") || "API tidak tersedia"}</p>
+                                    <p className="text-[10px] text-gray-400 font-medium">{t("billing.orders.list.toast.showing_local") || "Menampilkan data lokal"}</p>
                                 </div>
                                 <button
                                     onClick={() => setApiError(null)}
@@ -995,46 +1041,46 @@ function PesananContent() {
                                         onClick={() => handleSort("id")}
                                         className="text-left text-xs font-bold text-gray-800 dark:text-gray-200 px-4 py-3 whitespace-nowrap cursor-pointer select-none hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors"
                                     >
-                                        Kode Pesanan <SortIcon col="id" />
+                                        {t("billing.orders.list.table.code") || "Kode Pesanan"} <SortIcon col="id" />
                                     </th>
                                     <th
                                         onClick={() => handleSort("member")}
                                         className="text-left text-xs font-bold text-gray-800 dark:text-gray-200 px-4 py-3 whitespace-nowrap cursor-pointer select-none hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors"
                                     >
-                                        Murid <SortIcon col="member" />
+                                        {t("billing.orders.list.table.student") || "Murid"} <SortIcon col="member" />
                                     </th>
                                     <th
                                         onClick={() => handleSort("guru")}
                                         className="text-left text-xs font-bold text-gray-800 dark:text-gray-200 px-4 py-3 whitespace-nowrap cursor-pointer select-none hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors"
                                     >
-                                        Guru <SortIcon col="guru" />
+                                        {t("billing.orders.list.table.teacher") || "Guru"} <SortIcon col="guru" />
                                     </th>
                                     <th
                                         onClick={() => handleSort("paket")}
                                         className="text-left text-xs font-bold text-gray-800 dark:text-gray-200 px-4 py-3 whitespace-nowrap cursor-pointer select-none hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors"
                                     >
-                                        Paket <SortIcon col="paket" />
+                                        {t("billing.orders.list.table.package") || "Paket"} <SortIcon col="paket" />
                                     </th>
-                                    <th className="text-left text-xs font-bold text-gray-800 dark:text-gray-200 px-4 py-3 whitespace-nowrap">Mode</th>
+                                    <th className="text-left text-xs font-bold text-gray-800 dark:text-gray-200 px-4 py-3 whitespace-nowrap">{t("billing.orders.list.table.mode") || "Mode"}</th>
                                     <th
                                         onClick={() => handleSort("harga")}
                                         className="text-left text-xs font-bold text-gray-800 dark:text-gray-200 px-4 py-3 whitespace-nowrap cursor-pointer select-none hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors"
                                     >
-                                        Harga <SortIcon col="harga" />
+                                        {t("billing.orders.list.table.price") || "Harga"} <SortIcon col="harga" />
                                     </th>
                                     <th
                                         onClick={() => handleSort("status")}
                                         className="text-left text-xs font-bold text-gray-800 dark:text-gray-200 px-4 py-3 whitespace-nowrap cursor-pointer select-none hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors"
                                     >
-                                        Status <SortIcon col="status" />
+                                        {t("billing.orders.list.table.status") || "Status"} <SortIcon col="status" />
                                     </th>
                                     <th
                                         onClick={() => handleSort("tglPesan")}
                                         className="text-left text-xs font-bold text-gray-800 dark:text-gray-200 px-4 py-3 whitespace-nowrap cursor-pointer select-none hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors"
                                     >
-                                        Tanggal <SortIcon col="tglPesan" />
+                                        {t("billing.orders.list.table.date") || "Tanggal"} <SortIcon col="tglPesan" />
                                     </th>
-                                    <th className="text-left text-xs font-bold text-gray-800 dark:text-gray-200 px-4 py-3 whitespace-nowrap">Aksi</th>
+                                    <th className="text-left text-xs font-bold text-gray-800 dark:text-gray-200 px-4 py-3 whitespace-nowrap">{t("billing.orders.list.table.action") || "Aksi"}</th>
                                 </tr>
                             </thead>
                             <tbody className="divide-y divide-gray-100 dark:divide-gray-800">
@@ -1042,17 +1088,17 @@ function PesananContent() {
                                     <tr>
                                         <td colSpan={10} className="text-center py-16 text-gray-400 dark:text-gray-500">
                                             <ShoppingBag className="w-8 h-8 mx-auto mb-2 opacity-40" />
-                                            <p>{search ? `Tidak ada pesanan untuk "${search}"` : "Tidak ada pesanan ditemukan"}</p>
+                                            <p>{search ? t("billing.orders.list.empty_search", undefined, { search }) : (t("billing.orders.list.empty_title") || "Tidak ada pesanan ditemukan")}</p>
                                         </td>
                                     </tr>
                                 ) : paged.map(order => {
                                     const colorIdx = Math.abs(order.member.charCodeAt(0) + (order.member.charCodeAt(1) || 0)) % AVATAR_COLORS.length
-                                    const st = STATUS_CONFIG[order.status]
+                                    const st = getStatusConfig(order.status)
                                     const isSelected = selectedIds.some(id => String(id) === String(order.id))
                                     return (
                                     <tr
                                         key={order.id}
-                                        onClick={() => { const l = typeof window !== 'undefined' ? window.location.pathname.split('/')[1] : 'en'; router.push(`/${l}/billing/orders/${order.id}`); }}
+                                        onClick={() => { router.push(`/${langCode}/billing/orders/${order.id}`); }}
                                         className={`${isSelected ? "bg-emerald-50/50 dark:bg-emerald-900/10" : ""} hover:bg-gray-50 dark:hover:bg-gray-800/50 transition-colors group cursor-pointer`}
                                     >
                                             <td className="px-4 py-3" onClick={e => e.stopPropagation()}>
@@ -1067,7 +1113,7 @@ function PesananContent() {
                                             <td className="px-4 py-3 w-auto" onClick={e => e.stopPropagation()}>
                                                 <div className="flex flex-col gap-0.5 items-start">
                                                     <span
-                                                        onClick={() => { const l = typeof window !== 'undefined' ? window.location.pathname.split('/')[1] : 'en'; router.push(`/${l}/billing/orders/${order.id}`); }}
+                                                        onClick={() => { router.push(`/${langCode}/billing/orders/${order.id}`); }}
                                                         className="inline-flex w-fit items-center font-mono text-xs font-semibold text-emerald-700 dark:text-emerald-400 bg-emerald-50 dark:bg-emerald-900/20 px-2 py-1 rounded-md border border-emerald-100 dark:border-emerald-800 whitespace-nowrap cursor-pointer hover:bg-emerald-100 transition-colors"
                                                     >
                                                         {order.bookingCode}
@@ -1083,12 +1129,11 @@ function PesananContent() {
                                                     onClick={(e) => {
                                                         e.stopPropagation();
                                                         if (order.userId) {
-                                                            const langStr = typeof window !== 'undefined' ? window.location.pathname.split('/')[1] : 'en';
-                                                            router.push(`/${langStr}/users/manage/${order.userId}?tab=wallet`);
+                                                            router.push(`/${langCode}/users/manage/${order.userId}?tab=wallet`);
                                                         }
                                                     }}
                                                     className={order.userId ? 'cursor-pointer group/member inline-block' : ''}
-                                                    title={order.userId ? 'Lihat profil' : ''}
+                                                    title={order.userId ? (t("billing.orders.list.view_profile") || 'Lihat profil') : ''}
                                                 >
                                                     <p className={`text-sm font-semibold text-gray-900 dark:text-white ${order.userId ? 'group-hover/member:text-emerald-600 dark:group-hover/member:text-emerald-400 group-hover/member:underline' : ''}`}>{order.member}</p>
                                                     <p className={`text-[11px] ${order.userId ? 'text-emerald-600 dark:text-emerald-400 group-hover/member:underline' : 'text-gray-500'}`}>@{order.username.replace(/^@/, '')}</p>
@@ -1100,12 +1145,11 @@ function PesananContent() {
                                                     onClick={(e) => {
                                                         e.stopPropagation();
                                                         if (order.trainerId) {
-                                                            const langStr = typeof window !== 'undefined' ? window.location.pathname.split('/')[1] : 'en';
-                                                            router.push(`/${langStr}/teachers/manage/${order.trainerId}?from=orders`);
+                                                            router.push(`/${langCode}/teachers/manage/${order.trainerId}?from=orders`);
                                                         }
                                                     }}
                                                     className={`flex items-center gap-2 ${order.trainerId ? 'cursor-pointer group/guru inline-flex' : ''}`}
-                                                    title={order.trainerId ? 'Lihat profil guru' : ''}
+                                                    title={order.trainerId ? (t("billing.orders.list.view_teacher_profile") || 'Lihat profil guru') : ''}
                                                 >
                                                     {order.guruImage ? (
                                                         <img src={order.guruImage} alt={order.guru} className="w-7 h-7 rounded-full object-cover flex-shrink-0 border border-gray-100" />
@@ -1119,7 +1163,7 @@ function PesananContent() {
                                             {/* Paket */}
                                             <td className="px-4 py-3">
                                                 <p className="text-sm font-medium text-gray-900 dark:text-white">{order.paket}</p>
-                                                <p className="text-[11px] text-gray-500">{order.sesiSelesai}/{order.sesi} Sesi</p>
+                                                <p className="text-[11px] text-gray-500">{t("billing.orders.list.sessions_count", undefined, { done: order.sesiSelesai, total: order.sesi })}</p>
                                             </td>
                                             {/* Mode (online/offline) */}
                                             <td className="px-4 py-3">
@@ -1129,7 +1173,7 @@ function PesananContent() {
                                                     : "bg-blue-50 text-blue-700 border-blue-200 dark:bg-blue-900/30 dark:text-blue-400 dark:border-blue-800"
                                                 }`}>
                                                     <span className={`w-1.5 h-1.5 rounded-full ${order.mode === "offline" ? "bg-purple-500" : "bg-blue-500"}`} />
-                                                    {order.mode === "offline" ? "Tatap Muka" : "Online"}
+                                                    {order.mode === "offline" ? (t("billing.orders.list.mode_offline") || "Tatap Muka") : (t("billing.orders.list.mode_online") || "Online")}
                                                 </span>
                                             </td>
                                             {/* Harga */}
@@ -1174,15 +1218,15 @@ function PesananContent() {
                                                         className="absolute right-4 top-10 z-40 w-48 rounded-xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-900 shadow-2xl py-1.5 overflow-hidden"
                                                     >
                                                         <button
-                                                            onClick={() => { const l = typeof window !== 'undefined' ? window.location.pathname.split('/')[1] : 'en'; router.push(`/${l}/billing/orders/${order.id}`); }}
+                                                            onClick={() => { router.push(`/${langCode}/billing/orders/${order.id}`); }}
                                                             className="w-full px-3 py-2 text-left text-xs font-semibold text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-800 flex items-center gap-2"
                                                         >
                                                             <span className="w-1.5 h-1.5 rounded-full bg-gray-400 inline-block" />
-                                                            Lihat Detail
+                                                            {t("billing.orders.list.view_detail") || "Lihat Detail"}
                                                         </button>
                                                         <div className="my-1 h-px bg-gray-100 dark:bg-gray-800 mx-3" />
-                                                        <div className="px-3 py-1 text-[10px] font-bold text-gray-400 uppercase tracking-wider">Ubah Status</div>
-                                                        {STATUS_ACTIONS.map(action => (
+                                                        <div className="px-3 py-1 text-[10px] font-bold text-gray-400 uppercase tracking-wider">{t("billing.orders.list.change_status") || "Ubah Status"}</div>
+                                                        {statusActions.map(action => (
                                                             <button
                                                                 key={action.key}
                                                                 onClick={() => handleAdvance(order.id, action.key)}
@@ -1207,13 +1251,13 @@ function PesananContent() {
                         {paged.length === 0 ? (
                             <div className="text-center py-16 text-gray-400 dark:text-gray-500">
                                 <ShoppingBag className="w-8 h-8 mx-auto mb-2 opacity-40" />
-                                <p>{search ? `Tidak ada pesanan untuk "${search}"` : "Tidak ada pesanan ditemukan"}</p>
+                                <p>{search ? t("billing.orders.list.empty_search", undefined, { search }) : (t("billing.orders.list.empty_title") || "Tidak ada pesanan ditemukan")}</p>
                             </div>
                         ) : paged.map(order => {
-                            const st = STATUS_CONFIG[order.status]
+                            const st = getStatusConfig(order.status)
                             const isSelected = selectedIds.some(id => String(id) === String(order.id))
                             return (
-                                <div key={order.id} onClick={() => { const l = typeof window !== 'undefined' ? window.location.pathname.split('/')[1] : 'en'; router.push(`/${l}/billing/orders/${order.id}`); }} className={`p-4 hover:bg-gray-50 dark:hover:bg-gray-800/50 transition-colors cursor-pointer relative ${isSelected ? "bg-emerald-50/50 dark:bg-emerald-900/10" : ""}`}>
+                                <div key={order.id} onClick={() => { router.push(`/${langCode}/billing/orders/${order.id}`); }} className={`p-4 hover:bg-gray-50 dark:hover:bg-gray-800/50 transition-colors cursor-pointer relative ${isSelected ? "bg-emerald-50/50 dark:bg-emerald-900/10" : ""}`}>
                                     <div className="flex items-center justify-between mb-3">
                                         <div className="flex items-center gap-3">
                                             <input
@@ -1246,14 +1290,13 @@ function PesananContent() {
                                             onClick={(e) => {
                                                 e.stopPropagation();
                                                 if (order.userId) {
-                                                    const langStr = typeof window !== 'undefined' ? window.location.pathname.split('/')[1] : 'en';
-                                                    router.push(`/${langStr}/users/manage/${order.userId}?tab=wallet`);
+                                                    router.push(`/${langCode}/users/manage/${order.userId}?tab=wallet`);
                                                 }
                                             }}
                                             className={order.userId ? 'cursor-pointer group/membermobile inline-block' : ''}
-                                            title={order.userId ? 'Lihat profil' : ''}
+                                            title={order.userId ? (t("billing.orders.list.view_profile") || 'Lihat profil') : ''}
                                         >
-                                            <p className="text-[10px] text-gray-500 mb-0.5">Murid</p>
+                                            <p className="text-[10px] text-gray-500 mb-0.5">{t("billing.orders.list.table.student") || "Murid"}</p>
                                             <p className={`text-sm font-semibold text-gray-900 dark:text-white ${order.userId ? 'group-hover/membermobile:text-emerald-600 dark:group-hover/membermobile:text-emerald-400' : ''}`}>{order.member}</p>
                                             <p className={`text-[11px] ${order.userId ? 'text-emerald-600 dark:text-emerald-400' : 'text-gray-500'}`}>@{order.username.replace(/^@/, '')}</p>
                                         </div>
@@ -1262,25 +1305,24 @@ function PesananContent() {
                                             onClick={(e) => {
                                                 e.stopPropagation();
                                                 if (order.trainerId) {
-                                                    const langStr = typeof window !== 'undefined' ? window.location.pathname.split('/')[1] : 'en';
-                                                    router.push(`/${langStr}/teachers/manage/${order.trainerId}?from=orders`);
+                                                    router.push(`/${langCode}/teachers/manage/${order.trainerId}?from=orders`);
                                                 }
                                             }}
                                         >
-                                            <p className="text-[10px] text-gray-500 mb-0.5">Guru</p>
+                                            <p className="text-[10px] text-gray-500 mb-0.5">{t("billing.orders.list.table.teacher") || "Guru"}</p>
                                             <p className={`text-sm font-semibold text-gray-900 dark:text-white ${order.trainerId ? 'group-hover/gurumobile:text-emerald-600 dark:group-hover/gurumobile:text-emerald-400 group-hover/gurumobile:underline' : ''}`}>{order.guru}</p>
                                             <p className={`text-[11px] ${order.trainerId ? 'text-emerald-600 dark:text-emerald-400' : 'text-gray-500'}`}>{order.guruUsername}</p>
                                         </div>
                                     </div>
                                     <div className="flex justify-between items-center bg-gray-50 dark:bg-gray-800/50 p-2.5 rounded-lg border border-gray-100 dark:border-gray-800 ml-7">
                                         <div>
-                                            <p className="text-[10px] text-gray-500 mb-0.5">{order.paket} &bull; {order.sesiSelesai}/{order.sesi} Sesi</p>
+                                            <p className="text-[10px] text-gray-500 mb-0.5">{order.paket} &bull; {t("billing.orders.list.sessions_count", undefined, { done: order.sesiSelesai, total: order.sesi })}</p>
                                             <p className="text-xs font-bold text-gray-900 dark:text-white">{formatRupiah(order.harga)}</p>
                                         </div>
                                         <div className="text-right">
                                             <span className={`inline-flex items-center gap-1.5 px-2 py-1 rounded-md text-[10px] font-semibold border ${order.mode === "offline" ? "bg-purple-50 text-purple-700 border-purple-200 dark:bg-purple-900/30 dark:text-purple-400 dark:border-purple-800" : "bg-blue-50 text-blue-700 border-blue-200 dark:bg-blue-900/30 dark:text-blue-400 dark:border-blue-800"}`}>
                                                 <span className={`w-1.5 h-1.5 rounded-full ${order.mode === "offline" ? "bg-purple-500" : "bg-blue-500"}`} />
-                                                {order.mode === "offline" ? "Tatap Muka" : "Online"}
+                                                {order.mode === "offline" ? (t("billing.orders.list.mode_offline") || "Tatap Muka") : (t("billing.orders.list.mode_online") || "Online")}
                                             </span>
                                         </div>
                                     </div>
@@ -1288,12 +1330,12 @@ function PesananContent() {
                                     {/* Action dropdown for mobile */}
                                     {openActionId === order.id && (
                                         <div onClick={e => e.stopPropagation()} className="absolute right-4 top-14 z-40 w-48 rounded-xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-900 shadow-2xl py-1.5 overflow-hidden">
-                                            <button onClick={() => { const l = typeof window !== 'undefined' ? window.location.pathname.split('/')[1] : 'en'; router.push(`/${l}/billing/orders/${order.id}`); }} className="w-full px-3 py-2 text-left text-xs font-semibold text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-800 flex items-center gap-2">
-                                                <span className="w-1.5 h-1.5 rounded-full bg-gray-400 inline-block" /> Lihat Detail
+                                            <button onClick={() => { router.push(`/${langCode}/billing/orders/${order.id}`); }} className="w-full px-3 py-2 text-left text-xs font-semibold text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-800 flex items-center gap-2">
+                                                <span className="w-1.5 h-1.5 rounded-full bg-gray-400 inline-block" /> {t("billing.orders.list.view_detail") || "Lihat Detail"}
                                             </button>
                                             <div className="my-1 h-px bg-gray-100 dark:bg-gray-800 mx-3" />
-                                            <div className="px-3 py-1 text-[10px] font-bold text-gray-400 uppercase tracking-wider">Ubah Status</div>
-                                            {STATUS_ACTIONS.map(action => (
+                                            <div className="px-3 py-1 text-[10px] font-bold text-gray-400 uppercase tracking-wider">{t("billing.orders.list.change_status") || "Ubah Status"}</div>
+                                            {statusActions.map(action => (
                                                 <button key={action.key} onClick={() => handleAdvance(order.id, action.key)} className={`w-full px-3 py-1.5 text-left text-xs font-semibold flex items-center gap-2 ${action.text} ${action.hover} transition-colors`}>
                                                     <span className={`w-1.5 h-1.5 rounded-full ${action.dot} flex-shrink-0`} /> {action.label}
                                                 </button>
@@ -1331,15 +1373,15 @@ function PesananContent() {
                     >
                         <div className="flex items-center justify-between px-5 py-4 border-b border-gray-100 dark:border-gray-800">
                             <div>
-                                <p className="font-bold text-gray-900 dark:text-white text-sm">Ubah Status Massal</p>
-                                <p className="text-xs text-gray-500 mt-0.5">{selectedIds.length} pesanan dipilih</p>
+                                <p className="font-bold text-gray-900 dark:text-white text-sm">{t("billing.orders.list.bulk_modal.title") || "Ubah Status Massal"}</p>
+                                <p className="text-xs text-gray-500 mt-0.5">{t("billing.orders.list.bulk_modal.selected_count", undefined, { count: selectedIds.length })}</p>
                             </div>
                             <button onClick={() => setBulkOpen(false)} className="text-gray-400 hover:text-gray-600 transition-colors">
                                 <X className="w-4 h-4" />
                             </button>
                         </div>
                         <div className="p-4 grid grid-cols-2 gap-2">
-                            {STATUS_ACTIONS.map(action => (
+                            {statusActions.map(action => (
                                 <button
                                     key={action.key}
                                     onClick={() => handleBulkStatus(action.key)}
@@ -1356,7 +1398,7 @@ function PesananContent() {
                                 onClick={() => { setSelectedIds([]); setBulkOpen(false) }}
                                 className="w-full px-4 py-2.5 rounded-xl border border-gray-200 dark:border-gray-700 text-xs font-semibold text-gray-500 hover:text-rose-500 hover:border-rose-300 hover:bg-rose-50 dark:hover:bg-rose-900/20 transition-all"
                             >
-                                Batal &amp; Hapus Pilihan
+                                {t("billing.orders.list.bulk_modal.cancel_clear") || "Batal & Hapus Pilihan"}
                             </button>
                         </div>
                     </div>

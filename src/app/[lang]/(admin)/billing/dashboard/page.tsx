@@ -1,6 +1,7 @@
 "use client"
 
 import { useState, useMemo, useRef, useEffect } from "react"
+import { useI18n } from "@/components/providers/i18n-provider"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import {
     CreditCard,
@@ -74,38 +75,19 @@ type FilterKey =
     | "last_week" | "last_month" | "last_year"
     | "last_7_days" | "last_30_days"
 
-const FILTER_OPTIONS: { key: FilterKey; label: string; group: string }[] = [
-    { key: "all", label: "All (Semua)", group: "Quick" },
-    { key: "today", label: "Today", group: "Quick" },
-    { key: "yesterday", label: "Yesterday", group: "Quick" },
-    { key: "this_week", label: "This week", group: "Period" },
-    { key: "this_month", label: "This month", group: "Period" },
-    { key: "this_year", label: "This year", group: "Period" },
-    { key: "last_week", label: "Last week", group: "Historical" },
-    { key: "last_month", label: "Last month", group: "Historical" },
-    { key: "last_year", label: "Last year", group: "Historical" },
-    { key: "last_7_days", label: "Last 7 days", group: "Historical" },
-    { key: "last_30_days", label: "Last 30 days", group: "Historical" },
+const FILTER_OPTIONS: { key: FilterKey; group: "Quick" | "Period" | "Historical" }[] = [
+    { key: "all", group: "Quick" },
+    { key: "today", group: "Quick" },
+    { key: "yesterday", group: "Quick" },
+    { key: "this_week", group: "Period" },
+    { key: "this_month", group: "Period" },
+    { key: "this_year", group: "Period" },
+    { key: "last_week", group: "Historical" },
+    { key: "last_month", group: "Historical" },
+    { key: "last_year", group: "Historical" },
+    { key: "last_7_days", group: "Historical" },
+    { key: "last_30_days", group: "Historical" },
 ]
-
-// ── Display label per filter ──────────────────────────────────────────────────
-function getFilterLabel(filter: FilterKey): string {
-    const now = new Date()
-    const months = ["Jan", "Feb", "Mar", "Apr", "Mei", "Jun", "Jul", "Agu", "Sep", "Okt", "Nov", "Des"]
-    switch (filter) {
-        case "all": return "Semua Data"
-        case "today": return `Data: ${now.getDate()} ${months[now.getMonth()]} ${now.getFullYear()}`
-        case "yesterday": { const y = new Date(now.getTime() - 86400000); return `Data: ${y.getDate()} ${months[y.getMonth()]} ${y.getFullYear()}` }
-        case "this_week": return `Data: Minggu ini`
-        case "this_month": return `Data: ${months[now.getMonth()]} ${now.getFullYear()}`
-        case "this_year": return `Data: Tahun ${now.getFullYear()}`
-        case "last_week": return `Data: Minggu lalu`
-        case "last_month": { const m = new Date(now.getFullYear(), now.getMonth() - 1, 1); return `Data: ${months[m.getMonth()]} ${m.getFullYear()}` }
-        case "last_year": return `Data: Tahun ${now.getFullYear() - 1}`
-        case "last_7_days": return `Data: 7 hari terakhir`
-        case "last_30_days": return `Data: 30 hari terakhir`
-    }
-}
 
 
 function getFilterDates(filter: FilterKey) {
@@ -184,34 +166,37 @@ function formatRupiah(amount: number) {
 
 // ─── Filter Dropdown ──────────────────────────────────────────────────────────
 function FilterDropdown({ value, onChange }: { value: FilterKey; onChange: (k: FilterKey) => void }) {
+    const { t, locale } = useI18n()
     const [open, setOpen] = useState(false)
     const ref = useRef<HTMLDivElement>(null)
+    const dateLocale = locale === "en" ? "en-US" : locale === "ar" ? "ar-SA" : "id-ID"
+
     // Dynamic label on the button based on active filter
     const displayDate = useMemo(() => {
         const now = new Date()
         const pad = (n: number) => String(n).padStart(2, "0")
         const fmtShort = (d: Date) =>
-            d.toLocaleDateString("en-US", { month: "short", day: "2-digit", year: "numeric" })
+            d.toLocaleDateString(dateLocale, { month: "short", day: "2-digit", year: "numeric" })
 
         switch (value) {
-            case "all": return "Semua Data"
+            case "all": return t("billing.dashboard.filter.all", "Semua Data")
             case "today": return fmtShort(now)
             case "yesterday": { const y = new Date(now); y.setDate(y.getDate() - 1); return fmtShort(y) }
             case "this_week": {
                 const day = now.getDay()
                 const mon = new Date(now); mon.setDate(now.getDate() - (day === 0 ? 6 : day - 1))
                 const sun = new Date(mon); sun.setDate(mon.getDate() + 6)
-                return `${pad(mon.getDate())} – ${pad(sun.getDate())} ${now.toLocaleDateString("en-US", { month: "short", year: "numeric" })}`
+                return `${pad(mon.getDate())} – ${pad(sun.getDate())} ${now.toLocaleDateString(dateLocale, { month: "short", year: "numeric" })}`
             }
-            case "this_month": return now.toLocaleDateString("en-US", { month: "long", year: "numeric" })
-            case "this_year": return `Year ${now.getFullYear()}`
+            case "this_month": return now.toLocaleDateString(dateLocale, { month: "long", year: "numeric" })
+            case "this_year": return `${t("billing.dashboard.filter.this_year", "Tahun ini")} (${now.getFullYear()})`
             case "last_week": { const d = now.getDay(); const end = new Date(now); end.setDate(now.getDate() - (d === 0 ? 7 : d)); const start = new Date(end); start.setDate(end.getDate() - 6); return `${fmtShort(start)} – ${fmtShort(end)}` }
-            case "last_month": { const m = new Date(now.getFullYear(), now.getMonth() - 1, 1); return m.toLocaleDateString("en-US", { month: "long", year: "numeric" }) }
-            case "last_year": return `Year ${now.getFullYear() - 1}`
+            case "last_month": { const m = new Date(now.getFullYear(), now.getMonth() - 1, 1); return m.toLocaleDateString(dateLocale, { month: "long", year: "numeric" }) }
+            case "last_year": return `${t("billing.dashboard.filter.last_year", "Tahun lalu")} (${now.getFullYear() - 1})`
             case "last_7_days": { const from = new Date(now); from.setDate(now.getDate() - 6); return `${fmtShort(from)} – ${pad(now.getDate())}` }
-            case "last_30_days": { const from = new Date(now); from.setDate(now.getDate() - 29); return `${from.toLocaleDateString("en-US", { month: "short", day: "2-digit" })} – ${fmtShort(now)}` }
+            case "last_30_days": { const from = new Date(now); from.setDate(now.getDate() - 29); return `${from.toLocaleDateString(dateLocale, { month: "short", day: "2-digit" })} – ${fmtShort(now)}` }
         }
-    }, [value])
+    }, [value, dateLocale, t])
 
 
     useEffect(() => {
@@ -222,7 +207,7 @@ function FilterDropdown({ value, onChange }: { value: FilterKey; onChange: (k: F
         return () => document.removeEventListener("mousedown", handleClickOutside)
     }, [])
 
-    const groups = ["Quick", "Period", "Historical"]
+    const groups: ("Quick" | "Period" | "Historical")[] = ["Quick", "Period", "Historical"]
 
     return (
         <div className="relative" ref={ref}>
@@ -254,7 +239,7 @@ function FilterDropdown({ value, onChange }: { value: FilterKey; onChange: (k: F
                                                 : "text-gray-600 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-800/60"
                                                 }`}
                                         >
-                                            {opt.label}
+                                            {t(`billing.dashboard.filter.${opt.key}`, opt.key)}
                                             {value === opt.key && <Check className="w-3 h-3 text-emerald-500 flex-shrink-0" />}
                                         </button>
                                     ))}
@@ -309,6 +294,8 @@ function CircularGauge({ value, max, label, sublabel, color, displayValue }: {
 
 // ─── Main Content ─────────────────────────────────────────────────────────────
 function BillingDashboardContent() {
+    const { t, locale } = useI18n()
+    const dateLocale = locale === "en" ? "en-US" : locale === "ar" ? "ar-SA" : "id-ID"
     const [activeFilter, setActiveFilter] = useState<FilterKey>("this_month")
     const [loading, setLoading] = useState(false)
     const [stats, setStats] = useState<any>({
@@ -326,8 +313,6 @@ function BillingDashboardContent() {
     })
     const [chartData, setChartData] = useState<Array<{ label: string; revenue: number }>>([])
     const [filteredPayments, setFilteredPayments] = useState<Payment[]>([])
-
-    const label = useMemo(() => getFilterLabel(activeFilter), [activeFilter])
 
     useEffect(() => {
         const fetchData = async () => {
@@ -417,17 +402,41 @@ function BillingDashboardContent() {
         ? Math.round((stats.activeBookings / stats.totalBookings) * 100) : 0
 
     const overviewCards = [
-        { title: "Total Revenue", icon: DollarSign, value: formatRupiah(stats.totalRevenue), sub: `${stats.successfulPayments} transaksi berhasil`, color: "emerald" },
-        { title: "Total Pembayaran", icon: CreditCard, value: stats.totalPayments.toLocaleString("id-ID"), sub: `${stats.successfulPayments} berhasil`, color: "blue" },
-        { title: "Pesanan Aktif", icon: Users, value: stats.activeBookings.toLocaleString("id-ID"), sub: `dari ${stats.totalBookings} total pesanan`, color: "violet" },
-        { title: "Avg. Transaksi", icon: Banknote, value: formatRupiah(stats.avgTransaction), sub: `${stats.successfulPayments} transaksi`, color: "amber" },
+        {
+            title: t("billing.dashboard.total_revenue", "Total Revenue"),
+            icon: DollarSign,
+            value: formatRupiah(stats.totalRevenue),
+            sub: `${stats.successfulPayments} ${t("billing.dashboard.successful_transactions", "transaksi berhasil")}`,
+            color: "emerald"
+        },
+        {
+            title: t("billing.dashboard.total_payments", "Total Pembayaran"),
+            icon: CreditCard,
+            value: stats.totalPayments.toLocaleString(dateLocale),
+            sub: `${stats.successfulPayments} ${t("billing.dashboard.successful", "berhasil")}`,
+            color: "blue"
+        },
+        {
+            title: t("billing.dashboard.active_orders", "Pesanan Aktif"),
+            icon: Users,
+            value: stats.activeBookings.toLocaleString(dateLocale),
+            sub: `${t("billing.dashboard.of", "dari")} ${stats.totalBookings} ${t("billing.dashboard.total_orders", "total pesanan")}`,
+            color: "violet"
+        },
+        {
+            title: t("billing.dashboard.avg_transaction", "Avg. Transaksi"),
+            icon: Banknote,
+            value: formatRupiah(stats.avgTransaction),
+            sub: `${stats.successfulPayments} ${t("billing.dashboard.transactions", "transaksi")}`,
+            color: "amber"
+        },
     ]
 
     const statusCards = [
-        { label: "Berhasil", icon: CheckCircle2, count: stats.successfulPayments, color: "emerald" },
-        { label: "Pending", icon: Clock, count: stats.pendingPayments, color: "amber" },
-        { label: "Gagal", icon: XCircle, count: stats.failedPayments, color: "red" },
-        { label: "Refund", icon: RefreshCcw, count: stats.pendingRefunds, color: "blue" },
+        { label: t("billing.dashboard.successful_status", "Berhasil"), icon: CheckCircle2, count: stats.successfulPayments, color: "emerald" },
+        { label: t("billing.dashboard.pending_status", "Pending"), icon: Clock, count: stats.pendingPayments, color: "amber" },
+        { label: t("billing.dashboard.failed_status", "Gagal"), icon: XCircle, count: stats.failedPayments, color: "red" },
+        { label: t("billing.dashboard.refund_status", "Refund"), icon: RefreshCcw, count: stats.pendingRefunds, color: "blue" },
     ]
 
     // Chart rendering
@@ -450,10 +459,10 @@ function BillingDashboardContent() {
         .slice(0, 5)
 
     const statusMap: Record<string, { label: string; cls: string }> = {
-        completed: { label: "Berhasil", cls: "bg-emerald-100 text-emerald-700 dark:bg-emerald-900/30 dark:text-emerald-400" },
-        pending: { label: "Pending", cls: "bg-amber-100 text-amber-700 dark:bg-amber-900/30 dark:text-amber-400" },
-        failed: { label: "Gagal", cls: "bg-red-100 text-red-700 dark:bg-red-900/30 dark:text-red-400" },
-        refund_requested: { label: "Refund", cls: "bg-blue-100 text-blue-700 dark:bg-blue-900/30 dark:text-blue-400" },
+        completed: { label: t("billing.dashboard.successful_status", "Berhasil"), cls: "bg-emerald-100 text-emerald-700 dark:bg-emerald-900/30 dark:text-emerald-400" },
+        pending: { label: t("billing.dashboard.pending_status", "Pending"), cls: "bg-amber-100 text-amber-700 dark:bg-amber-900/30 dark:text-amber-400" },
+        failed: { label: t("billing.dashboard.failed_status", "Gagal"), cls: "bg-red-100 text-red-700 dark:bg-red-900/30 dark:text-red-400" },
+        refund_requested: { label: t("billing.dashboard.refund_status", "Refund"), cls: "bg-blue-100 text-blue-700 dark:bg-blue-900/30 dark:text-blue-400" },
     }
 
     const colorMap: Record<string, string> = {
@@ -496,7 +505,9 @@ function BillingDashboardContent() {
                 {/* ── Header ── */}
                 <div className="flex items-center justify-between mb-3 flex-wrap gap-2">
                     <div>
-                        <h1 className="text-2xl font-bold text-gray-900 dark:text-white">Billing Dashboard</h1>
+                        <h1 className="text-2xl font-bold text-gray-900 dark:text-white">
+                            {t("billing.dashboard.title", "Billing Dashboard")}
+                        </h1>
                     </div>
                     <FilterDropdown value={activeFilter} onChange={setActiveFilter} />
                 </div>
@@ -508,26 +519,26 @@ function BillingDashboardContent() {
                     <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
                         <Card className="lg:col-span-2 bg-white dark:bg-gray-900 border-gray-200 dark:border-gray-800 gap-1 py-4">
                             <CardHeader className="pb-0">
-                                <CardTitle className="text-gray-900 dark:text-white text-base">Status Keuangan</CardTitle>
+                                <CardTitle className="text-gray-900 dark:text-white text-base">{t("billing.dashboard.financial_status", "Status Keuangan")}</CardTitle>
                             </CardHeader>
                             <CardContent className="pt-0">
                                 <div className="grid grid-cols-3 gap-4">
                                     <CircularGauge
                                         value={successRate} max={100}
-                                        label="Tingkat Sukses"
-                                        sublabel={`${stats.successfulPayments} dari ${stats.totalPayments}`}
+                                        label={t("billing.dashboard.success_rate", "Tingkat Sukses")}
+                                        sublabel={`${stats.successfulPayments} ${t("billing.dashboard.of", "dari")} ${stats.totalPayments}`}
                                         color="text-emerald-500" displayValue={`${successRate}%`}
                                     />
                                     <CircularGauge
                                         value={activeSubRate} max={100}
-                                        label="Pesanan Aktif"
-                                        sublabel={`${stats.activeBookings} dari ${stats.totalBookings}`}
+                                        label={t("billing.dashboard.active_orders", "Pesanan Aktif")}
+                                        sublabel={`${stats.activeBookings} ${t("billing.dashboard.of", "dari")} ${stats.totalBookings}`}
                                         color="text-blue-500" displayValue={`${activeSubRate}%`}
                                     />
                                     <CircularGauge
                                         value={stats.pendingPayouts} max={150}
-                                        label="Payout Pending"
-                                        sublabel={`${stats.pendingPayouts} menunggu`}
+                                        label={t("billing.dashboard.pending_payout", "Payout Pending")}
+                                        sublabel={`${stats.pendingPayouts} ${t("billing.dashboard.pending", "menunggu")}`}
                                         color="text-amber-500" displayValue={`${stats.pendingPayouts}`}
                                     />
                                 </div>
@@ -536,7 +547,7 @@ function BillingDashboardContent() {
 
                         <Card className="bg-white dark:bg-gray-900 border-gray-200 dark:border-gray-800 gap-1 py-4">
                             <CardHeader className="pb-0">
-                                <CardTitle className="text-gray-900 dark:text-white text-base">Total Revenue</CardTitle>
+                                <CardTitle className="text-gray-900 dark:text-white text-base">{t("billing.dashboard.total_revenue", "Total Revenue")}</CardTitle>
                             </CardHeader>
                             <CardContent className="flex flex-col gap-4 px-6 py-4">
                                 <div>
@@ -546,7 +557,7 @@ function BillingDashboardContent() {
                                     <div className="flex items-center gap-1 mt-1">
                                         <ArrowUpRight className="w-4 h-4 text-emerald-500" />
                                         <span className="text-sm text-emerald-600 dark:text-emerald-400 font-medium">
-                                            {stats.successfulPayments} transaksi
+                                            {stats.successfulPayments} {t("billing.dashboard.transactions", "transaksi")}
                                         </span>
                                     </div>
                                 </div>
@@ -563,7 +574,7 @@ function BillingDashboardContent() {
                                                 </div>
                                             </div>
                                         ))
-                                        : <p className="text-xs text-gray-400 text-center py-2">Tidak ada data pada periode ini</p>
+                                        : <p className="text-xs text-gray-400 text-center py-2">{t("billing.dashboard.no_data_period", "Tidak ada data pada periode ini")}</p>
                                     }
                                 </div>
                             </CardContent>
@@ -573,7 +584,7 @@ function BillingDashboardContent() {
                     {/* ── Row 2: Overview cards ── */}
                     <Card className="bg-white dark:bg-gray-900 border-gray-200 dark:border-gray-800 gap-1 py-4">
                         <CardHeader className="pb-0">
-                            <CardTitle className="text-gray-900 dark:text-white text-base font-semibold">Overview</CardTitle>
+                            <CardTitle className="text-gray-900 dark:text-white text-base font-semibold">{t("billing.dashboard.overview", "Overview")}</CardTitle>
                         </CardHeader>
                         <CardContent className="pt-0">
                             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3">
@@ -607,7 +618,7 @@ function BillingDashboardContent() {
 
                         <Card className="bg-white dark:bg-gray-900 border-gray-200 dark:border-gray-800 gap-1 py-4">
                             <CardHeader className="pb-0">
-                                <CardTitle className="text-gray-900 dark:text-white text-base">Statistik Pembayaran</CardTitle>
+                                <CardTitle className="text-gray-900 dark:text-white text-base">{t("billing.dashboard.payment_stats", "Statistik Pembayaran")}</CardTitle>
                             </CardHeader>
                             <CardContent className="pt-0">
                                 <div className="grid grid-cols-2 gap-4">
@@ -622,7 +633,7 @@ function BillingDashboardContent() {
                                                     </div>
                                                     <div>
                                                         <h4 className="font-semibold text-gray-900 dark:text-white">{s.label}</h4>
-                                                        <p className="text-xs text-gray-500 dark:text-gray-400">Transaksi</p>
+                                                        <p className="text-xs text-gray-500 dark:text-gray-400">{t("billing.dashboard.transactions", "Transaksi")}</p>
                                                     </div>
                                                 </div>
                                                 <div className="flex items-center justify-between">
@@ -639,10 +650,10 @@ function BillingDashboardContent() {
                         <Card className="bg-white dark:bg-gray-900 border-gray-200 dark:border-gray-800 gap-1 py-4">
                             <CardHeader className="pb-0">
                                 <div className="flex items-center justify-between">
-                                    <CardTitle className="text-gray-900 dark:text-white text-base">Tren Revenue</CardTitle>
+                                    <CardTitle className="text-gray-900 dark:text-white text-base">{t("billing.dashboard.revenue_trend", "Tren Revenue")}</CardTitle>
                                     <div className="flex items-center gap-3 text-xs text-gray-500">
                                         <span className="flex items-center gap-1">
-                                            <span className="w-3 h-3 rounded-full bg-emerald-500 inline-block" /> Revenue
+                                            <span className="w-3 h-3 rounded-full bg-emerald-500 inline-block" /> {t("billing.dashboard.revenue_label", "Revenue")}
                                         </span>
                                     </div>
                                 </div>
@@ -652,7 +663,7 @@ function BillingDashboardContent() {
                                     <div className="h-44 relative">
                                         {chartData.every(d => d.revenue === 0) ? (
                                             <div className="h-full flex items-center justify-center text-xs text-gray-400">
-                                                Tidak ada data revenue pada periode ini
+                                                {t("billing.dashboard.no_revenue_data", "Tidak ada data revenue pada periode ini")}
                                             </div>
                                         ) : (
                                             <svg className="w-full h-full" viewBox={`0 0 ${chartW} ${chartH}`} preserveAspectRatio="none">
@@ -690,18 +701,18 @@ function BillingDashboardContent() {
                         <CardHeader className="pb-0">
                             <div className="flex items-center justify-between">
                                 <CardTitle className="text-gray-900 dark:text-white text-base">
-                                    Pembayaran
+                                    {t("billing.dashboard.payments_table_title", "Pembayaran")}
                                     {filteredPayments.length === 0 && (
-                                        <span className="ml-2 text-xs font-normal text-gray-400">— tidak ada data pada periode ini</span>
+                                        <span className="ml-2 text-xs font-normal text-gray-400">{t("billing.dashboard.no_data_short", "— tidak ada data pada periode ini")}</span>
                                     )}
                                 </CardTitle>
-                                <span className="text-xs text-gray-400">{filteredPayments.length} transaksi</span>
+                                <span className="text-xs text-gray-400">{filteredPayments.length} {t("billing.dashboard.transactions", "transaksi")}</span>
                             </div>
                         </CardHeader>
                         <CardContent className="pt-2 px-0">
                             {filteredPayments.length === 0 ? (
                                 <div className="text-center py-10 text-gray-400 text-sm">
-                                    Tidak ada transaksi pada periode yang dipilih
+                                    {t("billing.dashboard.no_transactions_found", "Tidak ada transaksi pada periode yang dipilih")}
                                 </div>
                             ) : (
                                 <div className="overflow-x-auto">
@@ -709,13 +720,13 @@ function BillingDashboardContent() {
                                         <table className="w-full text-sm">
                                             <thead className="sticky top-0 bg-white dark:bg-gray-900 z-10">
                                                 <tr className="border-b border-gray-100 dark:border-gray-800">
-                                                    <th className="text-left text-xs font-medium text-gray-500 dark:text-gray-400 px-6 py-3">ID</th>
-                                                    <th className="text-left text-xs font-medium text-gray-500 dark:text-gray-400 px-4 py-3">User</th>
-                                                    <th className="text-left text-xs font-medium text-gray-500 dark:text-gray-400 px-4 py-3">Trainer</th>
-                                                    <th className="text-left text-xs font-m edium text-gray-500 dark:text-gray-400 px-4 py-3">Payment</th>
-                                                    <th className="text-left text-xs font-medium text-gray-500 dark:text-gray-400 px-4 py-3">Jumlah</th>
-                                                    <th className="text-left text-xs font-medium text-gray-500 dark:text-gray-400 px-4 py-3">Status</th>
-                                                    <th className="text-left text-xs font-medium text-gray-500 dark:text-gray-400 px-4 py-3">Tanggal</th>
+                                                    <th className="text-left text-xs font-medium text-gray-500 dark:text-gray-400 px-6 py-3">{t("billing.dashboard.col_id", "ID")}</th>
+                                                    <th className="text-left text-xs font-medium text-gray-500 dark:text-gray-400 px-4 py-3">{t("billing.dashboard.col_user", "User")}</th>
+                                                    <th className="text-left text-xs font-medium text-gray-500 dark:text-gray-400 px-4 py-3">{t("billing.dashboard.col_trainer", "Trainer")}</th>
+                                                    <th className="text-left text-xs font-medium text-gray-500 dark:text-gray-400 px-4 py-3">{t("billing.dashboard.col_payment", "Payment")}</th>
+                                                    <th className="text-left text-xs font-medium text-gray-500 dark:text-gray-400 px-4 py-3">{t("billing.dashboard.col_amount", "Jumlah")}</th>
+                                                    <th className="text-left text-xs font-medium text-gray-500 dark:text-gray-400 px-4 py-3">{t("billing.dashboard.col_status", "Status")}</th>
+                                                    <th className="text-left text-xs font-medium text-gray-500 dark:text-gray-400 px-4 py-3">{t("billing.dashboard.col_date", "Tanggal")}</th>
                                                 </tr>
                                             </thead>
                                             <tbody className="divide-y divide-gray-50 dark:divide-gray-800">
@@ -746,7 +757,7 @@ function BillingDashboardContent() {
                                                                     </span>
                                                                 </td>
                                                                 <td className="px-4 py-3 text-[11px] text-gray-400">
-                                                                    {new Date(p.createdAt).toLocaleDateString("id-ID", { day: "2-digit", month: "short", year: "numeric" })}
+                                                                    {new Date(p.createdAt).toLocaleDateString(dateLocale, { day: "2-digit", month: "short", year: "numeric" })}
                                                                 </td>
                                                             </tr>
                                                         )
