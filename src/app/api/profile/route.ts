@@ -8,16 +8,22 @@ export async function GET(req: Request) {
   const searchParams = new URL(req.url).searchParams;
   const userId = searchParams.get("userId");
 
-  // Get auth token and user data from cookies
+  // Get auth token from header or cookies
+  const authHeader = req.headers.get("authorization");
+  const bearerToken = authHeader?.startsWith("Bearer ") ? authHeader.slice(7).trim() : null;
+
   const cookieStore = await cookies();
-  const token = cookieStore.get("myqurani_access_token")?.value;
+  const token = bearerToken || cookieStore.get("myqurani_access_token")?.value;
   const userCookie = cookieStore.get("myqurani_user")?.value;
 
-  // Try to get user data from cookie as fallback
+  // Try to get user data from cookie as fallback ONLY if it has real data
   let fallbackUserData: any = null;
   if (userCookie) {
     try {
-      fallbackUserData = JSON.parse(decodeURIComponent(userCookie));
+      const parsed = JSON.parse(decodeURIComponent(userCookie));
+      if (parsed.address || parsed.dob || parsed.avatar || parsed.cityName) {
+        fallbackUserData = parsed;
+      }
     } catch {
       console.log('[Profile API] Failed to parse user cookie');
     }
@@ -134,34 +140,53 @@ export async function GET(req: Request) {
   }
 }
 
+// Helper function to normalize avatar URL (handle relative paths from API)
+function normalizeAvatarUrl(url: string | null | undefined): string | null {
+  if (!url || !url.trim()) return null;
+  const img = url.trim();
+  if (img.startsWith('http') || img.startsWith('data:')) return img;
+  const normalizedPath = img.replace(/\\/g, '/');
+  return `${API_BASE_URL}${normalizedPath.startsWith('/') ? '' : '/'}${normalizedPath}`;
+}
+
 // Helper function to convert API response to profile format
 function convertToProfile(data: any) {
+  const avatarUrl = normalizeAvatarUrl(
+    data.avatarUrl || data.avatar || data.image || data.avatar_url || data.profilePhotoUrl
+  );
+
   return {
     id: String(data.id || data.userId || ''),
     username: data.username || '',
     name: data.name || data.fullName || '',
     full_name: data.fullName || data.name || '',
+    fullName: data.fullName || data.name || '',
     nickname: data.nickname || '',
     email: data.email || '',
-    avatar: data.avatarUrl || data.avatar || data.image || null,
-    avatar_url: data.avatarUrl || data.avatar || data.image || null,
-    hp: data.phone || data.hp || '',
-    noHp: data.phone || data.noHp || '',
+    avatar: avatarUrl,
+    avatar_url: avatarUrl,
+    avatarUrl: avatarUrl,
+    hp: data.address || data.phone || data.hp || '',
+    address: data.address || data.phone || data.hp || '',
+    phone: data.phone || data.hp || '',
+    noHp: data.noHp || data.phone || data.hp || '',
     bio: data.bio || '',
     cityId: data.cityId || null,
     city_id: data.cityId || null,
-    cityName: data.cityName || '',
-    city_name: data.cityName || '',
+    cityName: data.cityName || data.city || '',
+    city_name: data.cityName || data.city || '',
     stateId: data.stateId || null,
-    stateName: data.stateName || '',
-    state_name: data.stateName || '',
+    stateName: data.stateName || data.state || '',
+    state_name: data.stateName || data.state || '',
     countryId: data.countryId || null,
     country_id: data.countryId || null,
-    countryName: data.countryName || '',
-    country_name: data.countryName || '',
-    gender: data.gender || null,
-    dob: data.birthDate || data.dob || null,
-    birth_date: data.birthDate || null,
+    countryName: data.countryName || data.country || '',
+    country_name: data.countryName || data.country || '',
+    gender: data.gender ?? data.sex ?? null,
+    sex: data.sex ?? data.gender ?? null,
+    dob: data.dateOfBirth || data.birthDate || data.dob || null,
+    dateOfBirth: data.dateOfBirth || data.birthDate || data.dob || null,
+    birth_date: data.dateOfBirth || data.birthDate || null,
     job: data.job || '',
     timezone: data.timezone || '',
     is_verified: data.isVerified || false,

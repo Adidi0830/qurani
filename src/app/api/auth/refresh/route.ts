@@ -60,10 +60,16 @@ export async function POST() {
 
         console.log('[Auth Refresh] Token refreshed successfully!');
 
-        // Create response with new cookies
+        // Create response with new cookies and return tokens in body for client storage sync
+        const expiresInMs = data.expiresIn ? data.expiresIn * 1000 : 7 * 24 * 60 * 60 * 1000;
+        const expiresAt = data.accessTokenExpiresAt || new Date(Date.now() + expiresInMs).toISOString();
+
         const res = NextResponse.json({
             success: true,
             message: "Token refreshed successfully",
+            accessToken: data.accessToken,
+            refreshToken: data.refreshToken || refreshToken,
+            expiresAt,
         });
 
         // Set new access token

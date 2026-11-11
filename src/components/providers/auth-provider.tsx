@@ -98,7 +98,9 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
                             localStorage.setItem('myqurani_auth', JSON.stringify(newAuth));
 
                             const expires = new Date(newAuth.expiresAt).toUTCString();
-                            document.cookie = `myqurani_access_token=${data.accessToken}; expires=${expires}; path=/; SameSite=Lax`;
+                            const isSecure = window.location.protocol === 'https:';
+                            const secureFlag = isSecure ? '; Secure' : '';
+                            document.cookie = `myqurani_access_token=${data.accessToken}; expires=${expires}; path=/; SameSite=Lax${secureFlag}`;
 
                             setCustomUser(newAuth);
                             console.log('[AuthProvider] Token refreshed successfully ✅');
@@ -120,9 +122,17 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         async (authId: string): Promise<UserProfile | null> => {
             const stored = getStoredAuth();
 
-            // Priority 0: Fetch from /api/me (same endpoint used by Profile page)
+            // Priority 0: Fetch from /api/me (pass Bearer token if available)
             try {
-                const res = await fetch('/api/me');
+                const headers: Record<string, string> = {};
+                if (stored?.accessToken) {
+                    headers['Authorization'] = `Bearer ${stored.accessToken}`;
+                }
+                if (stored?.refreshToken) {
+                    headers['x-refresh-token'] = stored.refreshToken;
+                }
+
+                const res = await fetch('/api/me', { headers });
                 if (res.ok) {
                     const json = await res.json();
                     if (json?.profile) {
@@ -130,11 +140,11 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
                         const avatarUrl = p.avatar || p.avatar_url || normalizeAvatarUrl(p.image);
                         const profileObj: UserProfile = {
                             id: String(p.id || authId),
-                            name: p.name || p.username || stored?.name || 'User',
+                            name: p.name || p.fullName || p.username || stored?.name || 'User',
                             username: p.username || stored?.username || '',
                             email: p.email || stored?.email || '',
                             avatar: avatarUrl || '',
-                            role: p.role || stored?.roles?.[0] || 'member',
+                            role: p.role || (p.roles && p.roles[0]) || stored?.roles?.[0] || 'member',
                             roles: p.roles || (p.role ? [p.role] : stored?.roles) || ['member'],
                             timezone: p.timezone || (stored?.timezone as string) || '',
                         };
@@ -148,6 +158,36 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
                 }
             } catch (err) {
                 console.warn('[AuthProvider] /api/me fetch failed:', err);
+            }
+
+            // Priority 1: Direct fallback to MyQurani API via usersApi.getMe
+            if (stored?.accessToken) {
+                try {
+                    const { usersApi } = await import('@/lib/api');
+                    const result = await usersApi.getMe(stored.accessToken);
+                    const userData = result?.data || result;
+                    if (userData) {
+                        const avatarUrl = normalizeAvatarUrl(userData.avatar || userData.avatarUrl || userData.image);
+                        const profileObj: UserProfile = {
+                            id: String(userData.id || authId),
+                            name: userData.name || userData.fullName || userData.username || stored?.name || 'User',
+                            username: userData.username || stored?.username || '',
+                            email: userData.email || stored?.email || '',
+                            avatar: avatarUrl || '',
+                            role: userData.role || (userData.roles && userData.roles[0]) || stored?.roles?.[0] || 'member',
+                            roles: userData.roles || (userData.role ? [userData.role] : stored?.roles) || ['member'],
+                            timezone: userData.timezone || (stored?.timezone as string) || '',
+                        };
+
+                        if (avatarUrl && stored.image !== avatarUrl) {
+                            setStoredAuth({ ...stored, image: avatarUrl });
+                        }
+
+                        return profileObj;
+                    }
+                } catch (apiErr) {
+                    console.warn('[AuthProvider] Direct usersApi.getMe fallback failed:', apiErr);
+                }
             }
 
             // Fallback: use what's inside customUser / getStoredAuth

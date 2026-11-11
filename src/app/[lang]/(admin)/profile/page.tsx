@@ -222,17 +222,17 @@ function ProfilePageContent() {
         currencyFormat: (profile as any).currencyFormat || "",
       })
 
-      if ((profile as any).stateId) {
-        setCurrentState({ id: (profile as any).stateId, name: (profile as any).stateName || "" })
+      if ((profile as any).stateName || (profile as any).stateId) {
+        setCurrentState({ id: (profile as any).stateId || 0, name: (profile as any).stateName || "" })
       }
-      if ((profile as any).cityId) {
+      if ((profile as any).cityName || (profile as any).cityId) {
         // Use corrected timezone so displayTimezone shows the right value immediately
-        setCurrentCity({ id: (profile as any).cityId, name: (profile as any).cityName || "", timezone: correctedTimezone })
+        setCurrentCity({ id: (profile as any).cityId || 0, name: (profile as any).cityName || "", timezone: correctedTimezone })
       }
-      if ((profile as any).countryId) {
+      if ((profile as any).countryName || (profile as any).countryId) {
         const countryRow = countries.find(c => c.id === (profile as any).countryId)
         setCurrentCountry({
-          id: (profile as any).countryId,
+          id: (profile as any).countryId || 0,
           name: (profile as any).countryName || countryRow?.name || "",
           iso2: countryRow?.iso2 || ""
         })
@@ -301,8 +301,9 @@ function ProfilePageContent() {
   // Get avatar source
   const getAvatarSource = () => {
     if (avatarPreview) return avatarPreview
-    if (profile?.avatar && profile.avatar !== null && profile.avatar !== '') {
-      return profile.avatar
+    const av = profile?.avatar || (profile as any)?.avatar_url || (profile as any)?.avatarUrl || (profile as any)?.image
+    if (av && typeof av === 'string' && av.trim() !== '') {
+      return av
     }
     return null
   }

@@ -91,9 +91,19 @@ export function setStoredAuth(auth: AuthData): void {
     localStorage.setItem(AUTH_STORAGE_KEY, JSON.stringify(auth));
 
     // Also set cookies for middleware (non-httpOnly for fallback)
-    const expires = new Date(auth.expiresAt).toUTCString();
-    document.cookie = `myqurani_access_token=${auth.accessToken}; expires=${expires}; path=/; SameSite=Lax`;
-    document.cookie = `myqurani_refresh_token=${auth.refreshToken}; path=/; SameSite=Lax`;
+    let expiresDate = new Date(Date.now() + 7 * 24 * 60 * 60 * 1000);
+    if (auth.expiresAt) {
+        const parsed = new Date(auth.expiresAt);
+        if (!isNaN(parsed.getTime())) {
+            expiresDate = parsed;
+        }
+    }
+    const expires = expiresDate.toUTCString();
+    const isSecure = typeof window !== 'undefined' && window.location.protocol === 'https:';
+    const secureFlag = isSecure ? '; Secure' : '';
+
+    document.cookie = `myqurani_access_token=${auth.accessToken}; expires=${expires}; path=/; SameSite=Lax${secureFlag}`;
+    document.cookie = `myqurani_refresh_token=${auth.refreshToken || ''}; expires=${new Date(Date.now() + 30 * 24 * 60 * 60 * 1000).toUTCString()}; path=/; SameSite=Lax${secureFlag}`;
     document.cookie = `myqurani_user=${encodeURIComponent(JSON.stringify({
         id: auth.userId,
         email: auth.email,
@@ -114,7 +124,7 @@ export function setStoredAuth(auth: AuthData): void {
         language: auth.language,
         timezone: auth.timezone,
         dateFormat: auth.dateFormat,
-    }))}; expires=${expires}; path=/; SameSite=Lax`;
+    }))}; expires=${expires}; path=/; SameSite=Lax${secureFlag}`;
 
     // Dispatch auth change event
     window.dispatchEvent(new Event('auth-change'));
@@ -328,16 +338,19 @@ export const authApi = {
         const result = await response.json();
         const data = result.data || result;
 
+        const expiresInMs = data.expiresIn ? data.expiresIn * 1000 : 7 * 24 * 60 * 60 * 1000;
+        const expiresAt = data.accessTokenExpiresAt || new Date(Date.now() + expiresInMs).toISOString();
+
         const auth: AuthData = {
-            userId: data.userId,
-            email: data.email,
-            username: data.username,
-            name: data.name,
-            image: data.image,
+            userId: data.userId || data.user?.id || '',
+            email: data.email || data.user?.email || '',
+            username: data.username || data.user?.username || '',
+            name: data.name || data.user?.name || '',
+            image: data.image || data.user?.avatar || data.user?.image || '',
             accessToken: data.accessToken,
             refreshToken: data.refreshToken,
-            expiresAt: data.accessTokenExpiresAt,
-            roles: data.roles || [],
+            expiresAt: expiresAt,
+            roles: data.roles || (data.user?.role ? [data.user.role] : []),
         };
 
         setStoredAuth(auth);

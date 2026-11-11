@@ -43,12 +43,13 @@ export const Topbar = React.memo(function Topbar() {
   const isCollapsed = mounted ? state === "collapsed" && !isMobile : false
 
   const displayData = React.useMemo(() => {
-    const active = profile?.avatar ? profile : (userProfile || profile)
+    const active = (userProfile?.avatar || (userProfile as any)?.avatar_url) ? userProfile : (profile?.avatar ? profile : (userProfile || profile))
+    const avatar = active?.avatar || (active as any)?.avatar_url || (active as any)?.avatarUrl || (active as any)?.image || ""
     return {
-      displayName: active?.name || "User",
+      displayName: active?.name || (active as any)?.fullName || "User",
       displayUsername: active?.username || null,
-      initial: getInitials(active?.name || "User"),
-      avatar: active?.avatar || "",
+      initial: getInitials(active?.name || (active as any)?.fullName || "User"),
+      avatar: avatar,
     }
   }, [profile, userProfile])
 

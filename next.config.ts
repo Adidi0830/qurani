@@ -36,8 +36,20 @@ const nextConfig: NextConfig = {
         port: "",
         pathname: "/storage/v1/object/public/**",
       },
+      {
+        protocol: "https",
+        hostname: "api.myqurani.com",
+      },
+      {
+        protocol: "https",
+        hostname: "supabase-qurani.ubig.web.id",
+      },
     ],
-    domains: ["lh3.googleusercontent.com"],
+    domains: [
+      "lh3.googleusercontent.com",
+      "api.myqurani.com",
+      "supabase-qurani.ubig.web.id"
+    ],
   },
 
   trailingSlash: false,

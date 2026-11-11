@@ -1,31 +1,76 @@
 // app/api/me/route.ts
-// Clean endpoint for current user profile - no query params needed
+// Clean endpoint for current user profile - supports both header and cookie authentication with auto-refresh
 import { NextResponse } from "next/server";
 import { cookies } from "next/headers";
 
 const API_BASE_URL = process.env.NEXT_PUBLIC_MYQURANI_API_URL || 'https://api.myqurani.com';
 
-export async function GET() {
+export async function GET(req: Request) {
     try {
         const cookieStore = await cookies();
-        const token = cookieStore.get("myqurani_access_token")?.value;
+
+        // 1. Extract access token & refresh token from Authorization header (localStorage) OR cookies
+        const authHeader = req.headers.get("authorization");
+        const headerToken = authHeader?.startsWith("Bearer ") ? authHeader.slice(7).trim() : null;
+        let token = headerToken || cookieStore.get("myqurani_access_token")?.value;
+
+        const headerRefreshToken = req.headers.get("x-refresh-token");
+        let refreshToken = headerRefreshToken || cookieStore.get("myqurani_refresh_token")?.value;
+
+        let refreshedToken: string | null = null;
+        let refreshedRefreshToken: string | null = null;
+
+        // Helper to attempt token refresh
+        const tryRefreshToken = async (): Promise<boolean> => {
+            if (!refreshToken) return false;
+            try {
+                console.log("[/api/me] Access token invalid/expired, attempting refresh with refresh token...");
+                const refreshRes = await fetch(`${API_BASE_URL}/api/v1/Auth/refresh-token`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ refreshToken }),
+                });
+
+                if (!refreshRes.ok) return false;
+                const refreshJson = await refreshRes.json();
+                const refreshData = refreshJson.data || refreshJson;
+
+                if (refreshData?.accessToken) {
+                    token = refreshData.accessToken;
+                    refreshedToken = refreshData.accessToken;
+                    if (refreshData.refreshToken) {
+                        refreshToken = refreshData.refreshToken;
+                        refreshedRefreshToken = refreshData.refreshToken;
+                    }
+                    console.log("[/api/me] Token refreshed successfully ✅");
+                    return true;
+                }
+            } catch (err) {
+                console.error("[/api/me] Refresh token error:", err);
+            }
+            return false;
+        };
 
         if (!token) {
-            // Try fallback to cookie user data
-            const userCookie = cookieStore.get('myqurani_user')?.value;
-            if (userCookie) {
-                try {
-                    const userData = JSON.parse(decodeURIComponent(userCookie));
-                    return NextResponse.json({ profile: convertToProfile(userData) });
-                } catch {
-                    return NextResponse.json({ error: "Not authenticated" }, { status: 401 });
+            // Try refresh if we have a refresh token
+            const didRefresh = await tryRefreshToken();
+            if (!didRefresh) {
+                // Check if userCookie exists with complete data
+                const userCookie = cookieStore.get('myqurani_user')?.value;
+                if (userCookie) {
+                    try {
+                        const userData = JSON.parse(decodeURIComponent(userCookie));
+                        if (userData.address || userData.cityName || userData.countryName || userData.dob || userData.avatar) {
+                            return NextResponse.json({ profile: convertToProfile(userData) });
+                        }
+                    } catch {}
                 }
+                return NextResponse.json({ error: "Not authenticated" }, { status: 401 });
             }
-            return NextResponse.json({ error: "Not authenticated" }, { status: 401 });
         }
 
-        // Fetch from MyQurani API /api/v1/users/me
-        const response = await fetch(`${API_BASE_URL}/api/v1/users/me`, {
+        // 2. Fetch from MyQurani API /api/v1/Users/me
+        let response = await fetch(`${API_BASE_URL}/api/v1/Users/me`, {
             method: 'GET',
             headers: {
                 'Authorization': `Bearer ${token}`,
@@ -34,33 +79,78 @@ export async function GET() {
             cache: 'no-store',
         });
 
+        // 3. If 401 Unauthorized, attempt token refresh and retry
+        if (response.status === 401 && !refreshedToken) {
+            const didRefresh = await tryRefreshToken();
+            if (didRefresh) {
+                response = await fetch(`${API_BASE_URL}/api/v1/Users/me`, {
+                    method: 'GET',
+                    headers: {
+                        'Authorization': `Bearer ${token}`,
+                        'Content-Type': 'application/json',
+                    },
+                    cache: 'no-store',
+                });
+            }
+        }
+
         if (!response.ok) {
-            // Fallback to cookie data
+            console.warn(`[/api/me] MyQurani API returned ${response.status}`);
+
+            // Only fallback to cookie data if the cookie has substantive profile fields
             const userCookie = cookieStore.get('myqurani_user')?.value;
             if (userCookie) {
                 try {
                     const userData = JSON.parse(decodeURIComponent(userCookie));
-                    return NextResponse.json({ profile: convertToProfile(userData) });
-                } catch {
-                    // Continue to error
-                }
+                    if (userData.address || userData.cityName || userData.countryName || userData.dob || userData.avatar) {
+                        return NextResponse.json({ profile: convertToProfile(userData) });
+                    }
+                } catch {}
             }
-            return NextResponse.json({ error: "Failed to fetch profile" }, { status: response.status });
+
+            return NextResponse.json(
+                { error: "Failed to fetch profile from API" },
+                { status: response.status }
+            );
         }
 
         const responseText = await response.text();
-        if (!responseText) {
+        if (!responseText || responseText.trim() === '') {
             return NextResponse.json({ error: "Empty response" }, { status: 500 });
         }
 
         const result = JSON.parse(responseText);
         const profileData = result.data || result;
+        const profile = convertToProfile(profileData);
 
-        // --- Data Supabase sudah tidak digunakan ---
-        let profile = convertToProfile(profileData);
-        // -------------------------------------------------------------
+        const res = NextResponse.json({
+            profile,
+            accessToken: refreshedToken || undefined,
+        });
 
-        return NextResponse.json({ profile });
+        // 4. Update cookies if token was refreshed during this request
+        if (refreshedToken) {
+            const isProd = process.env.NODE_ENV === 'production';
+            res.cookies.set('myqurani_access_token', refreshedToken, {
+                httpOnly: true,
+                secure: isProd,
+                sameSite: 'lax',
+                path: '/',
+                maxAge: 60 * 60 * 24 * 7,
+            });
+
+            if (refreshedRefreshToken) {
+                res.cookies.set('myqurani_refresh_token', refreshedRefreshToken, {
+                    httpOnly: true,
+                    secure: isProd,
+                    sameSite: 'lax',
+                    path: '/',
+                    maxAge: 60 * 60 * 24 * 30,
+                });
+            }
+        }
+
+        return res;
     } catch (err) {
         console.error("[/api/me] Error:", err);
         return NextResponse.json({ error: "Failed to fetch profile" }, { status: 500 });
@@ -80,19 +170,25 @@ function normalizeAvatarUrl(url: string | null | undefined): string | null {
 
 // Helper function to convert API response to profile format
 function convertToProfile(data: any) {
-    const avatarUrl = normalizeAvatarUrl(data.avatarUrl || data.avatar || data.image);
+    const avatarUrl = normalizeAvatarUrl(
+        data.avatarUrl || data.avatar || data.image || data.avatar_url || data.profilePhotoUrl
+    );
 
     return {
         id: String(data.id || data.userId || ''),
         username: data.username || '',
         name: data.name || data.fullName || '',
         full_name: data.fullName || data.name || '',
+        fullName: data.fullName || data.name || '',
         nickname: data.nickname || '',
         email: data.email || '',
         avatar: avatarUrl,
         avatar_url: avatarUrl,
-        hp: data.phone || data.hp || data.address || '',
-        noHp: data.phone || data.noHp || data.address || '',
+        avatarUrl: avatarUrl,
+        hp: data.address || data.phone || data.hp || '',
+        address: data.address || data.phone || data.hp || '',
+        phone: data.phone || data.hp || '',
+        noHp: data.noHp || data.phone || data.hp || '',
         bio: data.bio || '',
         cityId: data.cityId || null,
         city_id: data.cityId || null,
@@ -106,7 +202,9 @@ function convertToProfile(data: any) {
         countryName: data.countryName || data.country || '',
         country_name: data.countryName || data.country || '',
         gender: data.gender ?? data.sex ?? null,
+        sex: data.sex ?? data.gender ?? null,
         dob: data.dateOfBirth || data.birthDate || data.dob || null,
+        dateOfBirth: data.dateOfBirth || data.birthDate || data.dob || null,
         birth_date: data.dateOfBirth || data.birthDate || null,
         job: data.job || '',
         timezone: data.timezone || '',
