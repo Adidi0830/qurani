@@ -1,7 +1,8 @@
 "use client"
 
-import { useState, useRef, useEffect } from "react"
+import { useState, useRef, useEffect, useMemo } from "react"
 import { useRouter } from "next/navigation"
+import { useI18n } from "@/components/providers/i18n-provider"
 import {
     Search, Filter, MoreHorizontal, Calendar,
     ChevronLeft, ChevronRight, Clock, CheckCircle2, XCircle,
@@ -13,13 +14,13 @@ import {
 import { useKycOrganisasi, ApiOrg, FilterState, EMPTY_FILTER } from "@/hooks/use-kyc-organisasi"
 
 // ─── Tipe badge config ────────────────────────────────────────────────────────
-const STATUS_CONFIG: Record<string, { label: string; cls: string; icon: any }> = {
-    semua: { label: "Semua", cls: "bg-gray-50 text-gray-600 border border-gray-200", icon: Building },
-    menunggu: { label: "Menunggu", cls: "bg-orange-50 text-orange-600 border border-orange-200", icon: Clock },
-    aktif: { label: "Aktif", cls: "bg-emerald-50 text-emerald-600 border border-emerald-200", icon: CheckCircle2 },
-    nonaktif: { label: "Nonaktif", cls: "bg-red-50 text-red-600 border border-red-200", icon: XCircle },
-    ditolak: { label: "Ditolak", cls: "bg-red-50 text-red-600 border border-red-200", icon: AlertCircle },
-}
+const getStatusConfig = (t: (key: string, fallback?: string) => string): Record<string, { label: string; cls: string; icon: any }> => ({
+    semua: { label: t("kyc_organization.status_all", "Semua"), cls: "bg-gray-50 text-gray-600 border border-gray-200", icon: Building },
+    menunggu: { label: t("kyc_organization.status_pending", "Menunggu"), cls: "bg-orange-50 text-orange-600 border border-orange-200", icon: Clock },
+    aktif: { label: t("kyc_organization.status_active", "Aktif"), cls: "bg-emerald-50 text-emerald-600 border border-emerald-200", icon: CheckCircle2 },
+    nonaktif: { label: t("kyc_organization.status_inactive", "Nonaktif"), cls: "bg-red-50 text-red-600 border border-red-200", icon: XCircle },
+    ditolak: { label: t("kyc_organization.status_rejected", "Ditolak"), cls: "bg-red-50 text-red-600 border border-red-200", icon: AlertCircle },
+})
 
 // ─── Toast Component ───────────────────────────────────────────────────────
 type ToastData = { id: number; message: string; type: "success" | "error" }
@@ -93,6 +94,7 @@ function PerPageSelect({ value, onChange }: { value: number; onChange: (v: numbe
 
 // ─── Dropdown Aksi ────────────────────────────────────────────────────────────
 function AksiDropdown({ org, onToggle, onDetail }: { org: ApiOrg; onToggle: (id: number | string, currentStatus: string) => void; onDetail: (id: number | string) => void }) {
+    const { t } = useI18n()
     const [open, setOpen] = useState(false)
     const buttonRef = useRef<HTMLButtonElement>(null)
     const [isBottom, setIsBottom] = useState(false)
@@ -100,7 +102,7 @@ function AksiDropdown({ org, onToggle, onDetail }: { org: ApiOrg; onToggle: (id:
     const isAktif = statusStr === "active" || statusStr === "aktif" || statusStr === "approved" || (!org.status && org.isVerified === 1 && org.isActive);
 
     const currentStatus = isAktif ? "ACTIVE" : "INACTIVE"
-    const nextLabel = isAktif ? "Nonaktifkan" : "Aktifkan"
+    const nextLabel = isAktif ? t("kyc_organization.action_deactivate", "Nonaktifkan") : t("kyc_organization.action_activate", "Aktifkan")
 
     const toggleOpen = () => {
         if (!open && buttonRef.current) {
@@ -128,7 +130,7 @@ function AksiDropdown({ org, onToggle, onDetail }: { org: ApiOrg; onToggle: (id:
                         onClick={() => { setOpen(false); onDetail(org.id) }}
                         className="w-full text-left px-4 py-2.5 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors border-b border-gray-100 dark:border-gray-800"
                     >
-                        Lihat &amp; Verifikasi
+                        {t("kyc_organization.action_view_verify", "Lihat & Verifikasi")}
                     </button>
                     <button
                         onClick={() => { setOpen(false); onToggle(org.id, currentStatus) }}
@@ -222,6 +224,7 @@ function KycDetailModal({
     orgMembersLoading: boolean
     fetchOrgMembers: (id: number | string) => Promise<void>
 }) {
+    const { t } = useI18n()
     const [activeTab, setActiveTab] = useState<"profil" | "dokumen" | "guru" | "galeri">("profil")
     const [verifying, setVerifying] = useState(false)
     const [showReject, setShowReject] = useState(false)
@@ -257,17 +260,17 @@ function KycDetailModal({
             {showReject && (
                 <div className="absolute inset-0 z-[60] flex items-center justify-center bg-black/40 backdrop-blur-sm px-4">
                     <div className="bg-white dark:bg-gray-900 rounded-2xl w-full max-w-md p-6 shadow-2xl animate-in fade-in zoom-in-95 duration-200">
-                        <h3 className="text-lg font-bold text-gray-900 dark:text-white mb-2">Tolak Pendaftaran</h3>
-                        <p className="text-sm text-gray-500 mb-4">Silakan masukkan alasan penolakan. Alasan ini akan dikirimkan kepada pendaftar.</p>
+                        <h3 className="text-lg font-bold text-gray-900 dark:text-white mb-2">{t("kyc_organization.reject_title", "Tolak Pendaftaran")}</h3>
+                        <p className="text-sm text-gray-500 mb-4">{t("kyc_organization.reject_desc", "Silakan masukkan alasan penolakan. Alasan ini akan dikirimkan kepada pendaftar.")}</p>
                         <textarea
                             className="w-full h-32 p-3 border border-gray-200 dark:border-gray-700 rounded-xl mb-4 bg-gray-50 dark:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-red-500 text-sm"
-                            placeholder="Contoh: Dokumen legalitas tidak lengkap..."
+                            placeholder={t("kyc_organization.reject_placeholder", "Contoh: Dokumen legalitas tidak lengkap...")}
                             value={rejectReason}
                             onChange={(e) => setRejectReason(e.target.value)}
                         />
                         <div className="flex items-center justify-end gap-3">
-                            <button onClick={() => setShowReject(false)} className="px-4 py-2 text-sm font-medium text-gray-600 hover:bg-gray-100 rounded-xl transition-colors">Batal</button>
-                            <button onClick={handleReject} disabled={!rejectReason.trim() || verifying} className="px-4 py-2 text-sm font-bold text-white bg-red-500 hover:bg-red-600 rounded-xl transition-colors disabled:opacity-50">Kirim Penolakan</button>
+                            <button onClick={() => setShowReject(false)} className="px-4 py-2 text-sm font-medium text-gray-600 hover:bg-gray-100 rounded-xl transition-colors">{t("kyc_organization.reject_cancel", "Batal")}</button>
+                            <button onClick={handleReject} disabled={!rejectReason.trim() || verifying} className="px-4 py-2 text-sm font-bold text-white bg-red-500 hover:bg-red-600 rounded-xl transition-colors disabled:opacity-50">{t("kyc_organization.reject_confirm", "Kirim Penolakan")}</button>
                         </div>
                     </div>
                 </div>
@@ -280,7 +283,7 @@ function KycDetailModal({
                     onClick={onClose}
                     className="absolute top-4 left-4 z-10 flex items-center gap-2 px-4 py-2 bg-black/40 hover:bg-black/60 backdrop-blur-md text-white text-sm font-semibold rounded-full transition-colors"
                 >
-                    <ChevronLeft className="w-4 h-4" /> Kembali ke Daftar
+                    <ChevronLeft className="w-4 h-4" /> {t("kyc_organization.btn_back_to_list", "Kembali ke Daftar")}
                 </button>
 
                 {/* BANNER SECTION */}
@@ -575,6 +578,7 @@ function FilterModal({
     onApply: (f: FilterState) => void
     onClose: () => void
 }) {
+    const { t } = useI18n()
     const [draft, setDraft] = useState<FilterState>(initial)
 
     const setVal = (key: keyof FilterState, val: any) => {
@@ -605,7 +609,7 @@ function FilterModal({
                     <div className="flex items-center justify-between mb-1">
                         <div className="flex items-center gap-2">
                             <Filter className="w-4 h-4 text-gray-600 dark:text-gray-400" />
-                            <h2 className="text-base font-bold text-gray-900 dark:text-white">Filter Data</h2>
+                            <h2 className="text-base font-bold text-gray-900 dark:text-white">{t("kyc_organization.filter_modal_title", "Filter Data")}</h2>
                         </div>
                         <button
                             onClick={onClose}
@@ -620,16 +624,16 @@ function FilterModal({
                     <div className="mb-5">
                         <div className="flex items-center gap-2 mb-3">
                             <Building2 className="w-4 h-4 text-gray-500" />
-                            <span className="text-sm font-semibold text-gray-800 dark:text-gray-200">Tipe Organisasi</span>
+                            <span className="text-sm font-semibold text-gray-800 dark:text-gray-200">{t("kyc_organization.filter_org_type", "Tipe Organisasi")}</span>
                         </div>
                         <div className="flex flex-wrap gap-2">
-                            <ChipBtn label="Semua" active={!draft.type} onClick={() => setVal("type", "")} />
-                            {TIPE_OPTIONS.map(t => (
+                            <ChipBtn label={t("kyc_organization.tab_all", "Semua")} active={!draft.type} onClick={() => setVal("type", "")} />
+                            {TIPE_OPTIONS.map(opt => (
                                 <ChipBtn
-                                    key={t}
-                                    label={t}
-                                    active={draft.type === t}
-                                    onClick={() => setVal("type", t)}
+                                    key={opt}
+                                    label={opt}
+                                    active={draft.type === opt}
+                                    onClick={() => setVal("type", opt)}
                                 />
                             ))}
                         </div>
@@ -639,10 +643,10 @@ function FilterModal({
                     <div className="mb-5">
                         <div className="flex items-center gap-2 mb-3">
                             <Building className="w-4 h-4 text-gray-500" />
-                            <span className="text-sm font-semibold text-gray-800 dark:text-gray-200">Kategori Organisasi</span>
+                            <span className="text-sm font-semibold text-gray-800 dark:text-gray-200">{t("kyc_organization.filter_category", "Kategori Organisasi")}</span>
                         </div>
                         <div className="flex flex-wrap gap-2">
-                            <ChipBtn label="Semua" active={draft.categoryIds.length === 0} onClick={() => setVal("categoryIds", [])} />
+                            <ChipBtn label={t("kyc_organization.tab_all", "Semua")} active={draft.categoryIds.length === 0} onClick={() => setVal("categoryIds", [])} />
                             {KATEGORI_OPTIONS.map(k => (
                                 <ChipBtn
                                     key={k.id}
@@ -665,13 +669,13 @@ function FilterModal({
                             onClick={() => setDraft(EMPTY_FILTER)}
                             className="flex items-center gap-1.5 text-sm text-gray-500 hover:text-gray-700 dark:hover:text-gray-300 transition-colors"
                         >
-                            <RotateCcw className="w-3.5 h-3.5" /> Reset
+                            <RotateCcw className="w-3.5 h-3.5" /> {t("kyc_organization.filter_btn_reset", "Reset")}
                         </button>
                         <button
                             onClick={() => { onApply(draft); onClose() }}
                             className="px-6 py-2 bg-emerald-500 hover:bg-emerald-600 text-white text-sm font-semibold rounded-xl transition-colors"
                         >
-                            Save
+                            {t("kyc_organization.filter_btn_save", "Save")}
                         </button>
                     </div>
                 </div>
@@ -707,6 +711,9 @@ function KycOrganisasiContent() {
     } = useKycOrganisasi()
 
     const router = useRouter()
+    const { t, locale } = useI18n()
+    const statusConfig = useMemo(() => getStatusConfig(t), [t])
+    const dateLocale = locale === "en" ? "en-US" : locale === "ar" ? "ar-SA" : "id-ID"
 
     const [showFilter, setShowFilter] = useState(false)
     const [searchInput, setSearchInput] = useState(search)
@@ -715,14 +722,12 @@ function KycOrganisasiContent() {
 
     const activeFiltersCount = (appliedFilter.type ? 1 : 0) + (appliedFilter.isActive ? 1 : 0) + (appliedFilter.categoryIds.length > 0 ? 1 : 0) + (appliedFilter.dateFrom ? 1 : 0) + (appliedFilter.dateTo ? 1 : 0)
 
-
-
     const tabs: { key: typeof activeTab; label: string }[] = [
-        { key: "semua", label: "Semua" },
-        { key: "menunggu", label: "Menunggu" },
-        { key: "aktif", label: "Aktif" },
-        { key: "nonaktif", label: "Nonaktif" },
-        { key: "ditolak", label: "Ditolak" },
+        { key: "semua", label: t("kyc_organization.tab_all", "Semua") },
+        { key: "menunggu", label: t("kyc_organization.tab_pending", "Menunggu") },
+        { key: "aktif", label: t("kyc_organization.tab_active", "Aktif") },
+        { key: "nonaktif", label: t("kyc_organization.tab_inactive", "Nonaktif") },
+        { key: "ditolak", label: t("kyc_organization.tab_rejected", "Ditolak") },
     ]
 
     const getVisiblePages = () => {
@@ -745,13 +750,13 @@ function KycOrganisasiContent() {
                 />
             )}
 
-
-
             <div className="max-w-[1600px] mx-auto">
                 {/* ── Header ── */}
                 <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-4">
                     <div className="flex items-center gap-2">
-                        <h1 className="text-xl sm:text-2xl font-bold text-gray-900 dark:text-white">KYC Organisasi</h1>
+                        <h1 className="text-xl sm:text-2xl font-bold text-gray-900 dark:text-white">
+                            {t("kyc_organization.page_title", "KYC Organisasi")}
+                        </h1>
                     </div>
                 </div>
 
@@ -762,7 +767,7 @@ function KycOrganisasiContent() {
                         <div className="flex w-full rounded-lg shadow-sm border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-950 overflow-hidden focus-within:ring-2 focus-within:ring-emerald-500 focus-within:border-emerald-500 transition-all">
                             <input
                                 type="text"
-                                placeholder="Cari nama organisasi"
+                                placeholder={t("kyc_organization.search_placeholder", "Cari nama organisasi")}
                                 value={searchInput}
                                 onChange={e => setSearchInput(e.target.value)}
                                 onKeyDown={e => {
@@ -790,7 +795,7 @@ function KycOrganisasiContent() {
                             }`}
                     >
                         <Filter className="w-4 h-4" /> 
-                        <span className="hidden sm:inline">Filter</span>
+                        <span className="hidden sm:inline">{t("kyc_organization.filter", "Filter")}</span>
                     </button>
                 </div>
 
@@ -819,11 +824,11 @@ function KycOrganisasiContent() {
                 <div className="block md:hidden space-y-3 mb-4">
                     {loading ? (
                         <div className="text-center py-10 text-gray-400 text-sm bg-white dark:bg-gray-900 rounded-xl border border-gray-200 dark:border-gray-800">
-                            Memuat data organisasi...
+                            {t("kyc_organization.loading_data", "Memuat data organisasi...")}
                         </div>
                     ) : filteredData.length === 0 ? (
                         <div className="text-center py-10 text-gray-400 text-sm bg-white dark:bg-gray-900 rounded-xl border border-gray-200 dark:border-gray-800">
-                            Tidak ada data organisasi ditemukan
+                            {t("kyc_organization.no_data", "Tidak ada data organisasi ditemukan")}
                         </div>
                     ) : filteredData.map(org => {
                         let orgStatus = "nonaktif";
@@ -836,9 +841,9 @@ function KycOrganisasiContent() {
                         else if (org.isVerified === 2) orgStatus = "ditolak";
                         else if (org.isActive) orgStatus = "aktif";
 
-                        const status = STATUS_CONFIG[orgStatus]
+                        const status = statusConfig[orgStatus] || statusConfig.nonaktif
                         const StatusIcon = status.icon
-                        const tglPengajuan = new Date(org.createdAt || Date.now()).toLocaleDateString("id-ID", {
+                        const tglPengajuan = new Date(org.createdAt || Date.now()).toLocaleDateString(dateLocale, {
                             day: "numeric", month: "short", year: "numeric"
                         })
                         return (
@@ -857,7 +862,7 @@ function KycOrganisasiContent() {
                                         <div>
                                             <p className="font-semibold text-gray-900 dark:text-white text-sm line-clamp-1">{org.name}</p>
                                             <span className="inline-flex items-center text-[10px] font-semibold px-2 py-0.5 mt-1 rounded bg-blue-100 text-blue-700 border border-blue-200">
-                                                {org.type || "Organisasi"}
+                                                {org.type || t("kyc_organization.type_fallback", "Organisasi")}
                                             </span>
                                         </div>
                                     </div>
@@ -867,11 +872,11 @@ function KycOrganisasiContent() {
                                 </div>
                                 <div className="grid grid-cols-2 gap-3 text-sm">
                                     <div>
-                                        <p className="text-xs text-gray-500 dark:text-gray-400 mb-0.5">Kategori</p>
-                                        <p className="font-medium text-gray-900 dark:text-gray-300 truncate">{org.categoryName || org.category || "Umum"}</p>
+                                        <p className="text-xs text-gray-500 dark:text-gray-400 mb-0.5">{t("kyc_organization.col_category", "Kategori")}</p>
+                                        <p className="font-medium text-gray-900 dark:text-gray-300 truncate">{org.categoryName || org.category || t("kyc_organization.category_general", "Umum")}</p>
                                     </div>
                                     <div>
-                                        <p className="text-xs text-gray-500 dark:text-gray-400 mb-0.5">User</p>
+                                        <p className="text-xs text-gray-500 dark:text-gray-400 mb-0.5">{t("kyc_organization.col_user", "User")}</p>
                                         <p className="font-medium text-gray-900 dark:text-gray-300 truncate">{org.ownerName || (org as any).user || org.ownerUsername || "-"}</p>
                                         <p className="text-[10px] text-gray-400 dark:text-gray-500 truncate">@{org.ownerUsername || (org as any).userUsername || "-"}</p>
                                     </div>
@@ -897,16 +902,16 @@ function KycOrganisasiContent() {
                         <table className="w-full text-sm">
                             <thead>
                                 <tr className="border-b border-gray-100 dark:border-gray-800">
-                                    <th className="text-left text-xs font-semibold text-gray-400 dark:text-gray-500 uppercase tracking-wide px-5 py-3 w-[28%]">Organisasi</th>
-                                    <th className="text-left text-xs font-semibold text-gray-400 dark:text-gray-500 uppercase tracking-wide px-4 py-3 w-[10%]">Tipe</th>
-                                    <th className="text-left text-xs font-semibold text-gray-400 dark:text-gray-500 uppercase tracking-wide px-4 py-3 w-[15%]">Kategori</th>
-                                    <th className="text-left text-xs font-semibold text-gray-400 dark:text-gray-500 uppercase tracking-wide px-4 py-3 w-[15%]">User</th>
+                                    <th className="text-left text-xs font-semibold text-gray-400 dark:text-gray-500 uppercase tracking-wide px-5 py-3 w-[28%]">{t("kyc_organization.col_organization", "Organisasi")}</th>
+                                    <th className="text-left text-xs font-semibold text-gray-400 dark:text-gray-500 uppercase tracking-wide px-4 py-3 w-[10%]">{t("kyc_organization.col_type", "Tipe")}</th>
+                                    <th className="text-left text-xs font-semibold text-gray-400 dark:text-gray-500 uppercase tracking-wide px-4 py-3 w-[15%]">{t("kyc_organization.col_category", "Kategori")}</th>
+                                    <th className="text-left text-xs font-semibold text-gray-400 dark:text-gray-500 uppercase tracking-wide px-4 py-3 w-[15%]">{t("kyc_organization.col_user", "User")}</th>
                                     <th
                                         className="text-left text-xs font-semibold text-gray-400 dark:text-gray-500 uppercase tracking-wide px-4 py-3 w-[15%] cursor-pointer hover:bg-gray-50 dark:hover:bg-gray-800/50 group transition-colors select-none"
                                         onClick={() => setSortOrder(sortOrder === "newest" ? "oldest" : "newest")}
                                     >
                                         <div className="flex items-center gap-1.5">
-                                            Tgl Pengajuan
+                                            {t("kyc_organization.col_submission_date", "Tgl Pengajuan")}
                                             {sortOrder === "newest" ? (
                                                 <ArrowDown className="w-3.5 h-3.5 text-emerald-500" />
                                             ) : sortOrder === "oldest" ? (
@@ -916,21 +921,21 @@ function KycOrganisasiContent() {
                                             )}
                                         </div>
                                     </th>
-                                    <th className="text-left text-xs font-semibold text-gray-400 dark:text-gray-500 uppercase tracking-wide px-4 py-3 w-[10%]">Status</th>
-                                    <th className="text-left text-xs font-semibold text-gray-400 dark:text-gray-500 uppercase tracking-wide px-4 py-3 w-[7%]">Aksi</th>
+                                    <th className="text-left text-xs font-semibold text-gray-400 dark:text-gray-500 uppercase tracking-wide px-4 py-3 w-[10%]">{t("kyc_organization.col_status", "Status")}</th>
+                                    <th className="text-left text-xs font-semibold text-gray-400 dark:text-gray-500 uppercase tracking-wide px-4 py-3 w-[7%]">{t("kyc_organization.col_action", "Aksi")}</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 {loading ? (
                                     <tr>
                                         <td colSpan={7} className="text-center py-20 text-gray-400 text-sm">
-                                            Memuat data organisasi...
+                                            {t("kyc_organization.loading_data", "Memuat data organisasi...")}
                                         </td>
                                     </tr>
                                 ) : filteredData.length === 0 ? (
                                     <tr>
                                         <td colSpan={7} className="text-center py-20 text-gray-400 text-sm">
-                                            Tidak ada data organisasi ditemukan
+                                            {t("kyc_organization.no_data", "Tidak ada data organisasi ditemukan")}
                                         </td>
                                     </tr>
                                 ) : filteredData.map(org => {
@@ -944,9 +949,9 @@ function KycOrganisasiContent() {
                                     else if (org.isVerified === 2) orgStatus = "ditolak";
                                     else if (org.isActive) orgStatus = "aktif";
 
-                                    const status = STATUS_CONFIG[orgStatus]
+                                    const status = statusConfig[orgStatus] || statusConfig.nonaktif
                                     const StatusIcon = status.icon
-                                    const tglPengajuan = new Date(org.createdAt || Date.now()).toLocaleDateString("id-ID", {
+                                    const tglPengajuan = new Date(org.createdAt || Date.now()).toLocaleDateString(dateLocale, {
                                         day: "numeric", month: "short", year: "numeric"
                                     })
                                     return (
@@ -972,14 +977,14 @@ function KycOrganisasiContent() {
                                             <td className="px-4 py-4">
                                                 <div className="flex flex-wrap gap-1">
                                                     <span className="inline-flex items-center text-[10px] font-semibold px-2 py-0.5 rounded bg-blue-100 text-blue-700 border border-blue-200">
-                                                        {org.type || "Organisasi"}
+                                                        {org.type || t("kyc_organization.type_fallback", "Organisasi")}
                                                     </span>
                                                 </div>
                                             </td>
 
                                             {/* Kategori */}
                                             <td className="px-4 py-4">
-                                                <p className="text-xs text-gray-500 dark:text-gray-400">{org.categoryName || org.category || "Umum"}</p>
+                                                <p className="text-xs text-gray-500 dark:text-gray-400">{org.categoryName || org.category || t("kyc_organization.category_general", "Umum")}</p>
                                             </td>
 
                                             {/* User */}
@@ -1021,13 +1026,13 @@ function KycOrganisasiContent() {
                 {/* ── Pagination (OUTSIDE the card) ── */}
                 <div className="flex items-center justify-between px-1 py-4">
                     <div className="text-sm text-gray-500 dark:text-gray-400 flex items-center flex-wrap gap-1">
-                        Menampilkan{" "}
+                        {t("kyc_organization.showing", "Menampilkan")}{" "}
                         <span className="text-emerald-600 dark:text-emerald-400 font-semibold">
                             {totalCount === 0 ? 0 : (page - 1) * perPage + 1}–{Math.min(page * perPage, totalCount)}
                         </span>{" "}
-                        dari <span className="font-semibold text-gray-700 dark:text-gray-300">{totalCount}</span> data
+                        {t("kyc_organization.of", "dari")} <span className="font-semibold text-gray-700 dark:text-gray-300">{totalCount}</span> {t("kyc_organization.data", "data")}
                         &nbsp;
-                        <span className="text-gray-400">Baris:</span>
+                        <span className="text-gray-400">{t("kyc_organization.rows", "Baris:")}</span>
                         <PerPageSelect value={perPage} onChange={v => { setPerPage(v); setPage(1) }} />
                     </div>
                     <div className="flex items-center gap-1">
