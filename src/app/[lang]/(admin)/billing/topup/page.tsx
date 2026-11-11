@@ -121,28 +121,31 @@ function timeAgo(dateStr: string, t: any): { relative: string; full: string } {
     const diffYear = Math.floor(diffDay / 365);
 
     let relative: string;
-    if (diffSec < 60) relative = t("common.timeAgo.justNow", "Baru saja");
-    else if (diffMin < 60) relative = t("common.timeAgo.minutesAgo", "{minutes} menit lalu").replace("{minutes}", String(diffMin));
-    else if (diffHour < 24) relative = t("common.timeAgo.hoursAgo", "{hours} jam lalu").replace("{hours}", String(diffHour));
-    else if (diffDay === 1) relative = t("common.timeAgo.yesterday", "Kemarin");
-    else if (diffDay < 7) relative = t("common.timeAgo.daysAgo", "{days} hari lalu").replace("{days}", String(diffDay));
-    else if (diffWeek < 5) relative = t("common.timeAgo.weeksAgo", "{weeks} minggu lalu").replace("{weeks}", String(diffWeek));
-    else if (diffMonth < 12) relative = t("common.timeAgo.monthsAgo", "{months} bulan lalu").replace("{months}", String(diffMonth));
-    else relative = t("common.timeAgo.yearsAgo", "{years} tahun lalu").replace("{years}", String(diffYear));
+    if (diffSec < 60) relative = t ? t("billing.topup.dates.just_now", "Baru saja") : "Baru saja";
+    else if (diffMin < 60) relative = t ? t("billing.topup.dates.minutes_ago", `${diffMin} menit lalu`, { count: diffMin }) : `${diffMin} menit lalu`;
+    else if (diffHour < 24) relative = t ? t("billing.topup.dates.hours_ago", `${diffHour} jam lalu`, { count: diffHour }) : `${diffHour} jam lalu`;
+    else if (diffDay === 1) relative = t ? t("billing.topup.dates.yesterday", "Kemarin") : "Kemarin";
+    else if (diffDay < 7) relative = t ? t("billing.topup.dates.days_ago", `${diffDay} hari lalu`, { count: diffDay }) : `${diffDay} hari lalu`;
+    else if (diffWeek < 5) relative = t ? t("billing.topup.dates.weeks_ago", `${diffWeek} minggu lalu`, { count: diffWeek }) : `${diffWeek} minggu lalu`;
+    else if (diffMonth < 12) relative = t ? t("billing.topup.dates.months_ago", `${diffMonth} bulan lalu`, { count: diffMonth }) : `${diffMonth} bulan lalu`;
+    else relative = t ? t("billing.topup.dates.years_ago", `${diffYear} tahun lalu`, { count: diffYear }) : `${diffYear} tahun lalu`;
 
     return { relative, full: "" };
 }
 
-function getStatusBadge(status: string | undefined) {
+function getStatusBadge(status: string | undefined, t?: (key: string, fallback?: string) => string) {
     const s = (status || "").toLowerCase();
+    const approvedLabel = t ? t("billing.topup.status_badge.approved", "Disetujui") : "Disetujui";
+    const pendingLabel = t ? t("billing.topup.status_badge.pending", "Pending") : "Pending";
+    const rejectedLabel = t ? t("billing.topup.status_badge.rejected", "Ditolak") : "Ditolak";
     if (s === "success" || s === "completed" || s === "approved" || s === "confirmed") {
-        return <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-bold bg-emerald-100 dark:bg-emerald-900/30 text-emerald-700 dark:text-emerald-400"><CheckCircle className="w-3 h-3" />Disetujui</span>;
+        return <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-bold bg-emerald-100 dark:bg-emerald-900/30 text-emerald-700 dark:text-emerald-400"><CheckCircle className="w-3 h-3" />{approvedLabel}</span>;
     }
     if (s === "pending" || s === "waiting") {
-        return <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-bold bg-amber-100 dark:bg-amber-900/30 text-amber-700 dark:text-amber-400"><Clock className="w-3 h-3" />Pending</span>;
+        return <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-bold bg-amber-100 dark:bg-amber-900/30 text-amber-700 dark:text-amber-400"><Clock className="w-3 h-3" />{pendingLabel}</span>;
     }
     if (s === "failed" || s === "rejected" || s === "cancelled") {
-        return <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-bold bg-red-100 dark:bg-red-900/30 text-red-700 dark:text-red-400"><XCircle className="w-3 h-3" />Ditolak</span>;
+        return <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-bold bg-red-100 dark:bg-red-900/30 text-red-700 dark:text-red-400"><XCircle className="w-3 h-3" />{rejectedLabel}</span>;
     }
     return <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-bold bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-400">{status || "—"}</span>;
 }
@@ -150,10 +153,10 @@ function getStatusBadge(status: string | undefined) {
 // ─── Components ───────────────────────────────────────────────────────────────
 
 function WalletPageContent() {
-    const { t } = useI18n();
+    const { t, locale } = useI18n();
     const router = useRouter();
     const params = useParams();
-    const lang = params?.lang || "en";
+    const lang = (params?.lang as string) || locale || "en";
     const [loading, setLoading] = useState(true);
     const [stats, setStats] = useState<any>(null);
     const [page, setPage] = useState(1);
@@ -326,7 +329,7 @@ function WalletPageContent() {
                 showToast({ type: 'success', title: '[DEMO] Topup Dikonfirmasi', message: `Saldo ${item.user?.name || 'User'} +${formatCurrency(item.amount)} (simulasi)` });
             } else if (type === 'reject_topup') {
                 if (!modalInput.reason.trim()) {
-                    showToast({ type: 'error', title: 'Alasan wajib diisi', message: 'Harap isi alasan penolakan topup.' });
+                    showToast({ type: 'error', title: t("billing.topup.confirm_modal.reason_required_title", "Alasan wajib diisi"), message: t("billing.topup.confirm_modal.reason_required_desc", "Harap isi alasan penolakan topup.") });
                     return;
                 }
                 rejectSimTopup(item.id, modalInput.reason.trim());
@@ -341,20 +344,20 @@ function WalletPageContent() {
         try {
             if (type === 'confirm_topup') {
                 await walletApi.confirmTopup(item.id, modalInput.ref);
-                showToast({ type: 'success', title: 'Topup Dikonfirmasi', message: `Saldo ${item.user?.name || 'User'} berhasil ditambahkan.` });
+                showToast({ type: 'success', title: t("billing.topup.confirm_modal.success_confirm_title", "Topup Dikonfirmasi"), message: t("billing.topup.confirm_modal.success_confirm_desc", `Saldo ${item.user?.name || 'User'} berhasil ditambahkan.`, { user: item.user?.name || 'User' }) });
             } else if (type === 'reject_topup') {
                 if (!modalInput.reason.trim()) {
-                    showToast({ type: 'error', title: 'Alasan wajib diisi', message: 'Harap isi alasan penolakan topup.' });
+                    showToast({ type: 'error', title: t("billing.topup.confirm_modal.reason_required_title", "Alasan wajib diisi"), message: t("billing.topup.confirm_modal.reason_required_desc", "Harap isi alasan penolakan topup.") });
                     return;
                 }
                 await walletApi.rejectTopup(item.id, modalInput.reason.trim());
-                showToast({ type: 'info', title: 'Topup Ditolak', message: `Permintaan topup ${item.user?.name || 'User'} telah ditolak.` });
+                showToast({ type: 'info', title: t("billing.topup.confirm_modal.success_reject_title", "Topup Ditolak"), message: t("billing.topup.confirm_modal.success_reject_desc", `Permintaan topup ${item.user?.name || 'User'} telah ditolak.`, { user: item.user?.name || 'User' }) });
             }
             fetchData();
             setActionModal({ isOpen: false, type: null, item: null });
             setModalInput({ reason: "", extId: "", ref: "" });
         } catch (error: any) {
-            showToast({ type: 'error', title: 'Gagal Melakukan Aksi', message: error.message || 'Terjadi kesalahan. Coba lagi.' });
+            showToast({ type: 'error', title: t("billing.topup.confirm_modal.action_failed_title", "Gagal Melakukan Aksi"), message: error.message || 'Terjadi kesalahan. Coba lagi.' });
         }
     };
 
@@ -370,7 +373,7 @@ function WalletPageContent() {
 
     const WALLET_STATS = [
         {
-            title: t("billing.wallet.stats.pendingTopup", "Topup Pending"),
+            title: t("billing.topup.stats.pending", "Topup Pending"),
             value: pendingCount,
             isCurrency: false,
             icon: Clock,
@@ -378,7 +381,7 @@ function WalletPageContent() {
             iconColor: "text-amber-500"
         },
         {
-            title: "Disetujui",
+            title: t("billing.topup.stats.approved", "Disetujui"),
             value: approvedCount,
             isCurrency: false,
             icon: CheckCircle,
@@ -386,7 +389,7 @@ function WalletPageContent() {
             iconColor: "text-emerald-500"
         },
         {
-            title: "Ditolak",
+            title: t("billing.topup.stats.rejected", "Ditolak"),
             value: rejectedCount,
             isCurrency: false,
             icon: XCircle,
@@ -408,13 +411,13 @@ function WalletPageContent() {
                     <div>
                         <h1 className="text-2xl font-bold text-gray-900 dark:text-white flex items-center gap-2">
                             <ArrowDownToLine className="w-6 h-6 text-emerald-500" />
-                            TopUp
+                            {t("billing.topup.title", "TopUp")}
                         </h1>
                     </div>
                     <div className="flex items-center gap-2">
                         <button onClick={fetchData} className="flex items-center gap-2 px-3 py-2 bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 rounded-lg text-sm font-medium hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors shadow-sm">
                             <RefreshCw className="w-4 h-4 text-gray-500" />
-                            Refresh
+                            {t("billing.topup.refresh", "Refresh")}
                         </button>
                     </div>
                 </div>
@@ -455,11 +458,11 @@ function WalletPageContent() {
                                         value={searchInput}
                                         onChange={e => setSearchInput(e.target.value)}
                                         onKeyDown={handleKeyDown}
-                                        placeholder="Cari nama, metode pembayaran..."
+                                        placeholder={t("billing.topup.toolbar.search_placeholder", "Cari nama, metode pembayaran...")}
                                         className="w-full pl-10 pr-3 py-2.5 text-sm bg-transparent border-none focus:outline-none dark:text-white"
                                     />
                                 </div>
-                                <button onClick={handleSearch} className="px-4 py-2.5 bg-emerald-500 hover:bg-emerald-600 text-white text-sm font-semibold transition-colors whitespace-nowrap">Cari</button>
+                                <button onClick={handleSearch} className="px-4 py-2.5 bg-emerald-500 hover:bg-emerald-600 text-white text-sm font-semibold transition-colors whitespace-nowrap">{t("billing.topup.toolbar.search_btn", "Cari")}</button>
                             </div>
 
                             {/* Filter Button */}
@@ -472,7 +475,7 @@ function WalletPageContent() {
                                     }`}
                                 >
                                     <Filter className="w-4 h-4" />
-                                    Filter
+                                    {t("billing.topup.toolbar.filter_btn", "Filter")}
                                 </button>
 
                                 {/* Filter Modal */}
@@ -480,14 +483,14 @@ function WalletPageContent() {
                                     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm p-4">
                                         <div className="bg-white dark:bg-gray-900 rounded-2xl shadow-xl w-full max-w-md overflow-hidden border border-gray-100 dark:border-gray-800 animate-in fade-in zoom-in-95 duration-200">
                                             <div className="px-6 py-4 border-b border-gray-100 dark:border-gray-800 flex items-center justify-between">
-                                                <h3 className="text-base font-bold text-gray-900 dark:text-white flex items-center gap-2"><Filter className="w-5 h-5 text-emerald-500" /> Filter Data Topup</h3>
+                                                <h3 className="text-base font-bold text-gray-900 dark:text-white flex items-center gap-2"><Filter className="w-5 h-5 text-emerald-500" /> {t("billing.topup.filter_modal.title", "Filter Data Topup")}</h3>
                                                 <button onClick={() => setFilterOpen(false)} className="text-gray-400 hover:text-gray-600 dark:hover:text-gray-300"><X className="w-5 h-5" /></button>
                                             </div>
                                             <div className="p-6 space-y-4">
 
                                         {/* Status */}
                                         <div>
-                                            <label className="block text-xs font-semibold text-gray-500 dark:text-gray-400 mb-1.5">Status</label>
+                                            <label className="block text-xs font-semibold text-gray-500 dark:text-gray-400 mb-1.5">{t("billing.topup.filter_modal.status_label", "Status")}</label>
                                             <div className="flex flex-wrap gap-2">
                                                 {['', 'pending', 'approved', 'rejected'].map(s => (
                                                     <button key={s} onClick={() => setFilter(f => ({ ...f, status: s }))}
@@ -495,7 +498,7 @@ function WalletPageContent() {
                                                             ? 'bg-emerald-500 text-white border-emerald-500'
                                                             : 'bg-gray-50 dark:bg-gray-800 text-gray-600 dark:text-gray-300 border-gray-200 dark:border-gray-700 hover:border-emerald-300'
                                                         }`}>
-                                                        {s === '' ? 'Semua' : s === 'pending' ? 'Pending' : s === 'approved' ? 'Disetujui' : 'Ditolak'}
+                                                        {s === '' ? t("billing.topup.filter_modal.status_all", "Semua") : s === 'pending' ? t("billing.topup.filter_modal.status_pending", "Pending") : s === 'approved' ? t("billing.topup.filter_modal.status_approved", "Disetujui") : t("billing.topup.filter_modal.status_rejected", "Ditolak")}
                                                     </button>
                                                 ))}
                                             </div>
@@ -503,10 +506,10 @@ function WalletPageContent() {
 
                                         {/* Payment Method */}
                                         <div>
-                                            <label className="block text-xs font-semibold text-gray-500 dark:text-gray-400 mb-1.5">Metode Pembayaran</label>
+                                            <label className="block text-xs font-semibold text-gray-500 dark:text-gray-400 mb-1.5">{t("billing.topup.filter_modal.payment_method_label", "Metode Pembayaran")}</label>
                                             <input
                                                 type="text"
-                                                placeholder="Contoh: GoPay, BCA, Transfer..."
+                                                placeholder={t("billing.topup.filter_modal.payment_method_placeholder", "Contoh: GoPay, BCA, Transfer...")}
                                                 value={filter.paymentMethod}
                                                 onChange={e => setFilter(f => ({ ...f, paymentMethod: e.target.value }))}
                                                 className="w-full border border-gray-200 dark:border-gray-700 rounded-lg px-2 py-1.5 text-xs bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-emerald-500"
@@ -515,15 +518,15 @@ function WalletPageContent() {
 
                                         {/* Date Range */}
                                         <div>
-                                            <label className="block text-xs font-semibold text-gray-500 dark:text-gray-400 mb-1.5 flex items-center gap-1"><Calendar className="w-3 h-3" />Rentang Tanggal</label>
+                                            <label className="block text-xs font-semibold text-gray-500 dark:text-gray-400 mb-1.5 flex items-center gap-1"><Calendar className="w-3 h-3" />{t("billing.topup.filter_modal.date_range_label", "Rentang Tanggal")}</label>
                                             <div className="grid grid-cols-2 gap-2">
                                                 <div>
-                                                    <p className="text-[10px] text-gray-400 mb-1">Dari</p>
+                                                    <p className="text-[10px] text-gray-400 mb-1">{t("billing.topup.filter_modal.date_from", "Dari")}</p>
                                                     <input type="date" value={filter.dateFrom} onChange={e => setFilter(f => ({ ...f, dateFrom: e.target.value }))}
                                                         className="w-full border border-gray-200 dark:border-gray-700 rounded-lg px-2 py-1.5 text-xs bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-emerald-500" />
                                                 </div>
                                                 <div>
-                                                    <p className="text-[10px] text-gray-400 mb-1">Sampai</p>
+                                                    <p className="text-[10px] text-gray-400 mb-1">{t("billing.topup.filter_modal.date_to", "Sampai")}</p>
                                                     <input type="date" value={filter.dateTo} onChange={e => setFilter(f => ({ ...f, dateTo: e.target.value }))}
                                                         className="w-full border border-gray-200 dark:border-gray-700 rounded-lg px-2 py-1.5 text-xs bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-emerald-500" />
                                                 </div>
@@ -532,15 +535,15 @@ function WalletPageContent() {
 
                                         {/* Amount Range */}
                                         <div>
-                                            <label className="block text-xs font-semibold text-gray-500 dark:text-gray-400 mb-1.5 flex items-center gap-1"><DollarSign className="w-3 h-3" />Nominal (Rp)</label>
+                                            <label className="block text-xs font-semibold text-gray-500 dark:text-gray-400 mb-1.5 flex items-center gap-1"><DollarSign className="w-3 h-3" />{t("billing.topup.filter_modal.amount_range_label", "Nominal (Rp)")}</label>
                                             <div className="grid grid-cols-2 gap-2">
                                                 <div>
-                                                    <p className="text-[10px] text-gray-400 mb-1">Lebih dari</p>
+                                                    <p className="text-[10px] text-gray-400 mb-1">{t("billing.topup.filter_modal.amount_min", "Lebih dari")}</p>
                                                     <input type="number" placeholder="0" value={filter.amountMin} onChange={e => setFilter(f => ({ ...f, amountMin: e.target.value }))}
                                                         className="w-full border border-gray-200 dark:border-gray-700 rounded-lg px-2 py-1.5 text-xs bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-emerald-500" />
                                                 </div>
                                                 <div>
-                                                    <p className="text-[10px] text-gray-400 mb-1">Kurang dari</p>
+                                                    <p className="text-[10px] text-gray-400 mb-1">{t("billing.topup.filter_modal.amount_max", "Kurang dari")}</p>
                                                     <input type="number" placeholder="∞" value={filter.amountMax} onChange={e => setFilter(f => ({ ...f, amountMax: e.target.value }))}
                                                         className="w-full border border-gray-200 dark:border-gray-700 rounded-lg px-2 py-1.5 text-xs bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-emerald-500" />
                                                 </div>
@@ -550,8 +553,8 @@ function WalletPageContent() {
                                         {/* Actions */}
                                             {/* Actions */}
                                             <div className="flex gap-3 pt-4 border-t border-gray-100 dark:border-gray-800">
-                                                <button onClick={resetFilter} className="flex-1 py-2.5 rounded-xl border border-gray-200 dark:border-gray-700 text-sm font-semibold text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors">Reset</button>
-                                                <button onClick={applyFilter} className="flex-1 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white text-sm font-semibold transition-colors">Terapkan</button>
+                                                <button onClick={resetFilter} className="flex-1 py-2.5 rounded-xl border border-gray-200 dark:border-gray-700 text-sm font-semibold text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors">{t("billing.topup.filter_modal.reset", "Reset")}</button>
+                                                <button onClick={applyFilter} className="flex-1 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white text-sm font-semibold transition-colors">{t("billing.topup.filter_modal.apply", "Terapkan")}</button>
                                             </div>
                                         </div>
                                     </div>
@@ -573,7 +576,7 @@ function WalletPageContent() {
                                 ))}
                             </div>
                         ) : pagedTopups.length === 0 ? (
-                            <div className="text-center py-8 text-gray-500">Tidak ada data topup.</div>
+                            <div className="text-center py-8 text-gray-500">{t("billing.topup.table.empty", "Tidak ada data topup.")}</div>
                         ) : (
                             pagedTopups.map((item: any) => (
                                 <div key={item.id} className="border border-gray-200 dark:border-gray-700 rounded-lg p-4 space-y-3 bg-white dark:bg-gray-800 shadow-sm">
@@ -582,7 +585,7 @@ function WalletPageContent() {
                                             #{item.id}
                                         </span>
                                         <div className="flex items-center gap-2">
-                                            {getStatusBadge(item.status)}
+                                            {getStatusBadge(item.status, t)}
                                             <DropdownMenu>
                                                 <DropdownMenuTrigger asChild>
                                                     <button className="p-1 text-gray-500 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-md">
@@ -590,30 +593,30 @@ function WalletPageContent() {
                                                     </button>
                                                 </DropdownMenuTrigger>
                                                 <DropdownMenuContent align="end">
-                                                    <DropdownMenuLabel>Aksi Topup</DropdownMenuLabel>
+                                                    <DropdownMenuLabel>{t("billing.topup.action_menu.label", "Aksi Topup")}</DropdownMenuLabel>
                                                     <DropdownMenuSeparator />
                                                     {['pending', 'waiting'].includes((item.status || '').toLowerCase()) && (
                                                         <>
                                                             <DropdownMenuItem onClick={() => openModal('confirm_topup', item)}>
                                                                 <Check className="w-4 h-4 mr-2 text-emerald-600" />
-                                                                <span>Confirm Topup</span>
+                                                                <span>{t("billing.topup.action_menu.confirm", "Confirm Topup")}</span>
                                                             </DropdownMenuItem>
                                                             <DropdownMenuItem onClick={() => openModal('reject_topup', item)}>
                                                                 <X className="w-4 h-4 mr-2 text-red-600" />
-                                                                <span className="text-red-600">Reject Topup</span>
+                                                                <span className="text-red-600">{t("billing.topup.action_menu.reject", "Reject Topup")}</span>
                                                             </DropdownMenuItem>
                                                         </>
                                                     )}
                                                     {['success', 'completed', 'approved', 'confirmed'].includes((item.status || '').toLowerCase()) && (
                                                         <DropdownMenuItem onClick={() => setRejectionModal({ isOpen: true, reason: item.rejectionReason || 'Tidak ada catatan.', userName: item.user?.name || `User #${item.userId}`, amount: item.amount || 0 })}>
                                                             <Eye className="w-4 h-4 mr-2 text-blue-600" />
-                                                            <span>Lihat Detail Penerimaan</span>
+                                                            <span>{t("billing.topup.action_menu.view_approval", "Lihat Detail Penerimaan")}</span>
                                                         </DropdownMenuItem>
                                                     )}
                                                     {['failed', 'rejected', 'cancelled'].includes((item.status || '').toLowerCase()) && (
                                                         <DropdownMenuItem onClick={() => setRejectionModal({ isOpen: true, reason: item.rejectionReason || 'Ditolak oleh admin.', userName: item.user?.name || `User #${item.userId}`, amount: item.amount || 0 })}>
                                                             <Eye className="w-4 h-4 mr-2 text-red-600" />
-                                                            <span className="text-red-600">Lihat Alasan Ditolak</span>
+                                                            <span className="text-red-600">{t("billing.topup.action_menu.view_rejection", "Lihat Alasan Ditolak")}</span>
                                                         </DropdownMenuItem>
                                                     )}
                                                 </DropdownMenuContent>
@@ -621,7 +624,7 @@ function WalletPageContent() {
                                         </div>
                                     </div>
                                     <div>
-                                        <Link href={`/${lang}/users/manage/${item.userId}`} title="Lihat profil" className="font-bold text-gray-900 dark:text-white text-sm hover:text-emerald-600 dark:hover:text-emerald-400 hover:underline transition-colors">{item.user?.name || `User ID: ${item.userId}`}</Link>
+                                        <Link href={`/${lang}/users/manage/${item.userId}`} title={t("billing.topup.table.view_profile", "Lihat profil")} className="font-bold text-gray-900 dark:text-white text-sm hover:text-emerald-600 dark:hover:text-emerald-400 hover:underline transition-colors">{item.user?.name || `User ID: ${item.userId}`}</Link>
                                         <div className="inline-flex items-center gap-1.5 mt-1 px-2 py-1 rounded bg-gray-100 dark:bg-gray-800 text-[11px] font-medium text-gray-700 dark:text-gray-300">
                                             <CreditCard className="w-3 h-3" />
                                             {item.paymentMethod || 'Transfer/Payment Gateway'}
@@ -643,13 +646,13 @@ function WalletPageContent() {
                         <table className="w-full text-sm">
                             <thead className="bg-gray-50/50 dark:bg-gray-800/30 text-gray-400 uppercase tracking-widest text-[10px] font-bold border-b border-gray-100 dark:border-gray-800">
                                 <tr>
-                                    <th className="px-6 py-4 text-left">ID</th>
-                                    <th className="px-6 py-4 text-left">User</th>
-                                    <th className="px-6 py-4 text-left">Metode Pembayaran</th>
-                                    <th className="px-6 py-4 text-right">Nominal</th>
-                                    <th className="px-6 py-4 text-center">Status</th>
-                                    <th className="px-6 py-4 text-left">Tanggal</th>
-                                    <th className="px-6 py-4 text-center">Aksi</th>
+                                    <th className="px-6 py-4 text-left">{t("billing.topup.table.id", "ID")}</th>
+                                    <th className="px-6 py-4 text-left">{t("billing.topup.table.user", "User")}</th>
+                                    <th className="px-6 py-4 text-left">{t("billing.topup.table.payment_method", "Metode Pembayaran")}</th>
+                                    <th className="px-6 py-4 text-right">{t("billing.topup.table.amount", "Nominal")}</th>
+                                    <th className="px-6 py-4 text-center">{t("billing.topup.table.status", "Status")}</th>
+                                    <th className="px-6 py-4 text-left">{t("billing.topup.table.date", "Tanggal")}</th>
+                                    <th className="px-6 py-4 text-center">{t("billing.topup.table.action", "Aksi")}</th>
                                 </tr>
                             </thead>
                             <tbody className="divide-y divide-gray-50 dark:divide-gray-800">
@@ -676,7 +679,7 @@ function WalletPageContent() {
                                     <tr>
                                         <td colSpan={7} className="py-12 text-center text-gray-500">
                                             <Wallet className="w-10 h-10 mx-auto mb-3 text-gray-300 dark:text-gray-700" />
-                                            <p>Tidak ada data topup.</p>
+                                            <p>{t("billing.topup.table.empty", "Tidak ada data topup.")}</p>
                                         </td>
                                     </tr>
                                 )}
@@ -697,7 +700,7 @@ function WalletPageContent() {
                                                 </span>
                                             </td>
                                             <td className="px-6 py-4">
-                                                <Link href={`/${lang}/users/manage/${item.userId}?tab=wallet`} title="Lihat profil" className="font-bold text-gray-900 dark:text-white text-sm hover:text-emerald-600 dark:hover:text-emerald-400 hover:underline transition-colors">{item.user?.name || `User ID: ${item.userId}`}</Link>
+                                                <Link href={`/${lang}/users/manage/${item.userId}?tab=wallet`} title={t("billing.topup.table.view_profile", "Lihat profil")} className="font-bold text-gray-900 dark:text-white text-sm hover:text-emerald-600 dark:hover:text-emerald-400 hover:underline transition-colors">{item.user?.name || `User ID: ${item.userId}`}</Link>
                                                 {userUsername && <div className="text-[11px] text-gray-400 mt-0.5">{userUsername}</div>}
                                             </td>
                                             <td className="px-6 py-4">
@@ -711,7 +714,7 @@ function WalletPageContent() {
                                             </td>
                                             <td className="px-6 py-4 text-center">
                                                 <div className="flex items-center justify-center gap-2">
-                                                    {getStatusBadge(item.status)}
+                                                    {getStatusBadge(item.status, t)}
                                                 </div>
                                             </td>
                                             <td className="px-6 py-4">
@@ -728,30 +731,30 @@ function WalletPageContent() {
                                                             </button>
                                                         </DropdownMenuTrigger>
                                                         <DropdownMenuContent align="end">
-                                                            <DropdownMenuLabel>Aksi Topup</DropdownMenuLabel>
+                                                            <DropdownMenuLabel>{t("billing.topup.action_menu.label", "Aksi Topup")}</DropdownMenuLabel>
                                                             <DropdownMenuSeparator />
                                                             {isPending && (
                                                                 <>
                                                                     <DropdownMenuItem onClick={() => openModal('confirm_topup', item)}>
                                                                         <Check className="w-4 h-4 mr-2 text-emerald-600" />
-                                                                        <span>Confirm Topup</span>
+                                                                        <span>{t("billing.topup.action_menu.confirm", "Confirm Topup")}</span>
                                                                     </DropdownMenuItem>
                                                                     <DropdownMenuItem onClick={() => openModal('reject_topup', item)}>
                                                                         <X className="w-4 h-4 mr-2 text-red-600" />
-                                                                        <span className="text-red-600">Reject Topup</span>
+                                                                        <span className="text-red-600">{t("billing.topup.action_menu.reject", "Reject Topup")}</span>
                                                                     </DropdownMenuItem>
                                                                 </>
                                                             )}
                                                             {!isPending && !isRejected && (
                                                                 <DropdownMenuItem onClick={() => setRejectionModal({ isOpen: true, reason: rejReason || 'Tidak ada catatan.', userName: item.user?.name || `User #${item.userId}`, amount: item.amount || 0 })}>
                                                                     <Eye className="w-4 h-4 mr-2 text-blue-600" />
-                                                                    <span>Lihat Detail Penerimaan</span>
+                                                                    <span>{t("billing.topup.action_menu.view_approval", "Lihat Detail Penerimaan")}</span>
                                                                 </DropdownMenuItem>
                                                             )}
                                                             {isRejected && (
                                                                 <DropdownMenuItem onClick={() => setRejectionModal({ isOpen: true, reason: rejReason || 'Ditolak oleh admin.', userName: item.user?.name || `User #${item.userId}`, amount: item.amount || 0 })}>
                                                                     <Eye className="w-4 h-4 mr-2 text-red-600" />
-                                                                    <span className="text-red-600">Lihat Alasan Ditolak</span>
+                                                                    <span className="text-red-600">{t("billing.topup.action_menu.view_rejection", "Lihat Alasan Ditolak")}</span>
                                                                 </DropdownMenuItem>
                                                             )}
                                                         </DropdownMenuContent>
@@ -782,40 +785,40 @@ function WalletPageContent() {
                         <div className="bg-white dark:bg-gray-900 rounded-2xl shadow-xl w-full max-w-md overflow-hidden animate-in fade-in zoom-in-95 duration-200">
                             <div className="p-6 border-b border-gray-100 dark:border-gray-800">
                                 <h3 className="text-lg font-bold text-gray-900 dark:text-white">
-                                    {actionModal.type === 'confirm_topup' && 'Confirm Topup'}
-                                    {actionModal.type === 'reject_topup' && 'Reject Topup'}
+                                    {actionModal.type === 'confirm_topup' && t("billing.topup.confirm_modal.confirm_title", "Confirm Topup")}
+                                    {actionModal.type === 'reject_topup' && t("billing.topup.confirm_modal.reject_title", "Reject Topup")}
                                 </h3>
                                 <p className="text-sm text-gray-500 mt-1">
-                                    Anda akan melakukan aksi pada transaksi <span className="font-bold">{actionModal.item?.user?.name || `User ID: ${actionModal.item?.userId}`}</span> senilai <span className="font-bold">{formatCurrency(actionModal.item?.amount)}</span>.
+                                    {t("billing.topup.confirm_modal.action_desc", `Anda akan melakukan aksi pada transaksi ${actionModal.item?.user?.name || `User ID: ${actionModal.item?.userId}`} senilai ${formatCurrency(actionModal.item?.amount)}.`, { user: actionModal.item?.user?.name || `User ID: ${actionModal.item?.userId}`, amount: formatCurrency(actionModal.item?.amount) })}
                                 </p>
                             </div>
                             <div className="p-6 space-y-4">
                                 {actionModal.type === 'confirm_topup' && (
                                     <div>
-                                        <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">External Reference</label>
+                                        <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">{t("billing.topup.confirm_modal.ext_ref_label", "External Reference")}</label>
                                         <input
                                             type="text"
                                             value={modalInput.ref}
                                             onChange={(e) => setModalInput({ ...modalInput, ref: e.target.value })}
                                             className="w-full px-3 py-2 bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500 text-sm"
-                                            placeholder="Opsional..."
+                                            placeholder={t("billing.topup.confirm_modal.ext_ref_placeholder", "Opsional...")}
                                         />
                                     </div>
                                 )}
                                 {actionModal.type === 'reject_topup' && (
                                     <div className="space-y-3">
                                         <p className="text-sm text-gray-700 dark:text-gray-300">
-                                            Masukkan alasan penolakan topup untuk pengguna ini.
+                                            {t("billing.topup.confirm_modal.reject_desc", "Masukkan alasan penolakan topup untuk pengguna ini.")}
                                         </p>
                                         <div>
                                             <label className="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-1.5">
-                                                Alasan Penolakan <span className="text-red-500">*</span>
+                                                {t("billing.topup.confirm_modal.rejection_reason_label", "Alasan Penolakan")} <span className="text-red-500">*</span>
                                             </label>
                                             <textarea
                                                 value={modalInput.reason}
                                                 onChange={(e) => setModalInput({ ...modalInput, reason: e.target.value })}
                                                 rows={3}
-                                                placeholder="Contoh: Bukti transfer tidak valid, nominal tidak sesuai..."
+                                                placeholder={t("billing.topup.confirm_modal.rejection_reason_placeholder", "Contoh: Bukti transfer tidak valid, nominal tidak sesuai...")}
                                                 className="w-full border border-gray-200 dark:border-gray-700 rounded-xl px-3 py-2.5 bg-white dark:bg-gray-800 text-gray-900 dark:text-white text-sm focus:outline-none focus:ring-2 focus:ring-red-500 resize-none"
                                             />
                                         </div>
@@ -827,13 +830,13 @@ function WalletPageContent() {
                                     onClick={() => setActionModal({ isOpen: false, type: null, item: null })}
                                     className="px-4 py-2 text-sm font-medium text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700 rounded-lg transition-colors"
                                 >
-                                    Batal
+                                    {t("billing.topup.confirm_modal.cancel", "Batal")}
                                 </button>
                                 <button
                                     onClick={executeAction}
                                     className={`px-4 py-2 text-sm font-bold text-white rounded-lg transition-colors shadow-sm ${actionModal.type?.includes('reject') ? 'bg-red-600 hover:bg-red-700' : 'bg-emerald-600 hover:bg-emerald-700'}`}
                                 >
-                                    Konfirmasi
+                                    {t("billing.topup.confirm_modal.confirm", "Konfirmasi")}
                                 </button>
                             </div>
                         </div>
@@ -847,16 +850,16 @@ function WalletPageContent() {
                     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm p-4">
                         <div className="bg-white dark:bg-gray-900 rounded-2xl shadow-xl w-full max-w-md overflow-hidden border border-gray-100 dark:border-gray-800 animate-in fade-in zoom-in-95 duration-200">
                             <div className="px-6 py-4 border-b border-gray-100 dark:border-gray-800 flex items-center justify-between">
-                                <h3 className="text-base font-bold text-gray-900 dark:text-white">Alasan Penolakan Topup</h3>
+                                <h3 className="text-base font-bold text-gray-900 dark:text-white">{t("billing.topup.rejection_modal.title", "Alasan Penolakan Topup")}</h3>
                                 <button onClick={() => setRejectionModal(prev => ({ ...prev, isOpen: false }))} className="text-gray-400 hover:text-gray-600 dark:hover:text-gray-300"><X className="w-5 h-5" /></button>
                             </div>
                             <div className="p-6 space-y-4">
                                 <div className="bg-gray-50 dark:bg-gray-800 p-4 rounded-xl border border-gray-100 dark:border-gray-700">
-                                    <p className="text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">Catatan/Alasan Admin:</p>
-                                    <p className="text-sm text-gray-900 dark:text-white leading-relaxed">{rejectionModal.reason || 'Tidak ada catatan.'}</p>
+                                    <p className="text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">{t("billing.topup.rejection_modal.admin_notes", "Catatan/Alasan Admin:")}</p>
+                                    <p className="text-sm text-gray-900 dark:text-white leading-relaxed">{rejectionModal.reason || t("billing.topup.rejection_modal.no_notes", "Tidak ada catatan.")}</p>
                                 </div>
                                 <div className="flex justify-end pt-2">
-                                    <button onClick={() => setRejectionModal(prev => ({ ...prev, isOpen: false }))} className="bg-gray-100 dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 text-gray-700 dark:text-gray-300 px-4 py-2 rounded-xl font-semibold transition-colors text-sm">Tutup</button>
+                                    <button onClick={() => setRejectionModal(prev => ({ ...prev, isOpen: false }))} className="bg-gray-100 dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 text-gray-700 dark:text-gray-300 px-4 py-2 rounded-xl font-semibold transition-colors text-sm">{t("billing.topup.rejection_modal.close", "Tutup")}</button>
                                 </div>
                             </div>
                         </div>

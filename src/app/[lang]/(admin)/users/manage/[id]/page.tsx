@@ -9,12 +9,12 @@ import { SkeletonDetailPage } from "@/components/ui/skeletons"
 import { Skeleton } from "@/components/ui/skeleton"
 import { Badge } from "@/components/ui/badge"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
+import { cn } from "@/lib/utils"
 import {
     Mail, Phone, MapPin, Shield,
     Clock, Activity, Calendar, ArrowLeft, Loader2, User as UserIcon,
-    TrendingUp
+    Wallet, ShoppingBag, BookOpen, Receipt
 } from "lucide-react"
-import { BookOpen } from "lucide-react"
 import { useI18n } from "@/components/providers/i18n-provider"
 
 import { useUserProfile } from "@/hooks/use-user-profile"
@@ -299,7 +299,7 @@ function UserDetailContent() {
                                 </h1>
 
                                 {user.isVerify && (
-                                    <Badge variant="secondary" className="bg-emerald-100 dark:bg-emerald-900/30 text-emerald-700 dark:text-emerald-400 text-[10px] px-2 h-5 inline-flex items-center justify-center leading-none border border-emerald-200 dark:border-emerald-800 shrink-0">
+                                    <Badge variant="secondary" className="bg-emerald-50 dark:bg-emerald-900/30 text-emerald-700 dark:text-emerald-400 text-xs px-2 py-0.5 font-medium border border-emerald-200 dark:border-emerald-800 shrink-0">
                                         Verified
                                     </Badge>
                                 )}
@@ -309,15 +309,33 @@ function UserDetailContent() {
                             </p>
                         </div>
                     </div>
-                    <div className="flex items-center gap-2 w-full sm:w-auto justify-start sm:justify-end flex-wrap">
+                    <div className="flex items-center gap-2.5 w-full sm:w-auto justify-start sm:justify-end flex-wrap">
+                        {/* Tanggal Bergabung */}
+                        <div className="inline-flex items-center gap-1.5 text-xs font-medium text-gray-500 dark:text-gray-400 bg-gray-50 dark:bg-gray-800/60 px-3 py-1.5 rounded-xl border border-gray-100 dark:border-gray-800">
+                            <Calendar className="w-3.5 h-3.5 text-gray-400 shrink-0" />
+                            <span>{t("user_detail.joined", "Bergabung")} {formatDate(user.created_at || user.createdAt || new Date().toISOString(), locale)}</span>
+                        </div>
+
+                        {/* Status Akun */}
+                        <div className={cn(
+                            "inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-semibold border",
+                            user.isBlocked
+                                ? "bg-red-50 text-red-700 border-red-200 dark:bg-red-900/20 dark:text-red-400 dark:border-red-800"
+                                : "bg-emerald-50 text-emerald-700 border-emerald-200 dark:bg-emerald-900/20 dark:text-emerald-400 dark:border-emerald-800"
+                        )}>
+                            <span className={cn("w-1.5 h-1.5 rounded-full", user.isBlocked ? "bg-red-500" : "bg-emerald-500")} />
+                            <span>{user.isBlocked ? t("user_detail.overview.status_blocked_badge", "Terblokir") : t("user_detail.overview.status_active", "Aktif")}</span>
+                        </div>
+
                         {trainerInfo && (
                             <Button
-                                className="bg-emerald-600 hover:bg-emerald-700 text-white shadow-sm flex-1 sm:flex-initial"
+                                size="sm"
+                                className="bg-emerald-600 hover:bg-emerald-700 text-white shadow-sm flex-1 sm:flex-initial rounded-xl text-xs font-semibold h-8"
                                 onClick={() => {
                                     router.push(`/${lang}/teachers/manage/${trainerInfo.id}`)
                                 }}
                             >
-                                <BookOpen className="w-4 h-4 mr-2" /> {t("user_detail.view_teacher_profile", "Lihat Profil Guru")}
+                                <BookOpen className="w-3.5 h-3.5 mr-1.5" /> {t("user_detail.view_teacher_profile", "Lihat Profil Guru")}
                             </Button>
                         )}
                     </div>
@@ -328,13 +346,13 @@ function UserDetailContent() {
                     {/* Card 1: Total Saldo → tab Dompet User */}
                     <Card
                         onClick={() => handleTabChange('wallet')}
-                        className="rounded-2xl border-gray-200 dark:border-gray-800 shadow-sm bg-white dark:bg-gray-900 cursor-pointer hover:shadow-md hover:border-emerald-300 dark:hover:border-emerald-700 transition-all duration-200"
+                        className="rounded-2xl border border-gray-200 dark:border-gray-800 shadow-sm bg-white dark:bg-gray-900 cursor-pointer hover:shadow-md hover:border-emerald-300 dark:hover:border-emerald-700 transition-all duration-200"
                     >
                         <CardContent className="p-4 sm:p-5">
                             <div className="flex justify-between items-start mb-2">
                                 <p className="text-xs sm:text-sm font-semibold text-gray-500 dark:text-gray-400">{t("user_detail.stats.balance", "Total Saldo")}</p>
                                 <div className="p-1.5 sm:p-2 bg-emerald-50 dark:bg-emerald-900/20 text-emerald-600 dark:text-emerald-400 rounded-lg shrink-0">
-                                    <Activity className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
+                                    <Wallet className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
                                 </div>
                             </div>
                             <h3 className="text-lg sm:text-2xl font-bold text-gray-900 dark:text-white truncate">
@@ -348,13 +366,13 @@ function UserDetailContent() {
                     {/* Card 2: Total Pesanan → tab Pesanan */}
                     <Card
                         onClick={() => handleTabChange('pesanan')}
-                        className="rounded-2xl border-gray-200 dark:border-gray-800 shadow-sm bg-white dark:bg-gray-900 cursor-pointer hover:shadow-md hover:border-blue-300 dark:hover:border-blue-700 transition-all duration-200"
+                        className="rounded-2xl border border-gray-200 dark:border-gray-800 shadow-sm bg-white dark:bg-gray-900 cursor-pointer hover:shadow-md hover:border-blue-300 dark:hover:border-blue-700 transition-all duration-200"
                     >
                         <CardContent className="p-4 sm:p-5">
                             <div className="flex justify-between items-start mb-2">
                                 <p className="text-xs sm:text-sm font-semibold text-gray-500 dark:text-gray-400">{t("user_detail.stats.orders", "Total Pesanan")}</p>
                                 <div className="p-1.5 sm:p-2 bg-blue-50 dark:bg-blue-900/20 text-blue-600 dark:text-blue-400 rounded-lg shrink-0">
-                                    <Activity className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
+                                    <ShoppingBag className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
                                 </div>
                             </div>
                             <h3 className="text-lg sm:text-2xl font-bold text-gray-900 dark:text-white">
@@ -366,7 +384,7 @@ function UserDetailContent() {
                     {/* Card 3: Total Setoran → tab Setoran */}
                     <Card
                         onClick={() => handleTabChange('setoran')}
-                        className="rounded-2xl border-gray-200 dark:border-gray-800 shadow-sm bg-white dark:bg-gray-900 cursor-pointer hover:shadow-md hover:border-purple-300 dark:hover:border-purple-700 transition-all duration-200"
+                        className="rounded-2xl border border-gray-200 dark:border-gray-800 shadow-sm bg-white dark:bg-gray-900 cursor-pointer hover:shadow-md hover:border-purple-300 dark:hover:border-purple-700 transition-all duration-200"
                     >
                         <CardContent className="p-4 sm:p-5">
                             <div className="flex justify-between items-start mb-2">
@@ -384,13 +402,13 @@ function UserDetailContent() {
                     {/* Card 4: Total Transaksi → tab Dompet User */}
                     <Card
                         onClick={() => handleTabChange('wallet')}
-                        className="rounded-2xl border-gray-200 dark:border-gray-800 shadow-sm bg-white dark:bg-gray-900 cursor-pointer hover:shadow-md hover:border-amber-300 dark:hover:border-amber-700 transition-all duration-200"
+                        className="rounded-2xl border border-gray-200 dark:border-gray-800 shadow-sm bg-white dark:bg-gray-900 cursor-pointer hover:shadow-md hover:border-amber-300 dark:hover:border-amber-700 transition-all duration-200"
                     >
                         <CardContent className="p-4 sm:p-5">
                             <div className="flex justify-between items-start mb-2">
                                 <p className="text-xs sm:text-sm font-semibold text-gray-500 dark:text-gray-400">{t("user_detail.stats.transactions", "Total Transaksi")}</p>
                                 <div className="p-1.5 sm:p-2 bg-amber-50 dark:bg-amber-900/20 text-amber-600 dark:text-amber-400 rounded-lg shrink-0">
-                                    <TrendingUp className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
+                                    <Receipt className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
                                 </div>
                             </div>
                             <h3 className="text-lg sm:text-2xl font-bold text-gray-900 dark:text-white">
@@ -402,32 +420,32 @@ function UserDetailContent() {
 
                 {/* Tabs & Content */}
                 <Card className="rounded-2xl border-gray-200 dark:border-gray-800 shadow-sm bg-white dark:bg-gray-900 overflow-hidden">
-                    <div className="px-4 sm:px-6 pt-2">
+                    <div className="px-4 sm:px-6 pt-0 sm:pt-0.5">
                         <Tabs defaultValue="overview" value={activeTab} onValueChange={handleTabChange} className="w-full">
                             <div className="overflow-x-auto scrollbar-none -mx-4 px-4 sm:mx-0 sm:px-0">
                                 <TabsList className="w-max min-w-full justify-start border-b border-gray-100 dark:border-gray-800 rounded-none bg-transparent h-auto p-0 space-x-4 sm:space-x-6 flex-nowrap">
-                                    <TabsTrigger value="overview" className="shrink-0 whitespace-nowrap rounded-none border-b-2 border-transparent data-[state=active]:border-emerald-500 data-[state=active]:bg-transparent px-1 py-3 sm:py-4 data-[state=active]:shadow-none text-xs sm:text-sm font-semibold text-gray-500 data-[state=active]:text-gray-900 dark:data-[state=active]:text-white">
+                                    <TabsTrigger value="overview" className="shrink-0 whitespace-nowrap rounded-none border-b-2 border-transparent data-[state=active]:border-emerald-500 data-[state=active]:bg-transparent px-1 pt-2 pb-2.5 sm:pt-2.5 sm:pb-3 data-[state=active]:shadow-none text-xs sm:text-sm font-semibold text-gray-500 data-[state=active]:text-gray-900 dark:data-[state=active]:text-white">
                                         {t("user_detail.tabs.overview", "Overview")}
                                     </TabsTrigger>
-                                    <TabsTrigger value="kyc" className="shrink-0 whitespace-nowrap rounded-none border-b-2 border-transparent data-[state=active]:border-emerald-500 data-[state=active]:bg-transparent px-1 py-3 sm:py-4 data-[state=active]:shadow-none text-xs sm:text-sm font-semibold text-gray-500 data-[state=active]:text-gray-900 dark:data-[state=active]:text-white">
+                                    <TabsTrigger value="kyc" className="shrink-0 whitespace-nowrap rounded-none border-b-2 border-transparent data-[state=active]:border-emerald-500 data-[state=active]:bg-transparent px-1 pt-2 pb-2.5 sm:pt-2.5 sm:pb-3 data-[state=active]:shadow-none text-xs sm:text-sm font-semibold text-gray-500 data-[state=active]:text-gray-900 dark:data-[state=active]:text-white">
                                         {t("user_detail.tabs.kyc", "KYC Member")}
                                     </TabsTrigger>
-                                    <TabsTrigger value="wallet" className="shrink-0 whitespace-nowrap rounded-none border-b-2 border-transparent data-[state=active]:border-emerald-500 data-[state=active]:bg-transparent px-1 py-3 sm:py-4 data-[state=active]:shadow-none text-xs sm:text-sm font-semibold text-gray-500 data-[state=active]:text-gray-900 dark:data-[state=active]:text-white">
+                                    <TabsTrigger value="wallet" className="shrink-0 whitespace-nowrap rounded-none border-b-2 border-transparent data-[state=active]:border-emerald-500 data-[state=active]:bg-transparent px-1 pt-2 pb-2.5 sm:pt-2.5 sm:pb-3 data-[state=active]:shadow-none text-xs sm:text-sm font-semibold text-gray-500 data-[state=active]:text-gray-900 dark:data-[state=active]:text-white">
                                         {t("user_detail.tabs.wallet", "Wallet")}
                                     </TabsTrigger>
-                                    <TabsTrigger value="pesanan" className="shrink-0 whitespace-nowrap rounded-none border-b-2 border-transparent data-[state=active]:border-emerald-500 data-[state=active]:bg-transparent px-1 py-3 sm:py-4 data-[state=active]:shadow-none text-xs sm:text-sm font-semibold text-gray-500 data-[state=active]:text-gray-900 dark:data-[state=active]:text-white">
+                                    <TabsTrigger value="pesanan" className="shrink-0 whitespace-nowrap rounded-none border-b-2 border-transparent data-[state=active]:border-emerald-500 data-[state=active]:bg-transparent px-1 pt-2 pb-2.5 sm:pt-2.5 sm:pb-3 data-[state=active]:shadow-none text-xs sm:text-sm font-semibold text-gray-500 data-[state=active]:text-gray-900 dark:data-[state=active]:text-white">
                                         {t("user_detail.tabs.orders", "Pesanan")}
                                     </TabsTrigger>
-                                    <TabsTrigger value="setoran" className="shrink-0 whitespace-nowrap rounded-none border-b-2 border-transparent data-[state=active]:border-emerald-500 data-[state=active]:bg-transparent px-1 py-3 sm:py-4 data-[state=active]:shadow-none text-xs sm:text-sm font-semibold text-gray-500 data-[state=active]:text-gray-900 dark:data-[state=active]:text-white">
+                                    <TabsTrigger value="setoran" className="shrink-0 whitespace-nowrap rounded-none border-b-2 border-transparent data-[state=active]:border-emerald-500 data-[state=active]:bg-transparent px-1 pt-2 pb-2.5 sm:pt-2.5 sm:pb-3 data-[state=active]:shadow-none text-xs sm:text-sm font-semibold text-gray-500 data-[state=active]:text-gray-900 dark:data-[state=active]:text-white">
                                         {t("user_detail.tabs.setoran", "Setoran")}
                                     </TabsTrigger>
-                                    <TabsTrigger value="aktivitas" className="shrink-0 whitespace-nowrap rounded-none border-b-2 border-transparent data-[state=active]:border-emerald-500 data-[state=active]:bg-transparent px-1 py-3 sm:py-4 data-[state=active]:shadow-none text-xs sm:text-sm font-semibold text-gray-500 data-[state=active]:text-gray-900 dark:data-[state=active]:text-white">
+                                    <TabsTrigger value="aktivitas" className="shrink-0 whitespace-nowrap rounded-none border-b-2 border-transparent data-[state=active]:border-emerald-500 data-[state=active]:bg-transparent px-1 pt-2 pb-2.5 sm:pt-2.5 sm:pb-3 data-[state=active]:shadow-none text-xs sm:text-sm font-semibold text-gray-500 data-[state=active]:text-gray-900 dark:data-[state=active]:text-white">
                                         {t("user_detail.tabs.log", "Log Aktivitas")}
                                     </TabsTrigger>
                                 </TabsList>
                             </div>
 
-                            <div className="py-6">
+                            <div className="pt-4 pb-6">
                                 {/* OVERVIEW TAB (60:40 Layout) */}
                                 <TabsContent value="overview" className="animate-in fade-in slide-in-from-bottom-2 duration-300">
                                     <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">

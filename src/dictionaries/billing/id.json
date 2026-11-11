@@ -259,49 +259,85 @@
     },
     "payments": {
       "title": "Pembayaran",
-      "searchPlaceholder": "Cari UserId, TrainerId, Status...",
+      "searchPlaceholder": "Cari kode pesanan, metode...",
       "searchButton": "Cari",
+      "filter": "Filter",
+      "export": "Ekspor...",
+      "csv": "CSV",
       "tabs": {
         "payments": "Daftar Pembayaran",
         "disputes": "Sengketa"
       },
-      "disputes": {
-        "table": {
-          "type": "Tipe"
-        },
-        "action": {
-          "detail": "Lihat Detail",
-          "reply": "Balas",
-          "resolve": "Selesaikan"
-        }
+      "stats": {
+        "payments": "Pembayaran",
+        "pending": "Payment Pending",
+        "completed": "Selesai"
       },
       "summary": {
+        "payments": "Pembayaran",
         "total": "Total Pembayaran",
         "revenue": "Pendapatan",
         "pendingRefunds": "Pending Refunds",
         "pendingPayouts": "Pending Payouts"
       },
+      "filter_modal": {
+        "title": "Filter Pembayaran",
+        "payment_status": "Status Pembayaran",
+        "all_statuses": "Semua Status",
+        "payment_method": "Metode Pembayaran",
+        "all_methods": "Semua",
+        "reset_all": "Reset Semua",
+        "apply": "Terapkan"
+      },
       "table": {
         "id": "ID",
+        "order_code": "Kode Pesanan",
         "user": "User",
         "trainer": "Trainer",
         "amount": "Nominal",
         "status": "Status",
         "paymentMethod": "Metode",
-        "date": "Tanggal",
+        "date": "Tgl Bayar",
+        "paymentDate": "Tgl Bayar",
         "actions": "Aksi"
       },
+      "tooltips": {
+        "view_profile": "Lihat profil pengguna",
+        "view_teacher": "Lihat profil guru"
+      },
       "status": {
-        "paid": "Dibayar",
-        "pending": "Menunggu",
+        "paid": "Lunas",
+        "pending": "Pending",
         "failed": "Gagal",
-        "refunded": "Dikembalikan",
+        "refunded": "Refund",
         "disputed": "Bermasalah"
       },
       "actions": {
+        "send_invoice": "Kirim Invoice",
+        "update_status": "Update Status",
         "processRefund": "Process Refund",
         "markPayout": "Mark Payout",
         "updateStatus": "Update Status"
+      },
+      "send_invoice": {
+        "title": "Kirim Invoice",
+        "subtitle": "Kirim bukti pembayaran ke email user",
+        "payment_id": "Payment ID",
+        "amount": "Nominal",
+        "user": "User",
+        "recipient_email": "Email Tujuan",
+        "from_account": "(dari akun user)",
+        "email_placeholder": "Email user terdaftar",
+        "email_notice": "Invoice akan dikirim ke email yang terdaftar pada akun user.",
+        "include_receipt": "Sertakan Struk / Receipt",
+        "include_receipt_desc": "Lampirkan detail transaksi ke email",
+        "sending": "Mengirim...",
+        "send_now": "Kirim Sekarang",
+        "cancel": "Batal",
+        "success_title": "Invoice Terkirim",
+        "success_message": "Invoice telah berhasil dikirim ke email user.",
+        "error_title": "Gagal Kirim Invoice",
+        "error_default": "Terjadi kesalahan saat mengirim invoice."
       },
       "modal": {
         "processRefundTitle": "Proses Refund",
@@ -314,12 +350,100 @@
         "payoutReference": "Referensi Payout",
         "submit": "Simpan",
         "cancel": "Batal",
-        "failureReason": "Alasan Gagal"
+        "failureReason": "Alasan Gagal (Wajib)"
+      },
+      "update_status": {
+        "success_title": "Status Diperbarui",
+        "success_message": "Status pembayaran berhasil diubah menjadi {{status}}.",
+        "demo_title": "[DEMO] Status Diperbarui",
+        "demo_message": "Status pembayaran diubah menjadi {{status}} (simulasi lokal)."
+      },
+      "disputes": {
+        "search_placeholder": "Cari sengketa...",
+        "search_button": "Cari",
+        "empty": "Tidak ada sengketa ditemukan.",
+        "all_statuses": "Semua Status",
+        "pagination": "Menampilkan {{from}} - {{to}} dari {{total}}",
+        "table": {
+          "date": "Tanggal",
+          "payment": "Pembayaran",
+          "user": "Pengguna",
+          "type": "Tipe",
+          "status": "Status",
+          "actions": "Aksi"
+        },
+        "action": {
+          "detail": "Lihat Detail",
+          "reply": "Balas",
+          "resolve": "Selesaikan"
+        },
+        "detail": {
+          "title": "Detail Sengketa #{{id}}",
+          "payment_id": "ID Pembayaran",
+          "amount": "Nominal",
+          "reporter": "Pengguna (Pelapor)",
+          "trainer": "Trainer Terkait",
+          "status": "Status",
+          "created_at": "Dibuat Pada",
+          "reason_title": "Alasan Sengketa (Reason)",
+          "no_reason": "Tidak ada alasan yang diberikan.",
+          "latest_response": "Respons Terakhir",
+          "final_resolution": "Resolusi Akhir",
+          "close": "Tutup"
+        },
+        "respond": {
+          "title": "Balas Sengketa #{{id}}",
+          "user": "Pengguna",
+          "reason": "Alasan",
+          "label": "Balasan (Wajib)",
+          "placeholder": "Ketik balasan Anda di sini...",
+          "evidence_label": "Bukti / Merchant Evidence (Opsional)",
+          "evidence_placeholder": "URL atau catatan bukti",
+          "submitting": "Menyimpan...",
+          "submit": "Kirim Reply",
+          "cancel": "Batal",
+          "error_required": "Teks respons wajib diisi",
+          "error_required_desc": "Harap isi kolom respons sebelum mengirim.",
+          "success_title": "Reply Terkirim",
+          "success_message": "Reply dispute berhasil dikirim.",
+          "demo_title": "[DEMO] Reply Tersimpan",
+          "demo_message": "Reply berhasil disimpan secara lokal (simulasi)."
+        },
+        "resolve": {
+          "title": "Selesaikan Sengketa #{{id}}",
+          "label": "Resolusi Akhir (Wajib)",
+          "placeholder": "Keputusan akhir...",
+          "notes_label": "Catatan Resolusi (Opsional)",
+          "notes_placeholder": "Catatan tambahan",
+          "refund_label": "Nominal Refund (Opsional)",
+          "auto_refund": "Auto Process Refund",
+          "submitting": "Menyimpan...",
+          "submit": "Kirim Resolve",
+          "cancel": "Batal",
+          "error_required": "Teks resolusi wajib diisi",
+          "error_required_desc": "Harap isi kolom resolusi sebelum mengirim.",
+          "success_title": "Dispute Diselesaikan",
+          "success_message": "Dispute berhasil diselesaikan.",
+          "refund_processed": " Refund sedang diproses.",
+          "demo_title": "[DEMO] Dispute Diselesaikan",
+          "demo_message": "Dispute berhasil diselesaikan secara lokal (simulasi)."
+        }
+      },
+      "dates": {
+        "just_now": "Baru saja",
+        "minutes_ago": "{{count}} menit lalu",
+        "hours_ago": "{{count}} jam lalu",
+        "yesterday": "Kemarin",
+        "days_ago": "{{count}} hari lalu",
+        "weeks_ago": "{{count}} minggu lalu",
+        "months_ago": "{{count}} bulan lalu",
+        "years_ago": "{{count}} tahun lalu"
       },
       "bulk": {
         "selected": "{{count}} dipilih",
         "actions": "Bulk Actions",
-        "markPayout": "Bulk Mark Payout"
+        "markPayout": "Bulk Mark Payout",
+        "cancel": "Batal"
       },
       "empty": "Tidak ada pembayaran yang ditemukan.",
       "loading": "Memuat data pembayaran..."
@@ -741,6 +865,162 @@
         "var_weight": "Bobot",
         "cancel": "Batal",
         "create_btn": "Buat A/B Test"
+      }
+    },
+    "wallet": {
+      "title": "Wallet",
+      "refresh": "Refresh",
+      "active_balance": "Saldo Aktif",
+      "pending_balance": "Saldo Pending",
+      "history_title": "Riwayat Transaksi",
+      "filter": "Filter",
+      "export": "Export",
+      "view_profile": "Lihat profil",
+      "dates": {
+        "just_now": "Baru saja",
+        "minutes_ago": "{{count}} menit lalu",
+        "hours_ago": "{{count}} jam lalu",
+        "days_ago": "{{count}} hari lalu"
+      },
+      "tx_type": {
+        "topup": "TopUp",
+        "withdraw": "Withdraw",
+        "transfer": "Transfer",
+        "payment": "Payment",
+        "other": "Lainnya"
+      },
+      "status": {
+        "success": "Berhasil",
+        "pending": "Pending",
+        "failed": "Gagal"
+      },
+      "filters": {
+        "category": "Kategori",
+        "status": "Status",
+        "method": "Metode",
+        "amount": "Nominal",
+        "date": "Tanggal",
+        "reset": "Reset",
+        "to": "s/d",
+        "max": "max"
+      },
+      "table": {
+        "id": "ID",
+        "user": "User",
+        "category": "Kategori",
+        "amount": "Nominal",
+        "method": "Metode",
+        "status": "Status",
+        "time": "Waktu",
+        "empty": "Belum ada riwayat transaksi"
+      },
+      "filter_dialog": {
+        "title": "Filter Transaksi",
+        "category_label": "Kategori",
+        "all_categories": "Semua Kategori",
+        "method_label": "Metode Pembayaran",
+        "method_placeholder": "Contoh: Bank BCA, DANA, dll",
+        "status_label": "Status",
+        "all_statuses": "Semua Status",
+        "status_success": "Berhasil",
+        "status_pending": "Pending",
+        "status_rejected": "Ditolak",
+        "amount_label": "Nominal (Rp)",
+        "amount_min": "Min",
+        "amount_max": "Max",
+        "date_range_label": "Rentang Tanggal",
+        "reset": "Reset",
+        "apply": "Terapkan Filter"
+      }
+    },
+    "topup": {
+      "title": "TopUp",
+      "refresh": "Refresh",
+      "dates": {
+        "just_now": "Baru saja",
+        "minutes_ago": "{{count}} menit lalu",
+        "hours_ago": "{{count}} jam lalu",
+        "yesterday": "Kemarin",
+        "days_ago": "{{count}} hari lalu",
+        "weeks_ago": "{{count}} minggu lalu",
+        "months_ago": "{{count}} bulan lalu",
+        "years_ago": "{{count}} tahun lalu"
+      },
+      "stats": {
+        "pending": "Topup Pending",
+        "approved": "Disetujui",
+        "rejected": "Ditolak"
+      },
+      "toolbar": {
+        "search_placeholder": "Cari nama, metode pembayaran...",
+        "search_btn": "Cari",
+        "filter_btn": "Filter"
+      },
+      "filter_modal": {
+        "title": "Filter Data Topup",
+        "status_label": "Status",
+        "status_all": "Semua",
+        "status_pending": "Pending",
+        "status_approved": "Disetujui",
+        "status_rejected": "Ditolak",
+        "payment_method_label": "Metode Pembayaran",
+        "payment_method_placeholder": "Contoh: GoPay, BCA, Transfer...",
+        "date_range_label": "Rentang Tanggal",
+        "date_from": "Dari",
+        "date_to": "Sampai",
+        "amount_range_label": "Nominal (Rp)",
+        "amount_min": "Lebih dari",
+        "amount_max": "Kurang dari",
+        "reset": "Reset",
+        "apply": "Terapkan"
+      },
+      "table": {
+        "id": "ID",
+        "user": "User",
+        "payment_method": "Metode Pembayaran",
+        "amount": "Nominal",
+        "status": "Status",
+        "date": "Tanggal",
+        "action": "Aksi",
+        "empty": "Tidak ada data topup.",
+        "view_profile": "Lihat profil"
+      },
+      "status_badge": {
+        "approved": "Disetujui",
+        "pending": "Pending",
+        "rejected": "Ditolak"
+      },
+      "action_menu": {
+        "label": "Aksi Topup",
+        "confirm": "Confirm Topup",
+        "reject": "Reject Topup",
+        "view_approval": "Lihat Detail Penerimaan",
+        "view_rejection": "Lihat Alasan Ditolak"
+      },
+      "confirm_modal": {
+        "confirm_title": "Confirm Topup",
+        "reject_title": "Reject Topup",
+        "action_desc": "Anda akan melakukan aksi pada transaksi {{user}} senilai {{amount}}.",
+        "ext_ref_label": "External Reference",
+        "ext_ref_placeholder": "Opsional...",
+        "reject_desc": "Masukkan alasan penolakan topup untuk pengguna ini.",
+        "rejection_reason_label": "Alasan Penolakan",
+        "rejection_reason_placeholder": "Contoh: Bukti transfer tidak valid, nominal tidak sesuai...",
+        "cancel": "Batal",
+        "confirm": "Konfirmasi",
+        "reason_required_title": "Alasan wajib diisi",
+        "reason_required_desc": "Harap isi alasan penolakan topup.",
+        "success_confirm_title": "Topup Dikonfirmasi",
+        "success_confirm_desc": "Saldo {{user}} berhasil ditambahkan.",
+        "success_reject_title": "Topup Ditolak",
+        "success_reject_desc": "Permintaan topup {{user}} telah ditolak.",
+        "action_failed_title": "Gagal Melakukan Aksi"
+      },
+      "rejection_modal": {
+        "title": "Alasan Penolakan Topup",
+        "admin_notes": "Catatan/Alasan Admin:",
+        "no_notes": "Tidak ada catatan.",
+        "close": "Tutup"
       }
     }
   }

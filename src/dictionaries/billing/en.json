@@ -258,38 +258,52 @@
       }
     },
     "payments": {
-      "title": "Payment",
-      "searchPlaceholder": "Search UserId, TrainerId, Status...",
+      "title": "Payments",
+      "searchPlaceholder": "Search order code, method...",
       "searchButton": "Search",
+      "filter": "Filter",
+      "export": "Export...",
+      "csv": "CSV",
       "tabs": {
         "payments": "Payments List",
         "disputes": "Disputes"
       },
-      "disputes": {
-        "table": {
-          "type": "Type"
-        },
-        "action": {
-          "detail": "View Detail",
-          "reply": "Reply",
-          "resolve": "Resolve"
-        }
+      "stats": {
+        "payments": "Payments",
+        "pending": "Pending Payments",
+        "completed": "Completed"
       },
       "summary": {
+        "payments": "Payments",
         "total": "Total Payments",
         "revenue": "Revenue",
         "pendingRefunds": "Pending Refunds",
         "pendingPayouts": "Pending Payouts"
       },
+      "filter_modal": {
+        "title": "Filter Payments",
+        "payment_status": "Payment Status",
+        "all_statuses": "All Statuses",
+        "payment_method": "Payment Method",
+        "all_methods": "All",
+        "reset_all": "Reset All",
+        "apply": "Apply"
+      },
       "table": {
         "id": "ID",
+        "order_code": "Order Code",
         "user": "User",
         "trainer": "Trainer",
         "amount": "Amount",
         "status": "Status",
         "paymentMethod": "Method",
-        "date": "Date",
+        "date": "Payment Date",
+        "paymentDate": "Payment Date",
         "actions": "Actions"
+      },
+      "tooltips": {
+        "view_profile": "View user profile",
+        "view_teacher": "View teacher profile"
       },
       "status": {
         "paid": "Paid",
@@ -299,9 +313,31 @@
         "disputed": "Disputed"
       },
       "actions": {
+        "send_invoice": "Send Invoice",
+        "update_status": "Update Status",
         "processRefund": "Process Refund",
         "markPayout": "Mark Payout",
         "updateStatus": "Update Status"
+      },
+      "send_invoice": {
+        "title": "Send Invoice",
+        "subtitle": "Send proof of payment to user email",
+        "payment_id": "Payment ID",
+        "amount": "Amount",
+        "user": "User",
+        "recipient_email": "Recipient Email",
+        "from_account": "(from user account)",
+        "email_placeholder": "Registered user email",
+        "email_notice": "Invoice will be sent to the registered user email.",
+        "include_receipt": "Include Receipt",
+        "include_receipt_desc": "Attach transaction details to email",
+        "sending": "Sending...",
+        "send_now": "Send Now",
+        "cancel": "Cancel",
+        "success_title": "Invoice Sent",
+        "success_message": "Invoice successfully sent to user email.",
+        "error_title": "Failed to Send Invoice",
+        "error_default": "An error occurred while sending the invoice."
       },
       "modal": {
         "processRefundTitle": "Process Refund",
@@ -312,14 +348,102 @@
         "reject": "Reject",
         "notes": "Notes",
         "payoutReference": "Payout Reference",
-        "submit": "Submit",
+        "submit": "Save",
         "cancel": "Cancel",
-        "failureReason": "Failure Reason"
+        "failureReason": "Failure Reason (Required)"
+      },
+      "update_status": {
+        "success_title": "Status Updated",
+        "success_message": "Payment status successfully changed to {{status}}.",
+        "demo_title": "[DEMO] Status Updated",
+        "demo_message": "Payment status changed to {{status}} (local simulation)."
+      },
+      "disputes": {
+        "search_placeholder": "Search dispute...",
+        "search_button": "Search",
+        "empty": "No disputes found.",
+        "all_statuses": "All Statuses",
+        "pagination": "Showing {{from}} - {{to}} of {{total}}",
+        "table": {
+          "date": "Date",
+          "payment": "Payment",
+          "user": "User",
+          "type": "Type",
+          "status": "Status",
+          "actions": "Actions"
+        },
+        "action": {
+          "detail": "View Detail",
+          "reply": "Reply",
+          "resolve": "Resolve"
+        },
+        "detail": {
+          "title": "Dispute Detail #{{id}}",
+          "payment_id": "Payment ID",
+          "amount": "Amount",
+          "reporter": "User (Reporter)",
+          "trainer": "Related Trainer",
+          "status": "Status",
+          "created_at": "Created At",
+          "reason_title": "Dispute Reason",
+          "no_reason": "No reason provided.",
+          "latest_response": "Latest Response",
+          "final_resolution": "Final Resolution",
+          "close": "Close"
+        },
+        "respond": {
+          "title": "Reply to Dispute #{{id}}",
+          "user": "User",
+          "reason": "Reason",
+          "label": "Response (Required)",
+          "placeholder": "Type your response here...",
+          "evidence_label": "Evidence / Merchant Evidence (Optional)",
+          "evidence_placeholder": "Evidence URL or notes",
+          "submitting": "Saving...",
+          "submit": "Send Reply",
+          "cancel": "Cancel",
+          "error_required": "Response text is required",
+          "error_required_desc": "Please fill in the response field before submitting.",
+          "success_title": "Reply Sent",
+          "success_message": "Dispute reply successfully sent.",
+          "demo_title": "[DEMO] Reply Saved",
+          "demo_message": "Reply successfully saved locally (simulation)."
+        },
+        "resolve": {
+          "title": "Resolve Dispute #{{id}}",
+          "label": "Final Resolution (Required)",
+          "placeholder": "Final decision...",
+          "notes_label": "Resolution Notes (Optional)",
+          "notes_placeholder": "Additional notes",
+          "refund_label": "Refund Amount (Optional)",
+          "auto_refund": "Auto Process Refund",
+          "submitting": "Saving...",
+          "submit": "Send Resolve",
+          "cancel": "Cancel",
+          "error_required": "Resolution text is required",
+          "error_required_desc": "Please fill in the resolution field before submitting.",
+          "success_title": "Dispute Resolved",
+          "success_message": "Dispute successfully resolved.",
+          "refund_processed": " Refund is being processed.",
+          "demo_title": "[DEMO] Dispute Resolved",
+          "demo_message": "Dispute resolved locally (simulation)."
+        }
+      },
+      "dates": {
+        "just_now": "just now",
+        "minutes_ago": "{{count}} min ago",
+        "hours_ago": "{{count}} hr ago",
+        "yesterday": "yesterday",
+        "days_ago": "{{count}} days ago",
+        "weeks_ago": "{{count}} wk ago",
+        "months_ago": "{{count}} mo ago",
+        "years_ago": "{{count}} yr ago"
       },
       "bulk": {
         "selected": "{{count}} selected",
         "actions": "Bulk Actions",
-        "markPayout": "Bulk Mark Payout"
+        "markPayout": "Bulk Mark Payout",
+        "cancel": "Cancel"
       },
       "empty": "No payments found.",
       "loading": "Loading payment data..."
@@ -741,6 +865,162 @@
         "var_weight": "Weight",
         "cancel": "Cancel",
         "create_btn": "Create A/B Test"
+      }
+    },
+    "wallet": {
+      "title": "Wallet",
+      "refresh": "Refresh",
+      "active_balance": "Active Balance",
+      "pending_balance": "Pending Balance",
+      "history_title": "Transaction History",
+      "filter": "Filter",
+      "export": "Export",
+      "view_profile": "View profile",
+      "dates": {
+        "just_now": "Just now",
+        "minutes_ago": "{{count}} minutes ago",
+        "hours_ago": "{{count}} hours ago",
+        "days_ago": "{{count}} days ago"
+      },
+      "tx_type": {
+        "topup": "TopUp",
+        "withdraw": "Withdraw",
+        "transfer": "Transfer",
+        "payment": "Payment",
+        "other": "Other"
+      },
+      "status": {
+        "success": "Success",
+        "pending": "Pending",
+        "failed": "Failed"
+      },
+      "filters": {
+        "category": "Category",
+        "status": "Status",
+        "method": "Method",
+        "amount": "Amount",
+        "date": "Date",
+        "reset": "Reset",
+        "to": "to",
+        "max": "max"
+      },
+      "table": {
+        "id": "ID",
+        "user": "User",
+        "category": "Category",
+        "amount": "Amount",
+        "method": "Method",
+        "status": "Status",
+        "time": "Time",
+        "empty": "No transaction history yet"
+      },
+      "filter_dialog": {
+        "title": "Filter Transactions",
+        "category_label": "Category",
+        "all_categories": "All Categories",
+        "method_label": "Payment Method",
+        "method_placeholder": "E.g., Bank BCA, DANA, etc.",
+        "status_label": "Status",
+        "all_statuses": "All Statuses",
+        "status_success": "Success",
+        "status_pending": "Pending",
+        "status_rejected": "Rejected",
+        "amount_label": "Amount (IDR)",
+        "amount_min": "Min",
+        "amount_max": "Max",
+        "date_range_label": "Date Range",
+        "reset": "Reset",
+        "apply": "Apply Filter"
+      }
+    },
+    "topup": {
+      "title": "TopUp",
+      "refresh": "Refresh",
+      "dates": {
+        "just_now": "Just now",
+        "minutes_ago": "{{count}} minutes ago",
+        "hours_ago": "{{count}} hours ago",
+        "yesterday": "Yesterday",
+        "days_ago": "{{count}} days ago",
+        "weeks_ago": "{{count}} weeks ago",
+        "months_ago": "{{count}} months ago",
+        "years_ago": "{{count}} years ago"
+      },
+      "stats": {
+        "pending": "Pending TopUp",
+        "approved": "Approved",
+        "rejected": "Rejected"
+      },
+      "toolbar": {
+        "search_placeholder": "Search name, payment method...",
+        "search_btn": "Search",
+        "filter_btn": "Filter"
+      },
+      "filter_modal": {
+        "title": "Filter TopUp Data",
+        "status_label": "Status",
+        "status_all": "All",
+        "status_pending": "Pending",
+        "status_approved": "Approved",
+        "status_rejected": "Rejected",
+        "payment_method_label": "Payment Method",
+        "payment_method_placeholder": "E.g., GoPay, BCA, Transfer...",
+        "date_range_label": "Date Range",
+        "date_from": "From",
+        "date_to": "To",
+        "amount_range_label": "Amount (IDR)",
+        "amount_min": "More than",
+        "amount_max": "Less than",
+        "reset": "Reset",
+        "apply": "Apply"
+      },
+      "table": {
+        "id": "ID",
+        "user": "User",
+        "payment_method": "Payment Method",
+        "amount": "Amount",
+        "status": "Status",
+        "date": "Date",
+        "action": "Action",
+        "empty": "No topup data found.",
+        "view_profile": "View profile"
+      },
+      "status_badge": {
+        "approved": "Approved",
+        "pending": "Pending",
+        "rejected": "Rejected"
+      },
+      "action_menu": {
+        "label": "Topup Actions",
+        "confirm": "Confirm Topup",
+        "reject": "Reject Topup",
+        "view_approval": "View Approval Details",
+        "view_rejection": "View Rejection Reason"
+      },
+      "confirm_modal": {
+        "confirm_title": "Confirm Topup",
+        "reject_title": "Reject Topup",
+        "action_desc": "You are performing an action on transaction for {{user}} worth {{amount}}.",
+        "ext_ref_label": "External Reference",
+        "ext_ref_placeholder": "Optional...",
+        "reject_desc": "Enter the rejection reason for this topup request.",
+        "rejection_reason_label": "Rejection Reason",
+        "rejection_reason_placeholder": "E.g., Invalid payment receipt, incorrect amount...",
+        "cancel": "Cancel",
+        "confirm": "Confirm",
+        "reason_required_title": "Reason is required",
+        "reason_required_desc": "Please enter a reason for rejecting the topup.",
+        "success_confirm_title": "Topup Confirmed",
+        "success_confirm_desc": "Balance for {{user}} successfully added.",
+        "success_reject_title": "Topup Rejected",
+        "success_reject_desc": "Topup request for {{user}} has been rejected.",
+        "action_failed_title": "Action Failed"
+      },
+      "rejection_modal": {
+        "title": "Topup Rejection Reason",
+        "admin_notes": "Admin Note / Reason:",
+        "no_notes": "No notes provided.",
+        "close": "Close"
       }
     }
   }

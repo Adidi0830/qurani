@@ -258,38 +258,52 @@
       }
     },
     "payments": {
-      "title": "الدفع",
-      "searchPlaceholder": "البحث عن معرّف المستخدم، معرّف المعلم، الحالة...",
+      "title": "المدفوعات",
+      "searchPlaceholder": "البحث عن رمز الطلب، الطريقة...",
       "searchButton": "بحث",
+      "filter": "تصفية",
+      "export": "تصدير...",
+      "csv": "CSV",
       "tabs": {
         "payments": "قائمة المدفوعات",
         "disputes": "النزاعات"
       },
-      "disputes": {
-        "table": {
-          "type": "النوع"
-        },
-        "action": {
-          "detail": "عرض التفاصيل",
-          "reply": "رد",
-          "resolve": "حل"
-        }
+      "stats": {
+        "payments": "المدفوعات",
+        "pending": "مدفوعات معلقة",
+        "completed": "مكتمل"
       },
       "summary": {
+        "payments": "المدفوعات",
         "total": "إجمالي المدفوعات",
         "revenue": "الإيرادات",
         "pendingRefunds": "المبالغ المستردة المعلقة",
         "pendingPayouts": "المدفوعات المعلقة"
       },
+      "filter_modal": {
+        "title": "تصفية المدفوعات",
+        "payment_status": "حالة الدفع",
+        "all_statuses": "جميع الحالات",
+        "payment_method": "طريقة الدفع",
+        "all_methods": "الكل",
+        "reset_all": "إعادة تعيين الكل",
+        "apply": "تطبيق"
+      },
       "table": {
         "id": "المعرف",
+        "order_code": "رمز الطلب",
         "user": "المستخدم",
         "trainer": "المعلم",
         "amount": "المبلغ",
         "status": "الحالة",
         "paymentMethod": "الطريقة",
-        "date": "التاريخ",
+        "date": "تاريخ الدفع",
+        "paymentDate": "تاريخ الدفع",
         "actions": "الإجراءات"
+      },
+      "tooltips": {
+        "view_profile": "عرض الملف الشخصي",
+        "view_teacher": "عرض ملف المعلم"
       },
       "status": {
         "paid": "مدفوع",
@@ -299,9 +313,31 @@
         "disputed": "متنازع عليها"
       },
       "actions": {
+        "send_invoice": "إرسال الفاتورة",
+        "update_status": "تحديث الحالة",
         "processRefund": "معالجة الاسترداد",
         "markPayout": "تحديد كمدفوع",
         "updateStatus": "تحديث الحالة"
+      },
+      "send_invoice": {
+        "title": "إرسال الفاتورة",
+        "subtitle": "إرسال إيصال الدفع إلى بريد المستخدم",
+        "payment_id": "معرّف الدفع",
+        "amount": "المبلغ",
+        "user": "المستخدم",
+        "recipient_email": "بريد المستلم",
+        "from_account": "(من حساب المستخدم)",
+        "email_placeholder": "بريد المستخدم المسجل",
+        "email_notice": "سيتم إرسال الفاتورة إلى البريد المسجل للمستخدم.",
+        "include_receipt": "تضمين الإيصال",
+        "include_receipt_desc": "إرفاق تفاصيل المعاملة بالبريد",
+        "sending": "جاري الإرسال...",
+        "send_now": "إرسال الآن",
+        "cancel": "إلغاء",
+        "success_title": "تم إرسال الفاتورة",
+        "success_message": "تم إرسال الفاتورة بنجاح إلى بريد المستخدم.",
+        "error_title": "فشل إرسال الفاتورة",
+        "error_default": "حدث خطأ أثناء إرسال الفاتورة."
       },
       "modal": {
         "processRefundTitle": "معالجة الاسترداد",
@@ -312,14 +348,102 @@
         "reject": "رفض",
         "notes": "ملاحظات",
         "payoutReference": "الرقم المرجعي للدفع",
-        "submit": "إرسال",
+        "submit": "حفظ",
         "cancel": "إلغاء",
-        "failureReason": "سبب الفشل"
+        "failureReason": "سبب الفشل (مطلوب)"
+      },
+      "update_status": {
+        "success_title": "تم تحديث الحالة",
+        "success_message": "تم تغيير حالة الدفع بنجاح إلى {{status}}.",
+        "demo_title": "[تجريبي] تم تحديث الحالة",
+        "demo_message": "تم تغيير حالة الدفع إلى {{status}} (محاكاة محلية)."
+      },
+      "disputes": {
+        "search_placeholder": "البحث عن نزاع...",
+        "search_button": "بحث",
+        "empty": "لم يتم العثور على أي نزاع.",
+        "all_statuses": "جميع الحالات",
+        "pagination": "عرض {{from}} - {{to}} من {{total}}",
+        "table": {
+          "date": "التاريخ",
+          "payment": "المدفوعات",
+          "user": "المستخدم",
+          "type": "النوع",
+          "status": "الحالة",
+          "actions": "الإجراءات"
+        },
+        "action": {
+          "detail": "عرض التفاصيل",
+          "reply": "رد",
+          "resolve": "حل"
+        },
+        "detail": {
+          "title": "تفاصيل النزاع #{{id}}",
+          "payment_id": "معرّف الدفع",
+          "amount": "المبلغ",
+          "reporter": "المستخدم (مقدم الشكوى)",
+          "trainer": "المعلم المرتبط",
+          "status": "الحالة",
+          "created_at": "تاريخ الإنشاء",
+          "reason_title": "سبب النزاع",
+          "no_reason": "لم يتم تقديم أي سبب.",
+          "latest_response": "آخر رد",
+          "final_resolution": "القرار النهائي",
+          "close": "إغلاق"
+        },
+        "respond": {
+          "title": "الرد على النزاع #{{id}}",
+          "user": "المستخدم",
+          "reason": "السبب",
+          "label": "الرد (مطلوب)",
+          "placeholder": "اكتب ردك هنا...",
+          "evidence_label": "دليل التاجر (اختياري)",
+          "evidence_placeholder": "رابط الدليل أو ملاحظات",
+          "submitting": "جاري الحفظ...",
+          "submit": "إرسال الرد",
+          "cancel": "إلغاء",
+          "error_required": "نص الرد مطلوب",
+          "error_required_desc": "يرجى ملء حقل الرد قبل الإرسال.",
+          "success_title": "تم إرسال الرد",
+          "success_message": "تم إرسال الرد على النزاع بنجاح.",
+          "demo_title": "[تجريبي] تم حفظ الرد",
+          "demo_message": "تم حفظ الرد بنجاح محلياً (محاكاة)."
+        },
+        "resolve": {
+          "title": "حل النزاع #{{id}}",
+          "label": "القرار النهائي (مطلوب)",
+          "placeholder": "القرار النهائي...",
+          "notes_label": "ملاحظات الحل (اختياري)",
+          "notes_placeholder": "ملاحظات إضافية",
+          "refund_label": "مبلغ الاسترداد (اختياري)",
+          "auto_refund": "معالجة الاسترداد تلقائياً",
+          "submitting": "جاري الحفظ...",
+          "submit": "إرسال الحل",
+          "cancel": "إلغاء",
+          "error_required": "نص القرار مطلوب",
+          "error_required_desc": "يرجى ملء حقل القرار قبل الإرسال.",
+          "success_title": "تم حل النزاع",
+          "success_message": "تم حل النزاع بنجاح.",
+          "refund_processed": " جاري معالجة الاسترداد.",
+          "demo_title": "[تجريبي] تم حل النزاع",
+          "demo_message": "تم حل النزاع محلياً (محاكاة)."
+        }
+      },
+      "dates": {
+        "just_now": "الآن",
+        "minutes_ago": "منذ {{count}} دقيقة",
+        "hours_ago": "منذ {{count}} ساعة",
+        "yesterday": "أمس",
+        "days_ago": "منذ {{count}} أيام",
+        "weeks_ago": "منذ {{count}} أسابيع",
+        "months_ago": "منذ {{count}} أشهر",
+        "years_ago": "منذ {{count}} سنة"
       },
       "bulk": {
-        "selected": "{{count}} محدد",
+        "selected": "تم تحديد {{count}}",
         "actions": "إجراءات جماعية",
-        "markPayout": "Bulk Mark Payout"
+        "markPayout": "Bulk Mark Payout",
+        "cancel": "إلغاء"
       },
       "empty": "لم يتم العثور على مدفوعات.",
       "loading": "جاري تحميل بيانات الدفع..."
@@ -741,6 +865,162 @@
         "var_weight": "الوزن",
         "cancel": "إلغاء",
         "create_btn": "إنشاء اختبار A/B"
+      }
+    },
+    "wallet": {
+      "title": "المحفظة",
+      "refresh": "تحديث",
+      "active_balance": "الرصيد النشط",
+      "pending_balance": "الرصيد المعلق",
+      "history_title": "سجل المعاملات",
+      "filter": "تصفية",
+      "export": "تصدير",
+      "view_profile": "عرض الملف الشخصي",
+      "dates": {
+        "just_now": "الآن",
+        "minutes_ago": "منذ {{count}} دقيقة",
+        "hours_ago": "منذ {{count}} ساعة",
+        "days_ago": "منذ {{count}} يوم"
+      },
+      "tx_type": {
+        "topup": "شحن رصيد",
+        "withdraw": "سحب",
+        "transfer": "تحويل",
+        "payment": "دفع",
+        "other": "أخرى"
+      },
+      "status": {
+        "success": "ناجح",
+        "pending": "معلق",
+        "failed": "فاشل"
+      },
+      "filters": {
+        "category": "الفئة",
+        "status": "الحالة",
+        "method": "الطريقة",
+        "amount": "المبلغ",
+        "date": "التاريخ",
+        "reset": "إعادة ضبط",
+        "to": "إلى",
+        "max": "الحد الأقصى"
+      },
+      "table": {
+        "id": "المعرف",
+        "user": "المستخدم",
+        "category": "الفئة",
+        "amount": "المبلغ",
+        "method": "الطريقة",
+        "status": "الحالة",
+        "time": "الوقت",
+        "empty": "لا توجد معاملات بعد"
+      },
+      "filter_dialog": {
+        "title": "تصفية المعاملات",
+        "category_label": "الفئة",
+        "all_categories": "جميع الفئات",
+        "method_label": "طريقة الدفع",
+        "method_placeholder": "مثال: بنك BCA، DANA، إلخ",
+        "status_label": "الحالة",
+        "all_statuses": "جميع الحالات",
+        "status_success": "ناجح",
+        "status_pending": "معلق",
+        "status_rejected": "مرفوض",
+        "amount_label": "المبلغ (روبية)",
+        "amount_min": "الحد الأدنى",
+        "amount_max": "الحد الأقصى",
+        "date_range_label": "النطاق الزمني",
+        "reset": "إعادة ضبط",
+        "apply": "تطبيق التصفية"
+      }
+    },
+    "topup": {
+      "title": "شحن الرصيد",
+      "refresh": "تحديث",
+      "dates": {
+        "just_now": "الآن",
+        "minutes_ago": "منذ {{count}} دقيقة",
+        "hours_ago": "منذ {{count}} ساعة",
+        "yesterday": "أمس",
+        "days_ago": "منذ {{count}} يوم",
+        "weeks_ago": "منذ {{count}} أسبوع",
+        "months_ago": "منذ {{count}} شهر",
+        "years_ago": "منذ {{count}} سنة"
+      },
+      "stats": {
+        "pending": "قيد الانتظار",
+        "approved": "تمت الموافقة",
+        "rejected": "مرفوض"
+      },
+      "toolbar": {
+        "search_placeholder": "البحث بالاسم أو طريقة الدفع...",
+        "search_btn": "بحث",
+        "filter_btn": "تصفية"
+      },
+      "filter_modal": {
+        "title": "تصفية بيانات شحن الرصيد",
+        "status_label": "الحالة",
+        "status_all": "الكل",
+        "status_pending": "معلق",
+        "status_approved": "تمت الموافقة",
+        "status_rejected": "مرفوض",
+        "payment_method_label": "طريقة الدفع",
+        "payment_method_placeholder": "مثال: GoPay، BCA، تحويل...",
+        "date_range_label": "النطاق الزمني",
+        "date_from": "من",
+        "date_to": "إلى",
+        "amount_range_label": "المبلغ (روبية)",
+        "amount_min": "أكثر من",
+        "amount_max": "أقل من",
+        "reset": "إعادة ضبط",
+        "apply": "تطبيق"
+      },
+      "table": {
+        "id": "المعرف",
+        "user": "المستخدم",
+        "payment_method": "طريقة الدفع",
+        "amount": "المبلغ",
+        "status": "الحالة",
+        "date": "التاريخ",
+        "action": "الإجراء",
+        "empty": "لا توجد بيانات شحن رصيد.",
+        "view_profile": "عرض الملف الشخصي"
+      },
+      "status_badge": {
+        "approved": "تمت الموافقة",
+        "pending": "معلق",
+        "rejected": "مرفوض"
+      },
+      "action_menu": {
+        "label": "إجراءات شحن الرصيد",
+        "confirm": "تأكيد شحن الرصيد",
+        "reject": "رفض شحن الرصيد",
+        "view_approval": "عرض تفاصيل القبول",
+        "view_rejection": "عرض سبب الرفض"
+      },
+      "confirm_modal": {
+        "confirm_title": "تأكيد شحن الرصيد",
+        "reject_title": "رفض شحن الرصيد",
+        "action_desc": "أنت على وشك تنفيذ إجراء على معاملة {{user}} بقيمة {{amount}}.",
+        "ext_ref_label": "المرجع الخارجي",
+        "ext_ref_placeholder": "اختياري...",
+        "reject_desc": "أدخل سبب رفض طلب شحن الرصيد لهذا المستخدم.",
+        "rejection_reason_label": "سبب الرفض",
+        "rejection_reason_placeholder": "مثال: إيصال التحويل غير صالح، المبلغ غير مطابق...",
+        "cancel": "إلغاء",
+        "confirm": "تأكيد",
+        "reason_required_title": "السبب مطلوب",
+        "reason_required_desc": "يرجى إدخال سبب لرفض شحن الرصيد.",
+        "success_confirm_title": "تم تأكيد شحن الرصيد",
+        "success_confirm_desc": "تمت إضافة الرصيد للمستخدم {{user}} بنجاح.",
+        "success_reject_title": "تم رفض شحن الرصيد",
+        "success_reject_desc": "تم رفض طلب شحن الرصيد للمستخدم {{user}}.",
+        "action_failed_title": "فشل تنفيذ الإجراء"
+      },
+      "rejection_modal": {
+        "title": "سبب رفض شحن الرصيد",
+        "admin_notes": "ملاحظة / سبب المسؤول:",
+        "no_notes": "لا توجد ملاحظات.",
+        "close": "إغلاق"
       }
     }
   }

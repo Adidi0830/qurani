@@ -53,7 +53,7 @@ function formatDate(dateStr: string) {
 }
 
 // Time ago: menampilkan waktu relatif dengan full date di tooltip (timezone-aware)
-function timeAgo(dateStr: string, locale: string = "id", timezone?: string): { relative: string; full: string } {
+function timeAgo(dateStr: string, t: (key: string, fallback?: string, params?: Record<string, any>) => string, timezone?: string): { relative: string; full: string } {
     if (!dateStr) return { relative: "-", full: "-" };
     let normalized = dateStr.trim();
     if (normalized.includes(" ") && !normalized.includes("T")) normalized = normalized.replace(" ", "T");
@@ -71,8 +71,7 @@ function timeAgo(dateStr: string, locale: string = "id", timezone?: string): { r
     const diffYear = Math.floor(diffDay / 365);
 
     const tz = timezone || Intl.DateTimeFormat().resolvedOptions().timeZone;
-    const localeCode = locale === "ar" ? "ar-SA" : locale === "en" ? "en-GB" : "id-ID";
-    const full = new Intl.DateTimeFormat(localeCode, {
+    const full = new Intl.DateTimeFormat("id-ID", {
         day: "2-digit", month: "short", year: "numeric",
         hour: "2-digit", minute: "2-digit",
         hour12: false,
@@ -81,37 +80,20 @@ function timeAgo(dateStr: string, locale: string = "id", timezone?: string): { r
     }).format(date);
 
     let relative: string;
-    if (locale === "en") {
-        if (diffSec < 60) relative = "just now";
-        else if (diffMin < 60) relative = `${diffMin} min ago`;
-        else if (diffHour < 24) relative = `${diffHour} hr ago`;
-        else if (diffDay === 1) relative = `yesterday`;
-        else if (diffDay < 7) relative = `${diffDay} days ago`;
-        else if (diffWeek < 5) relative = `${diffWeek} wk ago`;
-        else if (diffMonth < 12) relative = `${diffMonth} mo ago`;
-        else relative = `${diffYear} yr ago`;
-    } else if (locale === "ar") {
-        if (diffSec < 60) relative = "الآن";
-        else if (diffMin < 60) relative = `منذ ${diffMin} دقيقة`;
-        else if (diffHour < 24) relative = `منذ ${diffHour} ساعة`;
-        else if (diffDay < 7) relative = `منذ ${diffDay} أيام`;
-        else relative = date.toLocaleDateString("ar-SA", { day: "2-digit", month: "short", year: "numeric" });
-    } else {
-        if (diffSec < 60) relative = "Baru saja";
-        else if (diffMin < 60) relative = `${diffMin} menit lalu`;
-        else if (diffHour < 24) relative = `${diffHour} jam lalu`;
-        else if (diffDay === 1) relative = `Kemarin`;
-        else if (diffDay < 7) relative = `${diffDay} hari lalu`;
-        else if (diffWeek < 5) relative = `${diffWeek} minggu lalu`;
-        else if (diffMonth < 12) relative = `${diffMonth} bulan lalu`;
-        else relative = `${diffYear} tahun lalu`;
-    }
+    if (diffSec < 60) relative = t("billing.payments.dates.just_now", "just now");
+    else if (diffMin < 60) relative = t("billing.payments.dates.minutes_ago", `${diffMin} min ago`, { count: diffMin });
+    else if (diffHour < 24) relative = t("billing.payments.dates.hours_ago", `${diffHour} hr ago`, { count: diffHour });
+    else if (diffDay === 1) relative = t("billing.payments.dates.yesterday", "yesterday");
+    else if (diffDay < 7) relative = t("billing.payments.dates.days_ago", `${diffDay} days ago`, { count: diffDay });
+    else if (diffWeek < 5) relative = t("billing.payments.dates.weeks_ago", `${diffWeek} wk ago`, { count: diffWeek });
+    else if (diffMonth < 12) relative = t("billing.payments.dates.months_ago", `${diffMonth} mo ago`, { count: diffMonth });
+    else relative = t("billing.payments.dates.years_ago", `${diffYear} yr ago`, { count: diffYear });
 
     return { relative, full };
 }
 
 // Action dropdown component to avoid clipping issues
-function ActionDropdown({ payment, onSendInvoice, onUpdateStatus }: { payment: PaymentData, onSendInvoice: () => void, onUpdateStatus: () => void }) {
+function ActionDropdown({ payment, onSendInvoice, onUpdateStatus, t }: { payment: PaymentData, onSendInvoice: () => void, onUpdateStatus: () => void, t: any }) {
     const [open, setOpen] = useState(false);
     const ref = useRef<HTMLDivElement>(null);
 
@@ -140,14 +122,14 @@ function ActionDropdown({ payment, onSendInvoice, onUpdateStatus }: { payment: P
                         className="w-full text-left px-4 py-2 text-sm text-blue-600 dark:text-blue-400 hover:bg-blue-50 dark:hover:bg-blue-900/20 transition-colors flex items-center gap-2"
                     >
                         <Send className="w-3.5 h-3.5" />
-                        Kirim Invoice
+                        {t("billing.payments.actions.send_invoice", "Send Invoice")}
                     </button>
                     <button 
                         onClick={() => { setOpen(false); onUpdateStatus(); }}
                         className="w-full text-left px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors flex items-center gap-2"
                     >
                         <CheckSquare className="w-3.5 h-3.5" />
-                        Update Status
+                        {t("billing.payments.actions.update_status", "Update Status")}
                     </button>
                 </div>
             )}
@@ -421,11 +403,11 @@ function PaymentsContent() {
                 email: userEmail || null,
                 includeReceipt: invoiceIncludeReceipt ? 1 : 0
             })
-            showToast({ type: 'success', title: 'Invoice Terkirim', message: `Invoice telah berhasil dikirim ke email user.` })
+            showToast({ type: 'success', title: t("billing.payments.send_invoice.success_title", 'Invoice Terkirim'), message: t("billing.payments.send_invoice.success_message", 'Invoice telah berhasil dikirim ke email user.') })
             setSendInvoiceModal(null)
             setInvoiceIncludeReceipt(true)
         } catch (err: any) {
-            showToast({ type: 'error', title: 'Gagal Kirim Invoice', message: err?.message || 'Terjadi kesalahan saat mengirim invoice.' })
+            showToast({ type: 'error', title: t("billing.payments.send_invoice.error_title", 'Gagal Kirim Invoice'), message: err?.message || t("billing.payments.send_invoice.error_default", 'Terjadi kesalahan saat mengirim invoice.') })
         } finally {
             setIsSubmitting(false)
         }
@@ -438,7 +420,7 @@ function PaymentsContent() {
                 status: statusUpdateValue,
                 failureReason: statusUpdateValue === 'failed' ? failureReason : undefined
             })
-            showToast({ type: 'success', title: 'Status Diperbarui', message: `Status pembayaran berhasil diubah menjadi ${statusUpdateValue}.` })
+            showToast({ type: 'success', title: t("billing.payments.update_status.success_title", 'Status Diperbarui'), message: t("billing.payments.update_status.success_message", `Status pembayaran berhasil diubah menjadi ${statusUpdateValue}.`, { status: statusUpdateValue }) })
             setUpdateStatusModal(null)
             setFailureReason("")
             fetchPayments()
@@ -446,7 +428,7 @@ function PaymentsContent() {
             // Update dummy data when API fails
             const bId = payments.find(p => p.id === paymentId)?.bookingId || paymentId;
             syncPaymentStatusFromOrder(bId, statusUpdateValue);
-            showToast({ type: 'info', title: '[DEMO] Status Diperbarui', message: `Status pembayaran diubah menjadi ${statusUpdateValue} (simulasi lokal).` })
+            showToast({ type: 'info', title: t("billing.payments.update_status.demo_title", '[DEMO] Status Diperbarui'), message: t("billing.payments.update_status.demo_message", `Status pembayaran diubah menjadi ${statusUpdateValue} (simulasi lokal).`, { status: statusUpdateValue }) })
             setUpdateStatusModal(null)
             setFailureReason("")
             fetchPayments()
@@ -513,7 +495,7 @@ function PaymentsContent() {
                             <AlertCircle className="w-5 h-5 sm:w-6 sm:h-6" />
                         </div>
                         <div className="min-w-0">
-                            <p className="text-xs sm:text-sm text-gray-500 dark:text-gray-400 font-medium truncate">Payment Pending</p>
+                            <p className="text-xs sm:text-sm text-gray-500 dark:text-gray-400 font-medium truncate">{t("billing.payments.stats.pending", "Payment Pending")}</p>
                             {statsLoading ? (
                                 <div className="h-7 w-12 bg-gray-200 dark:bg-gray-700 rounded animate-pulse mt-0.5" />
                             ) : (
@@ -529,7 +511,7 @@ function PaymentsContent() {
                             <DollarSign className="w-5 h-5 sm:w-6 sm:h-6" />
                         </div>
                         <div className="min-w-0">
-                            <p className="text-xs sm:text-sm text-gray-500 dark:text-gray-400 font-medium truncate">Selesai</p>
+                            <p className="text-xs sm:text-sm text-gray-500 dark:text-gray-400 font-medium truncate">{t("billing.payments.stats.completed", "Selesai")}</p>
                             {statsLoading ? (
                                 <div className="h-7 w-24 bg-gray-200 dark:bg-gray-700 rounded animate-pulse mt-0.5" />
                             ) : (
@@ -555,7 +537,7 @@ function PaymentsContent() {
                                     <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
                                     <input
                                         type="text"
-                                        placeholder="Cari kode pesanan, metode..."
+                                        placeholder={t("billing.payments.searchPlaceholder", "Cari kode pesanan, metode...")}
                                         value={searchInput}
                                         onChange={(e) => setSearchInput(e.target.value)}
                                         onKeyDown={handleKeyPress}
@@ -580,7 +562,7 @@ function PaymentsContent() {
                                 }`}
                             >
                                 <Filter className="w-4 h-4" /> 
-                                <span className="hidden sm:inline">Filter</span>
+                                <span className="hidden sm:inline">{t("billing.payments.filter", "Filter")}</span>
                                 {(statusFilter || methodFilter) && (
                                     <span className="flex items-center justify-center w-4 h-4 rounded-full bg-emerald-500 text-white text-[9px] font-bold">
                                         {[statusFilter, methodFilter].filter(Boolean).length}
@@ -602,7 +584,7 @@ function PaymentsContent() {
                                 }`}
                             >
                                 <Download className="w-4 h-4" />
-                                <span className="hidden md:inline">{isExporting ? "Ekspor..." : "CSV"}</span>
+                                <span className="hidden md:inline">{isExporting ? t("billing.payments.export", "Ekspor...") : t("billing.payments.csv", "CSV")}</span>
                             </button>
 
                             {/* Tab Pills */}
@@ -615,7 +597,7 @@ function PaymentsContent() {
                                             : 'text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800'
                                     }`}
                                 >
-                                    Payments List
+                                    {t("billing.payments.tabs.payments", "Payments List")}
                                 </button>
                                 <div className="w-px h-5 bg-gray-200 dark:bg-gray-700" />
                                 <button
@@ -626,7 +608,7 @@ function PaymentsContent() {
                                             : 'text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800'
                                     }`}
                                 >
-                                    Disputes
+                                    {t("billing.payments.tabs.disputes", "Disputes")}
                                 </button>
                             </div>
                         </div>
@@ -649,7 +631,7 @@ function PaymentsContent() {
                                     <div className="w-7 h-7 rounded-lg bg-emerald-50 dark:bg-emerald-900/30 flex items-center justify-center">
                                         <SlidersHorizontal className="w-4 h-4 text-emerald-600 dark:text-emerald-400" />
                                     </div>
-                                    <h2 className="text-base font-bold text-gray-900 dark:text-white">Filter Pembayaran</h2>
+                                    <h2 className="text-base font-bold text-gray-900 dark:text-white">{t("billing.payments.filter_modal.title", "Filter Pembayaran")}</h2>
                                 </div>
                                 <button
                                     onClick={() => setShowFilterPanel(false)}
@@ -663,14 +645,14 @@ function PaymentsContent() {
                             <div className="px-5 py-5 space-y-6">
                                 {/* Status */}
                                 <div>
-                                    <p className="text-xs font-bold text-gray-400 dark:text-gray-500 uppercase tracking-wider mb-3">Status Pembayaran</p>
+                                    <p className="text-xs font-bold text-gray-400 dark:text-gray-500 uppercase tracking-wider mb-3">{t("billing.payments.filter_modal.payment_status", "Status Pembayaran")}</p>
                                     <div className="flex flex-wrap gap-2">
                                         {[
-                                            { val: "", label: "Semua Status" },
-                                            { val: "paid", label: "✓ Dibayar" },
-                                            { val: "pending", label: "⏳ Menunggu" },
-                                            { val: "failed", label: "✕ Gagal" },
-                                            { val: "refunded", label: "↩ Dikembalikan" },
+                                            { val: "", label: t("billing.payments.filter_modal.all_statuses", "Semua Status") },
+                                            { val: "paid", label: `✓ ${t("billing.payments.status.paid", "Dibayar")}` },
+                                            { val: "pending", label: `⏳ ${t("billing.payments.status.pending", "Menunggu")}` },
+                                            { val: "failed", label: `✕ ${t("billing.payments.status.failed", "Gagal")}` },
+                                            { val: "refunded", label: `↩ ${t("billing.payments.status.refunded", "Dikembalikan")}` },
                                         ].map(opt => (
                                             <button
                                                 key={opt.val}
@@ -691,10 +673,10 @@ function PaymentsContent() {
 
                                 {/* Metode */}
                                 <div>
-                                    <p className="text-xs font-bold text-gray-400 dark:text-gray-500 uppercase tracking-wider mb-3">Metode Pembayaran</p>
+                                    <p className="text-xs font-bold text-gray-400 dark:text-gray-500 uppercase tracking-wider mb-3">{t("billing.payments.filter_modal.payment_method", "Metode Pembayaran")}</p>
                                     <div className="flex flex-wrap gap-2">
                                         {[
-                                            { val: "", label: "Semua" },
+                                            { val: "", label: t("billing.payments.filter_modal.all_methods", "Semua") },
                                             { val: "GoPay", label: "GoPay" },
                                             { val: "OVO", label: "OVO" },
                                             { val: "DANA", label: "DANA" },
@@ -725,13 +707,13 @@ function PaymentsContent() {
                                     disabled={!statusFilter && !methodFilter}
                                     className="text-xs font-semibold text-rose-500 hover:text-rose-600 disabled:text-gray-300 dark:disabled:text-gray-600 disabled:cursor-not-allowed transition-colors flex items-center gap-1.5"
                                 >
-                                    Reset Semua
+                                    {t("billing.payments.filter_modal.reset_all", "Reset Semua")}
                                 </button>
                                 <button
                                     onClick={() => setShowFilterPanel(false)}
                                     className="px-5 py-2 bg-emerald-500 hover:bg-emerald-600 text-white text-sm font-bold rounded-xl transition-colors"
                                 >
-                                    Terapkan
+                                    {t("billing.payments.filter_modal.apply", "Terapkan")}
                                 </button>
                             </div>
                         </div>
@@ -811,7 +793,7 @@ function PaymentsContent() {
                                                         payment.status === 'disputed' ? 'bg-purple-100 text-purple-700 dark:bg-purple-900/30 dark:text-purple-400' :
                                                         'bg-rose-100 text-rose-700 dark:bg-rose-900/30 dark:text-rose-400'
                                                     }`}>
-                                                        {payment.status === 'paid' ? 'Lunas' : payment.status === 'pending' ? 'Pending' : payment.status === 'failed' ? 'Gagal' : payment.status === 'refunded' ? 'Refund' : payment.status === 'disputed' ? 'Bermasalah' : payment.status}
+                                                        {payment.status === 'paid' ? t("billing.payments.status.paid", "Lunas") : payment.status === 'pending' ? t("billing.payments.status.pending", "Pending") : payment.status === 'failed' ? t("billing.payments.status.failed", "Gagal") : payment.status === 'refunded' ? t("billing.payments.status.refunded", "Refund") : payment.status === 'disputed' ? t("billing.payments.status.disputed", "Bermasalah") : payment.status}
                                                     </span>
                                                 </div>
                                                 <div onClick={e => e.stopPropagation()}>
@@ -822,6 +804,7 @@ function PaymentsContent() {
                                                             setStatusUpdateValue(payment.status);
                                                             setUpdateStatusModal(payment);
                                                         }}
+                                                        t={t}
                                                     />
                                                 </div>
                                             </div>
@@ -829,27 +812,27 @@ function PaymentsContent() {
                                             {/* Row 2: User & Trainer info */}
                                             <div onClick={() => handleRowClick(payment.bookingId)} className="space-y-1">
                                                 <div className="flex items-baseline gap-1.5">
-                                                    <span className="text-[10px] font-medium text-gray-400 dark:text-gray-500 uppercase tracking-wide w-14 flex-shrink-0">User</span>
+                                                    <span className="text-[10px] font-medium text-gray-400 dark:text-gray-500 uppercase tracking-wide w-14 flex-shrink-0">{t("billing.payments.table.user", "User")}</span>
                                                     <button
                                                         onClick={(e) => { e.stopPropagation(); if (payment.userId) { router.push(`/${lang}/users/manage/${payment.userId}?tab=wallet`); } }}
-                                                        title="Lihat profil"
+                                                        title={t("billing.payments.tooltips.view_profile", "Lihat profil")}
                                                         className="text-sm font-semibold text-gray-900 dark:text-white hover:text-emerald-600 dark:hover:text-emerald-400 hover:underline text-left leading-tight"
                                                     >
                                                         {payment.userName || '-'}
                                                     </button>
                                                 </div>
                                                 <div className="flex items-baseline gap-1.5">
-                                                    <span className="text-[10px] font-medium text-gray-400 dark:text-gray-500 uppercase tracking-wide w-14 flex-shrink-0">Trainer</span>
+                                                    <span className="text-[10px] font-medium text-gray-400 dark:text-gray-500 uppercase tracking-wide w-14 flex-shrink-0">{t("billing.payments.table.trainer", "Trainer")}</span>
                                                     <button
                                                         onClick={(e) => { e.stopPropagation(); if (payment.trainerId) { router.push(`/${lang}/teachers/manage/${payment.trainerId}?from=payments`); } }}
-                                                        title={payment.trainerId ? "Lihat profil guru" : ""}
+                                                        title={payment.trainerId ? t("billing.payments.tooltips.view_teacher", "Lihat profil guru") : ""}
                                                         className={`text-sm leading-tight text-left ${payment.trainerId ? 'font-semibold text-gray-900 dark:text-white hover:text-emerald-600 dark:hover:text-emerald-400 hover:underline cursor-pointer' : 'text-gray-700 dark:text-gray-300'}`}
                                                     >
                                                         {payment.trainerName || '-'}
                                                     </button>
                                                 </div>
                                                 <div className="flex items-baseline gap-1.5">
-                                                    <span className="text-[10px] font-medium text-gray-400 dark:text-gray-500 uppercase tracking-wide w-14 flex-shrink-0">Metode</span>
+                                                    <span className="text-[10px] font-medium text-gray-400 dark:text-gray-500 uppercase tracking-wide w-14 flex-shrink-0">{t("billing.payments.table.paymentMethod", "Metode")}</span>
                                                     <span className="text-sm text-gray-700 dark:text-gray-300 leading-tight">{payment.paymentMethod || '-'}</span>
                                                 </div>
                                             </div>
@@ -863,7 +846,7 @@ function PaymentsContent() {
                                                     className="text-[11px] text-gray-400 dark:text-gray-500 border-b border-dashed border-gray-300 dark:border-gray-600 cursor-default"
                                                     title={formatTooltipDate(payment.updatedAt || payment.createdAt)}
                                                 >
-                                                    {timeAgo(payment.updatedAt || payment.createdAt).relative}
+                                                    {timeAgo(payment.updatedAt || payment.createdAt, t).relative}
                                                 </span>
                                             </div>
                                         </div>
@@ -875,13 +858,13 @@ function PaymentsContent() {
                         {/* Mobile Bulk Action Bar */}
                         {selectedIds.length > 0 && (
                             <div className="fixed bottom-4 left-4 right-4 z-40 bg-gray-900 dark:bg-gray-100 text-white dark:text-gray-900 rounded-2xl shadow-2xl p-3 flex items-center justify-between">
-                                <span className="text-sm font-semibold">{selectedIds.length} dipilih</span>
+                                <span className="text-sm font-semibold">{t("billing.payments.bulk.selected", "{{count}} dipilih", { count: selectedIds.length })}</span>
                                 <div className="flex gap-2">
                                     <button
                                         onClick={() => setSelectedIds([])}
                                         className="px-3 py-1.5 rounded-lg text-xs font-medium bg-white/10 dark:bg-black/10 hover:bg-white/20 dark:hover:bg-black/20 transition-colors"
                                     >
-                                        Batal
+                                        {t("billing.payments.bulk.cancel", "Batal")}
                                     </button>
                                 </div>
                             </div>
@@ -900,7 +883,7 @@ function PaymentsContent() {
                                             onChange={toggleSelectAll}
                                         />
                                     </th>
-                                    <th className="px-4 py-3 font-semibold">Kode Pesanan</th>
+                                    <th className="px-4 py-3 font-semibold">{t("billing.payments.table.order_code", "Kode Pesanan")}</th>
                                     <th className="px-4 py-3 font-semibold">{t("billing.payments.table.user", "User")}</th>
                                     <th className="px-4 py-3 font-semibold">{t("billing.payments.table.trainer", "Trainer")}</th>
                                     <th className="px-4 py-3 font-semibold text-right pr-16">{t("billing.payments.table.amount", "Nominal")}</th>
@@ -939,7 +922,7 @@ function PaymentsContent() {
                                     </tr>
                                 ) : (
                                     payments.map((payment) => {
-                                        const tglBayar = timeAgo(payment.updatedAt || payment.createdAt);
+                                        const tglBayar = timeAgo(payment.updatedAt || payment.createdAt, t);
                                         return (
                                         <tr
                                             key={payment.id}
@@ -961,12 +944,12 @@ function PaymentsContent() {
                                                 </span>
                                             </td>
                                             <td className="px-4 py-3">
-                                                <button onClick={(e) => { e.stopPropagation(); if (payment.userId) { router.push(`/${lang}/users/manage/${payment.userId}?tab=wallet`); } }} title="Lihat profil pengguna" className="font-medium text-gray-900 dark:text-white hover:text-emerald-600 dark:hover:text-emerald-400 hover:underline text-left">{payment.userName || '-'}</button>
+                                                <button onClick={(e) => { e.stopPropagation(); if (payment.userId) { router.push(`/${lang}/users/manage/${payment.userId}?tab=wallet`); } }} title={t("billing.payments.tooltips.view_profile", "Lihat profil pengguna")} className="font-medium text-gray-900 dark:text-white hover:text-emerald-600 dark:hover:text-emerald-400 hover:underline text-left">{payment.userName || '-'}</button>
                                             </td>
                                             <td className="px-4 py-3">
                                                 <button
                                                     onClick={(e) => { e.stopPropagation(); if (payment.trainerId) { router.push(`/${lang}/teachers/manage/${payment.trainerId}?from=payments`); } }}
-                                                    title={payment.trainerId ? "Lihat profil guru" : ""}
+                                                    title={payment.trainerId ? t("billing.payments.tooltips.view_teacher", "Lihat profil guru") : ""}
                                                     className={`text-left ${payment.trainerId ? 'font-medium text-gray-900 dark:text-white hover:text-emerald-600 dark:hover:text-emerald-400 hover:underline cursor-pointer' : 'font-medium text-gray-900 dark:text-white'}`}
                                                 >
                                                     {payment.trainerName || '-'}
@@ -982,13 +965,13 @@ function PaymentsContent() {
                                                     payment.status === 'refunded' ? 'bg-blue-100 text-blue-700 dark:bg-blue-900/30 dark:text-blue-400' :
                                                     'bg-rose-100 text-rose-700 dark:bg-rose-900/30 dark:text-rose-400'
                                                 }`}>
-                                                    {payment.status === 'paid' ? 'Lunas' : payment.status === 'pending' ? 'Pending' : payment.status === 'failed' ? 'Gagal' : payment.status === 'refunded' ? 'Refund' : payment.status === 'disputed' ? 'Bermasalah' : payment.status}
+                                                    {payment.status === 'paid' ? t("billing.payments.status.paid", "Lunas") : payment.status === 'pending' ? t("billing.payments.status.pending", "Pending") : payment.status === 'failed' ? t("billing.payments.status.failed", "Gagal") : payment.status === 'refunded' ? t("billing.payments.status.refunded", "Refund") : payment.status === 'disputed' ? t("billing.payments.status.disputed", "Bermasalah") : payment.status}
                                                 </span>
                                             </td>
                                             <td className="px-4 py-3 text-sm text-gray-700 dark:text-gray-300">{payment.paymentMethod || '-'}</td>
                                             {/* Tgl Bayar - Relative time + tooltip */}
                                             <td className="px-4 py-3 whitespace-nowrap">
-                                                {(() => { const t2 = timeAgo(payment.updatedAt || payment.createdAt); return (
+                                                {(() => { const t2 = timeAgo(payment.updatedAt || payment.createdAt, t); return (
                                                     <span
                                                         title={formatTooltipDate(payment.updatedAt || payment.createdAt)}
                                                         className="text-xs font-medium text-gray-700 dark:text-gray-300 cursor-default border-b border-dashed border-gray-400 dark:border-gray-500 pb-px"
@@ -1003,6 +986,7 @@ function PaymentsContent() {
                                                         setStatusUpdateValue(payment.status);
                                                         setUpdateStatusModal(payment);
                                                     }}
+                                                    t={t}
                                                 />
                                             </td>
                                         </tr>
@@ -1042,38 +1026,38 @@ function PaymentsContent() {
                                 <Send className="w-4 h-4 text-blue-600 dark:text-blue-400" />
                             </div>
                             <div>
-                                <h3 className="text-base font-bold text-gray-900 dark:text-white">Kirim Invoice</h3>
-                                <p className="text-xs text-gray-500 dark:text-gray-400">Kirim bukti pembayaran ke email user</p>
+                                <h3 className="text-base font-bold text-gray-900 dark:text-white">{t("billing.payments.send_invoice.title", "Kirim Invoice")}</h3>
+                                <p className="text-xs text-gray-500 dark:text-gray-400">{t("billing.payments.send_invoice.subtitle", "Kirim bukti pembayaran ke email user")}</p>
                             </div>
                         </div>
                         <div className="p-6 space-y-4">
                             {/* Info payment */}
                             <div className="bg-blue-50 dark:bg-blue-900/10 p-3 rounded-xl text-sm border border-blue-100 dark:border-blue-800/50 space-y-1">
-                                <p className="text-gray-500 dark:text-gray-400">Payment ID: <span className="font-semibold text-gray-900 dark:text-white">#{sendInvoiceModal.id}</span></p>
-                                <p className="text-gray-500 dark:text-gray-400">Nominal: <span className="font-bold text-emerald-600 dark:text-emerald-400">{formatCurrency(sendInvoiceModal.amount)}</span></p>
-                                <p className="text-gray-500 dark:text-gray-400">User: <span className="font-semibold text-gray-900 dark:text-white">{sendInvoiceModal.userName}</span></p>
+                                <p className="text-gray-500 dark:text-gray-400">{t("billing.payments.send_invoice.payment_id", "Payment ID")}: <span className="font-semibold text-gray-900 dark:text-white">#{sendInvoiceModal.id}</span></p>
+                                <p className="text-gray-500 dark:text-gray-400">{t("billing.payments.send_invoice.amount", "Nominal")}: <span className="font-bold text-emerald-600 dark:text-emerald-400">{formatCurrency(sendInvoiceModal.amount)}</span></p>
+                                <p className="text-gray-500 dark:text-gray-400">{t("billing.payments.send_invoice.user", "User")}: <span className="font-semibold text-gray-900 dark:text-white">{sendInvoiceModal.userName}</span></p>
                             </div>
 
                             {/* Email field (read-only dari data user) */}
                             <div>
                                 <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1.5">
-                                    Email Tujuan <span className="text-xs text-gray-400">(dari akun user)</span>
+                                    {t("billing.payments.send_invoice.recipient_email", "Email Tujuan")} <span className="text-xs text-gray-400">{t("billing.payments.send_invoice.from_account", "(dari akun user)")}</span>
                                 </label>
                                 <input
                                     type="email"
-                                    value={sendInvoiceModal.userName ? `(email ${sendInvoiceModal.userName})` : 'Email user terdaftar'}
+                                    value={sendInvoiceModal.userName ? `(email ${sendInvoiceModal.userName})` : t("billing.payments.send_invoice.email_placeholder", 'Email user terdaftar')}
                                     readOnly
                                     disabled
                                     className="w-full border border-gray-200 dark:border-gray-600 rounded-lg px-3 py-2 bg-gray-50 dark:bg-gray-700/50 text-gray-500 dark:text-gray-400 text-sm cursor-not-allowed"
                                 />
-                                <p className="text-xs text-gray-400 dark:text-gray-500 mt-1">Invoice akan dikirim ke email yang terdaftar pada akun user.</p>
+                                <p className="text-xs text-gray-400 dark:text-gray-500 mt-1">{t("billing.payments.send_invoice.email_notice", "Invoice akan dikirim ke email yang terdaftar pada akun user.")}</p>
                             </div>
 
                             {/* Toggle include receipt */}
                             <div className="flex items-center justify-between p-3 bg-gray-50 dark:bg-gray-900/40 rounded-xl border border-gray-100 dark:border-gray-700">
                                 <div>
-                                    <p className="text-sm font-medium text-gray-700 dark:text-gray-300">Sertakan Struk / Receipt</p>
-                                    <p className="text-xs text-gray-400">Lampirkan detail transaksi ke email</p>
+                                    <p className="text-sm font-medium text-gray-700 dark:text-gray-300">{t("billing.payments.send_invoice.include_receipt", "Sertakan Struk / Receipt")}</p>
+                                    <p className="text-xs text-gray-400">{t("billing.payments.send_invoice.include_receipt_desc", "Lampirkan detail transaksi ke email")}</p>
                                 </div>
                                 <button
                                     onClick={() => setInvoiceIncludeReceipt(!invoiceIncludeReceipt)}
@@ -1094,13 +1078,13 @@ function PaymentsContent() {
                                     className="flex-1 bg-blue-600 hover:bg-blue-700 disabled:opacity-50 text-white py-2.5 rounded-xl font-semibold transition-colors flex items-center justify-center gap-2 text-sm"
                                 >
                                     <Send className="w-4 h-4" />
-                                    {isSubmitting ? 'Mengirim...' : 'Kirim Sekarang'}
+                                    {isSubmitting ? t("billing.payments.send_invoice.sending", 'Mengirim...') : t("billing.payments.send_invoice.send_now", 'Kirim Sekarang')}
                                 </button>
                                 <button
                                     onClick={() => { setSendInvoiceModal(null); setInvoiceIncludeReceipt(true); }}
                                     className="flex-1 bg-gray-100 dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 text-gray-700 dark:text-gray-300 py-2.5 rounded-xl font-semibold transition-colors text-sm"
                                 >
-                                    Batal
+                                    {t("billing.payments.send_invoice.cancel", "Batal")}
                                 </button>
                             </div>
                         </div>
@@ -1119,12 +1103,12 @@ function PaymentsContent() {
                         </div>
                         <div className="p-6 space-y-4">
                             <div className="bg-gray-50 dark:bg-gray-900/50 p-3 rounded-lg text-sm mb-4 border border-gray-100 dark:border-gray-700">
-                                <p className="text-gray-500 dark:text-gray-400">Payment ID: <span className="font-medium text-gray-900 dark:text-white">#{updateStatusModal.id}</span></p>
+                                <p className="text-gray-500 dark:text-gray-400">{t("billing.payments.send_invoice.payment_id", "Payment ID")}: <span className="font-medium text-gray-900 dark:text-white">#{updateStatusModal.id}</span></p>
                             </div>
                             
                             <div>
                                 <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
-                                    Status
+                                    {t("billing.payments.table.status", "Status")}
                                 </label>
                                 <select
                                     value={statusUpdateValue}

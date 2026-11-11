@@ -73,7 +73,7 @@ function formatDate(dateStr: string) {
     }).format(d);
 }
 
-function timeAgo(dateStr: string): { relative: string; full: string } {
+function timeAgo(dateStr: string, t: (key: string, fallback?: string, params?: Record<string, any>) => string): { relative: string; full: string } {
     if (!dateStr) return { relative: "-", full: "-" };
     let normalized = dateStr.trim();
     if (normalized.includes(" ") && !normalized.includes("T")) normalized = normalized.replace(" ", "T");
@@ -100,14 +100,14 @@ function timeAgo(dateStr: string): { relative: string; full: string } {
     }).format(date);
 
     let relative: string;
-    if (diffSec < 60) relative = "Baru saja";
-    else if (diffMin < 60) relative = `${diffMin} menit lalu`;
-    else if (diffHour < 24) relative = `${diffHour} jam lalu`;
-    else if (diffDay === 1) relative = "Kemarin";
-    else if (diffDay < 7) relative = `${diffDay} hari lalu`;
-    else if (diffWeek < 5) relative = `${diffWeek} minggu lalu`;
-    else if (diffMonth < 12) relative = `${diffMonth} bulan lalu`;
-    else relative = `${diffYear} tahun lalu`;
+    if (diffSec < 60) relative = t("billing.payments.dates.just_now", "just now");
+    else if (diffMin < 60) relative = t("billing.payments.dates.minutes_ago", `${diffMin} min ago`, { count: diffMin });
+    else if (diffHour < 24) relative = t("billing.payments.dates.hours_ago", `${diffHour} hr ago`, { count: diffHour });
+    else if (diffDay === 1) relative = t("billing.payments.dates.yesterday", "yesterday");
+    else if (diffDay < 7) relative = t("billing.payments.dates.days_ago", `${diffDay} days ago`, { count: diffDay });
+    else if (diffWeek < 5) relative = t("billing.payments.dates.weeks_ago", `${diffWeek} wk ago`, { count: diffWeek });
+    else if (diffMonth < 12) relative = t("billing.payments.dates.months_ago", `${diffMonth} mo ago`, { count: diffMonth });
+    else relative = t("billing.payments.dates.years_ago", `${diffYear} yr ago`, { count: diffYear });
 
     return { relative, full };
 }
@@ -206,7 +206,7 @@ export default function DisputesTab() {
     // Action Handlers
     const submitRespond = async () => {
         if (!responseText.trim()) {
-            showToast({ type: 'error', title: 'Teks respons wajib diisi', message: 'Harap isi kolom respons sebelum mengirim.' });
+            showToast({ type: 'error', title: t("billing.payments.disputes.respond.error_required", 'Teks respons wajib diisi'), message: t("billing.payments.disputes.respond.error_required_desc", 'Harap isi kolom respons sebelum mengirim.') });
             return;
         }
         setIsSubmitting(true)
@@ -220,7 +220,7 @@ export default function DisputesTab() {
                     d.id === respondModal.id ? { ...d, response: responseText, status: "In Progress" } : d
                 );
             }
-            showToast({ type: 'success', title: 'Reply Terkirim', message: 'Reply dispute berhasil dikirim.' });
+            showToast({ type: 'success', title: t("billing.payments.disputes.respond.success_title", 'Reply Terkirim'), message: t("billing.payments.disputes.respond.success_message", 'Reply dispute berhasil dikirim.') });
             closeModals();
             fetchDisputes();
         } catch (err: any) {
@@ -231,7 +231,7 @@ export default function DisputesTab() {
                     d.id === respondModal.id ? { ...d, response: responseText, status: "In Progress" } : d
                 );
             }
-            showToast({ type: 'info', title: '[DEMO] Reply Tersimpan', message: 'Reply berhasil disimpan secara lokal (simulasi).' });
+            showToast({ type: 'info', title: t("billing.payments.disputes.respond.demo_title", '[DEMO] Reply Tersimpan'), message: t("billing.payments.disputes.respond.demo_message", 'Reply berhasil disimpan secara lokal (simulasi).') });
             closeModals();
             fetchDisputes();
         } finally {
@@ -241,7 +241,7 @@ export default function DisputesTab() {
 
     const submitResolve = async () => {
         if (!resolutionText.trim()) {
-            showToast({ type: 'error', title: 'Teks resolusi wajib diisi', message: 'Harap isi kolom resolusi sebelum mengirim.' });
+            showToast({ type: 'error', title: t("billing.payments.disputes.resolve.error_required", 'Teks resolusi wajib diisi'), message: t("billing.payments.disputes.resolve.error_required_desc", 'Harap isi kolom resolusi sebelum mengirim.') });
             return;
         }
         setIsSubmitting(true)
@@ -257,7 +257,7 @@ export default function DisputesTab() {
                     d.id === resolveModal.id ? { ...d, resolution: resolutionText, status: 'Resolved' } : d
                 );
             }
-            showToast({ type: 'success', title: 'Dispute Diselesaikan', message: 'Dispute berhasil diselesaikan.' + (autoProcessRefund ? ' Refund sedang diproses.' : '') });
+            showToast({ type: 'success', title: t("billing.payments.disputes.resolve.success_title", 'Dispute Diselesaikan'), message: t("billing.payments.disputes.resolve.success_message", 'Dispute berhasil diselesaikan.') + (autoProcessRefund ? t("billing.payments.disputes.resolve.refund_processed", ' Refund sedang diproses.') : '') });
             closeModals();
             fetchDisputes();
         } catch (err: any) {
@@ -268,7 +268,7 @@ export default function DisputesTab() {
                     d.id === resolveModal.id ? { ...d, resolution: resolutionText, status: 'Resolved' } : d
                 );
             }
-            showToast({ type: 'info', title: '[DEMO] Dispute Diselesaikan', message: 'Dispute berhasil diselesaikan secara lokal (simulasi).' });
+            showToast({ type: 'info', title: t("billing.payments.disputes.resolve.demo_title", '[DEMO] Dispute Diselesaikan'), message: t("billing.payments.disputes.resolve.demo_message", 'Dispute berhasil diselesaikan secara lokal (simulasi).') });
             closeModals();
             fetchDisputes();
         } finally {
@@ -297,10 +297,10 @@ export default function DisputesTab() {
 
                     <Select value={statusFilter || "all"} onValueChange={(v) => { setStatusFilter(v); setPage(1); }}>
                         <SelectTrigger className="w-[160px] bg-white dark:bg-gray-900 border-gray-200 dark:border-gray-700">
-                            <SelectValue placeholder="Semua Status" />
+                            <SelectValue placeholder={t("billing.payments.disputes.all_statuses", "Semua Status")} />
                         </SelectTrigger>
                         <SelectContent>
-                            <SelectItem value="all">Semua Status</SelectItem>
+                            <SelectItem value="all">{t("billing.payments.disputes.all_statuses", "Semua Status")}</SelectItem>
                             <SelectItem value="Open">Open</SelectItem>
                             <SelectItem value="In Progress">In Progress</SelectItem>
                             <SelectItem value="Resolved">Resolved</SelectItem>
@@ -314,7 +314,7 @@ export default function DisputesTab() {
                             <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
                             <input
                                 type="text"
-                                placeholder="Cari sengketa..."
+                                placeholder={t("billing.payments.disputes.search_placeholder", "Cari sengketa...")}
                                 value={searchInput}
                                 onChange={(e) => setSearchInput(e.target.value)}
                                 onKeyDown={(e) => e.key === 'Enter' && handleSearch()}
@@ -322,7 +322,7 @@ export default function DisputesTab() {
                             />
                         </div>
                         <button onClick={handleSearch} className="px-4 py-2.5 bg-emerald-500 hover:bg-emerald-600 text-white text-sm font-semibold transition-colors">
-                            Cari
+                            {t("billing.payments.disputes.search_button", "Cari")}
                         </button>
                     </div>
                 </div>
@@ -342,7 +342,7 @@ export default function DisputesTab() {
                             ))}
                         </div>
                     ) : disputes.length === 0 ? (
-                        <div className="text-center py-8 text-gray-500">Tidak ada sengketa ditemukan.</div>
+                        <div className="text-center py-8 text-gray-500">{t("billing.payments.disputes.empty", "Tidak ada sengketa ditemukan.")}</div>
                     ) : (
                         disputes.map((item) => (
                             <div key={item.id} className="border border-gray-200 dark:border-gray-700 rounded-lg p-4 space-y-3 bg-white dark:bg-gray-800 shadow-sm">
@@ -390,7 +390,7 @@ export default function DisputesTab() {
                                 </div>
                                 <div className="flex justify-between items-center pt-2 border-t border-gray-100 dark:border-gray-700">
                                     <div className="font-medium text-emerald-600 text-sm">{formatCurrency(item.amount)}</div>
-                                    {(() => { const ta = timeAgo(item.createdAt); return (
+                                    {(() => { const ta = timeAgo(item.createdAt, t); return (
                                         <span title={formatTooltipDate(item.createdAt)} className="text-xs text-gray-500 cursor-default border-b border-dashed border-gray-400 pb-px">{ta.relative}</span>
                                     ); })()}
                                 </div>
@@ -404,12 +404,12 @@ export default function DisputesTab() {
                     <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">
                         <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-900/50 dark:text-gray-300 border-b border-gray-200 dark:border-gray-700">
                             <tr>
-                                <th className="px-4 py-3">{t("billing.payments.table.paymentDate", "Tanggal")}</th>
-                                <th className="px-4 py-3">{t("billing.payments.summary.payments", "Pembayaran")}</th>
-                                <th className="px-4 py-3">{t("billing.payments.table.user", "Pengguna")}</th>
+                                <th className="px-4 py-3">{t("billing.payments.disputes.table.date", "Tanggal")}</th>
+                                <th className="px-4 py-3">{t("billing.payments.disputes.table.payment", "Pembayaran")}</th>
+                                <th className="px-4 py-3">{t("billing.payments.disputes.table.user", "Pengguna")}</th>
                                 <th className="px-4 py-3">{t("billing.payments.disputes.table.type", "Tipe")}</th>
-                                <th className="px-4 py-3">{t("billing.payments.table.status", "Status")}</th>
-                                <th className="px-4 py-3 text-center">{t("billing.payments.table.actions", "Aksi")}</th>
+                                <th className="px-4 py-3">{t("billing.payments.disputes.table.status", "Status")}</th>
+                                <th className="px-4 py-3 text-center">{t("billing.payments.disputes.table.actions", "Aksi")}</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -432,13 +432,13 @@ export default function DisputesTab() {
                                 </tr>
                             ) : disputes.length === 0 ? (
                                 <tr>
-                                    <td colSpan={6} className="px-4 py-8 text-center text-gray-500">Tidak ada sengketa ditemukan.</td>
+                                    <td colSpan={6} className="px-4 py-8 text-center text-gray-500">{t("billing.payments.disputes.empty", "Tidak ada sengketa ditemukan.")}</td>
                                 </tr>
                             ) : (
                                 disputes.map((item) => (
                                     <tr key={item.id} className="border-b border-gray-100 dark:border-gray-800 hover:bg-gray-50 dark:hover:bg-gray-800/50 transition-colors">
                                         <td className="px-4 py-3">
-                                            {(() => { const ta = timeAgo(item.createdAt); return (
+                                            {(() => { const ta = timeAgo(item.createdAt, t); return (
                                                 <span title={formatTooltipDate(item.createdAt)} className="text-xs font-medium text-gray-700 dark:text-gray-300 cursor-default border-b border-dashed border-gray-400 dark:border-gray-500 pb-px">{ta.relative}</span>
                                             ); })()}
                                         </td>
@@ -499,7 +499,11 @@ export default function DisputesTab() {
                 {totalItems > 0 && (
                     <div className="flex items-center justify-between px-4 py-3 border-t border-gray-200 dark:border-gray-700">
                         <span className="text-sm text-gray-500 dark:text-gray-400">
-                            Menampilkan <span className="font-semibold text-gray-900 dark:text-white">{(page - 1) * PAGE_SIZE + 1}</span> - <span className="font-semibold text-gray-900 dark:text-white">{Math.min(page * PAGE_SIZE, totalItems)}</span> dari <span className="font-semibold text-gray-900 dark:text-white">{totalItems}</span>
+                            {t("billing.payments.disputes.pagination", "Menampilkan {{from}} - {{to}} dari {{total}}", {
+                                from: (page - 1) * PAGE_SIZE + 1,
+                                to: Math.min(page * PAGE_SIZE, totalItems),
+                                total: totalItems
+                            })}
                         </span>
                         <div className="flex gap-1">
                             <button onClick={() => setPage(p => Math.max(1, p - 1))} disabled={page === 1} className="p-1 rounded text-gray-500 hover:bg-gray-100 disabled:opacity-50">
@@ -522,34 +526,34 @@ export default function DisputesTab() {
                         <div className="px-6 py-4 border-b border-gray-100 dark:border-gray-700 flex justify-between items-center bg-gray-50 dark:bg-gray-800/80">
                             <h3 className="text-lg font-bold text-gray-900 dark:text-white flex items-center gap-2">
                                 <AlertCircle className="w-5 h-5 text-amber-500" />
-                                Detail Sengketa #{detailModal.id}
+                                {t("billing.payments.disputes.detail.title", "Detail Sengketa #{{id}}", { id: detailModal.id })}
                             </h3>
                             <button onClick={closeModals} className="text-gray-400 hover:text-gray-600"><XCircle className="w-6 h-6" /></button>
                         </div>
                         <div className="p-6 space-y-4">
                             <div className="grid grid-cols-2 gap-4">
                                 <div>
-                                    <p className="text-xs text-gray-500">ID Pembayaran</p>
+                                    <p className="text-xs text-gray-500">{t("billing.payments.disputes.detail.payment_id", "ID Pembayaran")}</p>
                                     <p className="font-medium text-gray-900 dark:text-white">#{detailModal.paymentId}</p>
                                 </div>
                                 <div>
-                                    <p className="text-xs text-gray-500">Nominal</p>
+                                    <p className="text-xs text-gray-500">{t("billing.payments.disputes.detail.amount", "Nominal")}</p>
                                     <p className="font-bold text-emerald-600">{formatCurrency(detailModal.amount)}</p>
                                 </div>
                                 <div>
-                                    <p className="text-xs text-gray-500">Pengguna (Pelapor)</p>
+                                    <p className="text-xs text-gray-500">{t("billing.payments.disputes.detail.reporter", "Pengguna (Pelapor)")}</p>
                                     <p className="font-medium text-gray-900 dark:text-white">{detailModal.userName}</p>
                                 </div>
                                 <div>
-                                    <p className="text-xs text-gray-500">Trainer Terkait</p>
+                                    <p className="text-xs text-gray-500">{t("billing.payments.disputes.detail.trainer", "Trainer Terkait")}</p>
                                     <p className="font-medium text-gray-900 dark:text-white">{detailModal.trainerName}</p>
                                 </div>
                                 <div>
-                                    <p className="text-xs text-gray-500">Status</p>
+                                    <p className="text-xs text-gray-500">{t("billing.payments.disputes.detail.status", "Status")}</p>
                                     <span className="inline-block mt-1 px-2 py-0.5 text-xs rounded bg-gray-100 text-gray-700 dark:bg-gray-700 dark:text-gray-300 font-medium">{detailModal.status}</span>
                                 </div>
                                 <div>
-                                    <p className="text-xs text-gray-500">Dibuat Pada</p>
+                                    <p className="text-xs text-gray-500">{t("billing.payments.disputes.detail.created_at", "Dibuat Pada")}</p>
                                     <p className="text-sm text-gray-900 dark:text-gray-300">{formatDate(detailModal.createdAt)}</p>
                                 </div>
                             </div>
@@ -557,15 +561,15 @@ export default function DisputesTab() {
                             <hr className="border-gray-100 dark:border-gray-700 my-2" />
 
                             <div>
-                                <h4 className="text-sm font-bold text-gray-900 dark:text-white mb-2">Alasan Sengketa (Reason)</h4>
+                                <h4 className="text-sm font-bold text-gray-900 dark:text-white mb-2">{t("billing.payments.disputes.detail.reason_title", "Alasan Sengketa (Reason)")}</h4>
                                 <div className="bg-gray-50 dark:bg-gray-900/50 p-3 rounded-lg text-sm text-gray-700 dark:text-gray-300 border border-gray-100 dark:border-gray-700">
-                                    {detailModal.reason || "Tidak ada alasan yang diberikan."}
+                                    {detailModal.reason || t("billing.payments.disputes.detail.no_reason", "Tidak ada alasan yang diberikan.")}
                                 </div>
                             </div>
 
                             {detailModal.response && (
                                 <div>
-                                    <h4 className="text-sm font-bold text-gray-900 dark:text-white mb-2">Respons Terakhir</h4>
+                                    <h4 className="text-sm font-bold text-gray-900 dark:text-white mb-2">{t("billing.payments.disputes.detail.latest_response", "Respons Terakhir")}</h4>
                                     <div className="bg-blue-50 dark:bg-blue-900/20 p-3 rounded-lg text-sm text-blue-800 dark:text-blue-300 border border-blue-100 dark:border-blue-800/30">
                                         {detailModal.response}
                                     </div>
@@ -574,7 +578,7 @@ export default function DisputesTab() {
 
                             {detailModal.resolution && (
                                 <div>
-                                    <h4 className="text-sm font-bold text-gray-900 dark:text-white mb-2">Resolusi Akhir</h4>
+                                    <h4 className="text-sm font-bold text-gray-900 dark:text-white mb-2">{t("billing.payments.disputes.detail.final_resolution", "Resolusi Akhir")}</h4>
                                     <div className="bg-emerald-50 dark:bg-emerald-900/20 p-3 rounded-lg text-sm text-emerald-800 dark:text-emerald-300 border border-emerald-100 dark:border-emerald-800/30">
                                         {detailModal.resolution}
                                     </div>
@@ -584,11 +588,11 @@ export default function DisputesTab() {
                         <div className="px-6 py-4 border-t border-gray-100 dark:border-gray-700 bg-gray-50 dark:bg-gray-800/50 flex justify-end gap-3">
                             {detailModal.status !== 'Closed' && detailModal.status !== 'Resolved' && (
                                 <>
-                                    <Button variant="outline" onClick={() => { const item = detailModal; closeModals(); setRespondModal(item); }}>Respond</Button>
-                                    <Button className="bg-emerald-600 hover:bg-emerald-700 text-white" onClick={() => { const item = detailModal; closeModals(); setResolveModal(item); }}>Resolve</Button>
+                                    <Button variant="outline" onClick={() => { const item = detailModal; closeModals(); setRespondModal(item); }}>{t("billing.payments.disputes.action.reply", "Respond")}</Button>
+                                    <Button className="bg-emerald-600 hover:bg-emerald-700 text-white" onClick={() => { const item = detailModal; closeModals(); setResolveModal(item); }}>{t("billing.payments.disputes.action.resolve", "Resolve")}</Button>
                                 </>
                             )}
-                            <Button variant="ghost" onClick={closeModals}>Tutup</Button>
+                            <Button variant="ghost" onClick={closeModals}>{t("billing.payments.disputes.detail.close", "Tutup")}</Button>
                         </div>
                     </div>
                 </div>
@@ -600,36 +604,36 @@ export default function DisputesTab() {
                     <div className="bg-white dark:bg-gray-800 rounded-xl shadow-xl w-full max-w-md overflow-hidden animate-in slide-in-from-bottom-4">
                         <div className="px-6 py-4 border-b border-gray-100 dark:border-gray-700 bg-blue-50 dark:bg-blue-900/20">
                             <h3 className="text-lg font-bold text-blue-900 dark:text-blue-100">
-                                {t("billing.payments.disputes.action.reply", "Balas")} Sengketa #{respondModal?.id}
+                                {t("billing.payments.disputes.respond.title", "Balas Sengketa #{{id}}", { id: respondModal?.id })}
                             </h3>
                         </div>
                         <div className="p-6 space-y-4">
                             <div className="bg-white dark:bg-gray-900/50 p-3 rounded-lg text-sm border border-gray-100 dark:border-gray-700">
-                                <p className="text-gray-500 dark:text-gray-400">Pengguna: <span className="font-medium text-gray-900 dark:text-white">{respondModal?.userName}</span></p>
-                                <p className="text-gray-500 dark:text-gray-400 mt-1">Alasan: <span className="text-gray-700 dark:text-gray-300 italic">{respondModal?.reason || '-'}</span></p>
+                                <p className="text-gray-500 dark:text-gray-400">{t("billing.payments.disputes.respond.user", "Pengguna")}: <span className="font-medium text-gray-900 dark:text-white">{respondModal?.userName}</span></p>
+                                <p className="text-gray-500 dark:text-gray-400 mt-1">{t("billing.payments.disputes.respond.reason", "Alasan")}: <span className="text-gray-700 dark:text-gray-300 italic">{respondModal?.reason || '-'}</span></p>
                             </div>
                             <div>
                                 <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
-                                    Balasan (Wajib)
+                                    {t("billing.payments.disputes.respond.label", "Balasan (Wajib)")}
                                 </label>
                                 <textarea
                                     value={responseText}
                                     onChange={(e) => setResponseText(e.target.value)}
                                     className="w-full border border-gray-300 dark:border-gray-600 rounded-lg p-3 bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-shadow"
                                     rows={3}
-                                    placeholder="Ketik balasan Anda di sini..."
+                                    placeholder={t("billing.payments.disputes.respond.placeholder", "Ketik balasan Anda di sini...")}
                                 />
                             </div>
                             <div>
                                 <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
-                                    Bukti / Merchant Evidence (Opsional)
+                                    {t("billing.payments.disputes.respond.evidence_label", "Bukti / Merchant Evidence (Opsional)")}
                                 </label>
                                 <input
                                     type="text"
                                     value={merchantEvidence}
                                     onChange={(e) => setMerchantEvidence(e.target.value)}
                                     className="w-full border border-gray-300 dark:border-gray-600 rounded-lg p-2.5 bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
-                                    placeholder="URL atau catatan bukti"
+                                    placeholder={t("billing.payments.disputes.respond.evidence_placeholder", "URL atau catatan bukti")}
                                 />
                             </div>
 
@@ -640,9 +644,9 @@ export default function DisputesTab() {
                                     disabled={isSubmitting || !responseText.trim()}
                                     className="flex-1 bg-blue-600 hover:bg-blue-700 text-white"
                                 >
-                                    {isSubmitting ? "Menyimpan..." : "Kirim Reply"}
+                                    {isSubmitting ? t("billing.payments.disputes.respond.submitting", "Menyimpan...") : t("billing.payments.disputes.respond.submit", "Kirim Reply")}
                                 </Button>
-                                <Button variant="outline" className="flex-1" onClick={closeModals}>Batal</Button>
+                                <Button variant="outline" className="flex-1" onClick={closeModals}>{t("billing.payments.disputes.respond.cancel", "Batal")}</Button>
                             </div>
                         </div>
                     </div>
@@ -655,41 +659,41 @@ export default function DisputesTab() {
                     <div className="bg-white dark:bg-gray-800 rounded-xl shadow-xl w-full max-w-md overflow-hidden animate-in slide-in-from-bottom-4">
                         <div className="px-6 py-4 border-b border-gray-100 dark:border-gray-700 bg-emerald-50 dark:bg-emerald-900/20">
                             <h3 className="text-lg font-bold text-emerald-900 dark:text-emerald-100">
-                                {t("billing.payments.disputes.action.resolve", "Selesaikan")} Sengketa #{resolveModal?.id}
+                                {t("billing.payments.disputes.resolve.title", "Selesaikan Sengketa #{{id}}", { id: resolveModal?.id })}
                             </h3>
                         </div>
                         <div className="p-6 space-y-4">
                             <div className="bg-white dark:bg-gray-900/50 p-3 rounded-lg text-sm border border-gray-100 dark:border-gray-700">
-                                <p className="text-gray-500 dark:text-gray-400">Pengguna: <span className="font-medium text-gray-900 dark:text-white">{resolveModal?.userName}</span></p>
-                                <p className="text-gray-500 dark:text-gray-400 mt-1">Alasan: <span className="text-gray-700 dark:text-gray-300 italic">{resolveModal?.reason || '-'}</span></p>
+                                <p className="text-gray-500 dark:text-gray-400">{t("billing.payments.disputes.respond.user", "Pengguna")}: <span className="font-medium text-gray-900 dark:text-white">{resolveModal?.userName}</span></p>
+                                <p className="text-gray-500 dark:text-gray-400 mt-1">{t("billing.payments.disputes.respond.reason", "Alasan")}: <span className="text-gray-700 dark:text-gray-300 italic">{resolveModal?.reason || '-'}</span></p>
                             </div>
                             <div>
                                 <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
-                                    Resolusi Akhir (Wajib)
+                                    {t("billing.payments.disputes.resolve.label", "Resolusi Akhir (Wajib)")}
                                 </label>
                                 <textarea
                                     value={resolutionText}
                                     onChange={(e) => setResolutionText(e.target.value)}
                                     className="w-full border border-gray-300 dark:border-gray-600 rounded-lg p-3 bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-emerald-500 focus:border-transparent transition-shadow"
                                     rows={2}
-                                    placeholder="Keputusan akhir..."
+                                    placeholder={t("billing.payments.disputes.resolve.placeholder", "Keputusan akhir...")}
                                 />
                             </div>
                             <div>
                                 <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
-                                    Catatan Resolusi (Opsional)
+                                    {t("billing.payments.disputes.resolve.notes_label", "Catatan Resolusi (Opsional)")}
                                 </label>
                                 <input
                                     type="text"
                                     value={resolutionNotes}
                                     onChange={(e) => setResolutionNotes(e.target.value)}
                                     className="w-full border border-gray-300 dark:border-gray-600 rounded-lg p-2.5 bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
-                                    placeholder="Catatan tambahan"
+                                    placeholder={t("billing.payments.disputes.resolve.notes_placeholder", "Catatan tambahan")}
                                 />
                             </div>
                             <div>
                                 <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
-                                    Nominal Refund (Opsional)
+                                    {t("billing.payments.disputes.resolve.refund_label", "Nominal Refund (Opsional)")}
                                 </label>
                                 <input
                                     type="number"
@@ -708,7 +712,7 @@ export default function DisputesTab() {
                                     className="w-4 h-4 text-emerald-600 rounded border-gray-300 focus:ring-emerald-500"
                                 />
                                 <label htmlFor="autoProcess" className="text-sm font-medium text-gray-700 dark:text-gray-300">
-                                    Auto Process Refund
+                                    {t("billing.payments.disputes.resolve.auto_refund", "Auto Process Refund")}
                                 </label>
                             </div>
                             
@@ -718,9 +722,9 @@ export default function DisputesTab() {
                                     disabled={isSubmitting || !resolutionText.trim()}
                                     className="flex-1 bg-emerald-600 hover:bg-emerald-700 text-white"
                                 >
-                                    {isSubmitting ? "Menyimpan..." : "Kirim Resolve"}
+                                    {isSubmitting ? t("billing.payments.disputes.resolve.submitting", "Menyimpan...") : t("billing.payments.disputes.resolve.submit", "Kirim Resolve")}
                                 </Button>
-                                <Button variant="outline" className="flex-1" onClick={closeModals}>Batal</Button>
+                                <Button variant="outline" className="flex-1" onClick={closeModals}>{t("billing.payments.disputes.resolve.cancel", "Batal")}</Button>
                             </div>
                         </div>
                     </div>
