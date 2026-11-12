@@ -257,7 +257,12 @@ export async function apiRequest<T>(
 
     console.log(`[API] ${method} ${endpoint}`);
 
-    const response = await fetch(`${API_BASE}${endpoint}`, config);
+    const requestUrl =
+        typeof window !== 'undefined' && endpoint.startsWith('/api/v1/Groups')
+            ? `/api/groups${endpoint.slice('/api/v1/Groups'.length)}`
+            : `${API_BASE}${endpoint}`;
+
+    const response = await fetch(requestUrl, config);
 
     if (!response.ok) {
         // Handle 401 Unauthorized - try to refresh token first
@@ -837,7 +842,8 @@ export const groupsApi = {
         const auth = getStoredAuth();
         const useToken = token || auth?.accessToken;
 
-        const response = await fetch(`${API_BASE}/api/v1/Groups`, {
+        const createUrl = typeof window !== 'undefined' ? '/api/groups' : `${API_BASE}/api/v1/Groups`;
+        const response = await fetch(createUrl, {
             method: 'POST',
             headers: {
                 ...(useToken ? { 'Authorization': `Bearer ${useToken}` } : {}),
@@ -915,7 +921,8 @@ export const groupsApi = {
         const auth = getStoredAuth();
         const useToken = token || auth?.accessToken;
 
-        const response = await fetch(`${API_BASE}/api/v1/Groups/${id}/logo`, {
+        const logoUrl = typeof window !== 'undefined' ? `/api/groups/${id}/logo` : `${API_BASE}/api/v1/Groups/${id}/logo`;
+        const response = await fetch(logoUrl, {
             method: 'POST',
             headers: {
                 ...(useToken ? { 'Authorization': `Bearer ${useToken}` } : {}),
@@ -939,7 +946,8 @@ export const groupsApi = {
         const auth = getStoredAuth();
         const useToken = token || auth?.accessToken;
 
-        const response = await fetch(`${API_BASE}/api/v1/Groups/${id}/banner`, {
+        const bannerUrl = typeof window !== 'undefined' ? `/api/groups/${id}/banner` : `${API_BASE}/api/v1/Groups/${id}/banner`;
+        const response = await fetch(bannerUrl, {
             method: 'POST',
             headers: {
                 ...(useToken ? { 'Authorization': `Bearer ${useToken}` } : {}),

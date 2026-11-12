@@ -51,7 +51,7 @@ interface ApiGroupSummary {
 // API Configuration
 // ============================================
 
-const API_BASE_URL = process.env.NEXT_PUBLIC_MYQURANI_API_URL || 'https://api.myqurani.com';
+const GROUPS_PROXY_BASE = '/api/groups';
 
 // Helper to get auth token from localStorage
 function getAuthToken(): string | undefined {
@@ -66,11 +66,11 @@ function getAuthToken(): string | undefined {
   }
 }
 
-// Helper for API requests
+// Helper for API requests (proxied via Next.js API route to avoid CORS)
 async function apiRequest<T>(endpoint: string, options: RequestInit = {}): Promise<T> {
   const token = getAuthToken();
 
-  const response = await fetch(`${API_BASE_URL}${endpoint}`, {
+  const response = await fetch(`${GROUPS_PROXY_BASE}${endpoint}`, {
     ...options,
     headers: {
       'Content-Type': 'application/json',
@@ -124,17 +124,23 @@ const apiGroupsFetcher = async (key: string): Promise<{ success: boolean; data: 
       // Ensure we sort by latest to be consistent
       searchParams.set('SortBy', 'CreatedDateDesc');
 
-      const result = await apiRequest<any>(`/api/v1/Groups/search?${searchParams.toString()}`);
+      const result = await apiRequest<any>(`/search?${searchParams.toString()}`);
 
       // Map API response to MappedGroup format
       const items = result?.data?.items || result?.items || result?.Items || [];
-      const total = result?.data?.totalCount || result?.totalCount || result?.TotalCount || items.length || 0;
+      const total =
+        result?.data?.totalCount ||
+        result?.data?.pagination?.totalCount ||
+        result?.totalCount ||
+        result?.TotalCount ||
+        items.length ||
+        0;
 
       const mappedGroups: MappedGroup[] = items.map((item: any) => ({
         id: String(item.id || item.Id),
         name: item.name || item.Name || "Unknown Group",
         description: item.description || item.Description || "",
-        avatar: item.logoUrl || item.GroupProfileUrl || undefined,
+        avatar: item.logoUrl || item.GroupProfileUrl || item.logo || item.image || undefined,
         memberCount: item.memberCount || item.TotalMember || 0,
         isPrivate: (item.type || item.Type) === 'private' || (item.type || item.Type) === 'Private' || (item.type || item.Type) === 'secret',
         role: item.userRole || "member",
@@ -144,11 +150,11 @@ const apiGroupsFetcher = async (key: string): Promise<{ success: boolean; data: 
         category: item.categoryId || 0,
         deleted_at: null,
         countryId: item.countryId || null,
-        countryName: item.countryName || "",
+        countryName: item.countryName || item.countryCode || "",
         stateId: item.stateId || null,
         stateName: item.stateName || "",
         cityId: item.cityId || null,
-        cityName: item.cityName || "",
+        cityName: item.cityName || item.city || "",
         is_member: item.isMember,
         user_role: item.userRole,
         type: (item.type || item.Type)?.toLowerCase(),
@@ -248,7 +254,7 @@ export function useSearchGroups(params: SearchGroupsParams) {
       searchParams.append('Keyword', query || '');
       searchParams.append('PageSize', '20');
 
-      const result = await apiRequest<any>(`/api/v1/Groups/search?${searchParams.toString()}`);
+      const result = await apiRequest<any>(`/search?${searchParams.toString()}`);
 
       const items = result?.data?.items || result?.items || [];
       const mappedResults: SearchGroupResult[] = items.map((item: ApiGroupSummary) => ({
@@ -338,7 +344,7 @@ export function useGroupMutations(userId?: string) {
     if (!userId) throw new Error("User ID is required");
 
     try {
-      await apiRequest(`/api/v1/Groups/${groupId}/leave`, { method: 'POST' });
+      await apiRequest(`/${groupId}/leave`, { method: 'POST' });
       await refreshGroups();
       return { success: true, message: 'Successfully left the group' };
     } catch (error) {
@@ -362,7 +368,7 @@ export function useGroupMutations(userId?: string) {
 
       const token = getAuthToken();
 
-      const response = await fetch(`${API_BASE_URL}/api/v1/Groups`, {
+      const response = await fetch(GROUPS_PROXY_BASE, {
         method: 'POST',
         headers: {
           ...(token ? { 'Authorization': `Bearer ${token}` } : {}),
@@ -405,8 +411,8 @@ export function useGroupDetail(groupId?: string, userId?: string) {
     try {
       // Fetch group detail and members in parallel
       const [groupResult, membersResult] = await Promise.all([
-        apiRequest<any>(`/api/v1/Groups/${groupId}`),
-        apiRequest<any>(`/api/v1/Groups/${groupId}/members`)
+        apiRequest<any>(`/${groupId}`),
+        apiRequest<any>(`/${groupId}/members`)
       ]);
 
       console.log('[Group Detail] Group API response:', groupResult);
