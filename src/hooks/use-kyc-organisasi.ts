@@ -4,7 +4,7 @@ import { useState, useEffect, useCallback, useRef } from "react"
 import { useDebounce } from "@/hooks/use-debounce"
 import dummyOrgsBase from "@/data/dummy-orgs.json"
 
-const API_BASE_URL = process.env.NEXT_PUBLIC_MYQURANI_API_URL || "https://api.myqurani.com"
+const ORG_PROXY_BASE = "/api/organizations"
 
 const DUMMY_STATUS_KEY = "qurani_dummy_org_status"
 
@@ -335,7 +335,7 @@ export function useKycOrganisasi(): KycOrganisasiState {
             while (pageGuard < 200) {
                 pageGuard += 1
                 const params = new URLSearchParams({ Page: String(pageNum), PageSize: String(pageSize) })
-                const res = await fetch(`${API_BASE_URL}/api/v1/Organizations/search?${params}`, { headers: authHeaders() })
+                const res = await fetch(`${ORG_PROXY_BASE}/search?${params}`, { headers: authHeaders() })
                 if (!res.ok) break
                 const json = await res.json()
                 const items = parseItems(json)
@@ -400,7 +400,7 @@ export function useKycOrganisasi(): KycOrganisasiState {
             if (filter.dateTo) params.set("DateTo", filter.dateTo)
 
             const res = await fetch(
-                `${API_BASE_URL}/api/v1/Organizations/search?${params}`,
+                `${ORG_PROXY_BASE}/search?${params}`,
                 { headers: authHeaders() }
             )
 
@@ -464,7 +464,7 @@ export function useKycOrganisasi(): KycOrganisasiState {
                         if (filter.dateFrom) p.set("DateFrom", filter.dateFrom)
                         if (filter.dateTo) p.set("DateTo", filter.dateTo)
 
-                        const r = await fetch(`${API_BASE_URL}/api/v1/Organizations/search?${p}`, {
+                        const r = await fetch(`${ORG_PROXY_BASE}/search?${p}`, {
                             headers: authHeaders(),
                         })
                         if (!r.ok) break
@@ -548,7 +548,7 @@ export function useKycOrganisasi(): KycOrganisasiState {
 
         try {
             const res = await fetch(
-                `${API_BASE_URL}/api/v1/Organizations/${id}`,
+                `${ORG_PROXY_BASE}/${id}`,
                 { headers: authHeaders() }
             )
             if (!res.ok) throw new Error(`API error: ${res.status}`)
@@ -573,7 +573,7 @@ export function useKycOrganisasi(): KycOrganisasiState {
         try {
             const params = new URLSearchParams({ page: "1", pageSize: "100" })
             const res = await fetch(
-                `${API_BASE_URL}/api/v1/Organizations/${id}/members?${params}`,
+                `${ORG_PROXY_BASE}/${id}/members?${params}`,
                 { headers: authHeaders() }
             )
             if (!res.ok) throw new Error(`API error: ${res.status}`)
@@ -606,7 +606,7 @@ export function useKycOrganisasi(): KycOrganisasiState {
 
         try {
             const res = await fetch(
-                `${API_BASE_URL}/api/v1/Organizations/${id}/verify`,
+                `${ORG_PROXY_BASE}/${id}/verify`,
                 {
                     method: "POST",
                     headers: authHeaders(),
@@ -646,7 +646,7 @@ export function useKycOrganisasi(): KycOrganisasiState {
 
         try {
             const res = await fetch(
-                `${API_BASE_URL}/api/v1/Organizations/${id}/status`,
+                `${ORG_PROXY_BASE}/${id}/status`,
                 {
                     method: "POST",
                     headers: authHeaders(),
@@ -672,7 +672,7 @@ export function useKycOrganisasi(): KycOrganisasiState {
         setActionLoading(true)
         try {
             const res = await fetch(
-                `${API_BASE_URL}/api/v1/Organizations/${id}`,
+                `${ORG_PROXY_BASE}/${id}`,
                 {
                     method: "PUT",
                     headers: authHeaders(),
@@ -695,7 +695,7 @@ export function useKycOrganisasi(): KycOrganisasiState {
         setActionLoading(true)
         try {
             const res = await fetch(
-                `${API_BASE_URL}/api/v1/Organizations/${id}/regenerate-invite`,
+                `${ORG_PROXY_BASE}/${id}/regenerate-invite`,
                 { method: "POST", headers: authHeaders() }
             )
             if (!res.ok) throw new Error(`API error: ${res.status}`)
@@ -735,7 +735,7 @@ export function useKycOrganisasi(): KycOrganisasiState {
 
         try {
             const res = await fetch(
-                `${API_BASE_URL}/api/v1/Organizations/${id}/status`,
+                `${ORG_PROXY_BASE}/${id}/status`,
                 {
                     method: "POST",
                     headers: authHeaders(),

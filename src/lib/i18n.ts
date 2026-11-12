@@ -11,8 +11,28 @@ export const getDictionary = async (locale: Locale = defaultLocale) => {
   return getDictionaries(['common'], locale);
 };
 
+function isPlainObject(value: unknown): value is Record<string, unknown> {
+  return typeof value === 'object' && value !== null && !Array.isArray(value);
+}
+
+function deepMerge(
+  target: Record<string, unknown>,
+  source: Record<string, unknown>
+): Record<string, unknown> {
+  for (const key of Object.keys(source)) {
+    const sourceVal = source[key];
+    const targetVal = target[key];
+    if (isPlainObject(sourceVal) && isPlainObject(targetVal)) {
+      target[key] = deepMerge({ ...targetVal }, sourceVal);
+    } else {
+      target[key] = sourceVal;
+    }
+  }
+  return target;
+}
+
 export async function getDictionaries(namespaces: string[], locale: Locale = defaultLocale): Promise<Record<string, unknown>> {
-  const cacheKey = `${locale}:${namespaces.sort().join('|')}`;
+  const cacheKey = `${locale}:${namespaces.slice().sort().join('|')}`;
   
   // Check cache first
   if (dictionaryCache.has(cacheKey)) {
@@ -24,7 +44,7 @@ export async function getDictionaries(namespaces: string[], locale: Locale = def
   for (const ns of namespaces) {
     // Each namespace file shape should be an object (e.g., { common: {...} } or { profile: {...} })
     const data = await import(`@/dictionaries/${ns}/${locale}.json`).then((m) => m.default as Record<string, unknown>);
-    Object.assign(merged, data);
+    deepMerge(merged, data);
   }
 
   // Cache the result

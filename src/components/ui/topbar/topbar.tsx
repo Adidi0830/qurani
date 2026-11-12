@@ -147,7 +147,7 @@ const TopbarView = React.memo(function TopbarView({
             <TooltipTrigger asChild>
               <Link
                 href="/notification"
-                aria-label={t("common.notifications", "Notifikasi")}
+                aria-label={t("navigation.notifications", "Notifikasi")}
                 className="relative flex items-center justify-center rounded-lg p-2 text-gray-600 transition-colors hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-800"
               >
                 <Bell className="h-5 w-5" />
@@ -159,7 +159,7 @@ const TopbarView = React.memo(function TopbarView({
               </Link>
             </TooltipTrigger>
             <TooltipContent side="bottom">
-              {t("common.notifications", "Notifikasi")}
+              {t("navigation.notifications", "Notifikasi")}
             </TooltipContent>
           </Tooltip>
 
