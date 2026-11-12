@@ -13,7 +13,7 @@ import {
 import { ToastContainer, showToast } from "@/components/ui/toast-sim"
 
 // ── API ───────────────────────────────────────────────────────────────────────
-const API_BASE = "https://api.myqurani.com/api/v1/Categories"
+const API_BASE = "/api/myqurani/api/v1/Categories"
 
 /**
  * Mengambil token dari localStorage["myqurani_auth"].accessToken
@@ -215,7 +215,7 @@ export function CategoriesManager() {
             setTotalCount(count)
             setUsingDummy(false)
             setApiError(null)
-            
+
             if (items.length === 0) {
                 showToast({ title: "Belum ada kategori — silakan tambah kategori baru", type: "info" })
             }
@@ -232,7 +232,7 @@ export function CategoriesManager() {
                         let items2: Category[] = []
                         if (Array.isArray(json2)) items2 = json2
                         else if (json2.data && Array.isArray(json2.data)) items2 = json2.data
-                        
+
                         if (items2.length > 0) {
                             setCategories(items2)
                             setTotalCount(items2.length)
@@ -243,7 +243,7 @@ export function CategoriesManager() {
                         }
                     }
                 } catch { /* ignore */ }
-                
+
                 showToast({ title: "⚠️ Menggunakan data testing (Gagal load API)", type: "error" })
                 setCategories(DUMMY)
                 setTotalCount(DUMMY.length)
@@ -527,13 +527,12 @@ export function CategoriesManager() {
                         <div className="relative shrink-0">
                             <button
                                 onClick={() => setFilterDropdownOpen(o => !o)}
-                                className={`flex items-center gap-2 px-3 py-2 rounded-lg text-sm font-medium transition-colors border flex-shrink-0 ${
-                                    filterActive !== "all" || filterFeatured !== "all"
+                                className={`flex items-center gap-2 px-3 py-2 rounded-lg text-sm font-medium transition-colors border flex-shrink-0 ${filterActive !== "all" || filterFeatured !== "all"
                                         ? "bg-emerald-50 text-emerald-600 border-emerald-200 dark:bg-emerald-900/20 dark:text-emerald-400 dark:border-emerald-800"
                                         : "bg-white text-gray-700 border-gray-200 dark:bg-gray-800 dark:text-gray-300 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-700"
-                                }`}
+                                    }`}
                             >
-                                <Filter className="w-4 h-4" /> 
+                                <Filter className="w-4 h-4" />
                                 <span className="hidden sm:inline">Filter</span>
                                 {(filterActive !== "all" || filterFeatured !== "all") && (
                                     <span className="flex items-center justify-center w-4 h-4 rounded-full bg-emerald-500 text-white text-[9px] font-bold">
@@ -551,11 +550,10 @@ export function CategoriesManager() {
                                         {/* Semua */}
                                         <button
                                             onClick={() => { setFilterActive("all"); setFilterFeatured("all"); setPage(1); setFilterDropdownOpen(false) }}
-                                            className={`w-full text-left px-4 py-3 text-sm font-semibold transition-colors ${
-                                                filterActive === "all" && filterFeatured === "all"
+                                            className={`w-full text-left px-4 py-3 text-sm font-semibold transition-colors ${filterActive === "all" && filterFeatured === "all"
                                                     ? "bg-emerald-50 dark:bg-emerald-900/20 text-emerald-700 dark:text-emerald-400"
                                                     : "text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-800"
-                                            }`}
+                                                }`}
                                         >
                                             {t("masterdata.categories.filter_all", "Semua")}
                                         </button>
@@ -568,15 +566,13 @@ export function CategoriesManager() {
                                             <button
                                                 key={f}
                                                 onClick={() => { setFilterActive(f === filterActive ? "all" : f); setPage(1); }}
-                                                className={`w-full text-left px-4 py-2.5 text-sm flex items-center gap-2.5 transition-colors ${
-                                                    filterActive === f
+                                                className={`w-full text-left px-4 py-2.5 text-sm flex items-center gap-2.5 transition-colors ${filterActive === f
                                                         ? "bg-emerald-50 dark:bg-emerald-900/20 text-emerald-700 dark:text-emerald-400 font-medium"
                                                         : "text-gray-600 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-800"
-                                                }`}
+                                                    }`}
                                             >
-                                                <span className={`w-2 h-2 rounded-full shrink-0 ${
-                                                    f === "active" ? "bg-emerald-400" : "bg-red-400"
-                                                }`} />
+                                                <span className={`w-2 h-2 rounded-full shrink-0 ${f === "active" ? "bg-emerald-400" : "bg-red-400"
+                                                    }`} />
                                                 {f === "active" ? t("masterdata.categories.filter_active", "Aktif") : t("masterdata.categories.filter_inactive", "Nonaktif")}
                                             </button>
                                         ))}
@@ -589,11 +585,10 @@ export function CategoriesManager() {
                                             <button
                                                 key={f}
                                                 onClick={() => { setFilterFeatured(f === filterFeatured ? "all" : f); setPage(1); }}
-                                                className={`w-full text-left px-4 py-2.5 text-sm flex items-center gap-2.5 transition-colors ${
-                                                    filterFeatured === f
+                                                className={`w-full text-left px-4 py-2.5 text-sm flex items-center gap-2.5 transition-colors ${filterFeatured === f
                                                         ? "bg-amber-50 dark:bg-amber-900/20 text-amber-700 dark:text-amber-400 font-medium"
                                                         : "text-gray-600 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-800"
-                                                }`}
+                                                    }`}
                                             >
                                                 {f === "featured"
                                                     ? <Star className={`w-3.5 h-3.5 shrink-0 ${filterFeatured === "featured" ? "fill-current" : ""}`} />
@@ -785,14 +780,14 @@ export function CategoriesManager() {
 
                         {totalPages > 1 && (
                             <div className="flex items-center gap-1">
-                                <button 
-                                    onClick={() => setPage(Math.max(1, page - 1))} 
+                                <button
+                                    onClick={() => setPage(Math.max(1, page - 1))}
                                     disabled={page <= 1}
                                     className="w-8 h-8 flex items-center justify-center rounded-lg border border-gray-200 dark:border-gray-700 text-gray-500 hover:bg-gray-50 dark:hover:bg-gray-800 disabled:opacity-40 disabled:cursor-not-allowed transition-colors"
                                 >
                                     <ChevronLeft className="w-4 h-4" />
                                 </button>
-                                
+
                                 {/* Page Numbers */}
                                 {Array.from({ length: Math.min(5, totalPages) }, (_, i) => {
                                     let pageNum: number
@@ -806,22 +801,21 @@ export function CategoriesManager() {
                                         pageNum = page - 2 + i
                                     }
                                     return (
-                                        <button 
-                                            key={pageNum} 
+                                        <button
+                                            key={pageNum}
                                             onClick={() => setPage(pageNum)}
-                                            className={`w-8 h-8 rounded-lg text-sm font-medium transition-colors border ${
-                                                page === pageNum
+                                            className={`w-8 h-8 rounded-lg text-sm font-medium transition-colors border ${page === pageNum
                                                     ? "bg-emerald-500 text-white shadow-sm border-emerald-500"
                                                     : "bg-white dark:bg-gray-900 text-gray-600 dark:text-gray-400 border-gray-200 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-800"
-                                            }`}
+                                                }`}
                                         >
                                             {pageNum}
                                         </button>
                                     )
                                 })}
 
-                                <button 
-                                    onClick={() => setPage(Math.min(totalPages, page + 1))} 
+                                <button
+                                    onClick={() => setPage(Math.min(totalPages, page + 1))}
                                     disabled={page >= totalPages}
                                     className="w-8 h-8 flex items-center justify-center rounded-lg border border-gray-200 dark:border-gray-700 text-gray-500 hover:bg-gray-50 dark:hover:bg-gray-800 disabled:opacity-40 disabled:cursor-not-allowed transition-colors"
                                 >

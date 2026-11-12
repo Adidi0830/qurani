@@ -18,7 +18,7 @@ import seleksiTeam from "@/data/seleksi-team.json"
 import { CATEGORY_LIST } from "@/data/categories-data"
 
 // ── Constants ─────────────────────────────────────────────────────────────────
-const API_BASE_URL = process.env.NEXT_PUBLIC_MYQURANI_API_URL || "https://api.myqurani.com"
+const API_BASE_URL = "/api/myqurani"
 
 function getClientToken(): string | null {
     if (typeof window === "undefined") return null
@@ -823,13 +823,13 @@ function GuruDetailContent() {
                                     <div className="grid grid-cols-2 gap-3">
                                         {/* Online Card */}
                                         <div className={`rounded-xl border-2 p-3.5 transition-colors ${detail.isOnline
-                                                ? "border-emerald-400 bg-emerald-50/70 dark:bg-emerald-900/15 dark:border-emerald-700"
-                                                : "border-gray-200 bg-gray-50 dark:border-gray-700 dark:bg-gray-800/30 opacity-50"
+                                            ? "border-emerald-400 bg-emerald-50/70 dark:bg-emerald-900/15 dark:border-emerald-700"
+                                            : "border-gray-200 bg-gray-50 dark:border-gray-700 dark:bg-gray-800/30 opacity-50"
                                             }`}>
                                             <div className="flex items-start gap-2">
                                                 <div className={`w-4 h-4 mt-0.5 flex-shrink-0 border flex items-center justify-center rounded ${detail.isOnline
-                                                        ? "border-emerald-500 bg-emerald-500"
-                                                        : "border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800"
+                                                    ? "border-emerald-500 bg-emerald-500"
+                                                    : "border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800"
                                                     }`}>
                                                     {detail.isOnline && <svg className="w-3 h-3 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={3}><path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" /></svg>}
                                                 </div>
@@ -845,13 +845,13 @@ function GuruDetailContent() {
 
                                         {/* Offline Card */}
                                         <div className={`rounded-xl border-2 p-3.5 transition-colors ${detail.isOffline
-                                                ? "border-emerald-400 bg-emerald-50/70 dark:bg-emerald-900/15 dark:border-emerald-700"
-                                                : "border-gray-200 bg-gray-50 dark:border-gray-700 dark:bg-gray-800/30 opacity-50"
+                                            ? "border-emerald-400 bg-emerald-50/70 dark:bg-emerald-900/15 dark:border-emerald-700"
+                                            : "border-gray-200 bg-gray-50 dark:border-gray-700 dark:bg-gray-800/30 opacity-50"
                                             }`}>
                                             <div className="flex items-start gap-2">
                                                 <div className={`w-4 h-4 mt-0.5 flex-shrink-0 border flex items-center justify-center rounded ${detail.isOffline
-                                                        ? "border-emerald-500 bg-emerald-500"
-                                                        : "border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800"
+                                                    ? "border-emerald-500 bg-emerald-500"
+                                                    : "border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800"
                                                     }`}>
                                                     {detail.isOffline && <svg className="w-3 h-3 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={3}><path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" /></svg>}
                                                 </div>
@@ -1333,6 +1333,6 @@ function GuruDetailContent() {
 
 export default function GuruReviewPage() {
     return (
-                <GuruDetailContent />
+        <GuruDetailContent />
     )
 }

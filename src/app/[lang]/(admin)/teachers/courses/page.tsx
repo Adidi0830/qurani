@@ -33,7 +33,7 @@ import {
 } from "lucide-react"
 import dummyData from "@/data/billing-dummy.json"
 
-const API_BASE = process.env.NEXT_PUBLIC_MYQURANI_API_URL || "https://api.myqurani.com"
+const API_BASE = "/api/myqurani"
 const PAGE_SIZE = 10
 
 type CourseStatus = "published" | "unpublished" | "draft" | "archived"
@@ -942,16 +942,16 @@ function CombinedFilterDropdown({ value, onChange }: { value: string; onChange: 
 
     const options = [
         { value: "all", label: t("billing.courses.filters.allCombined", "Semua") },
-        { 
-            group: t("billing.courses.filterGroup.publish", "Status Publish"), 
+        {
+            group: t("billing.courses.filterGroup.publish", "Status Publish"),
             items: [
                 { value: "published", label: t("billing.courses.status.published", "Published") },
                 { value: "unpublished", label: t("billing.courses.status.unpublished", "Unpublished") },
                 { value: "draft", label: t("billing.courses.status.draft", "Draft") },
             ]
         },
-        { 
-            group: t("billing.courses.filterGroup.verify", "Status Verifikasi"), 
+        {
+            group: t("billing.courses.filterGroup.verify", "Status Verifikasi"),
             items: [
                 { value: "verified", label: t("billing.courses.filters.verified", "Verified") },
                 { value: "unverified", label: t("billing.courses.filters.unverified", "Belum Verified") },
@@ -959,13 +959,13 @@ function CombinedFilterDropdown({ value, onChange }: { value: string; onChange: 
         }
     ]
 
-    const selectedLabel = 
+    const selectedLabel =
         value === "all" ? t("billing.courses.filters.allCombined", "Semua") :
-        value === "published" ? t("billing.courses.status.published", "Published") :
-        value === "unpublished" ? t("billing.courses.status.unpublished", "Unpublished") :
-        value === "draft" ? t("billing.courses.status.draft", "Draft") :
-        value === "verified" ? t("billing.courses.filters.verified", "Verified") :
-        t("billing.courses.filters.unverified", "Belum Verified")
+            value === "published" ? t("billing.courses.status.published", "Published") :
+                value === "unpublished" ? t("billing.courses.status.unpublished", "Unpublished") :
+                    value === "draft" ? t("billing.courses.status.draft", "Draft") :
+                        value === "verified" ? t("billing.courses.filters.verified", "Verified") :
+                            t("billing.courses.filters.unverified", "Belum Verified")
 
     return (
         <div className="relative inline-flex" ref={dropdownRef}>
@@ -985,11 +985,11 @@ function CombinedFilterDropdown({ value, onChange }: { value: string; onChange: 
                     >
                         {t("billing.courses.filters.allCombined", "Semua")}
                     </button>
-                    
+
                     <div className="px-4 py-1.5 mt-1 border-t border-gray-100 dark:border-gray-800">
                         <span className="text-[10px] font-bold uppercase text-gray-400">{options[1].group as string}</span>
                     </div>
-                    {(options[1].items as Array<{value: string, label: string}>).map(item => (
+                    {(options[1].items as Array<{ value: string, label: string }>).map(item => (
                         <button
                             key={item.value}
                             onClick={() => { onChange(item.value); setIsOpen(false) }}
@@ -1003,7 +1003,7 @@ function CombinedFilterDropdown({ value, onChange }: { value: string; onChange: 
                     <div className="px-4 py-1.5 mt-1 border-t border-gray-100 dark:border-gray-800">
                         <span className="text-[10px] font-bold uppercase text-gray-400">{options[2].group as string}</span>
                     </div>
-                    {(options[2].items as Array<{value: string, label: string}>).map(item => (
+                    {(options[2].items as Array<{ value: string, label: string }>).map(item => (
                         <button
                             key={item.value}
                             onClick={() => { onChange(item.value); setIsOpen(false) }}
@@ -1332,9 +1332,9 @@ function PaketContent() {
                                 <SlidersHorizontal className="h-4 w-4" />
                                 {t("billing.courses.bulk.title", "Bulk Actions")}
                             </button>
-                            <CombinedFilterDropdown 
-                                value={combinedFilter} 
-                                onChange={value => { setCombinedFilter(value); setPage(1) }} 
+                            <CombinedFilterDropdown
+                                value={combinedFilter}
+                                onChange={value => { setCombinedFilter(value); setPage(1) }}
                             />
                         </div>
 
@@ -1614,6 +1614,6 @@ function SegmentedFilter({ value, items, onChange }: { value: string; items: Arr
 
 export default function PaketPage() {
     return (
-                <PaketContent />
+        <PaketContent />
     )
 }

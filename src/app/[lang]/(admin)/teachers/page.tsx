@@ -40,9 +40,9 @@ function getClientToken(): string | null {
 
 // ── Status Config ─────────────────────────────────────────────────────────────
 const STATUS_CFG = {
-    verified:  { defaultLabel: "Aktif",      bg: "bg-emerald-100 dark:bg-emerald-900/30", text: "text-emerald-700 dark:text-emerald-400", dot: "bg-emerald-500", icon: BadgeCheck },
-    suspended: { defaultLabel: "Tidak Aktif",bg: "bg-red-100 dark:bg-red-900/30",         text: "text-red-700 dark:text-red-400",         dot: "bg-red-500",     icon: ShieldOff  },
-    rejected:  { defaultLabel: "Ditolak",    bg: "bg-rose-100 dark:bg-rose-900/30",       text: "text-rose-700 dark:text-rose-400",       dot: "bg-rose-500",    icon: ShieldOff  },
+    verified: { defaultLabel: "Aktif", bg: "bg-emerald-100 dark:bg-emerald-900/30", text: "text-emerald-700 dark:text-emerald-400", dot: "bg-emerald-500", icon: BadgeCheck },
+    suspended: { defaultLabel: "Tidak Aktif", bg: "bg-red-100 dark:bg-red-900/30", text: "text-red-700 dark:text-red-400", dot: "bg-red-500", icon: ShieldOff },
+    rejected: { defaultLabel: "Ditolak", bg: "bg-rose-100 dark:bg-rose-900/30", text: "text-rose-700 dark:text-rose-400", dot: "bg-rose-500", icon: ShieldOff },
 } as const
 
 // ── Label System ──────────────────────────────────────────────────────────────
@@ -79,31 +79,31 @@ const ADMIN_LABELS: AdminLabel[] = [
     },
     // ── Tier Performa (Internal) ─────────────────────────────────────────
     { id: "tier_a", name: "Tier A", category: "tier", bg: "bg-emerald-100 dark:bg-emerald-900/40", text: "text-emerald-800 dark:text-emerald-300", dot: "bg-emerald-500" },
-    { id: "tier_b", name: "Tier B", category: "tier", bg: "bg-sky-100 dark:bg-sky-900/30",         text: "text-sky-700 dark:text-sky-400",         dot: "bg-sky-500"     },
-    { id: "tier_c", name: "Tier C", category: "tier", bg: "bg-gray-100 dark:bg-gray-800",          text: "text-gray-600 dark:text-gray-400",       dot: "bg-gray-400"    },
+    { id: "tier_b", name: "Tier B", category: "tier", bg: "bg-sky-100 dark:bg-sky-900/30", text: "text-sky-700 dark:text-sky-400", dot: "bg-sky-500" },
+    { id: "tier_c", name: "Tier C", category: "tier", bg: "bg-gray-100 dark:bg-gray-800", text: "text-gray-600 dark:text-gray-400", dot: "bg-gray-400" },
     // ── Flag Review (Internal) ───────────────────────────────────────────
-    { id: "perlu_review",     name: "Perlu Review",     category: "flag", bg: "bg-orange-100 dark:bg-orange-900/30", text: "text-orange-700 dark:text-orange-400", dot: "bg-orange-500" },
-    { id: "laporan_masuk",    name: "Laporan Masuk",    category: "flag", bg: "bg-red-100 dark:bg-red-900/30",       text: "text-red-700 dark:text-red-400",       dot: "bg-red-500"    },
+    { id: "perlu_review", name: "Perlu Review", category: "flag", bg: "bg-orange-100 dark:bg-orange-900/30", text: "text-orange-700 dark:text-orange-400", dot: "bg-orange-500" },
+    { id: "laporan_masuk", name: "Laporan Masuk", category: "flag", bg: "bg-red-100 dark:bg-red-900/30", text: "text-red-700 dark:text-red-400", dot: "bg-red-500" },
     { id: "verifikasi_ulang", name: "Verifikasi Ulang", category: "flag", bg: "bg-yellow-100 dark:bg-yellow-900/30", text: "text-yellow-700 dark:text-yellow-500", dot: "bg-yellow-400" },
 ]
 
 const LABEL_CATEGORY_NAMES: Record<LabelCategory, string> = {
     publik: "Label Publik",
-    tier:   "Tier Performa",
-    flag:   "Flag Review",
+    tier: "Tier Performa",
+    flag: "Flag Review",
     custom: "Label Kustom",
 }
 
 // Palette warna untuk label kustom
 const CUSTOM_COLORS = [
-    { bg: "bg-violet-100 dark:bg-violet-900/30",  text: "text-violet-700 dark:text-violet-400",  dot: "bg-violet-500" },
-    { bg: "bg-pink-100 dark:bg-pink-900/30",      text: "text-pink-700 dark:text-pink-400",      dot: "bg-pink-500"   },
-    { bg: "bg-cyan-100 dark:bg-cyan-900/30",      text: "text-cyan-700 dark:text-cyan-400",      dot: "bg-cyan-500"   },
-    { bg: "bg-lime-100 dark:bg-lime-900/30",      text: "text-lime-700 dark:text-lime-400",      dot: "bg-lime-500"   },
-    { bg: "bg-fuchsia-100 dark:bg-fuchsia-900/30",text: "text-fuchsia-700 dark:text-fuchsia-400",dot: "bg-fuchsia-500"},
-    { bg: "bg-rose-100 dark:bg-rose-900/30",      text: "text-rose-700 dark:text-rose-400",      dot: "bg-rose-500"   },
-    { bg: "bg-amber-100 dark:bg-amber-900/30",    text: "text-amber-700 dark:text-amber-400",    dot: "bg-amber-500"  },
-    { bg: "bg-blue-100 dark:bg-blue-900/30",      text: "text-blue-700 dark:text-blue-400",      dot: "bg-blue-400"   },
+    { bg: "bg-violet-100 dark:bg-violet-900/30", text: "text-violet-700 dark:text-violet-400", dot: "bg-violet-500" },
+    { bg: "bg-pink-100 dark:bg-pink-900/30", text: "text-pink-700 dark:text-pink-400", dot: "bg-pink-500" },
+    { bg: "bg-cyan-100 dark:bg-cyan-900/30", text: "text-cyan-700 dark:text-cyan-400", dot: "bg-cyan-500" },
+    { bg: "bg-lime-100 dark:bg-lime-900/30", text: "text-lime-700 dark:text-lime-400", dot: "bg-lime-500" },
+    { bg: "bg-fuchsia-100 dark:bg-fuchsia-900/30", text: "text-fuchsia-700 dark:text-fuchsia-400", dot: "bg-fuchsia-500" },
+    { bg: "bg-rose-100 dark:bg-rose-900/30", text: "text-rose-700 dark:text-rose-400", dot: "bg-rose-500" },
+    { bg: "bg-amber-100 dark:bg-amber-900/30", text: "text-amber-700 dark:text-amber-400", dot: "bg-amber-500" },
+    { bg: "bg-blue-100 dark:bg-blue-900/30", text: "text-blue-700 dark:text-blue-400", dot: "bg-blue-400" },
 ]
 
 const PAGE_SIZE = 10
@@ -487,7 +487,7 @@ function FilterPopover({
                             className={`px-2.5 py-1 rounded-full text-[11px] font-semibold transition-all border ${value === opt.value
                                 ? "bg-emerald-500 text-white border-emerald-500 shadow-sm"
                                 : "bg-white dark:bg-gray-800 text-gray-600 dark:text-gray-400 border-gray-200 dark:border-gray-700 hover:border-emerald-300 hover:text-emerald-600"
-                            }`}
+                                }`}
                         >
                             {opt.label}
                         </button>
@@ -721,11 +721,11 @@ function GuruContent() {
         try {
             const stored = localStorage.getItem("guruAdminLabels")
             if (stored) setGuruLabels(JSON.parse(stored))
-        } catch {}
+        } catch { }
         try {
             const stored = localStorage.getItem("customAdminLabels")
             if (stored) setCustomLabels(JSON.parse(stored))
-        } catch {}
+        } catch { }
     }, [])
 
     const allLabels = useMemo(() => [...ADMIN_LABELS, ...customLabels], [customLabels])
@@ -736,7 +736,7 @@ function GuruContent() {
         const newLabel: AdminLabel = { id, name, category: "custom", isCustom: true, ...color }
         const updated = [...customLabels, newLabel]
         setCustomLabels(updated)
-        try { localStorage.setItem("customAdminLabels", JSON.stringify(updated)) } catch {}
+        try { localStorage.setItem("customAdminLabels", JSON.stringify(updated)) } catch { }
     }
 
     function toggleLabel(guruId: number, labelId: string) {
@@ -744,7 +744,7 @@ function GuruContent() {
             const current = prev[guruId] || []
             const next = current.includes(labelId) ? current.filter(id => id !== labelId) : [...current, labelId]
             const updated = { ...prev, [guruId]: next }
-            try { localStorage.setItem("guruAdminLabels", JSON.stringify(updated)) } catch {}
+            try { localStorage.setItem("guruAdminLabels", JSON.stringify(updated)) } catch { }
             return updated
         })
     }
@@ -753,7 +753,7 @@ function GuruContent() {
         setGuruLabels(prev => {
             const next = (prev[guruId] || []).filter(id => id !== labelId)
             const updated = { ...prev, [guruId]: next }
-            try { localStorage.setItem("guruAdminLabels", JSON.stringify(updated)) } catch {}
+            try { localStorage.setItem("guruAdminLabels", JSON.stringify(updated)) } catch { }
             return updated
         })
     }
@@ -761,7 +761,7 @@ function GuruContent() {
     // ── Data Fetching ─────────────────────────────────────────────────────
     useEffect(() => {
         const token = getClientToken()
-        const API_BASE_URL = process.env.NEXT_PUBLIC_MYQURANI_API_URL || "https://api.myqurani.com"
+        const API_BASE_URL = "/api/myqurani"
         const headers: HeadersInit = token ? { Authorization: `Bearer ${token}` } : {}
 
         const mapData = (d: any) => {
@@ -828,19 +828,19 @@ function GuruContent() {
                             setApiGurus(prev => { const currentIds = new Set(prev.map(g => g.id)); return [...prev, ...newGurus.filter(g => !currentIds.has(g.id))] })
                         })
                     }
-                } catch (e) {}
+                } catch (e) { }
             }).catch(console.error)
     }, [])
 
     const [suspendReasons, setSuspendReasons] = useState<Record<number, string>>({})
     useEffect(() => {
-        try { const r = sessionStorage.getItem("guruSuspendReasons"); if (r) setSuspendReasons(JSON.parse(r)) } catch {}
+        try { const r = sessionStorage.getItem("guruSuspendReasons"); if (r) setSuspendReasons(JSON.parse(r)) } catch { }
     }, [])
 
     const effectiveApiGurus = useMemo(() => apiGurus.map(g => ({ ...g, status: guruStatuses[g.id] ?? g.status })), [apiGurus, guruStatuses])
 
     useEffect(() => {
-        try { const s = sessionStorage.getItem("guruStatuses"); if (s) setGuruStatuses(JSON.parse(s)) } catch {}
+        try { const s = sessionStorage.getItem("guruStatuses"); if (s) setGuruStatuses(JSON.parse(s)) } catch { }
     }, [])
 
     function openDeactivateModal(guruId: number, guruName: string) {
@@ -853,12 +853,12 @@ function GuruContent() {
         const { guruId, guruName } = deactivateModal
         setIsSuspending(true)
         const token = getClientToken()
-        const API_BASE_URL = process.env.NEXT_PUBLIC_MYQURANI_API_URL || "https://api.myqurani.com"
+        const API_BASE_URL = "/api/myqurani"
         const headers: HeadersInit = { "Content-Type": "application/json", ...(token ? { Authorization: `Bearer ${token}` } : {}) }
-        try { const res = await fetch(`${API_BASE_URL}/api/v1/Trainers/${guruId}/suspend`, { method: "POST", headers, body: JSON.stringify({ reason: deactivateReason, until: deactivateDuration || null }) }); if (!res.ok) throw new Error() } catch {}
+        try { const res = await fetch(`${API_BASE_URL}/api/v1/Trainers/${guruId}/suspend`, { method: "POST", headers, body: JSON.stringify({ reason: deactivateReason, until: deactivateDuration || null }) }); if (!res.ok) throw new Error() } catch { }
         finally {
-            setGuruStatuses(prev => { const u: Record<number, "verified" | "suspended" | "rejected"> = { ...prev, [guruId]: "suspended" }; try { sessionStorage.setItem("guruStatuses", JSON.stringify(u)) } catch {}; return u })
-            setSuspendReasons(prev => { const payload = JSON.stringify({ reason: deactivateReason, duration: deactivateDuration || t("teachers.modals.reactivate.not_specified", "Tidak ditentukan"), date: new Date().toISOString() }); const u = { ...prev, [guruId]: payload }; try { sessionStorage.setItem("guruSuspendReasons", JSON.stringify(u)) } catch {}; return u })
+            setGuruStatuses(prev => { const u: Record<number, "verified" | "suspended" | "rejected"> = { ...prev, [guruId]: "suspended" }; try { sessionStorage.setItem("guruStatuses", JSON.stringify(u)) } catch { }; return u })
+            setSuspendReasons(prev => { const payload = JSON.stringify({ reason: deactivateReason, duration: deactivateDuration || t("teachers.modals.reactivate.not_specified", "Tidak ditentukan"), date: new Date().toISOString() }); const u = { ...prev, [guruId]: payload }; try { sessionStorage.setItem("guruSuspendReasons", JSON.stringify(u)) } catch { }; return u })
             showToast({
                 type: "info",
                 title: t("teachers.toasts.deactivated_title", `${guruName} dinonaktifkan`, { name: guruName }),
@@ -873,11 +873,11 @@ function GuruContent() {
 
     async function handleReactivate(guruId: number, guruName: string) {
         const token = getClientToken()
-        const API_BASE_URL = process.env.NEXT_PUBLIC_MYQURANI_API_URL || "https://api.myqurani.com"
+        const API_BASE_URL = "/api/myqurani"
         const headers: HeadersInit = { "Content-Type": "application/json", ...(token ? { Authorization: `Bearer ${token}` } : {}) }
-        try { const res = await fetch(`${API_BASE_URL}/api/v1/Trainers/${guruId}/unsuspend`, { method: "POST", headers }); if (!res.ok) throw new Error() } catch {}
+        try { const res = await fetch(`${API_BASE_URL}/api/v1/Trainers/${guruId}/unsuspend`, { method: "POST", headers }); if (!res.ok) throw new Error() } catch { }
         finally {
-            setGuruStatuses(prev => { const u: Record<number, "verified" | "suspended" | "rejected"> = { ...prev, [guruId]: "verified" }; try { sessionStorage.setItem("guruStatuses", JSON.stringify(u)) } catch {}; return u })
+            setGuruStatuses(prev => { const u: Record<number, "verified" | "suspended" | "rejected"> = { ...prev, [guruId]: "verified" }; try { sessionStorage.setItem("guruStatuses", JSON.stringify(u)) } catch { }; return u })
             showToast({
                 type: "success",
                 title: t("teachers.toasts.reactivated_title", `${guruName} diaktifkan kembali`, { name: guruName }),
@@ -889,9 +889,9 @@ function GuruContent() {
 
     async function handleVerifyTrainer(guruId: number, guruName: string, isVerified: boolean) {
         const token = getClientToken()
-        const API_BASE_URL = process.env.NEXT_PUBLIC_MYQURANI_API_URL || "https://api.myqurani.com"
+        const API_BASE_URL = "/api/myqurani"
         const headers: HeadersInit = { "Content-Type": "application/json", ...(token ? { Authorization: `Bearer ${token}` } : {}) }
-        try { await fetch(`${API_BASE_URL}/api/v1/Trainers/${guruId}/verify`, { method: "POST", headers, body: JSON.stringify({ isVerified: isVerified ? 1 : 0, verificationLevel: isVerified ? 1 : null }) }) } catch {}
+        try { await fetch(`${API_BASE_URL}/api/v1/Trainers/${guruId}/verify`, { method: "POST", headers, body: JSON.stringify({ isVerified: isVerified ? 1 : 0, verificationLevel: isVerified ? 1 : null }) }) } catch { }
         finally {
             setGuruVerified(prev => ({ ...prev, [guruId]: isVerified }))
             showToast({
@@ -905,9 +905,9 @@ function GuruContent() {
 
     async function handleFeatureTrainer(guruId: number, guruName: string, isFeatured: boolean) {
         const token = getClientToken()
-        const API_BASE_URL = process.env.NEXT_PUBLIC_MYQURANI_API_URL || "https://api.myqurani.com"
+        const API_BASE_URL = "/api/myqurani"
         const headers: HeadersInit = { "Content-Type": "application/json", ...(token ? { Authorization: `Bearer ${token}` } : {}) }
-        try { await fetch(`${API_BASE_URL}/api/v1/Trainers/${guruId}/feature`, { method: "POST", headers, body: JSON.stringify({ isFeatured: isFeatured ? 1 : 0 }) }) } catch {}
+        try { await fetch(`${API_BASE_URL}/api/v1/Trainers/${guruId}/feature`, { method: "POST", headers, body: JSON.stringify({ isFeatured: isFeatured ? 1 : 0 }) }) } catch { }
         finally {
             setGuruFeatured(prev => ({ ...prev, [guruId]: isFeatured }))
             showToast({
@@ -1112,8 +1112,8 @@ function GuruContent() {
                                     const methodLabel = guru.teachingMethod === "Online"
                                         ? t("teachers.methods.online", "Online")
                                         : guru.teachingMethod === "Offline"
-                                        ? t("teachers.methods.offline", "Offline")
-                                        : t("teachers.methods.hybrid", "Online & Offline")
+                                            ? t("teachers.methods.offline", "Offline")
+                                            : t("teachers.methods.hybrid", "Online & Offline")
 
                                     return (
                                         <tr key={guru.id} className="hover:bg-gray-50 dark:hover:bg-gray-800/50 transition-colors group">
@@ -1193,8 +1193,8 @@ function GuruContent() {
                         const methodLabel = guru.teachingMethod === "Online"
                             ? t("teachers.methods.online", "Online")
                             : guru.teachingMethod === "Offline"
-                            ? t("teachers.methods.offline", "Offline")
-                            : t("teachers.methods.hybrid", "Online & Offline")
+                                ? t("teachers.methods.offline", "Offline")
+                                : t("teachers.methods.hybrid", "Online & Offline")
 
                         return (
                             <div key={guru.id} className="bg-white dark:bg-gray-900 rounded-xl border border-gray-200 dark:border-gray-700 p-4 space-y-3 shadow-sm">

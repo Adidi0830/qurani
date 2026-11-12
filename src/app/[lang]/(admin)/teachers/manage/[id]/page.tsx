@@ -22,7 +22,7 @@ import { TeacherOrdersTab } from "@/components/Teachers/TeacherOrdersTab"
 
 
 // ── Constants ─────────────────────────────────────────────────────────────────
-const API_BASE_URL = process.env.NEXT_PUBLIC_MYQURANI_API_URL || "https://api.myqurani.com"
+const API_BASE_URL = "/api/myqurani"
 
 function getClientToken(): string | null {
     if (typeof window === "undefined") return null
@@ -932,12 +932,12 @@ function GuruDetailContent() {
             }
             const newStatus = statusMap[action]
             setDetail(prev => prev ? { ...prev, status: newStatus } : null)
-            try { 
+            try {
                 const stored = sessionStorage.getItem("guruStatuses")
                 const dict = stored ? JSON.parse(stored) : {}
                 dict[detail.id] = newStatus
                 sessionStorage.setItem("guruStatuses", JSON.stringify(dict))
-            } catch {}
+            } catch { }
         } catch (e: any) {
             // Fallback to local mutation for dummy data if API fails
             const titleMap: Record<typeof action, string> = {
@@ -956,12 +956,12 @@ function GuruDetailContent() {
             if (action in statusMap) {
                 const newStatus = statusMap[action]
                 setDetail(prev => prev ? { ...prev, status: newStatus } : null)
-                try { 
+                try {
                     const stored = sessionStorage.getItem("guruStatuses")
                     const dict = stored ? JSON.parse(stored) : {}
                     dict[detail.id] = newStatus
                     sessionStorage.setItem("guruStatuses", JSON.stringify(dict))
-                } catch {}
+                } catch { }
             }
         } finally {
             setActionLoading(null)
@@ -1341,7 +1341,7 @@ function GuruDetailContent() {
                                         const trainerOrders = ordersMap[String(id)] ?? []
                                         const billingBookings = dummyData.bookings.filter((b: any) => String(b.trainerId) === String(id))
                                         const totalDummyPesanan = trainerOrders.length + billingBookings.length
-                                        
+
                                         const dummyPaketCount = packagesMap.length || detail.totalCourses || courses.length
                                         const dummyTotalOrders = totalDummyPesanan || packagesMap.reduce((s: number, p: any) => s + (p.totalOrders || 0), 0) || courses.reduce((s: number, c: any) => s + (c.totalStudents || 0), 0)
                                         const reviewsMap = (guruDetailDummy as any).reviewsByTrainer ?? {}
@@ -1413,8 +1413,8 @@ function GuruDetailContent() {
                                                     onClick={() => setTab(item.key)}
                                                     title={item.label}
                                                     className={`py-3 text-sm font-semibold inline-flex items-center justify-center gap-1.5 border-b-2 transition-colors ${active
-                                                            ? "border-emerald-500 text-emerald-600 dark:text-emerald-400 bg-emerald-50/60 dark:bg-emerald-900/10"
-                                                            : "border-transparent text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300"
+                                                        ? "border-emerald-500 text-emerald-600 dark:text-emerald-400 bg-emerald-50/60 dark:bg-emerald-900/10"
+                                                        : "border-transparent text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300"
                                                         }`}
                                                 >
                                                     <Icon className="w-4 h-4 flex-shrink-0" />
@@ -1895,8 +1895,8 @@ function GuruDetailContent() {
                                                             onClick={handleBackgroundCheck}
                                                             disabled={!!actionLoading || detail.bgCheckStatus === "requested"}
                                                             className={`w-full inline-flex items-center justify-center gap-2 rounded-xl disabled:opacity-80 text-white text-sm font-semibold py-2.5 transition-colors ${detail.bgCheckStatus === "requested"
-                                                                    ? "bg-indigo-400 cursor-not-allowed"
-                                                                    : "bg-blue-500 hover:bg-blue-600"
+                                                                ? "bg-indigo-400 cursor-not-allowed"
+                                                                : "bg-blue-500 hover:bg-blue-600"
                                                                 }`}
                                                         >
                                                             {actionLoading === "bgcheck" ? (
@@ -2037,8 +2037,8 @@ function GuruDetailContent() {
                                                     onClick={copyUserId}
                                                     title="Salin ID User"
                                                     className={`w-8 h-8 rounded-lg flex items-center justify-center border transition-all flex-shrink-0 ${copiedUserId
-                                                            ? "bg-emerald-50 border-emerald-300 text-emerald-600 dark:bg-emerald-900/30 dark:border-emerald-700 dark:text-emerald-400"
-                                                            : "bg-white dark:bg-gray-900 border-gray-200 dark:border-gray-700 text-gray-400 hover:text-emerald-600 hover:border-emerald-400"
+                                                        ? "bg-emerald-50 border-emerald-300 text-emerald-600 dark:bg-emerald-900/30 dark:border-emerald-700 dark:text-emerald-400"
+                                                        : "bg-white dark:bg-gray-900 border-gray-200 dark:border-gray-700 text-gray-400 hover:text-emerald-600 hover:border-emerald-400"
                                                         }`}
                                                 >
                                                     {copiedUserId
@@ -2153,8 +2153,8 @@ function GuruDetailContent() {
                         <div className="overflow-y-auto p-5 space-y-4">
                             <div className="flex flex-wrap gap-2">
                                 <span className={`inline-flex items-center gap-1 rounded-full px-2.5 py-1 text-[11px] font-bold ${selectedCourse.isPublished
-                                        ? "bg-emerald-100 text-emerald-700 dark:bg-emerald-900/30 dark:text-emerald-400"
-                                        : "bg-gray-100 text-gray-600 dark:bg-gray-800 dark:text-gray-400"
+                                    ? "bg-emerald-100 text-emerald-700 dark:bg-emerald-900/30 dark:text-emerald-400"
+                                    : "bg-gray-100 text-gray-600 dark:bg-gray-800 dark:text-gray-400"
                                     }`}>
                                     <span className={`w-1.5 h-1.5 rounded-full ${selectedCourse.isPublished ? "bg-emerald-500" : "bg-gray-400"}`} />
                                     {selectedCourse.isPublished ? "Published" : "Unpublished"}
@@ -2252,6 +2252,6 @@ function StatRow({ icon, label, value }: { icon: ReactNode; label: string; value
 
 export default function GuruDetailPage() {
     return (
-                <GuruDetailContent />
+        <GuruDetailContent />
     )
 }

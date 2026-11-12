@@ -29,7 +29,7 @@ export type BillingPipelineOrder = {
     apiStatus?: number | string | null
 }
 
-const API_BASE = process.env.NEXT_PUBLIC_MYQURANI_API_URL || "https://api.myqurani.com"
+const API_BASE = "/api/myqurani"
 
 function getClientToken(): string | null {
     if (typeof window === "undefined") return null
@@ -226,10 +226,10 @@ export function apiBookingToDetail(rawPayload: any) {
     const mode = row.mode
     const statusKey =
         row.status === "gagal" ? "cancelled" :
-        row.status === "selesai" ? "completed" :
-        row.status === "aktif" || row.status === "lunas" ? "active" :
-        row.status === "menunggu_guru" ? "menunggu_guru" :
-        "pending"
+            row.status === "selesai" ? "completed" :
+                row.status === "aktif" || row.status === "lunas" ? "active" :
+                    row.status === "menunggu_guru" ? "menunggu_guru" :
+                        "pending"
 
     const totalSessions = Math.max(1, row.sesi)
     const apiSessions = unwrapList(pick(raw, ["sessions", "bookingSessions", "schedules"], []))

@@ -855,7 +855,7 @@ export default function TicketDetailClient({
                 const auth = getStoredAuth()
                 if (!auth?.accessToken) return
                 // Fetch via Qurani users endpoint filtered by admin role
-                const res = await fetch(`${process.env.NEXT_PUBLIC_MYQURANI_API_URL || 'https://api.myqurani.com'}/api/v1/Users?role=admin&pageSize=100`, {
+                const res = await fetch(`/api/myqurani/api/v1/Users?role=admin&pageSize=100`, {
                     headers: { Authorization: `Bearer ${auth.accessToken}`, Accept: 'application/json' }
                 })
                 if (!res.ok) return
@@ -898,7 +898,7 @@ export default function TicketDetailClient({
             const auth = getStoredAuth()
             if (!auth?.accessToken) return
 
-            const API = process.env.NEXT_PUBLIC_MYQURANI_API_URL || 'https://api.myqurani.com'
+            const API = '/api/myqurani'
             // Fetch tickets from Qurani API, filter by same department or contact
             const params = new URLSearchParams({ PageSize: '50', Page: '1' })
             const res = await fetch(`${API}/api/v1/tickets?${params}`, {

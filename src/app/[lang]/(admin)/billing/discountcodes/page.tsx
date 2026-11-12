@@ -15,7 +15,7 @@ import { SmartPagination } from "@/components/ui/smart-pagination"
 import { useI18n } from "@/components/providers/i18n-provider"
 
 // ── API Config ─────────────────────────────────────────────────────────────────
-const API_BASE = process.env.NEXT_PUBLIC_MYQURANI_API_URL || "https://api.myqurani.com"
+const API_BASE = "/api/myqurani"
 
 function getClientToken(): string | null {
     if (typeof window === "undefined") return null
@@ -325,8 +325,8 @@ function CodeFormModal({ open, editItem, onSave, onClose, saving }: {
                     </div>
                     <div className="flex items-center gap-6">
                         {([
-                            ["isReferral", t("billing.discount_codes.form_modal.is_referral") || "Kode Referral"], 
-                            ["firstTimeOnly", t("billing.discount_codes.form_modal.first_time_only") || "First-Time Only"], 
+                            ["isReferral", t("billing.discount_codes.form_modal.is_referral") || "Kode Referral"],
+                            ["firstTimeOnly", t("billing.discount_codes.form_modal.first_time_only") || "First-Time Only"],
                             ["stackable", t("billing.discount_codes.form_modal.stackable") || "Stackable"]
                         ] as [keyof FormState, string][]).map(([k, lbl]) => (
                             <label key={k} className="flex items-center gap-2 cursor-pointer">
@@ -695,9 +695,9 @@ function FilterModal({ open, initial, onClose, onApply }: {
                         <div className="flex flex-wrap gap-2">
                             <Chip label={t("billing.discount_codes.filter_modal.all") || "Semua"} active={draft.statuses.length === 0} onClick={() => setDraft(p => ({ ...p, statuses: [] }))} />
                             {[
-                                { id: "active", label: t("billing.discount_codes.filter_modal.active") || "Aktif" }, 
-                                { id: "inactive", label: t("billing.discount_codes.filter_modal.inactive") || "Nonaktif" }, 
-                                { id: "referral", label: t("billing.discount_codes.filter_modal.referral") || "Referral" }, 
+                                { id: "active", label: t("billing.discount_codes.filter_modal.active") || "Aktif" },
+                                { id: "inactive", label: t("billing.discount_codes.filter_modal.inactive") || "Nonaktif" },
+                                { id: "referral", label: t("billing.discount_codes.filter_modal.referral") || "Referral" },
                                 { id: "expired", label: t("billing.discount_codes.filter_modal.expired") || "Kedaluwarsa" }
                             ].map(s => (
                                 <Chip key={s.id} label={s.label} active={draft.statuses.includes(s.id)} onClick={() => setDraft(p => ({ ...p, statuses: toggleArr(p.statuses, s.id) }))} />
@@ -796,9 +796,9 @@ function DiscountCodesContent() {
             const json = await res.json()
             const raw: ApiDiscountCode[] =
                 Array.isArray(json) ? json :
-                Array.isArray(json?.data) ? json.data :
-                Array.isArray(json?.data?.items) ? json.data.items :
-                Array.isArray(json?.items) ? json.items : []
+                    Array.isArray(json?.data) ? json.data :
+                        Array.isArray(json?.data?.items) ? json.data.items :
+                            Array.isArray(json?.items) ? json.items : []
             if (raw.length > 0) { setCodes(raw.map(mapApiToCode)) }
             else { setCodes(dummyData.discountCodes as DiscountCode[]) }
         } catch {
@@ -822,7 +822,7 @@ function DiscountCodesContent() {
         return liveCodes
             .filter(c => {
                 const matchSearch = !q || c.code.toLowerCase().includes(q) || (c.name || "").toLowerCase().includes(q) || (c.description || "").toLowerCase().includes(q) || (c.trainerName?.toLowerCase().includes(q) ?? false)
-                
+
                 let matchStatus = true
                 if (filterState.statuses.length > 0) {
                     const isRef = c.isReferral
@@ -836,9 +836,9 @@ function DiscountCodesContent() {
                 }
 
                 const matchType = filterState.types.length === 0 || filterState.types.includes(c.type)
-                
+
                 const matchCampaign = !filterState.campaignId || (c.campaignId?.toLowerCase().includes(filterState.campaignId.toLowerCase()))
-                
+
                 let matchDate = true
                 if (filterState.validFrom && c.validFrom) {
                     if (new Date(c.validFrom) < new Date(filterState.validFrom + "T00:00:00Z")) matchDate = false
@@ -997,9 +997,9 @@ function DiscountCodesContent() {
             </div>
 
             {/* All Modals */}
-            <ConfirmModal open={!!confirmDelete} 
+            <ConfirmModal open={!!confirmDelete}
                 title={t("billing.discount_codes.confirm_modal.delete_title", `Hapus kode "${confirmDelete?.code}"?`, { code: confirmDelete?.code || "" })}
-                message={t("billing.discount_codes.confirm_modal.delete_message", "Kode yang sudah dihapus tidak bisa dikembalikan.")} 
+                message={t("billing.discount_codes.confirm_modal.delete_message", "Kode yang sudah dihapus tidak bisa dikembalikan.")}
                 loading={mutating}
                 onConfirm={() => confirmDelete && handleDelete(confirmDelete)} onCancel={() => setConfirmDelete(null)} />
             <CodeFormModal open={formOpen} editItem={editItem} onSave={handleSaveForm} onClose={() => { setFormOpen(false); setEditItem(null) }} saving={mutating} />
@@ -1059,11 +1059,10 @@ function DiscountCodesContent() {
                     {/* Filter Button */}
                     <button
                         onClick={() => setFilterOpen(true)}
-                        className={`flex items-center justify-center gap-1.5 h-10 px-4 text-sm font-semibold rounded-lg transition-colors border shadow-sm ${
-                            (filterState.statuses.length > 0 || filterState.types.length > 0 || filterState.campaignId || filterState.validFrom || filterState.validUntil)
-                            ? "border-emerald-500 text-emerald-700 bg-emerald-50 dark:bg-emerald-900/20"
-                            : "border-gray-200 dark:border-gray-700 text-gray-600 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-800 bg-white dark:bg-gray-900"
-                        }`}
+                        className={`flex items-center justify-center gap-1.5 h-10 px-4 text-sm font-semibold rounded-lg transition-colors border shadow-sm ${(filterState.statuses.length > 0 || filterState.types.length > 0 || filterState.campaignId || filterState.validFrom || filterState.validUntil)
+                                ? "border-emerald-500 text-emerald-700 bg-emerald-50 dark:bg-emerald-900/20"
+                                : "border-gray-200 dark:border-gray-700 text-gray-600 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-800 bg-white dark:bg-gray-900"
+                            }`}
                     >
                         <Filter className="w-4 h-4" /> {t("billing.discount_codes.toolbar.filter", "Filter")}
                     </button>

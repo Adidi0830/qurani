@@ -49,8 +49,8 @@ export function clearTokens(): void {
 class MyQuraniApiClient {
     private baseUrl: string;
 
-    constructor(baseUrl: string = API_BASE_URL) {
-        this.baseUrl = baseUrl;
+    constructor(baseUrl?: string) {
+        this.baseUrl = baseUrl ?? (typeof window !== 'undefined' ? '/api/myqurani' : API_BASE_URL);
     }
 
     /**

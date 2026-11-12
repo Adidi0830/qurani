@@ -84,7 +84,7 @@ export const ticketsApi = {
         const formData = new FormData()
         formData.append("file", file)
 
-        const response = await fetch(`${API_BASE}/api/v1/tickets/${id}/attachments`, {
+        const response = await fetch(`/api/myqurani/api/v1/tickets/${id}/attachments`, {
             method: "POST",
             headers: authToken ? { Authorization: `Bearer ${authToken}` } : {},
             body: formData,

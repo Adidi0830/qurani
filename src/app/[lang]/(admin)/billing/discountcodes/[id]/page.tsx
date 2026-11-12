@@ -15,7 +15,7 @@ import React from "react"
 import dummyData from "@/data/billing-dummy.json"
 
 // ── API Config ─────────────────────────────────────────────────────────────────
-const API_BASE = process.env.NEXT_PUBLIC_MYQURANI_API_URL || "https://api.myqurani.com"
+const API_BASE = "/api/myqurani"
 
 function getClientToken(): string | null {
     if (typeof window === "undefined") return null
@@ -410,9 +410,9 @@ function DiscountCodeDetailContent() {
             const json = await res.json()
             const raw: UsageItem[] =
                 Array.isArray(json) ? json :
-                Array.isArray(json?.data) ? json.data :
-                Array.isArray(json?.data?.items) ? json.data.items :
-                Array.isArray(json?.items) ? json.items : []
+                    Array.isArray(json?.data) ? json.data :
+                        Array.isArray(json?.data?.items) ? json.data.items :
+                            Array.isArray(json?.items) ? json.items : []
             setUsages(raw)
         } catch { setUsages([]) }
         finally { setUsageLoading(false) }
@@ -623,11 +623,10 @@ function DiscountCodeDetailContent() {
                             <button
                                 onClick={handleToggle}
                                 disabled={mutating}
-                                className={`flex items-center gap-1.5 px-3 py-1.5 text-xs font-semibold rounded-lg transition-colors disabled:opacity-50 ${
-                                    code.isActive
+                                className={`flex items-center gap-1.5 px-3 py-1.5 text-xs font-semibold rounded-lg transition-colors disabled:opacity-50 ${code.isActive
                                         ? "text-amber-600 dark:text-amber-400 bg-amber-50 dark:bg-amber-900/20 hover:bg-amber-100 dark:hover:bg-amber-900/30 border border-amber-200 dark:border-amber-800"
                                         : "text-emerald-600 dark:text-emerald-400 bg-emerald-50 dark:bg-emerald-900/20 hover:bg-emerald-100 dark:hover:bg-emerald-900/30 border border-emerald-200 dark:border-emerald-800"
-                                }`}
+                                    }`}
                             >
                                 {mutating ? <Loader2 className="w-3.5 h-3.5 animate-spin" /> : code.isActive ? <PauseCircle className="w-3.5 h-3.5" /> : <Play className="w-3.5 h-3.5" />}
                                 {code.isActive ? "Jeda" : "Aktifkan"}
@@ -753,11 +752,10 @@ function DiscountCodeDetailContent() {
                                 <button
                                     key={tab.key}
                                     onClick={() => setActiveTab(tab.key)}
-                                    className={`flex items-center gap-2 px-4 py-3.5 text-sm font-semibold border-b-2 transition-all whitespace-nowrap -mb-px ${
-                                        activeTab === tab.key
+                                    className={`flex items-center gap-2 px-4 py-3.5 text-sm font-semibold border-b-2 transition-all whitespace-nowrap -mb-px ${activeTab === tab.key
                                             ? "border-emerald-500 text-emerald-600 dark:text-emerald-400"
                                             : "border-transparent text-gray-400 dark:text-gray-500 hover:text-gray-600 dark:hover:text-gray-300"
-                                    }`}
+                                        }`}
                                 >
                                     <Icon className="w-4 h-4" /> {tab.label}
                                 </button>

@@ -10,7 +10,7 @@ import {
 import { ToastContainer, showToast } from "@/components/ui/toast-sim"
 
 // ── API Base URL ─────────────────────────────────────────────────────────────────
-const API_BASE = "https://api.myqurani.com/api/v1/TaxRates"
+const API_BASE = "/api/myqurani/api/v1/TaxRates"
 
 // ── Auth Token (same pattern as other pages in this project) ─────────────────────
 function getClientToken(): string | null {
@@ -546,20 +546,18 @@ function TaxRatesContent() {
                         <div className="flex items-center gap-1 flex-wrap">
                             {(["all", "vat", "gst", "income", "exempt"] as TaxType[]).map(t => (
                                 <button key={t} onClick={() => { setTypeFilter(t); setPage(1) }}
-                                    className={`px-3 py-1.5 rounded-full text-xs font-semibold border transition-all h-10 ${
-                                        typeFilter === t
+                                    className={`px-3 py-1.5 rounded-full text-xs font-semibold border transition-all h-10 ${typeFilter === t
                                             ? "bg-emerald-500 text-white border-emerald-500 shadow-sm"
                                             : "bg-white dark:bg-gray-900 text-gray-600 dark:text-gray-400 border-gray-200 dark:border-gray-700 hover:border-emerald-400"
-                                    }`}>
+                                        }`}>
                                     {t === "all" ? "Semua" : typeLabelMap[t]}
                                 </button>
                             ))}
                             <button onClick={() => { setShowInactive(s => !s); setPage(1) }}
-                                className={`flex items-center gap-1.5 px-3 py-1.5 h-10 rounded-lg text-xs font-semibold border transition-all ${
-                                    showInactive
+                                className={`flex items-center gap-1.5 px-3 py-1.5 h-10 rounded-lg text-xs font-semibold border transition-all ${showInactive
                                         ? "bg-gray-800 text-white border-gray-700"
                                         : "bg-white dark:bg-gray-900 text-gray-500 border-gray-200 dark:border-gray-700"
-                                }`}>
+                                    }`}>
                                 <Filter className="w-3 h-3" /> {showInactive ? "Sembunyikan Nonaktif" : "Tampilkan Nonaktif"}
                             </button>
                         </div>
@@ -713,11 +711,10 @@ function TaxRatesContent() {
                                     else pageNum = page - 2 + i
                                     return (
                                         <button key={pageNum} onClick={() => setPage(pageNum)}
-                                            className={`w-8 h-8 rounded-lg text-sm font-medium border transition-colors ${
-                                                page === pageNum
+                                            className={`w-8 h-8 rounded-lg text-sm font-medium border transition-colors ${page === pageNum
                                                     ? "bg-emerald-500 text-white shadow-sm border-emerald-500"
                                                     : "bg-white dark:bg-gray-900 text-gray-600 dark:text-gray-400 border-gray-200 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-800"
-                                            }`}>
+                                                }`}>
                                             {pageNum}
                                         </button>
                                     )
@@ -738,6 +735,6 @@ function TaxRatesContent() {
 
 export default function TaxRatesPage() {
     return (
-                <TaxRatesContent />
+        <TaxRatesContent />
     )
 }

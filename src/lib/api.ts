@@ -164,7 +164,10 @@ async function tryRefreshToken(): Promise<boolean> {
 
         console.log('[API] Attempting to refresh token...');
 
-        const response = await fetch(`${API_BASE}/api/v1/Auth/refresh-token`, {
+        const refreshUrl = typeof window !== 'undefined'
+            ? '/api/myqurani/api/v1/Auth/refresh-token'
+            : `${API_BASE}/api/v1/Auth/refresh-token`;
+        const response = await fetch(refreshUrl, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ refreshToken: stored.refreshToken }),
@@ -260,7 +263,9 @@ export async function apiRequest<T>(
     const requestUrl =
         typeof window !== 'undefined' && endpoint.startsWith('/api/v1/Groups')
             ? `/api/groups${endpoint.slice('/api/v1/Groups'.length)}`
-            : `${API_BASE}${endpoint}`;
+            : typeof window !== 'undefined' && endpoint.startsWith('/')
+                ? `/api/myqurani${endpoint}`
+                : `${API_BASE}${endpoint}`;
 
     const response = await fetch(requestUrl, config);
 
@@ -292,7 +297,7 @@ export async function apiRequest<T>(
             const errorJson = JSON.parse(errorText);
             // Suppress console.error here to avoid triggering Next.js Error Overlay for expected fallbacks (e.g. 404s).
             // The error is thrown and handled by the caller anyway.
-            
+
             // Handle .NET ProblemDetails format (errors object with field names)
             if (errorJson.errors) {
                 const errorParts: string[] = [];
@@ -664,13 +669,13 @@ export const ticketsApi = {
         const authToken = token || getStoredAuth()?.accessToken;
         const formData = new FormData();
         formData.append('file', file);
-        
+
         const response = await fetch(`${API_BASE}/api/v1/tickets/${id}/attachments`, {
             method: 'POST',
             headers: authToken ? { Authorization: `Bearer ${authToken}` } : {},
             body: formData,
         });
-        
+
         if (!response.ok) {
             const err = await response.text();
             throw new Error(err || 'Upload failed');
@@ -1234,10 +1239,10 @@ export const notificationsApi = {
 
     // DELETE /api/v1/Notifications (Clear all or delete multiple)
     deleteMultiple: (ids?: (string | number)[], token?: string) => {
-        return apiRequest<any>('/api/v1/Notifications', { 
-            method: 'DELETE', 
+        return apiRequest<any>('/api/v1/Notifications', {
+            method: 'DELETE',
             body: ids ? { notificationIds: ids } : undefined,
-            token 
+            token
         })
     },
 
@@ -1769,7 +1774,7 @@ export const masterdataApi = {
     timezones: {
         getAll: (token?: string, signal?: AbortSignal) =>
             apiRequest<TimezonesApiResponse>('/api/v1/Timezones', { token, signal }),
-        
+
         getById: (id: number | string, token?: string, signal?: AbortSignal) =>
             apiRequest<TimezoneApiResponse>(`/api/v1/Timezones/${id}`, { token, signal }),
 
@@ -1977,7 +1982,7 @@ export const masterdataApi = {
         // Get all locales (cached for 24 hours)
         getAll: (token?: string, signal?: AbortSignal) =>
             apiRequest<any>('/api/v1/Locales', { token, signal }),
-        
+
         // Get active locales only
         getActive: (token?: string, signal?: AbortSignal) =>
             apiRequest<any>('/api/v1/Locales/active', { token, signal }),
@@ -2247,7 +2252,7 @@ export const paymentsApi = {
         const query = searchParams.toString();
         const authToken = token || getAuthToken();
         const url = `${API_BASE}/api/v1/Payments/export${query ? `?${query}` : ''}`;
-        
+
         return fetch(url, {
             headers: authToken ? { Authorization: `Bearer ${authToken}` } : {}
         });
@@ -2356,7 +2361,7 @@ export const paymentsApi = {
             body: data,
             token
         }),
-        
+
 };
 
 // ============================================

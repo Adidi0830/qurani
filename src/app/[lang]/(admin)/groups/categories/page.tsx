@@ -11,7 +11,7 @@ import {
 import { ToastContainer, showToast } from "@/components/ui/toast-sim"
 
 // ── API ──────────────────────────────────────────────────────────────────────────
-const API_BASE = "https://api.myqurani.com/api/v1/GroupCategories"
+const API_BASE = "/api/myqurani/api/v1/GroupCategories"
 
 function getClientToken(): string | null {
     if (typeof window === "undefined") return null

@@ -9,7 +9,7 @@ import { REPLIES_PAGE_SIZE } from "../model/constants"
 import type { AssigneeUser, RelatedMatchSource, RelatedTicketItem, TicketListItem, TicketReply, TicketState } from "../model/types"
 import { ticketKeys } from "./use-ticket-collections"
 
-const API_BASE_URL = process.env.NEXT_PUBLIC_MYQURANI_API_URL || "https://api.myqurani.com"
+const API_BASE_URL = "/api/myqurani"
 
 /** Hitung tiket terkait: department sama (+5) atau contact sama (+4). */
 export function useRelatedTickets(currentTicket: TicketState | null, enabled: boolean) {

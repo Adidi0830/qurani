@@ -270,7 +270,7 @@ function PengajuanContent() {
         setFetchError(null)
         try {
             const token = getClientToken()
-            const API_BASE_URL = process.env.NEXT_PUBLIC_MYQURANI_API_URL || "https://api.myqurani.com"
+            const API_BASE_URL = "/api/myqurani"
             const headers: HeadersInit = token ? { Authorization: `Bearer ${token}` } : {}
             const res = await fetch(`${API_BASE_URL}/api/v1/Trainers/pending`, { headers })
             if (!res.ok) throw new Error(`HTTP ${res.status}`)
@@ -459,9 +459,9 @@ function PengajuanContent() {
             data: {
                 ...data,
                 // Override for Email payload:
-                time: convertedTime || sTimeStart, 
+                time: convertedTime || sTimeStart,
                 timezone: seleksiModal.timezone || sTimezone,
-                
+
                 trainerName: seleksiModal.name,
                 trainerEmail: seleksiModal.email,
                 trainerId: seleksiModal.guruId,
