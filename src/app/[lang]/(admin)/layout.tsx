@@ -2,11 +2,17 @@
 
 import React, { useEffect, useState } from "react"
 import { useAuth } from "@/hooks/use-auth"
+import { useI18n } from "@/components/providers/i18n-provider"
 import { AppSidebar } from "@/components/ui/sidebar/app-sidebar"
-import { SidebarProvider } from "@/components/ui/sidebar/custom-sidebar"
-import { SidebarInset } from "@/components/ui/sidebar/custom-sidebar-inset"
+import { SidebarProvider as CustomSidebarProvider } from "@/components/ui/sidebar/custom-sidebar"
+import { SidebarInset as CustomSidebarInset } from "@/components/ui/sidebar/custom-sidebar-inset"
+import {
+  SidebarProvider as RtlSidebarProvider,
+  SidebarInset as RtlSidebarInset,
+} from "@/components/ui/sidebar"
 import { Topbar } from "@/components/ui/topbar"
 import { RoleGuard } from "@/components/auth/role-guard"
+import { cn } from "@/lib/utils"
 
 interface AdminLayoutProps {
   children: React.ReactNode
@@ -14,7 +20,9 @@ interface AdminLayoutProps {
 
 function AdminShell({ children }: AdminLayoutProps) {
   const { loading, isAuthenticated } = useAuth()
+  const { locale } = useI18n()
   const [hasMounted, setHasMounted] = useState(false)
+  const isRtl = locale === "ar"
 
   useEffect(() => {
     setHasMounted(true)
@@ -47,21 +55,30 @@ function AdminShell({ children }: AdminLayoutProps) {
     )
   }
 
+  const Provider = isRtl ? RtlSidebarProvider : CustomSidebarProvider
+  const Inset = isRtl ? RtlSidebarInset : CustomSidebarInset
+
   return (
-    <SidebarProvider className="select-none">
+    <Provider dir={isRtl ? "rtl" : undefined} className="select-none">
       <AppSidebar />
-      <SidebarInset>
+      <Inset>
         <Topbar />
-        {/* pt-16 agar konten tidak tertimpa topbar fixed height 64px */}
-        <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-slate-100 dark:from-slate-950 dark:via-slate-900 dark:to-slate-800 pt-16 p-4 lg:px-10 xl:px-10 overflow-y-auto">
+        {/* pt-16 di LTR agar konten tidak tertimpa topbar fixed height 64px */}
+        <div
+          dir={isRtl ? "ltr" : undefined}
+          className={cn(
+            "min-h-screen bg-gradient-to-br from-slate-50 via-white to-slate-100 dark:from-slate-950 dark:via-slate-900 dark:to-slate-800 p-4 lg:px-10 xl:px-10 overflow-y-auto",
+            isRtl ? "pt-4" : "pt-16"
+          )}
+        >
           <div className="lg:pt-4">
             <RoleGuard>
               {children}
             </RoleGuard>
           </div>
         </div>
-      </SidebarInset>
-    </SidebarProvider>
+      </Inset>
+    </Provider>
   )
 }
 

@@ -239,7 +239,7 @@ export const NavMain = React.memo(function NavMain({
 
               // Collapsed state: render as dropdown with tooltip
               return (
-                <li key={item.title} className="group/menu-item relative flex justify-center">
+                <li key={item.url} className="group/menu-item relative flex justify-center">
                   <Dropdown
                     open={openDropdowns[item.title] || false}
                     onOpenChange={(isOpen: boolean) => handleDropdownChange(item.title, isOpen)}
@@ -281,7 +281,7 @@ export const NavMain = React.memo(function NavMain({
                           (((subItem.url === "/grup" || subItem.url === "/groups") && (pathname?.startsWith("/groups/detail/") || pathname?.startsWith("/grup/detail/") || pathname?.startsWith("/grup/kelola/"))) || false)
                         return (
                           <button
-                            key={subItem.title}
+                            key={subItem.url}
                             onClick={(e) => {
                               e.preventDefault()
                               console.log('Navigating to:', subItem.title, 'URL:', subItem.url)
@@ -321,7 +321,7 @@ export const NavMain = React.memo(function NavMain({
               // Menu tidak aktif atau aktif: selalu render sebagai collapsible biasa agar bisa ditutup
               return (
                 <Collapsible
-                  key={item.title}
+                  key={item.url}
                   open={openMenus[item.title] || hasActiveSubItem} // Buka secara default jika aktif, tapi biarkan user menutupnya
                   onOpenChange={(isOpen) => handleOpenChange(item.title, isOpen)}
                   className="group/collapsible"
@@ -361,7 +361,7 @@ export const NavMain = React.memo(function NavMain({
                             const hasActiveNestedItem = subItem.items.some(nestedItem => pathname === nestedItem.url)
                             return (
                               <Collapsible
-                                key={subItem.title}
+                                key={subItem.url}
                                 open={openMenus[`${item.title}-${subItem.title}`] || hasActiveNestedItem}
                                 onOpenChange={(isOpen) => handleOpenChange(`${item.title}-${subItem.title}`, isOpen)}
                                 className="group/nested-collapsible"
@@ -395,7 +395,7 @@ export const NavMain = React.memo(function NavMain({
                                       {subItem.items.map((nestedItem) => {
                                         const isCurrentPageNested = pathname === nestedItem.url
                                         return (
-                                          <li key={nestedItem.title} className="group/menu-nested-item relative">
+                                          <li key={nestedItem.url} className="group/menu-nested-item relative">
                                             <button
                                               onClick={() => {
                                                 handleNavigation(nestedItem.url);
@@ -422,7 +422,7 @@ export const NavMain = React.memo(function NavMain({
 
                           // Regular subItem without nested items
                           return (
-                            <li key={subItem.title} className="group/menu-sub-item relative">
+                            <li key={subItem.url} className="group/menu-sub-item relative">
                               <button
                                 onClick={() => {
                                   handleNavigation(subItem.url);
@@ -453,7 +453,7 @@ export const NavMain = React.memo(function NavMain({
 
 
           return (
-            <li key={item.title} className={cn(
+            <li key={item.url} className={cn(
               "group/menu-item relative flex w-full",
               isCollapsed && "flex justify-center",
               isCurrentPage && !isCollapsed && "mb-2"

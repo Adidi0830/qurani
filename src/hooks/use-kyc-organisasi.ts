@@ -209,6 +209,64 @@ function statusToTabKey(org: ApiOrg): TabKey {
     return "nonaktif";
 }
 
+function matchesOrgFilters(
+    org: ApiOrg,
+    search: string,
+    activeTab: TabKey,
+    filter: FilterState,
+    checkTab = true
+): boolean {
+    const searchLower = search.trim().toLowerCase()
+    if (searchLower && !String(org.name || "").toLowerCase().includes(searchLower)) return false
+    if (checkTab && activeTab !== "semua" && statusToTabKey(org) !== activeTab) return false
+    if (filter.type && String(org.type || "").toLowerCase() !== filter.type.toLowerCase()) return false
+    if (filter.categoryIds.length > 0) {
+        const matchCategory = org.category || org.categoryName || String(org.categoryId || "")
+        if (!filter.categoryIds.includes(matchCategory)) return false
+    }
+    if (filter.dateFrom || filter.dateTo) {
+        const createdTime = org.createdAt ? new Date(org.createdAt).getTime() : Number.NaN
+        if (!Number.isFinite(createdTime)) return false
+        if (filter.dateFrom) {
+            const fromTime = new Date(filter.dateFrom).getTime()
+            if (Number.isFinite(fromTime) && createdTime < fromTime) return false
+        }
+        if (filter.dateTo) {
+            const toDate = new Date(filter.dateTo)
+            toDate.setHours(23, 59, 59, 999)
+            const toTime = toDate.getTime()
+            if (Number.isFinite(toTime) && createdTime > toTime) return false
+        }
+    }
+    return true
+}
+
+function getFilteredDummyOrgs(
+    search: string,
+    activeTab: TabKey,
+    filter: FilterState,
+    checkTab = true
+): ApiOrg[] {
+    return (getDummyOrgs() as unknown as ApiOrg[]).filter((d) =>
+        matchesOrgFilters(d, search, activeTab, filter, checkTab)
+    )
+}
+
+function sortOrgs(items: ApiOrg[], sortOrder: SortOrder): ApiOrg[] {
+    return [...items].sort((a, b) => {
+        if (sortOrder === "name_asc") {
+            const cmp = String(a.name || "").localeCompare(String(b.name || ""))
+            return cmp !== 0 ? cmp : (Number(b.id) - Number(a.id))
+        }
+        const da = new Date(a.createdAt || 0).getTime()
+        const db = new Date(b.createdAt || 0).getTime()
+        if (da === db) {
+            return sortOrder === "newest" ? Number(b.id) - Number(a.id) : Number(a.id) - Number(b.id)
+        }
+        return sortOrder === "newest" ? db - da : da - db
+    })
+}
+
 // ─── Main Hook ────────────────────────────────────────────────────────────────
 
 export function useKycOrganisasi(): KycOrganisasiState {
@@ -262,36 +320,43 @@ export function useKycOrganisasi(): KycOrganisasiState {
 
     const fetchAllOrgsForCounts = useCallback(async (): Promise<Record<TabKey, number>> => {
         const counts: Record<TabKey, number> = { semua: 0, menunggu: 0, aktif: 0, nonaktif: 0, ditolak: 0 }
+        getDummyOrgs().forEach(d => {
+            counts[statusToTabKey(d as unknown as ApiOrg)] += 1
+            counts.semua += 1
+        })
+
         const pageSize = 200
         let pageNum = 1
         let pageGuard = 0
         let expectedTotal = Number.POSITIVE_INFINITY
+        let apiFetchedCount = 0
 
-        while (pageGuard < 200) {
-            pageGuard += 1
-            const params = new URLSearchParams({ Page: String(pageNum), PageSize: String(pageSize) })
-            const res = await fetch(`${API_BASE_URL}/api/v1/Organizations/search?${params}`, { headers: authHeaders() })
-            if (!res.ok) break
-            const json = await res.json()
-            const items = parseItems(json)
+        try {
+            while (pageGuard < 200) {
+                pageGuard += 1
+                const params = new URLSearchParams({ Page: String(pageNum), PageSize: String(pageSize) })
+                const res = await fetch(`${API_BASE_URL}/api/v1/Organizations/search?${params}`, { headers: authHeaders() })
+                if (!res.ok) break
+                const json = await res.json()
+                const items = parseItems(json)
 
-            if (pageNum === 1) {
-                expectedTotal = parseTotalCount(json, items.length)
-                getDummyOrgs().forEach(d => {
-                    counts[statusToTabKey(d as any)] += 1
+                if (pageNum === 1) {
+                    expectedTotal = parseTotalCount(json, items.length)
+                }
+
+                items.forEach((org) => {
+                    counts[statusToTabKey(org)] += 1
                     counts.semua += 1
                 })
+                apiFetchedCount += items.length
+
+                if (items.length === 0) break
+                if (Number.isFinite(expectedTotal) && apiFetchedCount >= expectedTotal) break
+                if (items.length < pageSize) break
+                pageNum += 1
             }
-
-            items.forEach((org) => {
-                counts[statusToTabKey(org)] += 1
-                counts.semua += 1
-            })
-
-            if (items.length === 0) break
-            if (Number.isFinite(expectedTotal) && counts.semua >= expectedTotal) break
-            if (items.length < pageSize) break
-            pageNum += 1
+        } catch {
+            // Keep dummy counts when the API is unreachable or blocked (e.g. CORS/401)
         }
 
         return counts
@@ -344,19 +409,16 @@ export function useKycOrganisasi(): KycOrganisasiState {
             }
 
             const json = await res.json()
-            let items = parseItems(json)
+            const apiItems = parseItems(json)
 
             // INJECT DUMMY DATA ONLY ON PAGE 1
-            if (page === 1) {
-                const searchLower = search.trim().toLowerCase();
-                const filteredDummy = getDummyOrgs().filter(d => {
-                    if (searchLower && !d.name.toLowerCase().includes(searchLower)) return false;
-                    return true;
-                })
-                items = [...filteredDummy as any, ...items]
-            }
+            const filteredDummy = page === 1
+                ? getFilteredDummyOrgs(search, activeTab, filter, true)
+                : []
+            const items = [...filteredDummy, ...apiItems]
 
-            const total = parseTotalCount(json, items.length)
+            const apiTotal = parseTotalCount(json, apiItems.length)
+            const total = apiTotal + filteredDummy.length
 
             const tabFilteredItems =
                 activeTab === "semua"
@@ -426,35 +488,15 @@ export function useKycOrganisasi(): KycOrganisasiState {
                         return true;
                     })
 
-                    const searchLower = search.trim().toLowerCase();
-                    const filteredDummy = getDummyOrgs().filter(d => {
-                        if (searchLower && !d.name.toLowerCase().includes(searchLower)) return false;
-                        if (activeTab !== "semua" && statusToTabKey(d as any) !== activeTab) return false;
-                        if (filter.categoryIds.length > 1) {
-                            const matchCategory = (d as any).category || (d as any).categoryName || String((d as any).categoryId || "");
-                            if (!filter.categoryIds.includes(matchCategory)) return false;
-                        }
-                        return true;
-                    });
-                    strictFiltered = [...filteredDummy as any, ...strictFiltered];
+                    const strictDummy = getFilteredDummyOrgs(search, activeTab, filter, true)
+                    strictFiltered = [...strictDummy, ...strictFiltered]
 
                     // Cache the filtered rows so page/perPage changes don't re-fetch
                     fallbackCacheRef.current = { key: cacheKey, rows: strictFiltered }
                 }
 
                 // Apply client-side sort
-                const sorted = [...strictFiltered].sort((a, b) => {
-                    if (sortOrder === "name_asc") {
-                        const cmp = String(a.name || "").localeCompare(String(b.name || ""))
-                        return cmp !== 0 ? cmp : (Number(b.id) - Number(a.id))
-                    }
-                    const da = new Date(a.createdAt || 0).getTime()
-                    const db = new Date(b.createdAt || 0).getTime()
-                    if (da === db) {
-                        return sortOrder === "newest" ? Number(b.id) - Number(a.id) : Number(a.id) - Number(b.id)
-                    }
-                    return sortOrder === "newest" ? db - da : da - db
-                })
+                const sorted = sortOrgs(strictFiltered, sortOrder)
 
                 const start = (page - 1) * perPage
                 const end = start + perPage
@@ -464,18 +506,7 @@ export function useKycOrganisasi(): KycOrganisasiState {
                 setTotalCount(strictFiltered.length)
             } else {
                 // Apply client-side sort for non-fallback mode too
-                const sorted = [...tabFilteredItems].sort((a, b) => {
-                    if (sortOrder === "name_asc") {
-                        const cmp = String(a.name || "").localeCompare(String(b.name || ""))
-                        return cmp !== 0 ? cmp : (Number(b.id) - Number(a.id))
-                    }
-                    const da = new Date(a.createdAt || 0).getTime()
-                    const db = new Date(b.createdAt || 0).getTime()
-                    if (da === db) {
-                        return sortOrder === "newest" ? Number(b.id) - Number(a.id) : Number(a.id) - Number(b.id)
-                    }
-                    return sortOrder === "newest" ? db - da : da - db
-                })
+                const sorted = sortOrgs(tabFilteredItems, sortOrder)
                 if (requestId !== fetchSeqRef.current) return
                 setOrgs(sorted)
                 setTotalCount(total)
@@ -483,9 +514,15 @@ export function useKycOrganisasi(): KycOrganisasiState {
         } catch (err) {
             if (requestId !== fetchSeqRef.current) return
             const msg = err instanceof Error ? err.message : "Gagal memuat data"
+            const dummyFallback = sortOrgs(
+                getFilteredDummyOrgs(search, activeTab, filter, true),
+                sortOrder
+            )
+            const start = (page - 1) * perPage
+            const end = start + perPage
             setError(msg)
-            setOrgs([])
-            setTotalCount(0)
+            setOrgs(dummyFallback.slice(start, end))
+            setTotalCount(dummyFallback.length)
         } finally {
             if (requestId !== fetchSeqRef.current) return
             setLoading(false)
@@ -529,6 +566,10 @@ export function useKycOrganisasi(): KycOrganisasiState {
     const fetchOrgMembers = useCallback(async (id: number | string) => {
         setOrgMembersLoading(true)
         setOrgMembers([])
+        if (getDummyOrgs().some(d => String(d.id) === String(id))) {
+            setOrgMembersLoading(false)
+            return
+        }
         try {
             const params = new URLSearchParams({ page: "1", pageSize: "100" })
             const res = await fetch(

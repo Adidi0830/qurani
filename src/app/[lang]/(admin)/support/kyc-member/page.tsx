@@ -967,7 +967,7 @@ function KycMemberContent() {
                 {/* Toolbar */}
                 <div className="flex flex-wrap items-center gap-2 w-full mb-3">
                     {/* Search Bar */}
-                    <div className="flex items-center flex-1 min-w-[140px]">
+                    <div className="flex items-center flex-1 min-w-[140px] md:max-w-sm">
                         <div className="flex w-full rounded-lg shadow-sm border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-950 overflow-hidden focus-within:ring-2 focus-within:ring-emerald-500 focus-within:border-emerald-500 transition-all">
                             <input
                                 value={searchInput}

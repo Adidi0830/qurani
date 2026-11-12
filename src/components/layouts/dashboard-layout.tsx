@@ -5,10 +5,17 @@ import { useLocalizedRouter as useRouter } from "@/hooks/use-localized-router"
 import { usePathname } from "next/navigation"
 import { useAuth } from "@/hooks/use-auth"
 import { useUnreadCount } from "@/hooks/use-notifications"
+import { useI18n } from "@/components/providers/i18n-provider"
 import { AppSidebar } from "@/components/ui/sidebar/app-sidebar"
-import { SidebarProvider } from "@/components/ui/sidebar/custom-sidebar"
-import { SidebarInset } from "@/components/ui/sidebar/custom-sidebar-inset"
-import { SidebarTrigger } from "@/components/ui/sidebar/custom-sidebar-trigger"
+import { SidebarProvider as CustomSidebarProvider } from "@/components/ui/sidebar/custom-sidebar"
+import { SidebarInset as CustomSidebarInset } from "@/components/ui/sidebar/custom-sidebar-inset"
+import { SidebarTrigger as CustomSidebarTrigger } from "@/components/ui/sidebar/custom-sidebar-trigger"
+import {
+  SidebarProvider as RtlSidebarProvider,
+  SidebarInset as RtlSidebarInset,
+  SidebarTrigger as RtlSidebarTrigger,
+} from "@/components/ui/sidebar"
+import { cn } from "@/lib/utils"
 import Image from "next/image"
 import { LocalizedLink as Link } from "@/components/ui/localized-link"
 import { RoleGuard } from "@/components/auth/role-guard"
@@ -21,6 +28,8 @@ export function DashboardLayout({ children }: DashboardLayoutProps) {
   const router = useRouter()
   const pathname = usePathname()
   const { loading, isAuthenticated, userId } = useAuth()
+  const { locale } = useI18n()
+  const isRtl = locale === "ar"
   const { unreadCount } = useUnreadCount(isAuthenticated ? userId : undefined)
   const [hasVisitedNotifications, setHasVisitedNotifications] = useState(false)
 
@@ -106,21 +115,34 @@ export function DashboardLayout({ children }: DashboardLayoutProps) {
     )
   }
 
+  const Provider = isRtl ? RtlSidebarProvider : CustomSidebarProvider
+  const Inset = isRtl ? RtlSidebarInset : CustomSidebarInset
+
   return (
-    <SidebarProvider className="select-none">
+    <Provider dir={isRtl ? "rtl" : undefined} className="select-none">
       <AppSidebar />
-      <SidebarInset>
+      <Inset>
         {/* Header - tombol sidebar dengan background yang lebih terlihat di mobile */}
-        <header className="fixed top-0 left-0 right-0 z-50 md:absolute md:top-4 md:left-4 md:right-auto">
+        <header
+          dir={isRtl ? "rtl" : undefined}
+          className={cn(
+            "fixed top-0 left-0 right-0 z-50 md:absolute md:top-4",
+            isRtl ? "md:right-4 md:left-auto" : "md:left-4 md:right-auto"
+          )}
+        >
           <div className="flex items-center justify-between p-4 pt-safe md:p-0 bg-white dark:bg-gray-900 border-b border-gray-200 dark:border-gray-800 md:bg-transparent md:backdrop-blur-none md:border-none">
             <div className="relative">
-              <SidebarTrigger
-                className="md:hidden bg-white dark:bg-gray-800 hover:bg-gray-100 dark:hover:bg-gray-700 border border-gray-200 dark:border-gray-700 shadow-sm md:bg-transparent md:hover:bg-white/10 md:dark:hover:bg-black/10 md:border-0 md:shadow-none"
-                notificationCount={unreadCount}
-              />
+              {isRtl ? (
+                <RtlSidebarTrigger className="md:hidden bg-white dark:bg-gray-800 hover:bg-gray-100 dark:hover:bg-gray-700 border border-gray-200 dark:border-gray-700 shadow-sm md:bg-transparent md:hover:bg-white/10 md:dark:hover:bg-black/10 md:border-0 md:shadow-none" />
+              ) : (
+                <CustomSidebarTrigger
+                  className="md:hidden bg-white dark:bg-gray-800 hover:bg-gray-100 dark:hover:bg-gray-700 border border-gray-200 dark:border-gray-700 shadow-sm md:bg-transparent md:hover:bg-white/10 md:dark:hover:bg-black/10 md:border-0 md:shadow-none"
+                  notificationCount={unreadCount}
+                />
+              )}
               {/* BADGE NOTIFIKASI MOBILE - hilang ketika di halaman notifikasi */}
               {showMobileBadge && (
-                <span className="absolute -top-1 -right-1 inline-flex items-center justify-center min-w-5 h-5 px-1 bg-red-500 text-white text-xs font-bold rounded-full z-[9999] border-2 border-white shadow-lg md:hidden">
+                <span className="absolute -top-1 -end-1 inline-flex items-center justify-center min-w-5 h-5 px-1 bg-red-500 text-white text-xs font-bold rounded-full z-[9999] border-2 border-white shadow-lg md:hidden">
                   {unreadCount > 99 ? '99+' : unreadCount}
                 </span>
               )}
@@ -133,14 +155,17 @@ export function DashboardLayout({ children }: DashboardLayoutProps) {
           </div>
         </header>
         {/* Content container - dengan padding top yang cukup untuk mobile header */}
-        <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-slate-100 dark:from-slate-950 dark:via-slate-900 dark:to-slate-800 pt-20 md:pt-7 p-4 lg:px-10 xl:px-10 overflow-y-auto">
+        <div
+          dir={isRtl ? "ltr" : undefined}
+          className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-slate-100 dark:from-slate-950 dark:via-slate-900 dark:to-slate-800 pt-20 md:pt-7 p-4 lg:px-10 xl:px-10 overflow-y-auto"
+        >
           <div className="lg:pt-0">
             <RoleGuard>
               {children}
             </RoleGuard>
           </div>
         </div>
-      </SidebarInset>
-    </SidebarProvider>
+      </Inset>
+    </Provider>
   )
 }

@@ -7,8 +7,12 @@ import { cn } from "@/lib/utils"
 import { useAuth } from "@/hooks/use-auth"
 import { useUnreadCount } from "@/hooks/use-notifications"
 import { useI18n } from "@/components/providers/i18n-provider"
-import { useSidebar } from "@/components/ui/sidebar/custom-sidebar"
-import { SidebarTrigger } from "@/components/ui/sidebar/custom-sidebar-trigger"
+import { useSidebar as useCustomSidebar } from "@/components/ui/sidebar/custom-sidebar"
+import { SidebarTrigger as CustomSidebarTrigger } from "@/components/ui/sidebar/custom-sidebar-trigger"
+import {
+  useSidebar as useRtlSidebar,
+  SidebarTrigger as RtlSidebarTrigger,
+} from "@/components/ui/sidebar"
 import { LocalizedLink as Link } from "@/components/ui/localized-link"
 import { LanguageSwitcher } from "@/components/ui/language-switcher"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
@@ -25,13 +29,24 @@ import signOut from "@/utils/Auth/logout"
 import { getInitials } from "@/utils/helpers/get-initials"
 import { useUserProfile } from "@/hooks/use-user-profile"
 
-export const Topbar = React.memo(function Topbar() {
+interface TopbarViewProps {
+  isRtl: boolean
+  isMobile: boolean
+  isCollapsed: boolean
+  trigger: React.ReactNode
+}
+
+const TopbarView = React.memo(function TopbarView({
+  isRtl,
+  isMobile,
+  isCollapsed,
+  trigger,
+}: TopbarViewProps) {
   const router = useRouter()
   const { profile, userId, isAuthenticated } = useAuth()
   const { profile: userProfile } = useUserProfile(isAuthenticated ? "me" : null)
   const { unreadCount } = useUnreadCount(isAuthenticated ? userId : undefined)
   const { t } = useI18n()
-  const { state, isMobile } = useSidebar()
   const { theme, setTheme } = useTheme()
   const [mounted, setMounted] = React.useState(false)
   const [searchQuery, setSearchQuery] = React.useState("")
@@ -40,16 +55,24 @@ export const Topbar = React.memo(function Topbar() {
     setMounted(true)
   }, [])
 
-  const isCollapsed = mounted ? state === "collapsed" && !isMobile : false
-
   const displayData = React.useMemo(() => {
-    const active = (userProfile?.avatar || (userProfile as any)?.avatar_url) ? userProfile : (profile?.avatar ? profile : (userProfile || profile))
-    const avatar = active?.avatar || (active as any)?.avatar_url || (active as any)?.avatarUrl || (active as any)?.image || ""
+    const active =
+      userProfile?.avatar || (userProfile as any)?.avatar_url
+        ? userProfile
+        : profile?.avatar
+          ? profile
+          : userProfile || profile
+    const avatar =
+      active?.avatar ||
+      (active as any)?.avatar_url ||
+      (active as any)?.avatarUrl ||
+      (active as any)?.image ||
+      ""
     return {
       displayName: active?.name || (active as any)?.fullName || "User",
       displayUsername: active?.username || null,
       initial: getInitials(active?.name || (active as any)?.fullName || "User"),
-      avatar: avatar,
+      avatar,
     }
   }, [profile, userProfile])
 
@@ -74,41 +97,47 @@ export const Topbar = React.memo(function Topbar() {
 
   if (!mounted) {
     return (
-      <header className="fixed top-0 left-0 right-0 z-50 h-16 bg-white/80 dark:bg-gray-900/80 backdrop-blur-md border-b border-gray-200 dark:border-gray-800" />
+      <header
+        dir={isRtl ? "rtl" : undefined}
+        className={cn(
+          "h-16 bg-white/80 dark:bg-gray-900/80 backdrop-blur-md border-b border-gray-200 dark:border-gray-800",
+          isRtl ? "sticky top-0 z-40 w-full" : "fixed top-0 left-0 right-0 z-50"
+        )}
+      />
     )
   }
 
   return (
     <header
+      dir={isRtl ? "rtl" : undefined}
       className={cn(
-        "fixed top-0 right-0 z-50 h-16 bg-white/80 dark:bg-gray-900/80 backdrop-blur-md border-b border-gray-200 dark:border-gray-800 transition-all duration-200",
-        isMobile ? "left-0" : isCollapsed ? "left-12" : "left-64"
+        "h-16 bg-white/80 dark:bg-gray-900/80 backdrop-blur-md border-b border-gray-200 dark:border-gray-800 transition-all duration-200",
+        isRtl
+          ? "sticky top-0 z-40 w-full shrink-0"
+          : cn("fixed top-0 right-0 z-50", isMobile ? "left-0" : isCollapsed ? "left-12" : "left-64")
       )}
     >
       <div className="flex h-full items-center justify-between gap-4 px-4 md:px-6">
         <div className="flex min-w-0 flex-1 items-center gap-3">
           <Tooltip>
-            <TooltipTrigger asChild>
-              <SidebarTrigger
-                className="h-9 w-9 rounded-lg text-gray-600 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-800"
-                aria-label={t("navigation.menu", "Menu Sidebar")}
-              />
-            </TooltipTrigger>
+            <TooltipTrigger asChild>{trigger}</TooltipTrigger>
             <TooltipContent side="bottom">
               {t("navigation.menu", "Menu Sidebar")}
             </TooltipContent>
           </Tooltip>
 
-
           <form onSubmit={handleSearch} className="relative mx-4 hidden w-full max-w-md md:block">
-            <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-gray-400" aria-hidden="true" />
+            <Search
+              className="absolute start-3 top-1/2 h-4 w-4 -translate-y-1/2 text-gray-400"
+              aria-hidden="true"
+            />
             <input
               type="search"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               placeholder={t("common.search_placeholder", "Cari...")}
               aria-label={t("common.search", "Cari")}
-              className="w-full rounded-lg border border-gray-200 bg-gray-100 py-2 pl-10 pr-4 text-sm text-gray-900 placeholder-gray-500 transition-all focus:border-transparent focus:outline-none focus:ring-2 focus:ring-emerald-500 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-100"
+              className="w-full rounded-lg border border-gray-200 bg-gray-100 py-2 ps-10 pe-4 text-sm text-gray-900 placeholder-gray-500 transition-all focus:border-transparent focus:outline-none focus:ring-2 focus:ring-emerald-500 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-100"
             />
           </form>
         </div>
@@ -123,7 +152,7 @@ export const Topbar = React.memo(function Topbar() {
               >
                 <Bell className="h-5 w-5" />
                 {unreadCount > 0 && (
-                  <span className="absolute -right-0.5 -top-0.5 inline-flex h-4 min-w-4 items-center justify-center rounded-full border-2 border-white bg-red-500 px-1 text-[10px] font-bold text-white shadow-sm dark:border-gray-900">
+                  <span className="absolute -end-0.5 -top-0.5 inline-flex h-4 min-w-4 items-center justify-center rounded-full border-2 border-white bg-red-500 px-1 text-[10px] font-bold text-white shadow-sm dark:border-gray-900">
                     {unreadCount > 99 ? "99+" : unreadCount}
                   </span>
                 )}
@@ -152,14 +181,18 @@ export const Topbar = React.memo(function Topbar() {
           </Tooltip>
 
           {isAuthenticated && (
-            <DropdownMenu>
+            <DropdownMenu dir={isRtl ? "rtl" : undefined}>
               <DropdownMenuTrigger asChild>
                 <button
                   aria-label={t("common.user_menu", "Menu Pengguna")}
                   className="flex items-center gap-2 rounded-lg p-1.5 transition-colors hover:bg-gray-100 dark:hover:bg-gray-800"
                 >
                   <Avatar className="h-8 w-8">
-                    <AvatarImage src={displayData.avatar} alt={displayData.displayName} className="object-cover" />
+                    <AvatarImage
+                      src={displayData.avatar}
+                      alt={displayData.displayName}
+                      className="object-cover"
+                    />
                     <AvatarFallback className="bg-gradient-to-br from-blue-500 to-purple-600 text-xs font-semibold text-white">
                       {displayData.initial}
                     </AvatarFallback>
@@ -218,4 +251,49 @@ export const Topbar = React.memo(function Topbar() {
       </div>
     </header>
   )
+})
+
+function LtrTopbar() {
+  const { t } = useI18n()
+  const { state, isMobile } = useCustomSidebar()
+  const isCollapsed = state === "collapsed" && !isMobile
+
+  return (
+    <TopbarView
+      isRtl={false}
+      isMobile={isMobile}
+      isCollapsed={isCollapsed}
+      trigger={
+        <CustomSidebarTrigger
+          className="h-9 w-9 rounded-lg text-gray-600 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-800"
+          aria-label={t("navigation.menu", "Menu Sidebar")}
+        />
+      }
+    />
+  )
+}
+
+function RtlTopbar() {
+  const { t } = useI18n()
+  const { state, isMobile } = useRtlSidebar()
+  const isCollapsed = state === "collapsed" && !isMobile
+
+  return (
+    <TopbarView
+      isRtl={true}
+      isMobile={isMobile}
+      isCollapsed={isCollapsed}
+      trigger={
+        <RtlSidebarTrigger
+          className="h-9 w-9 rounded-lg text-gray-600 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-800"
+          aria-label={t("navigation.menu", "Menu Sidebar")}
+        />
+      }
+    />
+  )
+}
+
+export const Topbar = React.memo(function Topbar() {
+  const { locale } = useI18n()
+  return locale === "ar" ? <RtlTopbar /> : <LtrTopbar />
 })
