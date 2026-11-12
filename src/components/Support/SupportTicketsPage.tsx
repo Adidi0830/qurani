@@ -188,8 +188,9 @@ export default function SupportTicketsPage() {
       try {
         const { ticketsApi, getStoredAuth } = await import('@/lib/api');
         const auth = getStoredAuth();
+        const accessToken = auth?.accessToken;
 
-        if (auth?.accessToken) {
+        {
           // Map status name to number
           const statusMap: Record<string, number> = {
             'Open': 1, 'In Progress': 2, 'Answered': 3, 'On Hold': 4, 'Closed': 5
@@ -236,7 +237,7 @@ export default function SupportTicketsPage() {
           // Try /api/v1/tickets first (admin endpoint - all tickets)
           let result = await ticketsApi.getTickets(
             { ...params, keyword: searchQuery || undefined },
-            auth.accessToken,
+            accessToken,
             { signal }
           );
 
@@ -249,7 +250,7 @@ export default function SupportTicketsPage() {
           // If no tickets from admin endpoint, try /api/v1/tickets/my (user's own tickets)
           if (tickets.length === 0 && (!signal || !signal.aborted)) {
             try {
-              result = await ticketsApi.getMyTickets(params, auth.accessToken, { signal });
+              result = await ticketsApi.getMyTickets(params, accessToken, { signal });
               responseData = result?.data || result;
               tickets = responseData?.items || responseData?.data || (Array.isArray(responseData) ? responseData : []);
               total = responseData?.pagination?.totalCount || responseData?.totalCount || tickets.length;
@@ -355,7 +356,7 @@ export default function SupportTicketsPage() {
     try {
       const { ticketsApi, getStoredAuth } = await import('@/lib/api');
       const auth = getStoredAuth();
-      if (!auth?.accessToken) return;
+      const accessToken = auth?.accessToken;
 
       const statusMap = {
         open: 1,
@@ -372,7 +373,7 @@ export default function SupportTicketsPage() {
         try {
           const result = await ticketsApi.getTickets(
             { page: 1, pageSize: 1, status: statusId },
-            auth.accessToken
+            accessToken
           );
           const responseData = result?.data || result;
           const total = responseData?.pagination?.totalCount || responseData?.totalCount || 0;
@@ -383,7 +384,7 @@ export default function SupportTicketsPage() {
       });
 
       // Also get the total count for all tickets
-      const allPromise = ticketsApi.getTickets({ page: 1, pageSize: 1 }, auth.accessToken)
+      const allPromise = ticketsApi.getTickets({ page: 1, pageSize: 1 }, accessToken)
         .then(result => {
           const responseData = result?.data || result;
           return responseData?.pagination?.totalCount || responseData?.totalCount || 0;
