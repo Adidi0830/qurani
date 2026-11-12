@@ -350,5 +350,350 @@
         "rejected": "Rejected"
       }
     }
+  },
+  "teachers": {
+    "title": "Teachers",
+    "search_placeholder": "Search name, email...",
+    "search_button": "Search",
+    "filter_button": "Filter",
+    "reset_button": "Reset ({{count}})",
+    "showing_count": "Showing {{filtered}} of {{total}} teachers.",
+    "labels": {
+      "all": "All Labels",
+      "filter_title": "Filter by Label",
+      "categories": {
+        "publik": "Public Label",
+        "tier": "Performance Tier",
+        "flag": "Review Flag",
+        "custom": "Custom Label"
+      },
+      "marketplace_visible": "(visible in marketplace)",
+      "add_label": "Label",
+      "add_label_title": "Add Label",
+      "admin_labels_header": "Admin Labels",
+      "create": "Create",
+      "input_placeholder": "Label name...",
+      "save": "Save Label",
+      "items": {
+        "ambassador": "Ambassador",
+        "ambassador_desc": "Platform representative teacher with an outstanding track record and high community contribution.",
+        "super_teacher": "Super Teacher",
+        "super_teacher_desc": "Top performing teacher with consistent rating ≥4.8 and hundreds of active students.",
+        "recommended": "Recommended",
+        "recommended_desc": "Teacher recommended by the platform based on quality and teaching method relevance.",
+        "tier_a": "Tier A",
+        "tier_b": "Tier B",
+        "tier_c": "Tier C",
+        "perlu_review": "Needs Review",
+        "laporan_masuk": "Report Filed",
+        "verifikasi_ulang": "Re-verification"
+      }
+    },
+    "date_range": {
+      "label": "Date Range",
+      "title": "Joined Date Range",
+      "from": "From",
+      "to": "To",
+      "reset": "Reset",
+      "apply": "Apply"
+    },
+    "filter_popover": {
+      "title": "Advanced Filters",
+      "active_badge": "Active",
+      "status_label": "Status",
+      "method_label": "Teaching Method",
+      "skill_label": "Skill / Expertise",
+      "curriculum_label": "Curriculum Method",
+      "all_option": "All",
+      "reset": "Reset filters",
+      "apply": "Apply"
+    },
+    "status": {
+      "verified": "Active",
+      "suspended": "Inactive",
+      "rejected": "Rejected"
+    },
+    "methods": {
+      "online": "Online",
+      "offline": "Offline",
+      "hybrid": "Online & Offline"
+    },
+    "table": {
+      "teacher": "Teacher",
+      "method": "Method",
+      "location": "Location",
+      "students": "Students",
+      "rating": "Rating",
+      "revenue": "Revenue",
+      "status": "Status",
+      "featured": "Featured",
+      "joined_date": "Joined Date",
+      "actions": "Actions",
+      "empty_title": "No data found",
+      "reset_all": "Reset all filters",
+      "students_count": "{{count}} students",
+      "featured_badge": "Featured"
+    },
+    "actions_menu": {
+      "view_profile": "View Profile",
+      "verify": "Verify Teacher",
+      "unverify": "Unverify Teacher",
+      "feature": "Mark as Featured",
+      "unfeature": "Remove from Featured",
+      "deactivate": "Deactivate",
+      "reactivate": "Reactivate"
+    },
+    "mobile": {
+      "empty": "No data",
+      "reset": "Reset filter",
+      "method": "Method",
+      "joined_date": "Joined Date",
+      "students": "Students",
+      "revenue": "Revenue",
+      "inactive_notice": "Data not available for inactive teachers"
+    },
+    "pagination": {
+      "empty": "No data",
+      "showing": "Showing {{start}}–{{end}} of {{total}} entries"
+    },
+    "modals": {
+      "reactivate": {
+        "title": "Teacher Deactivated",
+        "reason_heading": "Reason",
+        "default_reason": "No reason specified.",
+        "deactivated_since": "Deactivated since",
+        "duration": "Duration",
+        "not_specified": "Not specified",
+        "close": "Close",
+        "submit": "Reactivate"
+      },
+      "deactivate": {
+        "title": "Deactivate Teacher",
+        "warning": "Teacher {{name}} will be deactivated and cannot receive new orders.",
+        "reason_label": "Deactivation Reason",
+        "reason_placeholder": "e.g., Violating platform terms...",
+        "duration_label": "Deactivation Duration",
+        "duration_placeholder": "e.g., 10 Days, Permanent...",
+        "cancel": "Cancel",
+        "submit": "Yes, Deactivate",
+        "processing": "Processing..."
+      }
+    },
+    "toasts": {
+      "deactivated_title": "{{name}} deactivated",
+      "deactivated_reason": "Reason: {{reason}}",
+      "deactivated_message": "Teacher cannot receive new orders.",
+      "reactivated_title": "{{name}} reactivated",
+      "reactivated_message": "Teacher status returned to Active.",
+      "verified_title": "{{name}} verified",
+      "unverified_title": "Verification for {{name}} revoked",
+      "verified_message": "Teacher has been granted admin-verified status.",
+      "unverified_message": "Admin-verified status has been revoked.",
+      "featured_title": "{{name}} marked as Featured",
+      "unfeatured_title": "{{name}} removed from Featured",
+      "featured_message": "Teacher will appear on the marketplace homepage.",
+      "unfeatured_message": "Teacher no longer featured on the homepage."
+    }
+  },
+  "applications": {
+    "title": "Trainer Applications",
+    "refresh": "Refresh",
+    "search_placeholder": "Search name or email...",
+    "search_button": "Search",
+    "try_again": "Try Again",
+    "fetch_error_title": "Failed to load data",
+    "status": {
+      "pending": "Pending",
+      "seleksi": "Selection",
+      "diterima": "Accepted",
+      "ditolak": "Rejected",
+      "batal": "Cancelled",
+      "all": "All"
+    },
+    "reschedule_badge": "Reschedule",
+    "table": {
+      "applicant": "Applicant",
+      "specialization": "Specialization",
+      "status": "Status",
+      "actions": "Actions",
+      "applied_date": "Application Date",
+      "empty": "No application data found",
+      "detail": "Detail",
+      "reschedule": "Reschedule",
+      "edit_schedule": "Edit Schedule",
+      "evaluate": "Evaluation"
+    },
+    "mobile": {
+      "specialization": "Specialization",
+      "applied_date": "Application Date",
+      "empty": "No application data found"
+    },
+    "pagination": {
+      "showing": "Showing {{start}}–{{end}} of {{total}} entries"
+    },
+    "modals": {
+      "schedule": {
+        "title": "Selection Interview Schedule",
+        "reschedule_title": "Reschedule Selection Interview",
+        "reschedule_alert_title": "Reschedule Request",
+        "reschedule_alert_desc": "Applicant requested a reschedule. Previous schedule is displayed — please update to the new time and resend.",
+        "date_label": "Selection Date",
+        "time_label": "Selection Time",
+        "timezone_label": "Timezone",
+        "duration_label": "Duration: {{duration}}",
+        "hours": "{{count}} hours",
+        "minutes": "{{count}} mins",
+        "hours_minutes": "{{hours}} hrs {{mins}} mins",
+        "timezone_detected": "Applicant timezone detected: {{tz}}",
+        "timezone_converted": "Selection time at applicant's location is {{time}} {{tz}}",
+        "examiner_label": "Examiner / Selection Team",
+        "examiner_placeholder": "Select selection team...",
+        "examiner_search_placeholder": "Search name or specialization...",
+        "examiner_search_button": "Search",
+        "examiner_empty": "No examiner found",
+        "method_label": "Method",
+        "method_online": "Online",
+        "method_offline": "Offline",
+        "meeting_link_label": "Meeting Link (Zoom / Google Meet)",
+        "auto_from_examiner": "(automatic from examiner)",
+        "meeting_link_placeholder": "https://zoom.us/j/...",
+        "location_label": "Location / Address",
+        "applicant_location": "Applicant location: {{location}}",
+        "notes_label": "Notes / Additional Info",
+        "notes_placeholder": "Prepare short surah recitation, bring original documents...",
+        "cancel": "Cancel",
+        "save": "Save",
+        "save_reschedule": "Save New Schedule"
+      },
+      "email_preview": {
+        "title": "Confirm Send Email",
+        "subtitle": "Notification to applicant",
+        "summary_title": "Summary of Email to be Sent",
+        "recipient": "Recipient",
+        "schedule": "Schedule",
+        "method_and_link": "Method & Link",
+        "examiner": "Examiner",
+        "info_hint": "Email will include Confirm Attendance and Request Reschedule buttons for the applicant.",
+        "edit": "Edit",
+        "send": "Send Email",
+        "sending": "Sending..."
+      },
+      "evaluation": {
+        "title": "Selection Evaluation",
+        "participant": "Participant: {{name}}",
+        "schedule_info_title": "Selection Schedule Info",
+        "examiner_prefix": "Examiner:",
+        "schedule_unavailable": "Selection schedule data not available yet.",
+        "attendance_title": "Attendance Confirmation",
+        "present": "Present",
+        "absent": "Absent",
+        "criteria_title": "Evaluation Criteria (Scale 1–9)",
+        "fluency": "Reading Fluency",
+        "tajweed": "Tajweed & Makhraj",
+        "intonation": "Vocal Intonation",
+        "appearance": "Appearance / Demeanor",
+        "experience": "Experience",
+        "average": "Average:",
+        "passing_score": "Min. passing score:",
+        "documentation_title": "Selection Photo / Documentation",
+        "upload_photo": "Upload Photo (Screenshot)",
+        "change_photo": "Change Photo",
+        "photo_format_hint": "Format: JPG, PNG (Max 2MB)",
+        "attendance_warning": "Select attendance status before making the final decision.",
+        "reject": "Reject",
+        "accept": "Accept Trainer"
+      }
+    },
+    "toasts": {
+      "select_examiner_title": "Select Selection Team",
+      "select_examiner_desc": "Please select an examiner from the dropdown.",
+      "select_attendance_title": "Select Attendance Status",
+      "select_attendance_desc": "Please select attendance status first.",
+      "trainer_accepted": "Trainer Accepted Successfully",
+      "trainer_rejected": "Trainer Rejected",
+      "email_simulated_title": "Schedule Saved (Email Simulated)",
+      "email_simulated_desc": "Data saved. Email will be sent to {{email}} once Gmail is configured.",
+      "email_sent_title": "📧 Email Sent!",
+      "email_sent_desc": "Selection invitation email sent successfully to {{recipient}}.",
+      "email_failed_title": "Failed to Send Email",
+      "email_failed_desc": "An error occurred while sending email."
+    }
+  },
+  "calendar": {
+    "title": "Calendar",
+    "filter_button": "Schedule Filter",
+    "today": "Today",
+    "more_schedules": "+{{count}} more",
+    "statuses": {
+      "scheduled": "Scheduled",
+      "ongoing": "Ongoing",
+      "done": "Completed",
+      "cancelled": "Cancelled",
+      "reschedule": "Reschedule"
+    },
+    "filter": {
+      "title": "Filter",
+      "examiner": "Examiner",
+      "all_examiners": "All Examiners",
+      "status": "Status",
+      "all_statuses": "All Statuses",
+      "method": "Method",
+      "all_methods": "All Methods",
+      "online": "Online",
+      "offline": "Offline",
+      "time": "Time",
+      "all_times": "All Times",
+      "morning": "Morning (< 12:00)",
+      "afternoon_evening": "Afternoon/Evening (>= 12:00)",
+      "reset": "Reset Filter"
+    },
+    "days": {
+      "mon": "Mon",
+      "tue": "Tue",
+      "wed": "Wed",
+      "thu": "Thu",
+      "fri": "Fri",
+      "sat": "Sat",
+      "sun": "Sun"
+    },
+    "selected_date": {
+      "select_date_prompt": "Select date",
+      "click_calendar_hint": "Click a date on the calendar",
+      "schedules_count": "{{count}} selection schedules",
+      "empty_title": "No selection schedule",
+      "empty_desc": "on this date",
+      "detail_link": "Detail →"
+    },
+    "modal": {
+      "title": "Selection Proof & Result Document",
+      "close": "Close Document",
+      "selection_data_title": "Selection Data",
+      "applicant_name": "Applicant Name",
+      "email": "Email",
+      "schedule_datetime": "Selection Date / Time",
+      "method": "Method",
+      "examiner": "Examiner",
+      "qualification_title": "Scores & Qualification",
+      "criteria": {
+        "fluency": "Reading Fluency",
+        "tajweed": "Tajweed & Makhraj",
+        "intonation": "Voice Intonation",
+        "appearance": "Appearance",
+        "experience": "Experience"
+      },
+      "result_recommendation": "Result Recommendation",
+      "recommendations": {
+        "highly_recommended": "Highly Recommended (Adult / Tahfidz Level)",
+        "eligible": "Recommended for Teaching (Children Level)",
+        "not_evaluated": "Not yet evaluated (Selection not completed)"
+      },
+      "not_graded_title": "Process Not Yet Graded",
+      "not_graded_desc": "Qualification scores, tajweed proficiency, and teaching suitability will appear after selection is completed by the examiner.",
+      "documentation_title": "Selection Photo / Documentation",
+      "no_photo_title": "No Documentation Photo",
+      "no_photo_desc": "Screenshot or recording of online selection has not been uploaded.",
+      "offline_meeting_title": "In-person interview with applicant",
+      "offline_meeting_desc": "In-person method. Physical attendance and printed documents verified directly by {{examiner}}."
+    }
   }
 }

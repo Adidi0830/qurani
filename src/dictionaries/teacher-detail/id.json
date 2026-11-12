@@ -350,5 +350,350 @@
         "rejected": "Ditolak"
       }
     }
+  },
+  "teachers": {
+    "title": "Guru",
+    "search_placeholder": "Cari nama, email...",
+    "search_button": "Cari",
+    "filter_button": "Filter",
+    "reset_button": "Reset ({{count}})",
+    "showing_count": "Menampilkan {{filtered}} dari {{total}} guru.",
+    "labels": {
+      "all": "Semua Label",
+      "filter_title": "Filter berdasarkan Label",
+      "categories": {
+        "publik": "Label Publik",
+        "tier": "Tier Performa",
+        "flag": "Flag Review",
+        "custom": "Label Kustom"
+      },
+      "marketplace_visible": "(tampil marketplace)",
+      "add_label": "Label",
+      "add_label_title": "Tambah Label",
+      "admin_labels_header": "Label Admin",
+      "create": "Buat",
+      "input_placeholder": "Nama label...",
+      "save": "Simpan Label",
+      "items": {
+        "ambassador": "Ambassador",
+        "ambassador_desc": "Guru representasi platform dengan rekam jejak luar biasa dan kontribusi komunitas yang tinggi.",
+        "super_teacher": "Super Teacher",
+        "super_teacher_desc": "Guru dengan performa pengajaran tertinggi — rating konsisten ≥4.8 dan ratusan murid aktif.",
+        "recommended": "Recommended",
+        "recommended_desc": "Guru yang direkomendasikan platform berdasarkan kualitas dan relevansi metode pengajarannya.",
+        "tier_a": "Tier A",
+        "tier_b": "Tier B",
+        "tier_c": "Tier C",
+        "perlu_review": "Perlu Review",
+        "laporan_masuk": "Laporan Masuk",
+        "verifikasi_ulang": "Verifikasi Ulang"
+      }
+    },
+    "date_range": {
+      "label": "Rentang Tanggal",
+      "title": "Rentang Tgl Bergabung",
+      "from": "Dari",
+      "to": "Sampai",
+      "reset": "Reset",
+      "apply": "Terapkan"
+    },
+    "filter_popover": {
+      "title": "Filter Lanjutan",
+      "active_badge": "Aktif",
+      "status_label": "Status",
+      "method_label": "Metode Mengajar",
+      "skill_label": "Skill / Keahlian",
+      "curriculum_label": "Metode Pengajaran",
+      "all_option": "Semua",
+      "reset": "Reset filter",
+      "apply": "Terapkan"
+    },
+    "status": {
+      "verified": "Aktif",
+      "suspended": "Tidak Aktif",
+      "rejected": "Ditolak"
+    },
+    "methods": {
+      "online": "Online",
+      "offline": "Offline",
+      "hybrid": "Online & Offline"
+    },
+    "table": {
+      "teacher": "Guru",
+      "method": "Metode",
+      "location": "Lokasi",
+      "students": "Murid",
+      "rating": "Rating",
+      "revenue": "Revenue",
+      "status": "Status",
+      "featured": "Unggulan",
+      "joined_date": "Tgl Bergabung",
+      "actions": "Aksi",
+      "empty_title": "Tidak ada data yang ditemukan",
+      "reset_all": "Reset semua filter",
+      "students_count": "{{count}} murid",
+      "featured_badge": "Unggulan"
+    },
+    "actions_menu": {
+      "view_profile": "Lihat Profil",
+      "verify": "Verifikasi Guru",
+      "unverify": "Batalkan Verifikasi",
+      "feature": "Jadikan Unggulan",
+      "unfeature": "Hapus dari Unggulan",
+      "deactivate": "Nonaktifkan",
+      "reactivate": "Aktifkan Kembali"
+    },
+    "mobile": {
+      "empty": "Tidak ada data",
+      "reset": "Reset filter",
+      "method": "Metode",
+      "joined_date": "Tgl Bergabung",
+      "students": "Murid",
+      "revenue": "Revenue",
+      "inactive_notice": "Data tidak tersedia untuk guru non-aktif"
+    },
+    "pagination": {
+      "empty": "Tidak ada data",
+      "showing": "Menampilkan {{start}}–{{end}} dari {{total}} data"
+    },
+    "modals": {
+      "reactivate": {
+        "title": "Guru dinonaktifkan",
+        "reason_heading": "Alasan",
+        "default_reason": "Alasan tidak dicantumkan.",
+        "deactivated_since": "Dinonaktifkan sejak",
+        "duration": "Durasi",
+        "not_specified": "Tidak ditentukan",
+        "close": "Tutup",
+        "submit": "Aktifkan kembali"
+      },
+      "deactivate": {
+        "title": "Nonaktifkan Guru",
+        "warning": "Guru {{name}} akan dinonaktifkan dan tidak dapat menerima pesanan baru.",
+        "reason_label": "Alasan Penonaktifan",
+        "reason_placeholder": "Contoh: Melanggar ketentuan platform...",
+        "duration_label": "Durasi Penonaktifan",
+        "duration_placeholder": "Contoh: 10 Hari, Permanen...",
+        "cancel": "Batal",
+        "submit": "Ya, Nonaktifkan",
+        "processing": "Memproses..."
+      }
+    },
+    "toasts": {
+      "deactivated_title": "{{name}} dinonaktifkan",
+      "deactivated_reason": "Alasan: {{reason}}",
+      "deactivated_message": "Guru tidak dapat menerima pesanan baru.",
+      "reactivated_title": "{{name}} diaktifkan kembali",
+      "reactivated_message": "Status guru dikembalikan menjadi Aktif.",
+      "verified_title": "{{name}} diverifikasi",
+      "unverified_title": "Verifikasi {{name}} dibatalkan",
+      "verified_message": "Guru telah mendapatkan status terverifikasi admin.",
+      "unverified_message": "Status verifikasi admin dicabut.",
+      "featured_title": "{{name}} dijadikan Unggulan",
+      "unfeatured_title": "{{name}} dihapus dari Unggulan",
+      "featured_message": "Guru akan tampil di halaman utama marketplace.",
+      "unfeatured_message": "Guru tidak lagi tampil sebagai guru unggulan."
+    }
+  },
+  "applications": {
+    "title": "Pengajuan Guru",
+    "refresh": "Refresh",
+    "search_placeholder": "Cari nama atau email...",
+    "search_button": "Cari",
+    "try_again": "Coba Lagi",
+    "fetch_error_title": "Gagal memuat data",
+    "status": {
+      "pending": "Menunggu",
+      "seleksi": "Seleksi",
+      "diterima": "Diterima",
+      "ditolak": "Ditolak",
+      "batal": "Batal",
+      "all": "Semua"
+    },
+    "reschedule_badge": "Reschedule",
+    "table": {
+      "applicant": "Pendaftar",
+      "specialization": "Spesialisasi",
+      "status": "Status",
+      "actions": "Aksi",
+      "applied_date": "Tgl Daftar",
+      "empty": "Tidak ada data pengajuan",
+      "detail": "Detail",
+      "reschedule": "Atur Ulang",
+      "edit_schedule": "Edit Jadwal",
+      "evaluate": "Penilaian"
+    },
+    "mobile": {
+      "specialization": "Spesialisasi",
+      "applied_date": "Tgl Daftar",
+      "empty": "Tidak ada data pengajuan"
+    },
+    "pagination": {
+      "showing": "Menampilkan {{start}}–{{end}} dari {{total}} data"
+    },
+    "modals": {
+      "schedule": {
+        "title": "Jadwal Wawancara Seleksi",
+        "reschedule_title": "Atur Ulang Jadwal Seleksi",
+        "reschedule_alert_title": "Permintaan Reschedule",
+        "reschedule_alert_desc": "Guru mengajukan reschedule. Jadwal lama ditampilkan — silakan ubah ke waktu yang baru lalu kirim ulang.",
+        "date_label": "Tanggal Seleksi",
+        "time_label": "Waktu Seleksi",
+        "timezone_label": "Zona Waktu",
+        "duration_label": "Durasi: {{duration}}",
+        "hours": "{{count}} jam",
+        "minutes": "{{count}} menit",
+        "hours_minutes": "{{hours}} jam {{mins}} menit",
+        "timezone_detected": "Zona waktu calon guru terdeteksi: {{tz}}",
+        "timezone_converted": "Waktu seleksi di lokasi calon guru adalah {{time}} {{tz}}",
+        "examiner_label": "Penguji / Tim Penyeleksi",
+        "examiner_placeholder": "Pilih tim penyeleksi...",
+        "examiner_search_placeholder": "Cari nama atau spesialisasi...",
+        "examiner_search_button": "Cari",
+        "examiner_empty": "Tidak ada penyeleksi ditemukan",
+        "method_label": "Metode",
+        "method_online": "Online",
+        "method_offline": "Offline",
+        "meeting_link_label": "Link Pertemuan (Zoom / Google Meet)",
+        "auto_from_examiner": "(otomatis dari penguji)",
+        "meeting_link_placeholder": "https://zoom.us/j/...",
+        "location_label": "Lokasi / Alamat",
+        "applicant_location": "Lokasi pendaftar: {{location}}",
+        "notes_label": "Catatan / Info Tambahan",
+        "notes_placeholder": "Persiapkan hafalan surah pendek, bawa dokumen asli...",
+        "cancel": "Batal",
+        "save": "Simpan",
+        "save_reschedule": "Simpan Jadwal Baru"
+      },
+      "email_preview": {
+        "title": "Konfirmasi Kirim Email",
+        "subtitle": "Notifikasi ke calon guru",
+        "summary_title": "Ringkasan Email yang Akan Dikirim",
+        "recipient": "Penerima",
+        "schedule": "Jadwal",
+        "method_and_link": "Metode & Link",
+        "examiner": "Penguji",
+        "info_hint": "Email akan berisi tombol Konfirmasi Hadir dan Minta Reschedule untuk calon guru.",
+        "edit": "Edit",
+        "send": "Kirim Email",
+        "sending": "Mengirim..."
+      },
+      "evaluation": {
+        "title": "Penilaian Seleksi",
+        "participant": "Peserta: {{name}}",
+        "schedule_info_title": "Info Jadwal Seleksi",
+        "examiner_prefix": "Penyeleksi:",
+        "schedule_unavailable": "Data jadwal seleksi belum tersedia.",
+        "attendance_title": "Konfirmasi Kehadiran",
+        "present": "Hadir",
+        "absent": "Tidak Hadir",
+        "criteria_title": "Kriteria Penilaian (Skala 1–9)",
+        "fluency": "Kelancaran Baca",
+        "tajweed": "Tajwid & Makhraj",
+        "intonation": "Intonasi Suara",
+        "appearance": "Penampilan",
+        "experience": "Pengalaman",
+        "average": "Rata-rata:",
+        "passing_score": "Nilai min. lolos:",
+        "documentation_title": "Foto / Dokumentasi Penyeleksian",
+        "upload_photo": "Unggah Foto (Screenshot)",
+        "change_photo": "Ganti Foto",
+        "photo_format_hint": "Format: JPG, PNG (Maks 2MB)",
+        "attendance_warning": "Pilih status kehadiran sebelum memberikan keputusan akhir.",
+        "reject": "Tolak",
+        "accept": "Terima Guru"
+      }
+    },
+    "toasts": {
+      "select_examiner_title": "Pilih Tim Penyeleksi",
+      "select_examiner_desc": "Harap pilih penguji dari dropdown.",
+      "select_attendance_title": "Pilih Status Kehadiran",
+      "select_attendance_desc": "Harap pilih status kehadiran dahulu.",
+      "trainer_accepted": "Guru Berhasil Diterima",
+      "trainer_rejected": "Guru Ditolak",
+      "email_simulated_title": "Jadwal Tersimpan (Email Disimulasi)",
+      "email_simulated_desc": "Data tersimpan. Email akan dikirim ke {{email}} setelah Gmail dikonfigurasi.",
+      "email_sent_title": "📧 Email Terkirim!",
+      "email_sent_desc": "Email undangan seleksi berhasil dikirim ke {{recipient}}.",
+      "email_failed_title": "Gagal Kirim Email",
+      "email_failed_desc": "Terjadi kesalahan saat mengirim email."
+    }
+  },
+  "calendar": {
+    "title": "Kalender",
+    "filter_button": "Filter Jadwal",
+    "today": "Hari Ini",
+    "more_schedules": "+{{count}} lainnya",
+    "statuses": {
+      "scheduled": "Terjadwal",
+      "ongoing": "Berlangsung",
+      "done": "Selesai",
+      "cancelled": "Dibatalkan",
+      "reschedule": "Reschedule"
+    },
+    "filter": {
+      "title": "Filter",
+      "examiner": "Penguji",
+      "all_examiners": "Semua Penguji",
+      "status": "Status",
+      "all_statuses": "Semua Status",
+      "method": "Metode",
+      "all_methods": "Semua Metode",
+      "online": "Online",
+      "offline": "Offline",
+      "time": "Waktu",
+      "all_times": "Semua Waktu",
+      "morning": "Pagi (< 12:00)",
+      "afternoon_evening": "Siang/Sore (>= 12:00)",
+      "reset": "Reset Filter"
+    },
+    "days": {
+      "mon": "Sen",
+      "tue": "Sel",
+      "wed": "Rab",
+      "thu": "Kam",
+      "fri": "Jum",
+      "sat": "Sab",
+      "sun": "Min"
+    },
+    "selected_date": {
+      "select_date_prompt": "Pilih tanggal",
+      "click_calendar_hint": "Klik tanggal di kalender",
+      "schedules_count": "{{count}} jadwal seleksi",
+      "empty_title": "Tidak ada jadwal seleksi",
+      "empty_desc": "di tanggal ini",
+      "detail_link": "Detail →"
+    },
+    "modal": {
+      "title": "Dokumen Bukti & Hasil Seleksi",
+      "close": "Tutup Dokumen",
+      "selection_data_title": "Data Seleksi",
+      "applicant_name": "Nama Calon Guru",
+      "email": "Email",
+      "schedule_datetime": "Tanggal / Jam Seleksi",
+      "method": "Metode",
+      "examiner": "Penguji",
+      "qualification_title": "Nilai & Kualifikasi",
+      "criteria": {
+        "fluency": "Kelancaran Baca",
+        "tajweed": "Tajwid & Makhraj",
+        "intonation": "Intonasi Suara",
+        "appearance": "Penampilan",
+        "experience": "Pengalaman"
+      },
+      "result_recommendation": "Rekomendasi Hasil",
+      "recommendations": {
+        "highly_recommended": "Sangat Direkomendasikan (Mengajar Level Dewasa/Tahfidz)",
+        "eligible": "Rekomendasi Layak Mengajar (Level Anak-anak)",
+        "not_evaluated": "Belum dinilai (Seleksi belum selesai)"
+      },
+      "not_graded_title": "Proses Belum Dinilai",
+      "not_graded_desc": "Nilai kualifikasi, skor kemampuan tajwid & kelayakan mengajar akan tampil setelah status seleksi diselesaikan oleh penguji.",
+      "documentation_title": "Foto / Dokumentasi Penyeleksian",
+      "no_photo_title": "Tidak Ada Foto Dokumentasi",
+      "no_photo_desc": "Tangkapan layar atau rekaman seleksi online belum diunggah.",
+      "offline_meeting_title": "Pertemuan dengan calon guru secara langsung",
+      "offline_meeting_desc": "Metode tatap muka. Absensi fisik dan dokumen cetak diverifikasi langsung oleh {{examiner}}."
+    }
   }
 }

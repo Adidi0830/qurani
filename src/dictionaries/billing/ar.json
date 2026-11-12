@@ -448,6 +448,293 @@
       "empty": "لم يتم العثور على مدفوعات.",
       "loading": "جاري تحميل بيانات الدفع..."
     },
+    "payout": {
+      "title": "مدفوعات المعلمين",
+      "refresh": "تحديث",
+      "searchPlaceholder": "البحث عن اسم المعلم، المستخدم...",
+      "searchButton": "بحث",
+      "filter": "تصفية",
+      "bulkAction": "إجراء جماعي",
+      "checkbox_disabled_hint": "يمكن فقط تحديد المدفوعات المعلقة للدفع",
+      "stats": {
+        "pendingCount": "مدفوعات معلقة",
+        "pendingTotal": "القيمة المعلقة",
+        "approvedCount": "معتمد"
+      },
+      "filterModal": {
+        "title": "تصفية بيانات المدفوعات",
+        "status": "الحالة",
+        "all": "الكل",
+        "pending": "قيد الانتظار",
+        "approved": "معتمد",
+        "rejected": "مرفوض",
+        "date": "التاريخ",
+        "from": "من",
+        "to": "إلى",
+        "amount": "المبلغ (ر.إ)",
+        "min": "الحد الأدنى",
+        "max": "الحد الأقصى",
+        "method": "طريقة الدفع",
+        "reset": "إعادة ضبط",
+        "apply": "تطبيق التصفية"
+      },
+      "table": {
+        "orderCode": "رمز الطلب",
+        "user": "المستخدم (الدافع)",
+        "teacher": "المعلم (المستلم)",
+        "amount": "المبلغ",
+        "status": "الحالة",
+        "paymentDate": "تاريخ الدفع",
+        "actions": "الإجراءات",
+        "empty": "لا توجد بيانات مدفوعات",
+        "tooltips": {
+          "viewUser": "عرض الملف الشخصي للمستخدم",
+          "viewTeacher": "عرض الملف الشخصي للمعلم"
+        }
+      },
+      "status": {
+        "approved": "معتمد",
+        "pending": "قيد الانتظار",
+        "rejected": "مرفوض"
+      },
+      "actions": {
+        "dropdownTitle": "إجراءات الدفع",
+        "markDone": "تحديد كمكتمل",
+        "viewNotes": "عرض الملاحظات"
+      },
+      "markModal": {
+        "title": "تحديد كمدفوع",
+        "subtitle": "تأكيد التحويل إلى المعلم",
+        "paymentId": "معرّف الدفع",
+        "teacher": "المعلم",
+        "amount": "المبلغ",
+        "reference": "الرقم المرجعي للدفع",
+        "referencePlaceholder": "مثال: TRF-2026-001, REF-BANK-XXX",
+        "notes": "الملاحظات",
+        "optional": "(اختياري)",
+        "notesPlaceholder": "ملاحظات إضافية...",
+        "submit": "تأكيد الدفع",
+        "submitting": "جاري المعالجة...",
+        "cancel": "إلغاء",
+        "errorRef": "الرقم المرجعي مطلوب",
+        "errorRefDesc": "يرجى ملء الرقم المرجعي للدفع قبل المتابعة.",
+        "successTitle": "تم الدفع بنجاح",
+        "successDesc": "تم تحديد الدفعة بنجاح كمدفوعة للمعلم.",
+        "demoTitle": "[تجريبي] تم تحديد الدفع",
+        "demoDesc": "تم تحديد الدفعة كمدفوعة (محاكاة محلية)."
+      },
+      "bulkModal": {
+        "title": "دفع جماعي",
+        "subtitle": "تم تحديد {{count}} مدفوعات",
+        "totalSelected": "إجمالي المحدد: {{count}} مدفوعات",
+        "totalValue": "القيمة الإجمالية:",
+        "reference": "الرقم المرجعي للدفع",
+        "referencePlaceholder": "مثال: BATCH-2026-001",
+        "submit": "معالجة الدفع الجماعي",
+        "submitting": "جاري المعالجة...",
+        "cancel": "إلغاء",
+        "successTitle": "تم الدفع الجماعي بنجاح",
+        "successDesc": "تم تحديد {{count}} مدفوعات كمدفوعة بنجاح.",
+        "demoTitle": "[تجريبي] دفع جماعي",
+        "demoDesc": "تم تحديد {{count}} مدفوعات (محاكاة محلية)."
+      },
+      "viewModal": {
+        "title": "تفاصيل الملاحظات",
+        "adminNotes": "ملاحظات المشرف:",
+        "defaultNote": "تم التحويل بنجاح!",
+        "close": "إغلاق"
+      }
+    },
+    "refund": {
+      "title": "استرداد الأموال",
+      "refresh": "تحديث",
+      "searchPlaceholder": "البحث بالاسم، سبب الاسترداد...",
+      "searchButton": "بحث",
+      "filter": "تصفية",
+      "stats": {
+        "pendingCount": "استرداد قيد الانتظار",
+        "totalValue": "قيمة الاسترداد",
+        "approvedCount": "تمت الموافقة",
+        "rejectedCount": "مرفوض"
+      },
+      "filterModal": {
+        "title": "تصفية بيانات الاسترداد",
+        "status": "الحالة",
+        "all": "الكل",
+        "pending": "قيد الانتظار",
+        "approved": "تمت الموافقة",
+        "rejected": "مرفوض",
+        "dateRange": "النطاق الزمني",
+        "from": "من",
+        "to": "إلى",
+        "amountRange": "قيمة الاسترداد (روبية)",
+        "moreThan": "أكثر من",
+        "lessThan": "أقل من",
+        "reset": "إعادة تعيين",
+        "apply": "تطبيق"
+      },
+      "table": {
+        "orderCode": "رمز الطلب",
+        "user": "المستخدم",
+        "teacher": "المعلم",
+        "sessions": "الجلسات",
+        "status": "الحالة",
+        "refundAmount": "قيمة الاسترداد",
+        "requestDate": "تاريخ الطلب",
+        "actions": "الإجراءات",
+        "empty": "لا توجد بيانات استرداد",
+        "reasonLabel": "السبب: ",
+        "tooltips": {
+          "viewTeacher": "عرض ملف المعلم"
+        }
+      },
+      "mobile": {
+        "user": "المستخدم:",
+        "teacher": "المعلم:",
+        "sessions": "الجلسات:"
+      },
+      "status": {
+        "approved": "تمت الموافقة",
+        "rejected": "مرفوض",
+        "pending": "قيد الانتظار"
+      },
+      "actions": {
+        "dropdownTitle": "إجراءات الاسترداد",
+        "approve": "موافقة",
+        "reject": "رفض",
+        "viewNotes": "عرض الملاحظات",
+        "viewRejectReason": "عرض سبب الرفض",
+        "noAction": "لا توجد إجراءات متاحة"
+      },
+      "viewModal": {
+        "title": "تفاصيل الملاحظات",
+        "reasonTitle": "سبب الاسترداد:",
+        "adminNotesTitle": "ملاحظات المسؤول / السبب:",
+        "emptyNotes": "لا توجد ملاحظات.",
+        "close": "إغلاق"
+      },
+      "actionModal": {
+        "approveTitle": "الموافقة على الاسترداد",
+        "rejectTitle": "رفض الاسترداد",
+        "userLabel": "المستخدم:",
+        "refundAmountLabel": "قيمة الاسترداد:",
+        "rejectReasonLabel": "سبب الرفض",
+        "notesLabel": "ملاحظات (اختياري)",
+        "rejectPlaceholder": "مثال: سبب الاسترداد غير صالح...",
+        "notesPlaceholder": "ملاحظات إضافية للمستخدم...",
+        "submitting": "جار المعالجة...",
+        "approveSubmit": "تأكيد الموافقة",
+        "rejectSubmit": "تأكيد الرفض",
+        "cancel": "إلغاء",
+        "rejectError": "سبب الرفض مطلوب",
+        "rejectErrorDesc": "يرجى توضيح سبب رفض الاسترداد.",
+        "successApproveTitle": "تمت الموافقة على الاسترداد",
+        "successApproveDesc": "تمت الموافقة على الاسترداد بنجاح وسيتم إرجاع المبلغ للمستخدم.",
+        "successRejectTitle": "تم رفض الاسترداد",
+        "successRejectDesc": "تم رفض طلب الاسترداد بنجاح.",
+        "demoTitle": "[تجريبي] استرداد {{status}}",
+        "demoDesc": "تمت محاكاة الإجراء محلياً."
+      }
+    },
+    "withdraw": {
+      "title": "سحب الرصيد",
+      "refresh": "تحديث",
+      "searchPlaceholder": "البحث عن المستخدم، البنك، رقم الحساب...",
+      "searchButton": "بحث",
+      "filter": "تصفية",
+      "stats": {
+        "pendingCount": "سحب قيد الانتظار",
+        "pendingTotal": "قيمة السحب",
+        "approvedCount": "تمت الموافقة",
+        "rejectedCount": "مرفوض"
+      },
+      "filterModal": {
+        "title": "تصفية بيانات السحب",
+        "status": "الحالة",
+        "all": "الكل",
+        "pending": "قيد الانتظار",
+        "approved": "تمت الموافقة",
+        "rejected": "مرفوض",
+        "target": "الوجهة (البنك / رقم الحساب)",
+        "targetPlaceholder": "مثال: BCA، الراجحي، 12345...",
+        "dateRange": "النطاق الزمني",
+        "from": "من",
+        "to": "إلى",
+        "amountRange": "المبلغ (روبية)",
+        "moreThan": "أكثر من",
+        "lessThan": "أقل من",
+        "reset": "إعادة تعيين",
+        "apply": "تطبيق"
+      },
+      "table": {
+        "id": "المعرف",
+        "user": "المستخدم",
+        "destination": "الوجهة",
+        "amount": "المبلغ",
+        "status": "الحالة",
+        "requestDate": "تاريخ الطلب",
+        "actions": "الإجراءات",
+        "empty": "لا توجد بيانات سحب"
+      },
+      "status": {
+        "completed": "مكتمل",
+        "approved": "تمت الموافقة",
+        "rejected": "مرفوض",
+        "pending": "قيد الانتظار"
+      },
+      "actions": {
+        "dropdownTitle": "إجراءات السحب",
+        "approve": "موافقة",
+        "reject": "رفض",
+        "markComplete": "تحديد كمكتمل",
+        "viewTransferDetail": "عرض تفاصيل التحويل",
+        "viewRejectReason": "عرض سبب الرفض",
+        "noAction": "لا توجد إجراءات متاحة"
+      },
+      "viewModal": {
+        "reasonTitle": "سبب الرفض",
+        "detailTitle": "تفاصيل التحويل",
+        "reasonHeader": "ملاحظات / سبب الرفض:",
+        "detailHeader": "تفاصيل التحويل:",
+        "amount": "المبلغ:",
+        "targetBank": "البنك المستلم:",
+        "accountNumber": "رقم الحساب:",
+        "extTxId": "معرف المعاملة:",
+        "gatewayRef": "مرجع البوابة:",
+        "notes": "الملاحظات:",
+        "emptyNotes": "لا توجد ملاحظات.",
+        "close": "إغلاق"
+      },
+      "actionModal": {
+        "titles": {
+          "approve": "الموافقة على طلب السحب",
+          "complete": "تأكيد إتمام السحب والتحويل",
+          "reject": "رفض طلب السحب"
+        },
+        "userLabel": "المستخدم:",
+        "amountLabel": "المبلغ:",
+        "bankLabel": "البنك:",
+        "rejectReason": "سبب الرفض",
+        "rejectReasonPlaceholder": "مثال: بيانات الحساب غير صحيحة...",
+        "rejectReasonRequired": "سبب الرفض مطلوب",
+        "rejectReasonRequiredDesc": "يرجى توضيح سبب رفض السحب.",
+        "extIdLabel": "معرف المعاملة الخارجي",
+        "extIdPlaceholder": "معرف المعاملة من البنك / البوابة...",
+        "gatewayRefLabel": "مرجع البوابة",
+        "gatewayRefPlaceholder": "مرجع البوابة...",
+        "optional": "(اختياري)",
+        "approveWarning": "يرجى التأكد من التحقق من صحة بيانات الحساب قبل الموافقة على هذا السحب.",
+        "confirm": "تأكيد",
+        "submitting": "جار المعالجة...",
+        "cancel": "إلغاء",
+        "approveSuccess": "تمت الموافقة على السحب بنجاح.",
+        "rejectSuccess": "تم رفض طلب السحب بنجاح.",
+        "completeSuccess": "تم تحديث الحالة إلى مكتمل بنجاح.",
+        "demoApprove": "تم تغيير الحالة إلى تمت الموافقة (محاكاة محلية).",
+        "demoReject": "تم تغيير الحالة إلى مرفوض (محاكاة محلية).",
+        "demoComplete": "تم تغيير الحالة إلى مكتمل (محاكاة محلية)."
+      }
+    },
     "wallet_page": {
       "title": "إدارة محفظة المستخدم",
       "subtitle": "عرض تفاصيل الملف ومعلومات المحفظة وسجل المعاملات"

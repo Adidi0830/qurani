@@ -3,6 +3,7 @@
 import { useState, useMemo, useEffect, Suspense, useRef } from "react"
 import Link from "next/link"
 import Image from "next/image"
+import { useParams } from "next/navigation"
 import {
     Search, ChevronLeft, ChevronRight, Star, Eye, Users,
     ChevronsUpDown, BadgeCheck, ShieldOff, ShieldCheck, XCircle, AlertTriangle,
@@ -10,6 +11,7 @@ import {
     MoreVertical, Zap, ZapOff,
 } from "lucide-react"
 import { ToastContainer, showToast } from "@/components/ui/toast-sim"
+import { useI18n } from "@/components/providers/i18n-provider"
 
 // ── Helpers ───────────────────────────────────────────────────────────────────
 function formatRupiah(n: number) {
@@ -19,10 +21,11 @@ function formatRupiah(n: number) {
     }).format(n)
 }
 
-function formatDate(dateStr: string) {
+function formatDate(dateStr: string, locale: string = "id") {
     if (!dateStr) return "—"
     try {
-        return new Date(dateStr).toLocaleDateString("id-ID", { day: "numeric", month: "short", year: "numeric" })
+        const loc = locale === "id" ? "id-ID" : locale === "ar" ? "ar-EG" : "en-US"
+        return new Date(dateStr).toLocaleDateString(loc, { day: "numeric", month: "short", year: "numeric" })
     } catch { return "—" }
 }
 
@@ -37,9 +40,9 @@ function getClientToken(): string | null {
 
 // ── Status Config ─────────────────────────────────────────────────────────────
 const STATUS_CFG = {
-    verified:  { label: "Aktif",      bg: "bg-emerald-100 dark:bg-emerald-900/30", text: "text-emerald-700 dark:text-emerald-400", dot: "bg-emerald-500", icon: BadgeCheck },
-    suspended: { label: "Tidak Aktif",bg: "bg-red-100 dark:bg-red-900/30",         text: "text-red-700 dark:text-red-400",         dot: "bg-red-500",     icon: ShieldOff  },
-    rejected:  { label: "Ditolak",    bg: "bg-rose-100 dark:bg-rose-900/30",       text: "text-rose-700 dark:text-rose-400",       dot: "bg-rose-500",    icon: ShieldOff  },
+    verified:  { defaultLabel: "Aktif",      bg: "bg-emerald-100 dark:bg-emerald-900/30", text: "text-emerald-700 dark:text-emerald-400", dot: "bg-emerald-500", icon: BadgeCheck },
+    suspended: { defaultLabel: "Tidak Aktif",bg: "bg-red-100 dark:bg-red-900/30",         text: "text-red-700 dark:text-red-400",         dot: "bg-red-500",     icon: ShieldOff  },
+    rejected:  { defaultLabel: "Ditolak",    bg: "bg-rose-100 dark:bg-rose-900/30",       text: "text-rose-700 dark:text-rose-400",       dot: "bg-rose-500",    icon: ShieldOff  },
 } as const
 
 // ── Label System ──────────────────────────────────────────────────────────────
@@ -130,6 +133,7 @@ function LabelDropdown({
     allLabels: AdminLabel[]
     onCreateLabel: (name: string, colorIdx: number) => void
 }) {
+    const { t } = useI18n()
     const [open, setOpen] = useState(false)
     const [showCreate, setShowCreate] = useState(false)
     const [newName, setNewName] = useState("")
@@ -158,18 +162,18 @@ function LabelDropdown({
             <button
                 onClick={() => setOpen(v => !v)}
                 className="inline-flex items-center justify-center gap-1 px-2 py-0.5 rounded-full bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-300 hover:bg-emerald-100 dark:hover:bg-emerald-900/30 hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors flex-shrink-0"
-                title="Tambah Label"
+                title={t("teachers.labels.add_label_title", "Tambah Label")}
             >
                 <Plus className="w-3 h-3" />
-                <span className="text-[9px] font-bold">Label</span>
+                <span className="text-[9px] font-bold">{t("teachers.labels.add_label", "Label")}</span>
             </button>
             {open && (
                 <div className="absolute z-50 left-0 top-7 w-56 bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 rounded-xl shadow-2xl overflow-hidden">
                     {/* Header */}
                     <div className="px-3 py-2 bg-gray-50 dark:bg-gray-800/60 border-b border-gray-100 dark:border-gray-800 flex items-center justify-between">
-                        <p className="text-[10px] font-bold text-gray-500 dark:text-gray-400 uppercase tracking-wider">Label Admin</p>
+                        <p className="text-[10px] font-bold text-gray-500 dark:text-gray-400 uppercase tracking-wider">{t("teachers.labels.admin_labels_header", "Label Admin")}</p>
                         <button onClick={() => setShowCreate(v => !v)} className="text-[10px] text-emerald-600 dark:text-emerald-400 font-semibold hover:underline flex items-center gap-0.5">
-                            <Plus className="w-2.5 h-2.5" /> Buat
+                            <Plus className="w-2.5 h-2.5" /> {t("teachers.labels.create", "Buat")}
                         </button>
                     </div>
 
@@ -181,7 +185,7 @@ function LabelDropdown({
                                 value={newName}
                                 onChange={e => setNewName(e.target.value)}
                                 onKeyDown={e => e.key === "Enter" && handleCreate()}
-                                placeholder="Nama label..."
+                                placeholder={t("teachers.labels.input_placeholder", "Nama label...")}
                                 className="w-full px-2 py-1 text-xs rounded-md border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-900 text-gray-900 dark:text-white placeholder:text-gray-400 focus:outline-none focus:ring-1 focus:ring-emerald-500"
                             />
                             <div className="flex items-center gap-1 flex-wrap">
@@ -198,7 +202,7 @@ function LabelDropdown({
                                 disabled={!newName.trim()}
                                 className="w-full py-1 text-xs font-bold bg-emerald-500 hover:bg-emerald-600 disabled:opacity-40 text-white rounded-md transition-colors"
                             >
-                                Simpan Label
+                                {t("teachers.labels.save", "Simpan Label")}
                             </button>
                         </div>
                     )}
@@ -210,12 +214,13 @@ function LabelDropdown({
                                 <div className="px-3 pt-2 pb-0.5">
                                     <p className="text-[9px] font-bold uppercase tracking-widest text-gray-400 dark:text-gray-600 flex items-center gap-1">
                                         {cat === "publik" && <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 inline-block" />}
-                                        {LABEL_CATEGORY_NAMES[cat]}
-                                        {cat === "publik" && <span className="text-[8px] text-emerald-500 normal-case font-normal">(tampil marketplace)</span>}
+                                        {t(`teachers.labels.categories.${cat}`, LABEL_CATEGORY_NAMES[cat])}
+                                        {cat === "publik" && <span className="text-[8px] text-emerald-500 normal-case font-normal">{t("teachers.labels.marketplace_visible", "(tampil marketplace)")}</span>}
                                     </p>
                                 </div>
                                 {allLabels.filter(l => l.category === cat).map(label => {
                                     const isActive = activeLabels.includes(label.id)
+                                    const labelName = label.isCustom ? label.name : t(`teachers.labels.items.${label.id}`, label.name)
                                     return (
                                         <button
                                             key={label.id}
@@ -223,7 +228,7 @@ function LabelDropdown({
                                             className={`w-full flex items-center gap-2 px-3 py-1.5 text-xs transition-colors hover:bg-gray-50 dark:hover:bg-gray-800 ${isActive ? "bg-emerald-50/50 dark:bg-emerald-900/10" : ""}`}
                                         >
                                             <span className={`w-2 h-2 rounded-full flex-shrink-0 ${label.dot}`} />
-                                            <span className={`font-semibold flex-1 text-left ${label.text}`}>{label.name}</span>
+                                            <span className={`font-semibold flex-1 text-left ${label.text}`}>{labelName}</span>
                                             {isActive && <Check className="w-3 h-3 text-emerald-500 flex-shrink-0" />}
                                         </button>
                                     )
@@ -248,19 +253,22 @@ function LabelBadges({
     allLabels: AdminLabel[]
     onCreateLabel: (name: string, colorIdx: number) => void
 }) {
+    const { t } = useI18n()
     const getLabelById = (id: string) => allLabels.find(l => l.id === id)
     return (
         <div className="flex items-center gap-1 flex-wrap min-w-0">
             {labelIds.map(id => {
                 const label = getLabelById(id)
                 if (!label) return null
+                const labelName = label.isCustom ? label.name : t(`teachers.labels.items.${label.id}`, label.name)
+                const labelDesc = label.isCustom ? (label.description || "") : t(`teachers.labels.items.${label.id}_desc`, label.description || "")
                 const badge = (
                     <span
                         key={id}
                         className={`inline-flex items-center gap-1 rounded-full px-2 py-0.5 text-[9px] font-bold ${label.bg} ${label.text} group/badge`}
                     >
                         <span className={`w-1.5 h-1.5 rounded-full ${label.dot}`} />
-                        {label.name}
+                        {labelName}
                         {label.isPublic && <HelpCircle className="w-2.5 h-2.5 opacity-50" />}
                         <button
                             onClick={() => onRemove(guruId, id)}
@@ -270,8 +278,8 @@ function LabelBadges({
                         </button>
                     </span>
                 )
-                if (label.isPublic && label.description) {
-                    return <Tooltip key={id} text={label.description}>{badge}</Tooltip>
+                if (label.isPublic && labelDesc) {
+                    return <Tooltip key={id} text={labelDesc}>{badge}</Tooltip>
                 }
                 return badge
             })}
@@ -288,6 +296,7 @@ function LabelFilterDropdown({
     onChange: (v: string) => void
     allLabels: AdminLabel[]
 }) {
+    const { t } = useI18n()
     const [open, setOpen] = useState(false)
     const ref = useRef<HTMLDivElement>(null)
 
@@ -301,6 +310,7 @@ function LabelFilterDropdown({
 
     const isActive = value !== "all"
     const activeLabel = isActive ? allLabels.find(l => l.id === value) : null
+    const activeLabelName = activeLabel ? (activeLabel.isCustom ? activeLabel.name : t(`teachers.labels.items.${activeLabel.id}`, activeLabel.name)) : ""
     const categories: LabelCategory[] = ["publik", "tier", "flag", "custom"]
     const visibleCats = categories.filter(c => allLabels.some(l => l.category === c))
 
@@ -313,8 +323,8 @@ function LabelFilterDropdown({
                     : "bg-white border-gray-200 text-gray-600 hover:border-gray-300 dark:bg-gray-900 dark:border-gray-700 dark:text-gray-400"}`}
             >
                 {activeLabel
-                    ? <><span className={`w-2 h-2 rounded-full ${activeLabel.dot}`} />{activeLabel.name}</>
-                    : <><Tag className="w-3.5 h-3.5 text-gray-400" />Semua Label</>
+                    ? <><span className={`w-2 h-2 rounded-full ${activeLabel.dot}`} />{activeLabelName}</>
+                    : <><Tag className="w-3.5 h-3.5 text-gray-400" />{t("teachers.labels.all", "Semua Label")}</>
                 }
                 <ChevronDown className={`w-3 h-3 transition-transform ${open ? "rotate-180" : ""}`} />
             </button>
@@ -322,7 +332,7 @@ function LabelFilterDropdown({
             {open && (
                 <div className="absolute top-10 left-0 z-50 w-60 bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 rounded-xl shadow-2xl overflow-hidden">
                     <div className="px-3 py-2 bg-gray-50 dark:bg-gray-800/60 border-b border-gray-100 dark:border-gray-800">
-                        <p className="text-[10px] font-bold text-gray-500 uppercase tracking-wider">Filter berdasarkan Label</p>
+                        <p className="text-[10px] font-bold text-gray-500 uppercase tracking-wider">{t("teachers.labels.filter_title", "Filter berdasarkan Label")}</p>
                     </div>
                     <div className="max-h-72 overflow-y-auto py-1">
                         <button
@@ -330,7 +340,7 @@ function LabelFilterDropdown({
                             className={`w-full flex items-center gap-2 px-3 py-2 text-xs font-semibold transition-colors hover:bg-gray-50 dark:hover:bg-gray-800 ${value === "all" ? "text-emerald-600 dark:text-emerald-400" : "text-gray-600 dark:text-gray-400"}`}
                         >
                             <span className="w-2 h-2 rounded-full bg-gray-300 dark:bg-gray-600" />
-                            Semua Label
+                            {t("teachers.labels.all", "Semua Label")}
                             {value === "all" && <Check className="w-3 h-3 ml-auto text-emerald-500" />}
                         </button>
                         {visibleCats.map(cat => (
@@ -338,20 +348,23 @@ function LabelFilterDropdown({
                                 <div className="px-3 pt-2 pb-0.5">
                                     <p className="text-[9px] font-bold uppercase tracking-widest text-gray-400 dark:text-gray-600 flex items-center gap-1">
                                         {cat === "publik" && <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 inline-block" />}
-                                        {LABEL_CATEGORY_NAMES[cat]}
+                                        {t(`teachers.labels.categories.${cat}`, LABEL_CATEGORY_NAMES[cat])}
                                     </p>
                                 </div>
-                                {allLabels.filter(l => l.category === cat).map(label => (
-                                    <button
-                                        key={label.id}
-                                        onClick={() => { onChange(label.id); setOpen(false) }}
-                                        className={`w-full flex items-center gap-2 px-3 py-1.5 text-xs transition-colors hover:bg-gray-50 dark:hover:bg-gray-800 ${value === label.id ? "bg-emerald-50/50 dark:bg-emerald-900/10" : ""}`}
-                                    >
-                                        <span className={`w-2 h-2 rounded-full flex-shrink-0 ${label.dot}`} />
-                                        <span className={`font-semibold flex-1 text-left ${label.text}`}>{label.name}</span>
-                                        {value === label.id && <Check className="w-3 h-3 text-emerald-500 flex-shrink-0" />}
-                                    </button>
-                                ))}
+                                {allLabels.filter(l => l.category === cat).map(label => {
+                                    const lName = label.isCustom ? label.name : t(`teachers.labels.items.${label.id}`, label.name)
+                                    return (
+                                        <button
+                                            key={label.id}
+                                            onClick={() => { onChange(label.id); setOpen(false) }}
+                                            className={`w-full flex items-center gap-2 px-3 py-1.5 text-xs transition-colors hover:bg-gray-50 dark:hover:bg-gray-800 ${value === label.id ? "bg-emerald-50/50 dark:bg-emerald-900/10" : ""}`}
+                                        >
+                                            <span className={`w-2 h-2 rounded-full flex-shrink-0 ${label.dot}`} />
+                                            <span className={`font-semibold flex-1 text-left ${label.text}`}>{lName}</span>
+                                            {value === label.id && <Check className="w-3 h-3 text-emerald-500 flex-shrink-0" />}
+                                        </button>
+                                    )
+                                })}
                             </div>
                         ))}
                     </div>
@@ -370,6 +383,7 @@ function DateRangeFilter({
     onChange: (start: string, end: string) => void
     onClear: () => void
 }) {
+    const { t, locale } = useI18n()
     const [open, setOpen] = useState(false)
     const ref = useRef<HTMLDivElement>(null)
     const isActive = startDate !== "" || endDate !== ""
@@ -392,8 +406,8 @@ function DateRangeFilter({
             >
                 <Calendar className={`w-3.5 h-3.5 ${isActive ? "text-emerald-500" : "text-gray-400"}`} />
                 {isActive
-                    ? `${startDate ? formatDate(startDate) : "…"} – ${endDate ? formatDate(endDate) : "…"}`
-                    : "Rentang Tanggal"
+                    ? `${startDate ? formatDate(startDate, locale) : "…"} – ${endDate ? formatDate(endDate, locale) : "…"}`
+                    : t("teachers.date_range.label", "Rentang Tanggal")
                 }
                 {isActive
                     ? <button onClick={e => { e.stopPropagation(); onClear() }} className="ml-1 hover:text-red-500 transition-colors"><X className="w-3 h-3" /></button>
@@ -403,10 +417,10 @@ function DateRangeFilter({
 
             {open && (
                 <div className="absolute top-10 left-0 z-50 w-72 bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 rounded-xl shadow-2xl p-4 space-y-3">
-                    <p className="text-xs font-bold text-gray-700 dark:text-gray-300">Rentang Tgl Bergabung</p>
+                    <p className="text-xs font-bold text-gray-700 dark:text-gray-300">{t("teachers.date_range.title", "Rentang Tgl Bergabung")}</p>
                     <div className="space-y-2">
                         <div className="space-y-1">
-                            <label className="text-[10px] font-semibold text-gray-400 uppercase tracking-wider">Dari</label>
+                            <label className="text-[10px] font-semibold text-gray-400 uppercase tracking-wider">{t("teachers.date_range.from", "Dari")}</label>
                             <input
                                 type="date"
                                 value={startDate}
@@ -415,7 +429,7 @@ function DateRangeFilter({
                             />
                         </div>
                         <div className="space-y-1">
-                            <label className="text-[10px] font-semibold text-gray-400 uppercase tracking-wider">Sampai</label>
+                            <label className="text-[10px] font-semibold text-gray-400 uppercase tracking-wider">{t("teachers.date_range.to", "Sampai")}</label>
                             <input
                                 type="date"
                                 value={endDate}
@@ -425,8 +439,8 @@ function DateRangeFilter({
                         </div>
                     </div>
                     <div className="flex gap-2 pt-1">
-                        <button onClick={() => { onClear(); setOpen(false) }} className="flex-1 py-1.5 text-xs font-semibold text-gray-500 border border-gray-200 dark:border-gray-700 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors">Reset</button>
-                        <button onClick={() => setOpen(false)} className="flex-1 py-1.5 text-xs font-bold text-white bg-emerald-500 hover:bg-emerald-600 rounded-lg transition-colors">Terapkan</button>
+                        <button onClick={() => { onClear(); setOpen(false) }} className="flex-1 py-1.5 text-xs font-semibold text-gray-500 border border-gray-200 dark:border-gray-700 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors">{t("teachers.date_range.reset", "Reset")}</button>
+                        <button onClick={() => setOpen(false)} className="flex-1 py-1.5 text-xs font-bold text-white bg-emerald-500 hover:bg-emerald-600 rounded-lg transition-colors">{t("teachers.date_range.apply", "Terapkan")}</button>
                     </div>
                 </div>
             )}
@@ -443,6 +457,7 @@ function FilterPopover({
     filterMetodePengajaran, setFilterMetodePengajaran,
     availableSkills
 }: any) {
+    const { t } = useI18n()
     const ref = useRef<HTMLDivElement>(null)
 
     useEffect(() => {
@@ -465,7 +480,7 @@ function FilterPopover({
             <div className="space-y-2">
                 <p className="text-[10px] font-bold text-gray-500 dark:text-gray-400 uppercase tracking-wider">{label}</p>
                 <div className="flex flex-wrap gap-1.5">
-                    {[{ value: "all", label: "Semua" }, ...options].map(opt => (
+                    {[{ value: "all", label: t("teachers.filter_popover.all_option", "Semua") }, ...options].map(opt => (
                         <button
                             key={opt.value}
                             onClick={() => onChange(opt.value)}
@@ -499,7 +514,7 @@ function FilterPopover({
                             ? "bg-emerald-50 dark:bg-emerald-900/20 border-emerald-400 text-emerald-700 dark:text-emerald-400"
                             : "bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700 text-gray-600 dark:text-gray-400"}`}
                     >
-                        <option value="all">Semua</option>
+                        <option value="all">{t("teachers.filter_popover.all_option", "Semua")}</option>
                         {options.map(o => <option key={o.value} value={o.value}>{o.label}</option>)}
                     </select>
                     <ChevronDown className="absolute right-2 top-1/2 -translate-y-1/2 w-3 h-3 pointer-events-none text-gray-400" />
@@ -516,9 +531,9 @@ function FilterPopover({
             <div className="flex items-center justify-between px-4 py-3 bg-gray-50 dark:bg-gray-800/60 border-b border-gray-100 dark:border-gray-800">
                 <div className="flex items-center gap-2">
                     <Filter className="w-4 h-4 text-emerald-500" />
-                    <span className="text-sm font-bold text-gray-900 dark:text-white">Filter Lanjutan</span>
+                    <span className="text-sm font-bold text-gray-900 dark:text-white">{t("teachers.filter_popover.title", "Filter Lanjutan")}</span>
                     {hasActive && (
-                        <span className="px-1.5 py-0.5 rounded-full bg-emerald-500 text-white text-[9px] font-bold">Aktif</span>
+                        <span className="px-1.5 py-0.5 rounded-full bg-emerald-500 text-white text-[9px] font-bold">{t("teachers.filter_popover.active_badge", "Aktif")}</span>
                     )}
                 </div>
                 <button onClick={onClose} className="text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 transition-colors">
@@ -529,25 +544,33 @@ function FilterPopover({
             {/* Filters */}
             <div className="p-4 space-y-4">
                 <PillSelector
-                    label="Status"
+                    label={t("teachers.filter_popover.status_label", "Status")}
                     value={filterStatus}
                     onChange={setFilterStatus}
-                    options={[{ value: "verified", label: "Aktif" }, { value: "suspended", label: "Tidak Aktif" }, { value: "rejected", label: "Ditolak" }]}
+                    options={[
+                        { value: "verified", label: t("teachers.status.verified", "Aktif") },
+                        { value: "suspended", label: t("teachers.status.suspended", "Tidak Aktif") },
+                        { value: "rejected", label: t("teachers.status.rejected", "Ditolak") },
+                    ]}
                 />
                 <PillSelector
-                    label="Metode Mengajar"
+                    label={t("teachers.filter_popover.method_label", "Metode Mengajar")}
                     value={filterMetode}
                     onChange={setFilterMetode}
-                    options={[{ value: "Online", label: "Online" }, { value: "Offline", label: "Offline" }, { value: "Online & Offline", label: "Online & Offline" }]}
+                    options={[
+                        { value: "Online", label: t("teachers.methods.online", "Online") },
+                        { value: "Offline", label: t("teachers.methods.offline", "Offline") },
+                        { value: "Online & Offline", label: t("teachers.methods.hybrid", "Online & Offline") },
+                    ]}
                 />
                 <NativeSelect
-                    label="Skill / Keahlian"
+                    label={t("teachers.filter_popover.skill_label", "Skill / Keahlian")}
                     value={filterSkill}
                     onChange={setFilterSkill}
                     options={availableSkills.map((s: string) => ({ value: s, label: s }))}
                 />
                 <NativeSelect
-                    label="Metode Pengajaran"
+                    label={t("teachers.filter_popover.curriculum_label", "Metode Pengajaran")}
                     value={filterMetodePengajaran}
                     onChange={setFilterMetodePengajaran}
                     options={METODE_PENGAJARAN_OPTIONS.map(s => ({ value: s, label: s }))}
@@ -560,10 +583,10 @@ function FilterPopover({
                     onClick={() => { setFilterStatus("all"); setFilterMetode("all"); setFilterSkill("all"); setFilterMetodePengajaran("all") }}
                     className="text-xs text-gray-400 hover:text-red-500 transition-colors flex items-center gap-1"
                 >
-                    <RotateCcw className="w-3 h-3" /> Reset filter
+                    <RotateCcw className="w-3 h-3" /> {t("teachers.filter_popover.reset", "Reset filter")}
                 </button>
                 <button onClick={onClose} className="px-4 py-1.5 bg-emerald-500 hover:bg-emerald-600 text-white text-xs font-bold rounded-lg transition-colors">
-                    Terapkan
+                    {t("teachers.filter_popover.apply", "Terapkan")}
                 </button>
             </div>
         </div>
@@ -583,6 +606,9 @@ function ActionMenu({
     onVerify: (v: boolean) => void
     onFeature: (f: boolean) => void
 }) {
+    const { t, locale } = useI18n()
+    const params = useParams()
+    const lang = (params?.lang as string) || locale || "en"
     const [open, setOpen] = useState(false)
     const ref = useRef<HTMLDivElement>(null)
 
@@ -605,13 +631,13 @@ function ActionMenu({
     const items: MenuItem[] = [
         {
             icon: <Eye className="w-3.5 h-3.5" />,
-            label: "Lihat Profil",
-            onClick: () => { window.location.href = `/en/teachers/manage/${guru.id}` },
+            label: t("teachers.actions_menu.view_profile", "Lihat Profil"),
+            onClick: () => { window.location.href = `/${lang}/teachers/manage/${guru.id}` },
             className: "text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-800",
         },
         {
             icon: isAdminVerified ? <BadgeCheck className="w-3.5 h-3.5 text-emerald-500" /> : <BadgeCheck className="w-3.5 h-3.5" />,
-            label: isAdminVerified ? "Batalkan Verifikasi" : "Verifikasi Guru",
+            label: isAdminVerified ? t("teachers.actions_menu.unverify", "Batalkan Verifikasi") : t("teachers.actions_menu.verify", "Verifikasi Guru"),
             onClick: () => { onVerify(!isAdminVerified); setOpen(false) },
             className: isAdminVerified
                 ? "text-emerald-700 dark:text-emerald-400 hover:bg-emerald-50 dark:hover:bg-emerald-900/20"
@@ -619,7 +645,7 @@ function ActionMenu({
         },
         {
             icon: isFeatured ? <ZapOff className="w-3.5 h-3.5 text-amber-500" /> : <Zap className="w-3.5 h-3.5" />,
-            label: isFeatured ? "Hapus dari Unggulan" : "Jadikan Unggulan",
+            label: isFeatured ? t("teachers.actions_menu.unfeature", "Hapus dari Unggulan") : t("teachers.actions_menu.feature", "Jadikan Unggulan"),
             onClick: () => { onFeature(!isFeatured); setOpen(false) },
             className: isFeatured
                 ? "text-amber-700 dark:text-amber-400 hover:bg-amber-50 dark:hover:bg-amber-900/20"
@@ -628,13 +654,13 @@ function ActionMenu({
         },
         ...(guru.status === "verified" ? [{
             icon: <ShieldOff className="w-3.5 h-3.5" />,
-            label: "Nonaktifkan",
+            label: t("teachers.actions_menu.deactivate", "Nonaktifkan"),
             onClick: () => { onSuspend(); setOpen(false) },
             className: "text-red-600 dark:text-red-400 hover:bg-red-50 dark:hover:bg-red-900/20",
         }] : []),
         ...(guru.status === "suspended" ? [{
             icon: <ShieldCheck className="w-3.5 h-3.5" />,
-            label: "Aktifkan Kembali",
+            label: t("teachers.actions_menu.reactivate", "Aktifkan Kembali"),
             onClick: () => { onUnsuspend(); setOpen(false) },
             className: "text-amber-600 dark:text-amber-400 hover:bg-amber-50 dark:hover:bg-amber-900/20",
         }] : []),
@@ -645,7 +671,7 @@ function ActionMenu({
             <button
                 onClick={() => setOpen(v => !v)}
                 className="w-8 h-8 flex items-center justify-center rounded-lg border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-500 hover:text-gray-800 dark:hover:text-gray-200 hover:border-gray-300 dark:hover:border-gray-600 transition-all"
-                title="Aksi"
+                title={t("teachers.table.actions", "Aksi")}
             >
                 <MoreVertical className="w-4 h-4" />
             </button>
@@ -671,6 +697,10 @@ function ActionMenu({
 
 // ── Main Content ──────────────────────────────────────────────────────────────
 function GuruContent() {
+    const { t, locale } = useI18n()
+    const params = useParams()
+    const lang = (params?.lang as string) || locale || "en"
+
     const [apiGurus, setApiGurus] = useState<any[]>([])
     const [guruStatuses, setGuruStatuses] = useState<Record<number, "verified" | "suspended" | "rejected">>({})
     const [deactivateModal, setDeactivateModal] = useState<{ open: boolean; guruId: number | null; guruName: string }>({ open: false, guruId: null, guruName: "" })
@@ -828,8 +858,13 @@ function GuruContent() {
         try { const res = await fetch(`${API_BASE_URL}/api/v1/Trainers/${guruId}/suspend`, { method: "POST", headers, body: JSON.stringify({ reason: deactivateReason, until: deactivateDuration || null }) }); if (!res.ok) throw new Error() } catch {}
         finally {
             setGuruStatuses(prev => { const u: Record<number, "verified" | "suspended" | "rejected"> = { ...prev, [guruId]: "suspended" }; try { sessionStorage.setItem("guruStatuses", JSON.stringify(u)) } catch {}; return u })
-            setSuspendReasons(prev => { const payload = JSON.stringify({ reason: deactivateReason, duration: deactivateDuration || "Tidak ditentukan", date: new Date().toISOString() }); const u = { ...prev, [guruId]: payload }; try { sessionStorage.setItem("guruSuspendReasons", JSON.stringify(u)) } catch {}; return u })
-            showToast({ type: "info", title: `${guruName} dinonaktifkan`, message: deactivateReason ? `Alasan: ${deactivateReason}` : "Guru tidak dapat menerima pesanan baru.", endpoint: `POST /api/v1/Trainers/${guruId}/suspend` })
+            setSuspendReasons(prev => { const payload = JSON.stringify({ reason: deactivateReason, duration: deactivateDuration || t("teachers.modals.reactivate.not_specified", "Tidak ditentukan"), date: new Date().toISOString() }); const u = { ...prev, [guruId]: payload }; try { sessionStorage.setItem("guruSuspendReasons", JSON.stringify(u)) } catch {}; return u })
+            showToast({
+                type: "info",
+                title: t("teachers.toasts.deactivated_title", `${guruName} dinonaktifkan`, { name: guruName }),
+                message: deactivateReason ? t("teachers.toasts.deactivated_reason", `Alasan: ${deactivateReason}`, { reason: deactivateReason }) : t("teachers.toasts.deactivated_message", "Guru tidak dapat menerima pesanan baru."),
+                endpoint: `POST /api/v1/Trainers/${guruId}/suspend`
+            })
             setIsSuspending(false)
             setDeactivateModal({ open: false, guruId: null, guruName: "" })
             setDeactivateReason(""); setDeactivateDuration("")
@@ -843,7 +878,12 @@ function GuruContent() {
         try { const res = await fetch(`${API_BASE_URL}/api/v1/Trainers/${guruId}/unsuspend`, { method: "POST", headers }); if (!res.ok) throw new Error() } catch {}
         finally {
             setGuruStatuses(prev => { const u: Record<number, "verified" | "suspended" | "rejected"> = { ...prev, [guruId]: "verified" }; try { sessionStorage.setItem("guruStatuses", JSON.stringify(u)) } catch {}; return u })
-            showToast({ type: "success", title: `${guruName} diaktifkan kembali`, message: "Status guru dikembalikan menjadi Aktif.", endpoint: `POST /api/v1/Trainers/${guruId}/unsuspend` })
+            showToast({
+                type: "success",
+                title: t("teachers.toasts.reactivated_title", `${guruName} diaktifkan kembali`, { name: guruName }),
+                message: t("teachers.toasts.reactivated_message", "Status guru dikembalikan menjadi Aktif."),
+                endpoint: `POST /api/v1/Trainers/${guruId}/unsuspend`
+            })
         }
     }
 
@@ -854,7 +894,12 @@ function GuruContent() {
         try { await fetch(`${API_BASE_URL}/api/v1/Trainers/${guruId}/verify`, { method: "POST", headers, body: JSON.stringify({ isVerified: isVerified ? 1 : 0, verificationLevel: isVerified ? 1 : null }) }) } catch {}
         finally {
             setGuruVerified(prev => ({ ...prev, [guruId]: isVerified }))
-            showToast({ type: isVerified ? "success" : "info", title: isVerified ? `${guruName} diverifikasi` : `Verifikasi ${guruName} dibatalkan`, message: isVerified ? "Guru telah mendapatkan status terverifikasi admin." : "Status verifikasi admin dicabut.", endpoint: `POST /api/v1/Trainers/${guruId}/verify` })
+            showToast({
+                type: isVerified ? "success" : "info",
+                title: isVerified ? t("teachers.toasts.verified_title", `${guruName} diverifikasi`, { name: guruName }) : t("teachers.toasts.unverified_title", `Verifikasi ${guruName} dibatalkan`, { name: guruName }),
+                message: isVerified ? t("teachers.toasts.verified_message", "Guru telah mendapatkan status terverifikasi admin.") : t("teachers.toasts.unverified_message", "Status verifikasi admin dicabut."),
+                endpoint: `POST /api/v1/Trainers/${guruId}/verify`
+            })
         }
     }
 
@@ -865,7 +910,12 @@ function GuruContent() {
         try { await fetch(`${API_BASE_URL}/api/v1/Trainers/${guruId}/feature`, { method: "POST", headers, body: JSON.stringify({ isFeatured: isFeatured ? 1 : 0 }) }) } catch {}
         finally {
             setGuruFeatured(prev => ({ ...prev, [guruId]: isFeatured }))
-            showToast({ type: isFeatured ? "success" : "info", title: isFeatured ? `${guruName} dijadikan Unggulan` : `${guruName} dihapus dari Unggulan`, message: isFeatured ? "Guru akan tampil di halaman utama marketplace." : "Guru tidak lagi tampil sebagai guru unggulan.", endpoint: `POST /api/v1/Trainers/${guruId}/feature` })
+            showToast({
+                type: isFeatured ? "success" : "info",
+                title: isFeatured ? t("teachers.toasts.featured_title", `${guruName} dijadikan Unggulan`, { name: guruName }) : t("teachers.toasts.unfeatured_title", `${guruName} dihapus dari Unggulan`, { name: guruName }),
+                message: isFeatured ? t("teachers.toasts.featured_message", "Guru akan tampil di halaman utama marketplace.") : t("teachers.toasts.unfeatured_message", "Guru tidak lagi tampil sebagai guru unggulan."),
+                endpoint: `POST /api/v1/Trainers/${guruId}/feature`
+            })
         }
     }
 
@@ -956,7 +1006,7 @@ function GuruContent() {
 
                 {/* ── Header ── */}
                 <div>
-                    <h1 className="text-2xl font-bold text-gray-900 dark:text-white">Guru</h1>
+                    <h1 className="text-2xl font-bold text-gray-900 dark:text-white">{t("teachers.title", "Guru")}</h1>
                 </div>
 
                 {/* ── Action Bar ── */}
@@ -969,12 +1019,12 @@ function GuruContent() {
                                 value={searchInput}
                                 onChange={e => setSearchInput(e.target.value)}
                                 onKeyDown={handleKeyDown}
-                                placeholder="Cari nama, email..."
+                                placeholder={t("teachers.search_placeholder", "Cari nama, email...")}
                                 className="w-full pl-9 pr-4 py-2 text-sm rounded-l-lg border border-r-0 border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-900 text-gray-900 dark:text-white placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-emerald-500/30 focus:border-emerald-500"
                             />
                         </div>
                         <button onClick={handleSearch} className="px-4 py-2 bg-emerald-500 hover:bg-emerald-600 text-white text-sm font-semibold rounded-r-lg border border-emerald-500 transition-colors flex items-center gap-1.5">
-                            <Search className="w-3.5 h-3.5" /> Cari
+                            <Search className="w-3.5 h-3.5" /> {t("teachers.search_button", "Cari")}
                         </button>
                     </div>
 
@@ -986,7 +1036,7 @@ function GuruContent() {
                                 ? "bg-emerald-50 border-emerald-300 text-emerald-700 dark:bg-emerald-900/20 dark:border-emerald-700 dark:text-emerald-400"
                                 : "bg-white border-gray-200 text-gray-600 hover:border-gray-300 dark:bg-gray-900 dark:border-gray-700 dark:text-gray-400"}`}
                         >
-                            <Filter className="w-3.5 h-3.5" /> Filter
+                            <Filter className="w-3.5 h-3.5" /> {t("teachers.filter_button", "Filter")}
                             <ChevronDown className={`w-3 h-3 transition-transform ${showFilterModal ? "rotate-180" : ""}`} />
                         </button>
                         <FilterPopover
@@ -1012,14 +1062,20 @@ function GuruContent() {
                     {/* Reset */}
                     {activeFilterCount > 0 && (
                         <button onClick={resetFilters} className="inline-flex items-center gap-1.5 px-3 py-2 rounded-lg border border-red-200 dark:border-red-800 bg-red-50 dark:bg-red-900/20 text-red-600 dark:text-red-400 text-xs font-semibold hover:bg-red-100 transition-colors">
-                            <RotateCcw className="w-3.5 h-3.5" /> Reset ({activeFilterCount})
+                            <RotateCcw className="w-3.5 h-3.5" /> {t("teachers.reset_button", `Reset (${activeFilterCount})`, { count: activeFilterCount })}
                         </button>
                     )}
                 </div>
 
                 {activeFilterCount > 0 && (
                     <div className="px-1 text-xs text-gray-500 dark:text-gray-400 flex items-center gap-1.5">
-                        <Filter className="w-3.5 h-3.5" /> Menampilkan <span className="font-bold text-emerald-600">{filtered.length}</span> dari <span className="font-bold text-emerald-600">{effectiveApiGurus.length}</span> guru.
+                        <Filter className="w-3.5 h-3.5" />
+                        <span>
+                            {t("teachers.showing_count", `Menampilkan ${filtered.length} dari ${effectiveApiGurus.length} guru.`, {
+                                filtered: filtered.length,
+                                total: effectiveApiGurus.length,
+                            })}
+                        </span>
                     </div>
                 )}
 
@@ -1029,16 +1085,16 @@ function GuruContent() {
                         <table className="w-full text-sm">
                             <thead>
                                 <tr className="bg-gray-50 dark:bg-gray-800/60 border-b border-gray-200 dark:border-gray-700">
-                                    <th className="text-left text-xs font-bold text-gray-800 dark:text-gray-200 px-4 py-3 whitespace-nowrap">Guru</th>
-                                    <th className="text-left text-xs font-bold text-gray-800 dark:text-gray-200 px-4 py-3 whitespace-nowrap">Metode</th>
-                                    <th className="text-left text-xs font-bold text-gray-800 dark:text-gray-200 px-4 py-3 whitespace-nowrap">Lokasi</th>
-                                    <th className="text-left text-xs font-bold text-gray-800 dark:text-gray-200 px-4 py-3 cursor-pointer select-none whitespace-nowrap hover:text-emerald-600 transition-colors" onClick={() => handleSort("totalStudents")}>Murid <SortIcon field="totalStudents" /></th>
-                                    <th className="text-left text-xs font-bold text-gray-800 dark:text-gray-200 px-4 py-3 cursor-pointer select-none whitespace-nowrap hover:text-emerald-600 transition-colors" onClick={() => handleSort("rating")}>Rating <SortIcon field="rating" /></th>
-                                    <th className="text-left text-xs font-bold text-gray-800 dark:text-gray-200 px-4 py-3 cursor-pointer select-none whitespace-nowrap hover:text-emerald-600 transition-colors" onClick={() => handleSort("totalRevenue")}>Revenue <SortIcon field="totalRevenue" /></th>
-                                    <th className="text-left text-xs font-bold text-gray-800 dark:text-gray-200 px-4 py-3 whitespace-nowrap">Status</th>
-                                    <th className="text-left text-xs font-bold text-gray-800 dark:text-gray-200 px-4 py-3 whitespace-nowrap">Unggulan</th>
-                                    <th className="text-left text-xs font-bold text-gray-800 dark:text-gray-200 px-4 py-3 cursor-pointer select-none whitespace-nowrap hover:text-emerald-600 transition-colors" onClick={() => handleSort("createdAt")}>Tgl Bergabung <SortIcon field="createdAt" /></th>
-                                    <th className="text-left text-xs font-bold text-gray-800 dark:text-gray-200 px-4 py-3 whitespace-nowrap">Aksi</th>
+                                    <th className="text-left text-xs font-bold text-gray-800 dark:text-gray-200 px-4 py-3 whitespace-nowrap">{t("teachers.table.teacher", "Guru")}</th>
+                                    <th className="text-left text-xs font-bold text-gray-800 dark:text-gray-200 px-4 py-3 whitespace-nowrap">{t("teachers.table.method", "Metode")}</th>
+                                    <th className="text-left text-xs font-bold text-gray-800 dark:text-gray-200 px-4 py-3 whitespace-nowrap">{t("teachers.table.location", "Lokasi")}</th>
+                                    <th className="text-left text-xs font-bold text-gray-800 dark:text-gray-200 px-4 py-3 cursor-pointer select-none whitespace-nowrap hover:text-emerald-600 transition-colors" onClick={() => handleSort("totalStudents")}>{t("teachers.table.students", "Murid")} <SortIcon field="totalStudents" /></th>
+                                    <th className="text-left text-xs font-bold text-gray-800 dark:text-gray-200 px-4 py-3 cursor-pointer select-none whitespace-nowrap hover:text-emerald-600 transition-colors" onClick={() => handleSort("rating")}>{t("teachers.table.rating", "Rating")} <SortIcon field="rating" /></th>
+                                    <th className="text-left text-xs font-bold text-gray-800 dark:text-gray-200 px-4 py-3 cursor-pointer select-none whitespace-nowrap hover:text-emerald-600 transition-colors" onClick={() => handleSort("totalRevenue")}>{t("teachers.table.revenue", "Revenue")} <SortIcon field="totalRevenue" /></th>
+                                    <th className="text-left text-xs font-bold text-gray-800 dark:text-gray-200 px-4 py-3 whitespace-nowrap">{t("teachers.table.status", "Status")}</th>
+                                    <th className="text-left text-xs font-bold text-gray-800 dark:text-gray-200 px-4 py-3 whitespace-nowrap">{t("teachers.table.featured", "Unggulan")}</th>
+                                    <th className="text-left text-xs font-bold text-gray-800 dark:text-gray-200 px-4 py-3 cursor-pointer select-none whitespace-nowrap hover:text-emerald-600 transition-colors" onClick={() => handleSort("createdAt")}>{t("teachers.table.joined_date", "Tgl Bergabung")} <SortIcon field="createdAt" /></th>
+                                    <th className="text-left text-xs font-bold text-gray-800 dark:text-gray-200 px-4 py-3 whitespace-nowrap">{t("teachers.table.actions", "Aksi")}</th>
                                 </tr>
                             </thead>
                             <tbody className="divide-y divide-gray-100 dark:divide-gray-800">
@@ -1046,27 +1102,33 @@ function GuruContent() {
                                     <tr>
                                         <td colSpan={10} className="text-center py-16 text-gray-400 dark:text-gray-500">
                                             <Users className="w-8 h-8 mx-auto mb-2 opacity-40" />
-                                            <p>Tidak ada data yang ditemukan</p>
-                                            {activeFilterCount > 0 && <button onClick={resetFilters} className="mt-2 text-xs text-emerald-500 hover:underline">Reset semua filter</button>}
+                                            <p>{t("teachers.table.empty_title", "Tidak ada data yang ditemukan")}</p>
+                                            {activeFilterCount > 0 && <button onClick={resetFilters} className="mt-2 text-xs text-emerald-500 hover:underline">{t("teachers.table.reset_all", "Reset semua filter")}</button>}
                                         </td>
                                     </tr>
                                 ) : paged.map(guru => {
                                     const st = STATUS_CFG[guru.status as keyof typeof STATUS_CFG]
                                     const myLabels = guruLabels[guru.id] || []
+                                    const methodLabel = guru.teachingMethod === "Online"
+                                        ? t("teachers.methods.online", "Online")
+                                        : guru.teachingMethod === "Offline"
+                                        ? t("teachers.methods.offline", "Offline")
+                                        : t("teachers.methods.hybrid", "Online & Offline")
+
                                     return (
                                         <tr key={guru.id} className="hover:bg-gray-50 dark:hover:bg-gray-800/50 transition-colors group">
                                             <td className="px-4 py-3">
                                                 <div className="flex items-center gap-3">
-                                                    <Link href={`/en/teachers/manage/${guru.id}`} className="relative w-9 h-9 rounded-full overflow-hidden flex-shrink-0 ring-2 ring-emerald-100 dark:ring-emerald-900/30 hover:ring-emerald-400 dark:hover:ring-emerald-500 transition-all hover:scale-110">
+                                                    <Link href={`/${lang}/teachers/manage/${guru.id}`} className="relative w-9 h-9 rounded-full overflow-hidden flex-shrink-0 ring-2 ring-emerald-100 dark:ring-emerald-900/30 hover:ring-emerald-400 dark:hover:ring-emerald-500 transition-all hover:scale-110">
                                                         {guru.avatar ? <Image src={guru.avatar} alt={guru.name} fill className="object-cover" unoptimized /> : <div className="w-full h-full bg-emerald-100 text-emerald-700 dark:bg-emerald-900/50 dark:text-emerald-400 flex items-center justify-center font-bold">{guru.name.charAt(0).toUpperCase()}</div>}
                                                     </Link>
                                                     <div>
-                                                        <Link href={`/en/teachers/manage/${guru.id}`} className="font-bold text-gray-900 dark:text-white text-xs leading-tight hover:text-emerald-600 dark:hover:text-emerald-400 hover:underline transition-colors">{guru.name}</Link>
+                                                        <Link href={`/${lang}/teachers/manage/${guru.id}`} className="font-bold text-gray-900 dark:text-white text-xs leading-tight hover:text-emerald-600 dark:hover:text-emerald-400 hover:underline transition-colors">{guru.name}</Link>
                                                         <p className="text-[10px] text-gray-400 dark:text-gray-500 mt-0.5 truncate max-w-[140px]">@{guru.username}</p>
                                                     </div>
                                                 </div>
                                             </td>
-                                            <td className="px-4 py-3 text-xs italic font-semibold text-gray-700 dark:text-gray-300 whitespace-nowrap">{guru.teachingMethod}</td>
+                                            <td className="px-4 py-3 text-xs italic font-semibold text-gray-700 dark:text-gray-300 whitespace-nowrap">{methodLabel}</td>
                                             <td className="px-4 py-3">
                                                 {(guru.cityName || guru.stateName || guru.countryName) ? (
                                                     <div className="text-xs text-gray-700 dark:text-gray-300">
@@ -1075,27 +1137,27 @@ function GuruContent() {
                                                     </div>
                                                 ) : <span className="text-xs text-gray-400">&#8212;</span>}
                                             </td>
-                                            <td className="px-4 py-3 text-xs font-bold text-gray-900 dark:text-white">{guru.status === "verified" ? <>{guru.stats.totalStudents} murid</> : <span className="text-gray-400 dark:text-gray-600">&#8212;</span>}</td>
+                                            <td className="px-4 py-3 text-xs font-bold text-gray-900 dark:text-white">{guru.status === "verified" ? <>{t("teachers.table.students_count", `${guru.stats.totalStudents} murid`, { count: guru.stats.totalStudents })}</> : <span className="text-gray-400 dark:text-gray-600">&#8212;</span>}</td>
                                             <td className="px-4 py-3">
                                                 {guru.rating > 0 ? <div className="flex items-center gap-1"><Star className="w-3.5 h-3.5 text-amber-400 fill-amber-400" /><span className="text-xs font-bold text-gray-900 dark:text-white">{guru.rating.toFixed(1)}</span></div> : <span className="text-xs text-gray-400 dark:text-gray-600">&#8212;</span>}
                                             </td>
                                             <td className="px-4 py-3 text-xs font-bold text-gray-900 dark:text-white">{guru.status === "verified" ? formatRupiah(guru.stats.totalRevenue) : <span className="text-gray-400 dark:text-gray-600">&#8212;</span>}</td>
                                             <td className="px-4 py-3">
                                                 <span className={`inline-flex items-center gap-1 rounded-full px-2 py-0.5 text-[10px] font-semibold ${st?.bg ?? ""} ${st?.text ?? ""}`}>
-                                                    <span className={`w-1.5 h-1.5 rounded-full ${st?.dot ?? ""}`} />{st?.label ?? guru.status}
+                                                    <span className={`w-1.5 h-1.5 rounded-full ${st?.dot ?? ""}`} />{t(`teachers.status.${guru.status}`, st?.defaultLabel ?? guru.status)}
                                                 </span>
                                             </td>
                                             <td className="px-4 py-3 max-w-[220px]">
                                                 {guruFeatured[guru.id] ? (
                                                     <span className="inline-flex items-center gap-1 rounded-full bg-amber-50 dark:bg-amber-900/20 text-amber-700 dark:text-amber-400 px-2.5 py-1 text-[10px] font-bold border border-amber-200/50 dark:border-amber-800/50">
-                                                        <Star className="w-3 h-3 fill-amber-400 text-amber-400" /> Unggulan
+                                                        <Star className="w-3 h-3 fill-amber-400 text-amber-400" /> {t("teachers.table.featured_badge", "Unggulan")}
                                                     </span>
                                                 ) : <span className="text-gray-400 dark:text-gray-600 text-xs font-bold px-3">-</span>}
                                             </td>
                                             <td className="px-4 py-3 whitespace-nowrap">
                                                 <div className="flex items-center gap-1.5 text-xs text-gray-700 dark:text-gray-300 font-medium">
                                                     <Calendar className="w-3.5 h-3.5 text-gray-400" />
-                                                    {formatDate(guru.createdAt)}
+                                                    {formatDate(guru.createdAt, locale)}
                                                 </div>
                                             </td>
                                             <td className="px-4 py-3">
@@ -1122,32 +1184,38 @@ function GuruContent() {
                     {paged.length === 0 ? (
                         <div className="bg-white dark:bg-gray-900 rounded-xl border border-gray-200 dark:border-gray-700 p-10 text-center">
                             <Users className="w-8 h-8 mx-auto mb-2 text-gray-300 dark:text-gray-600" />
-                            <p className="text-sm text-gray-400">Tidak ada data</p>
-                            {activeFilterCount > 0 && <button onClick={resetFilters} className="mt-2 text-xs text-emerald-500 hover:underline">Reset filter</button>}
+                            <p className="text-sm text-gray-400">{t("teachers.mobile.empty", "Tidak ada data")}</p>
+                            {activeFilterCount > 0 && <button onClick={resetFilters} className="mt-2 text-xs text-emerald-500 hover:underline">{t("teachers.mobile.reset", "Reset filter")}</button>}
                         </div>
                     ) : paged.map(guru => {
                         const st = STATUS_CFG[guru.status as keyof typeof STATUS_CFG]
                         const myLabels = guruLabels[guru.id] || []
+                        const methodLabel = guru.teachingMethod === "Online"
+                            ? t("teachers.methods.online", "Online")
+                            : guru.teachingMethod === "Offline"
+                            ? t("teachers.methods.offline", "Offline")
+                            : t("teachers.methods.hybrid", "Online & Offline")
+
                         return (
                             <div key={guru.id} className="bg-white dark:bg-gray-900 rounded-xl border border-gray-200 dark:border-gray-700 p-4 space-y-3 shadow-sm">
                                 <div className="flex items-start justify-between gap-3">
                                     <div className="flex items-center gap-3 min-w-0">
-                                        <Link href={`/en/teachers/manage/${guru.id}`} className="relative w-10 h-10 rounded-full overflow-hidden flex-shrink-0 ring-2 ring-emerald-100 dark:ring-emerald-900/30">
+                                        <Link href={`/${lang}/teachers/manage/${guru.id}`} className="relative w-10 h-10 rounded-full overflow-hidden flex-shrink-0 ring-2 ring-emerald-100 dark:ring-emerald-900/30">
                                             {guru.avatar ? <Image src={guru.avatar} alt={guru.name} fill className="object-cover" unoptimized /> : <div className="w-full h-full bg-gradient-to-br from-emerald-400 to-teal-500 flex items-center justify-center text-white font-bold text-sm">{guru.name.charAt(0).toUpperCase()}</div>}
                                         </Link>
                                         <div className="min-w-0">
-                                            <Link href={`/en/teachers/manage/${guru.id}`} className="font-bold text-gray-900 dark:text-white text-sm leading-tight truncate block hover:text-emerald-600 transition-colors">{guru.name}</Link>
+                                            <Link href={`/${lang}/teachers/manage/${guru.id}`} className="font-bold text-gray-900 dark:text-white text-sm leading-tight truncate block hover:text-emerald-600 transition-colors">{guru.name}</Link>
                                             <p className="text-[11px] text-gray-400 truncate">@{guru.username}</p>
                                         </div>
                                     </div>
                                     <div className="flex items-center gap-2 flex-shrink-0">
-                                                {guruFeatured[guru.id] && (
-                                                    <span className="inline-flex items-center gap-0.5 rounded-full bg-amber-50 dark:bg-amber-900/20 text-amber-700 dark:text-amber-400 px-1.5 py-0.5 text-[9px] font-bold border border-amber-200/50 dark:border-amber-800/50" title="Guru Unggulan">
-                                                        <Star className="w-2.5 h-2.5 fill-amber-400 text-amber-400" />
-                                                    </span>
-                                                )}
+                                        {guruFeatured[guru.id] && (
+                                            <span className="inline-flex items-center gap-0.5 rounded-full bg-amber-50 dark:bg-amber-900/20 text-amber-700 dark:text-amber-400 px-1.5 py-0.5 text-[9px] font-bold border border-amber-200/50 dark:border-amber-800/50" title={t("teachers.table.featured_badge", "Guru Unggulan")}>
+                                                <Star className="w-2.5 h-2.5 fill-amber-400 text-amber-400" />
+                                            </span>
+                                        )}
                                         <span className={`inline-flex items-center gap-1 rounded-full px-2 py-0.5 text-[10px] font-semibold ${st?.bg ?? ""} ${st?.text ?? ""}`}>
-                                            <span className={`w-1.5 h-1.5 rounded-full ${st?.dot ?? ""}`} />{st?.label ?? guru.status}
+                                            <span className={`w-1.5 h-1.5 rounded-full ${st?.dot ?? ""}`} />{t(`teachers.status.${guru.status}`, st?.defaultLabel ?? guru.status)}
                                         </span>
                                         <ActionMenu
                                             guru={guru}
@@ -1161,13 +1229,13 @@ function GuruContent() {
                                     </div>
                                 </div>
                                 <div className="grid grid-cols-2 gap-2 text-xs">
-                                    <div className="bg-gray-50 dark:bg-gray-800/50 rounded-lg p-2.5"><p className="text-[10px] text-gray-400 font-semibold uppercase mb-0.5">Metode</p><p className="font-semibold text-gray-700 dark:text-gray-300 truncate">{guru.teachingMethod}</p></div>
-                                    <div className="bg-gray-50 dark:bg-gray-800/50 rounded-lg p-2.5"><p className="text-[10px] text-gray-400 font-semibold uppercase mb-0.5">Tgl Bergabung</p><p className="font-semibold text-gray-700 dark:text-gray-300 truncate flex items-center gap-1"><Calendar className="w-3 h-3 text-gray-400" />{formatDate(guru.createdAt)}</p></div>
+                                    <div className="bg-gray-50 dark:bg-gray-800/50 rounded-lg p-2.5"><p className="text-[10px] text-gray-400 font-semibold uppercase mb-0.5">{t("teachers.mobile.method", "Metode")}</p><p className="font-semibold text-gray-700 dark:text-gray-300 truncate">{methodLabel}</p></div>
+                                    <div className="bg-gray-50 dark:bg-gray-800/50 rounded-lg p-2.5"><p className="text-[10px] text-gray-400 font-semibold uppercase mb-0.5">{t("teachers.mobile.joined_date", "Tgl Bergabung")}</p><p className="font-semibold text-gray-700 dark:text-gray-300 truncate flex items-center gap-1"><Calendar className="w-3 h-3 text-gray-400" />{formatDate(guru.createdAt, locale)}</p></div>
                                     {guru.status === "verified" ? (<>
-                                        <div className="bg-gray-50 dark:bg-gray-800/50 rounded-lg p-2.5"><p className="text-[10px] text-gray-400 font-semibold uppercase mb-0.5">Murid</p><p className="font-bold text-emerald-600 dark:text-emerald-400">{guru.stats.totalStudents}</p></div>
-                                        <div className="bg-gray-50 dark:bg-gray-800/50 rounded-lg p-2.5"><p className="text-[10px] text-gray-400 font-semibold uppercase mb-0.5">Revenue</p><p className="font-bold text-emerald-600 dark:text-emerald-400">{formatRupiah(guru.stats.totalRevenue)}</p></div>
+                                        <div className="bg-gray-50 dark:bg-gray-800/50 rounded-lg p-2.5"><p className="text-[10px] text-gray-400 font-semibold uppercase mb-0.5">{t("teachers.mobile.students", "Murid")}</p><p className="font-bold text-emerald-600 dark:text-emerald-400">{guru.stats.totalStudents}</p></div>
+                                        <div className="bg-gray-50 dark:bg-gray-800/50 rounded-lg p-2.5"><p className="text-[10px] text-gray-400 font-semibold uppercase mb-0.5">{t("teachers.mobile.revenue", "Revenue")}</p><p className="font-bold text-emerald-600 dark:text-emerald-400">{formatRupiah(guru.stats.totalRevenue)}</p></div>
                                     </>) : (
-                                        <div className="col-span-2 bg-gray-50 dark:bg-gray-800/50 rounded-lg p-2.5"><p className="text-gray-500 italic text-xs">Data tidak tersedia untuk guru non-aktif</p></div>
+                                        <div className="col-span-2 bg-gray-50 dark:bg-gray-800/50 rounded-lg p-2.5"><p className="text-gray-500 italic text-xs">{t("teachers.mobile.inactive_notice", "Data tidak tersedia untuk guru non-aktif")}</p></div>
                                     )}
                                 </div>
 
@@ -1179,7 +1247,7 @@ function GuruContent() {
                 {/* ── Pagination ── */}
                 <div className="flex items-center justify-between px-6 py-3 bg-white dark:bg-gray-900 rounded-xl border border-gray-200 dark:border-gray-700">
                     <span className="text-xs text-gray-500 dark:text-gray-400">
-                        {filtered.length === 0 ? "Tidak ada data" : `Menampilkan ${Math.min((page - 1) * PAGE_SIZE + 1, filtered.length)}\u2013${Math.min(page * PAGE_SIZE, filtered.length)} dari ${filtered.length} data`}
+                        {filtered.length === 0 ? t("teachers.pagination.empty", "Tidak ada data") : t("teachers.pagination.showing", `Menampilkan ${Math.min((page - 1) * PAGE_SIZE + 1, filtered.length)}–${Math.min(page * PAGE_SIZE, filtered.length)} dari ${filtered.length} data`, { start: Math.min((page - 1) * PAGE_SIZE + 1, filtered.length), end: Math.min(page * PAGE_SIZE, filtered.length), total: filtered.length })}
                     </span>
                     <div className="flex items-center gap-1">
                         <button onClick={() => setPage(p => Math.max(1, p - 1))} disabled={page === 1} className="p-1.5 rounded-lg border border-gray-200 dark:border-gray-700 text-gray-500 hover:bg-white dark:hover:bg-gray-800 disabled:opacity-40 disabled:cursor-not-allowed transition-colors"><ChevronLeft className="w-4 h-4" /></button>
@@ -1194,25 +1262,34 @@ function GuruContent() {
             {/* ── Reactivate Modal ── */}
             {reactivateModal.open && (() => {
                 const rawReason = reactivateModal.guruId ? suspendReasons[reactivateModal.guruId] : null
-                let reasonText = "Alasan tidak dicantumkan.", dateText = new Date().toLocaleDateString("id-ID", { day: "numeric", month: "short", year: "numeric" }), durationText = "Tidak ditentukan"
-                if (rawReason) { try { const p = JSON.parse(rawReason); reasonText = p.reason || reasonText; durationText = p.duration || durationText; if (p.date) dateText = new Date(p.date).toLocaleDateString("id-ID", { day: "numeric", month: "short", year: "numeric" }) } catch { reasonText = rawReason } }
+                let reasonText = t("teachers.modals.reactivate.default_reason", "Alasan tidak dicantumkan."),
+                    dateText = formatDate(new Date().toISOString(), locale),
+                    durationText = t("teachers.modals.reactivate.not_specified", "Tidak ditentukan")
+                if (rawReason) {
+                    try {
+                        const p = JSON.parse(rawReason)
+                        reasonText = p.reason || reasonText
+                        durationText = p.duration || durationText
+                        if (p.date) dateText = formatDate(p.date, locale)
+                    } catch { reasonText = rawReason }
+                }
                 return (
                     <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/50 backdrop-blur-sm">
                         <div className="bg-white dark:bg-gray-900 rounded-2xl w-full max-w-md shadow-2xl border border-emerald-100 dark:border-emerald-900/50 overflow-hidden">
                             <div className="bg-emerald-50 dark:bg-emerald-900/20 p-5 flex items-start gap-4 border-b border-emerald-100 dark:border-emerald-800">
                                 <div className="w-10 h-10 rounded-full bg-emerald-100 dark:bg-emerald-800/50 flex items-center justify-center text-emerald-600 dark:text-emerald-400 flex-shrink-0"><ShieldOff className="w-5 h-5" /></div>
-                                <div><h2 className="text-base font-bold text-gray-900 dark:text-white">Guru dinonaktifkan</h2><p className="text-sm text-gray-500 dark:text-gray-400 mt-0.5 font-medium">{reactivateModal.guruName} &bull; @{reactivateModal.guruUsername}</p></div>
+                                <div><h2 className="text-base font-bold text-gray-900 dark:text-white">{t("teachers.modals.reactivate.title", "Guru dinonaktifkan")}</h2><p className="text-sm text-gray-500 dark:text-gray-400 mt-0.5 font-medium">{reactivateModal.guruName} &bull; @{reactivateModal.guruUsername}</p></div>
                             </div>
                             <div className="p-5 space-y-4">
-                                <div><h3 className="text-sm font-semibold text-gray-700 dark:text-gray-300 flex items-center gap-1.5 mb-2"><AlertTriangle className="w-4 h-4 text-emerald-500" /> Alasan</h3><p className="text-sm font-medium text-gray-600 dark:text-gray-400 leading-relaxed">{reasonText}</p></div>
+                                <div><h3 className="text-sm font-semibold text-gray-700 dark:text-gray-300 flex items-center gap-1.5 mb-2"><AlertTriangle className="w-4 h-4 text-emerald-500" /> {t("teachers.modals.reactivate.reason_heading", "Alasan")}</h3><p className="text-sm font-medium text-gray-600 dark:text-gray-400 leading-relaxed">{reasonText}</p></div>
                                 <div className="bg-gray-50 dark:bg-gray-800/50 rounded-xl p-4 flex items-center justify-between border border-gray-100 dark:border-gray-800">
-                                    <div><p className="text-[11px] font-semibold text-gray-400 mb-1">Dinonaktifkan sejak</p><p className="text-sm font-bold text-gray-700 dark:text-gray-300">{dateText}</p></div>
-                                    <div><p className="text-[11px] font-semibold text-gray-400 mb-1">Durasi</p><p className="text-sm font-bold text-gray-700 dark:text-gray-300">{durationText}</p></div>
+                                    <div><p className="text-[11px] font-semibold text-gray-400 mb-1">{t("teachers.modals.reactivate.deactivated_since", "Dinonaktifkan sejak")}</p><p className="text-sm font-bold text-gray-700 dark:text-gray-300">{dateText}</p></div>
+                                    <div><p className="text-[11px] font-semibold text-gray-400 mb-1">{t("teachers.modals.reactivate.duration", "Durasi")}</p><p className="text-sm font-bold text-gray-700 dark:text-gray-300">{durationText}</p></div>
                                 </div>
                             </div>
                             <div className="p-5 flex items-center gap-3 border-t border-gray-100 dark:border-gray-800">
-                                <button onClick={() => setReactivateModal({ open: false, guruId: null, guruName: "", guruUsername: "" })} className="flex-1 py-2.5 rounded-xl border border-gray-200 dark:border-gray-700 text-sm font-bold text-gray-600 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors">Tutup</button>
-                                <button onClick={() => { if (reactivateModal.guruId) { handleReactivate(reactivateModal.guruId, reactivateModal.guruName); setReactivateModal({ open: false, guruId: null, guruName: "", guruUsername: "" }) } }} className="flex-1 py-2.5 rounded-xl bg-emerald-500 hover:bg-emerald-600 text-sm font-bold text-white transition-colors">Aktifkan kembali</button>
+                                <button onClick={() => setReactivateModal({ open: false, guruId: null, guruName: "", guruUsername: "" })} className="flex-1 py-2.5 rounded-xl border border-gray-200 dark:border-gray-700 text-sm font-bold text-gray-600 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors">{t("teachers.modals.reactivate.close", "Tutup")}</button>
+                                <button onClick={() => { if (reactivateModal.guruId) { handleReactivate(reactivateModal.guruId, reactivateModal.guruName); setReactivateModal({ open: false, guruId: null, guruName: "", guruUsername: "" }) } }} className="flex-1 py-2.5 rounded-xl bg-emerald-500 hover:bg-emerald-600 text-sm font-bold text-white transition-colors">{t("teachers.modals.reactivate.submit", "Aktifkan kembali")}</button>
                             </div>
                         </div>
                     </div>
@@ -1224,27 +1301,29 @@ function GuruContent() {
                 <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/50 backdrop-blur-sm">
                     <div className="bg-white dark:bg-gray-900 rounded-2xl w-full max-w-md shadow-2xl border border-gray-200 dark:border-gray-800">
                         <div className="flex items-center justify-between px-5 py-4 border-b border-gray-100 dark:border-gray-800 bg-red-50 dark:bg-red-900/20 rounded-t-2xl">
-                            <div className="flex items-center gap-2"><ShieldOff className="w-5 h-5 text-red-500" /><h2 className="text-base font-bold text-gray-900 dark:text-white">Nonaktifkan Guru</h2></div>
+                            <div className="flex items-center gap-2"><ShieldOff className="w-5 h-5 text-red-500" /><h2 className="text-base font-bold text-gray-900 dark:text-white">{t("teachers.modals.deactivate.title", "Nonaktifkan Guru")}</h2></div>
                             <button onClick={() => setDeactivateModal({ open: false, guruId: null, guruName: "" })} className="text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 p-1"><XCircle className="w-5 h-5" /></button>
                         </div>
                         <div className="p-5 space-y-4">
                             <div className="flex items-start gap-3 p-3 bg-amber-50 dark:bg-amber-900/20 rounded-xl border border-amber-200 dark:border-amber-800">
                                 <AlertTriangle className="w-4 h-4 text-amber-500 flex-shrink-0 mt-0.5" />
-                                <p className="text-xs text-amber-700 dark:text-amber-400">Guru <span className="font-bold">{deactivateModal.guruName}</span> akan dinonaktifkan dan tidak dapat menerima pesanan baru.</p>
+                                <p className="text-xs text-amber-700 dark:text-amber-400">
+                                    {t("teachers.modals.deactivate.warning", `Guru ${deactivateModal.guruName} akan dinonaktifkan dan tidak dapat menerima pesanan baru.`, { name: deactivateModal.guruName })}
+                                </p>
                             </div>
                             <div>
-                                <label className="block text-xs font-bold text-gray-600 dark:text-gray-400 mb-1.5">Alasan Penonaktifan</label>
-                                <textarea value={deactivateReason} onChange={e => setDeactivateReason(e.target.value)} placeholder="Contoh: Melanggar ketentuan platform..." rows={3} className="w-full px-3 py-2.5 text-sm border border-gray-200 dark:border-gray-700 rounded-xl bg-white dark:bg-gray-800 text-gray-900 dark:text-white placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-red-400/40 focus:border-red-400 resize-none" />
+                                <label className="block text-xs font-bold text-gray-600 dark:text-gray-400 mb-1.5">{t("teachers.modals.deactivate.reason_label", "Alasan Penonaktifan")}</label>
+                                <textarea value={deactivateReason} onChange={e => setDeactivateReason(e.target.value)} placeholder={t("teachers.modals.deactivate.reason_placeholder", "Contoh: Melanggar ketentuan platform...")} rows={3} className="w-full px-3 py-2.5 text-sm border border-gray-200 dark:border-gray-700 rounded-xl bg-white dark:bg-gray-800 text-gray-900 dark:text-white placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-red-400/40 focus:border-red-400 resize-none" />
                             </div>
                             <div>
-                                <label className="block text-xs font-bold text-gray-600 dark:text-gray-400 mb-1.5">Durasi Penonaktifan</label>
-                                <input value={deactivateDuration} onChange={e => setDeactivateDuration(e.target.value)} placeholder="Contoh: 10 Hari, Permanen..." className="w-full px-3 py-2.5 text-sm border border-gray-200 dark:border-gray-700 rounded-xl bg-white dark:bg-gray-800 text-gray-900 dark:text-white placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-red-400/40 focus:border-red-400" />
+                                <label className="block text-xs font-bold text-gray-600 dark:text-gray-400 mb-1.5">{t("teachers.modals.deactivate.duration_label", "Durasi Penonaktifan")}</label>
+                                <input value={deactivateDuration} onChange={e => setDeactivateDuration(e.target.value)} placeholder={t("teachers.modals.deactivate.duration_placeholder", "Contoh: 10 Hari, Permanen...")} className="w-full px-3 py-2.5 text-sm border border-gray-200 dark:border-gray-700 rounded-xl bg-white dark:bg-gray-800 text-gray-900 dark:text-white placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-red-400/40 focus:border-red-400" />
                             </div>
                         </div>
                         <div className="flex gap-2 px-5 pb-5">
-                            <button onClick={() => setDeactivateModal({ open: false, guruId: null, guruName: "" })} className="flex-1 py-2.5 text-sm font-semibold text-gray-700 dark:text-gray-300 border border-gray-200 dark:border-gray-700 rounded-xl hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors">Batal</button>
+                            <button onClick={() => setDeactivateModal({ open: false, guruId: null, guruName: "" })} className="flex-1 py-2.5 text-sm font-semibold text-gray-700 dark:text-gray-300 border border-gray-200 dark:border-gray-700 rounded-xl hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors">{t("teachers.modals.deactivate.cancel", "Batal")}</button>
                             <button onClick={confirmDeactivate} disabled={isSuspending} className="flex-1 flex items-center justify-center gap-2 py-2.5 text-sm font-bold text-white bg-red-500 hover:bg-red-600 rounded-xl transition-colors disabled:opacity-60">
-                                <ShieldOff className="w-4 h-4" />{isSuspending ? "Memproses..." : "Ya, Nonaktifkan"}
+                                <ShieldOff className="w-4 h-4" />{isSuspending ? t("teachers.modals.deactivate.processing", "Memproses...") : t("teachers.modals.deactivate.submit", "Ya, Nonaktifkan")}
                             </button>
                         </div>
                     </div>

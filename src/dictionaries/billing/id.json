@@ -448,6 +448,293 @@
       "empty": "Tidak ada pembayaran yang ditemukan.",
       "loading": "Memuat data pembayaran..."
     },
+    "payout": {
+      "title": "Payout Guru",
+      "refresh": "Refresh",
+      "searchPlaceholder": "Cari nama guru, user...",
+      "searchButton": "Cari",
+      "filter": "Filter",
+      "bulkAction": "Bulk Action",
+      "checkbox_disabled_hint": "Hanya pembayaran pending yang dapat dipilih untuk payout",
+      "stats": {
+        "pendingCount": "Payout Pending",
+        "pendingTotal": "Nilai Pending",
+        "approvedCount": "Disetujui"
+      },
+      "filterModal": {
+        "title": "Filter Data Payout",
+        "status": "Status",
+        "all": "Semua",
+        "pending": "Pending",
+        "approved": "Disetujui",
+        "rejected": "Ditolak",
+        "date": "Tanggal",
+        "from": "Dari",
+        "to": "Sampai",
+        "amount": "Nominal (Rp)",
+        "min": "Min",
+        "max": "Maks",
+        "method": "Metode Pembayaran",
+        "reset": "Reset Filter",
+        "apply": "Terapkan Filter"
+      },
+      "table": {
+        "orderCode": "Kode Pesanan",
+        "user": "User (Pembayar)",
+        "teacher": "Guru (Penerima)",
+        "amount": "Nominal",
+        "status": "Status",
+        "paymentDate": "Tgl Bayar",
+        "actions": "Aksi",
+        "empty": "Tidak ada data payout",
+        "tooltips": {
+          "viewUser": "Lihat profil pengguna",
+          "viewTeacher": "Lihat profil guru"
+        }
+      },
+      "status": {
+        "approved": "Disetujui",
+        "pending": "Pending",
+        "rejected": "Ditolak"
+      },
+      "actions": {
+        "dropdownTitle": "Aksi Payout",
+        "markDone": "Tandai Selesai",
+        "viewNotes": "Lihat Catatan"
+      },
+      "markModal": {
+        "title": "Tandai Sudah Dibayarkan",
+        "subtitle": "Konfirmasi transfer ke guru",
+        "paymentId": "Payment ID",
+        "teacher": "Guru",
+        "amount": "Nominal",
+        "reference": "Referensi Payout",
+        "referencePlaceholder": "Contoh: TRF-2026-001, REF-BANK-XXX",
+        "notes": "Catatan",
+        "optional": "(Opsional)",
+        "notesPlaceholder": "Catatan tambahan...",
+        "submit": "Konfirmasi Payout",
+        "submitting": "Memproses...",
+        "cancel": "Batal",
+        "errorRef": "Referensi wajib diisi",
+        "errorRefDesc": "Harap isi kolom Referensi Payout sebelum melanjutkan.",
+        "successTitle": "Payout Berhasil",
+        "successDesc": "Pembayaran telah berhasil ditandai sebagai sudah dibayarkan ke guru.",
+        "demoTitle": "[DEMO] Payout Ditandai",
+        "demoDesc": "Pembayaran berhasil ditandai sebagai sudah dibayarkan (simulasi lokal)."
+      },
+      "bulkModal": {
+        "title": "Bulk Payout",
+        "subtitle": "{{count}} pembayaran terpilih",
+        "totalSelected": "Total dipilih: {{count}} pembayaran",
+        "totalValue": "Total nilai:",
+        "reference": "Referensi Payout",
+        "referencePlaceholder": "Contoh: BATCH-2026-001",
+        "submit": "Proses Bulk Payout",
+        "submitting": "Memproses...",
+        "cancel": "Batal",
+        "successTitle": "Bulk Payout Berhasil",
+        "successDesc": "{{count}} pembayaran berhasil ditandai sebagai sudah dibayarkan.",
+        "demoTitle": "[DEMO] Bulk Payout",
+        "demoDesc": "{{count}} pembayaran ditandai (simulasi lokal)."
+      },
+      "viewModal": {
+        "title": "Detail Catatan",
+        "adminNotes": "Catatan Admin:",
+        "defaultNote": "Transfer Berhasil!",
+        "close": "Tutup"
+      }
+    },
+    "refund": {
+      "title": "Refund",
+      "refresh": "Refresh",
+      "searchPlaceholder": "Cari nama, alasan refund...",
+      "searchButton": "Cari",
+      "filter": "Filter",
+      "stats": {
+        "pendingCount": "Refund Pending",
+        "totalValue": "Nilai Refund",
+        "approvedCount": "Disetujui",
+        "rejectedCount": "Ditolak"
+      },
+      "filterModal": {
+        "title": "Filter Data Refund",
+        "status": "Status",
+        "all": "Semua",
+        "pending": "Pending",
+        "approved": "Disetujui",
+        "rejected": "Ditolak",
+        "dateRange": "Rentang Tanggal",
+        "from": "Dari",
+        "to": "Sampai",
+        "amountRange": "Nilai Refund (Rp)",
+        "moreThan": "Lebih dari",
+        "lessThan": "Kurang dari",
+        "reset": "Reset",
+        "apply": "Terapkan"
+      },
+      "table": {
+        "orderCode": "Kode Pesanan",
+        "user": "User",
+        "teacher": "Guru",
+        "sessions": "Sesi",
+        "status": "Status",
+        "refundAmount": "Nilai Refund",
+        "requestDate": "Tgl Request",
+        "actions": "Aksi",
+        "empty": "Tidak ada data refund",
+        "reasonLabel": "Alasan: ",
+        "tooltips": {
+          "viewTeacher": "Lihat profil guru"
+        }
+      },
+      "mobile": {
+        "user": "User:",
+        "teacher": "Guru:",
+        "sessions": "Sesi:"
+      },
+      "status": {
+        "approved": "Disetujui",
+        "rejected": "Ditolak",
+        "pending": "Pending"
+      },
+      "actions": {
+        "dropdownTitle": "Aksi Refund",
+        "approve": "Setuju",
+        "reject": "Tolak",
+        "viewNotes": "Lihat Catatan",
+        "viewRejectReason": "Lihat Alasan Ditolak",
+        "noAction": "Tidak ada aksi"
+      },
+      "viewModal": {
+        "title": "Detail Catatan",
+        "reasonTitle": "Alasan Refund:",
+        "adminNotesTitle": "Catatan/Alasan Admin:",
+        "emptyNotes": "Tidak ada catatan.",
+        "close": "Tutup"
+      },
+      "actionModal": {
+        "approveTitle": "Setujui Refund",
+        "rejectTitle": "Tolak Refund",
+        "userLabel": "User:",
+        "refundAmountLabel": "Nilai Refund:",
+        "rejectReasonLabel": "Alasan Penolakan",
+        "notesLabel": "Catatan (Opsional)",
+        "rejectPlaceholder": "Contoh: Alasan refund tidak valid...",
+        "notesPlaceholder": "Catatan tambahan untuk user...",
+        "submitting": "Memproses...",
+        "approveSubmit": "Setujui Refund",
+        "rejectSubmit": "Tolak Refund",
+        "cancel": "Batal",
+        "rejectError": "Catatan wajib diisi",
+        "rejectErrorDesc": "Harap isi alasan penolakan.",
+        "successApproveTitle": "Refund Disetujui",
+        "successApproveDesc": "Refund berhasil disetujui dan akan diproses ke user.",
+        "successRejectTitle": "Refund Ditolak",
+        "successRejectDesc": "Refund berhasil ditolak.",
+        "demoTitle": "[DEMO] Refund {{status}}",
+        "demoDesc": "Aksi berhasil disimulasikan secara lokal."
+      }
+    },
+    "withdraw": {
+      "title": "Withdraw",
+      "refresh": "Refresh",
+      "searchPlaceholder": "Cari user, bank, no. rekening...",
+      "searchButton": "Cari",
+      "filter": "Filter",
+      "stats": {
+        "pendingCount": "Withdraw Pending",
+        "pendingTotal": "Nilai Withdraw",
+        "approvedCount": "Disetujui",
+        "rejectedCount": "Ditolak"
+      },
+      "filterModal": {
+        "title": "Filter Data Withdraw",
+        "status": "Status",
+        "all": "Semua",
+        "pending": "Pending",
+        "approved": "Disetujui",
+        "rejected": "Ditolak",
+        "target": "Tujuan (Bank / No. Rek)",
+        "targetPlaceholder": "Contoh: BCA, Mandiri, 12345...",
+        "dateRange": "Rentang Tanggal",
+        "from": "Dari",
+        "to": "Sampai",
+        "amountRange": "Nominal (Rp)",
+        "moreThan": "Lebih dari",
+        "lessThan": "Kurang dari",
+        "reset": "Reset",
+        "apply": "Terapkan"
+      },
+      "table": {
+        "id": "ID",
+        "user": "User",
+        "destination": "Tujuan",
+        "amount": "Nominal",
+        "status": "Status",
+        "requestDate": "Tgl Request",
+        "actions": "Aksi",
+        "empty": "Tidak ada data withdraw"
+      },
+      "status": {
+        "completed": "Selesai",
+        "approved": "Disetujui",
+        "rejected": "Ditolak",
+        "pending": "Pending"
+      },
+      "actions": {
+        "dropdownTitle": "Aksi Withdraw",
+        "approve": "Approve",
+        "reject": "Tolak",
+        "markComplete": "Tandai Selesai",
+        "viewTransferDetail": "Lihat Detail Transfer",
+        "viewRejectReason": "Lihat Alasan Ditolak",
+        "noAction": "Tidak ada aksi"
+      },
+      "viewModal": {
+        "reasonTitle": "Alasan Ditolak",
+        "detailTitle": "Detail Transfer",
+        "reasonHeader": "Catatan / Alasan Penolakan:",
+        "detailHeader": "Detail Transfer:",
+        "amount": "Nominal:",
+        "targetBank": "Bank Tujuan:",
+        "accountNumber": "No. Rekening:",
+        "extTxId": "Transaction ID:",
+        "gatewayRef": "Gateway Ref:",
+        "notes": "Catatan:",
+        "emptyNotes": "Tidak ada catatan.",
+        "close": "Tutup"
+      },
+      "actionModal": {
+        "titles": {
+          "approve": "Setujui Permintaan Withdraw",
+          "complete": "Tandai Withdraw Selesai Ditransfer",
+          "reject": "Tolak Permintaan Withdraw"
+        },
+        "userLabel": "User:",
+        "amountLabel": "Nominal:",
+        "bankLabel": "Bank:",
+        "rejectReason": "Alasan Penolakan",
+        "rejectReasonPlaceholder": "Contoh: Rekening tidak valid...",
+        "rejectReasonRequired": "Alasan wajib diisi",
+        "rejectReasonRequiredDesc": "Harap isi alasan penolakan.",
+        "extIdLabel": "External Transaction ID",
+        "extIdPlaceholder": "ID transaksi dari bank/gateway...",
+        "gatewayRefLabel": "Gateway Reference",
+        "gatewayRefPlaceholder": "Referensi gateway...",
+        "optional": "(Opsional)",
+        "approveWarning": "Pastikan Anda telah memverifikasi data rekening sebelum menyetujui penarikan ini.",
+        "confirm": "Konfirmasi",
+        "submitting": "Memproses...",
+        "cancel": "Batal",
+        "approveSuccess": "Penarikan dana berhasil disetujui.",
+        "rejectSuccess": "Penarikan dana berhasil ditolak.",
+        "completeSuccess": "Status berhasil diperbarui ke selesai.",
+        "demoApprove": "Status diubah ke approved (simulasi lokal).",
+        "demoReject": "Status diubah ke rejected (simulasi lokal).",
+        "demoComplete": "Status diubah ke completed (simulasi lokal)."
+      }
+    },
     "wallet_page": {
       "title": "Kelola Wallet Pengguna",
       "subtitle": "Menampilkan detail profil, informasi wallet, dan riwayat transaksi"

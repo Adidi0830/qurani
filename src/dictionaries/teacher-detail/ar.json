@@ -350,5 +350,350 @@
         "rejected": "مرفوض"
       }
     }
+  },
+  "teachers": {
+    "title": "المعلمون",
+    "search_placeholder": "البحث بالاسم، البريد الإلكتروني...",
+    "search_button": "بحث",
+    "filter_button": "تصفية",
+    "reset_button": "إعادة تعيين ({{count}})",
+    "showing_count": "عرض {{filtered}} من أصل {{total}} معلماً.",
+    "labels": {
+      "all": "جميع الوسوم",
+      "filter_title": "تصفية حسب الوسم",
+      "categories": {
+        "publik": "وسم عام",
+        "tier": "مستوى الأداء",
+        "flag": "علامة المراجعة",
+        "custom": "وسم مخصص"
+      },
+      "marketplace_visible": "(مرئي في السوق)",
+      "add_label": "وسم",
+      "add_label_title": "إضافة وسم",
+      "admin_labels_header": "وسوم الإدارة",
+      "create": "إنشاء",
+      "input_placeholder": "اسم الوسم...",
+      "save": "حفظ الوسم",
+      "items": {
+        "ambassador": "سفير",
+        "ambassador_desc": "معلم ممثل للمنصة بسجل حافل ومساهمة مجتمعية متميزة.",
+        "super_teacher": "معلم متميز",
+        "super_teacher_desc": "معلم بأعلى أداء تدريسي مع تقييم مستمر ≥4.8 ومئات الطلاب النشطين.",
+        "recommended": "موصى به",
+        "recommended_desc": "معلم موصى به من المنصة بناءً على الجودة وتوافق طرق التدريس.",
+        "tier_a": "الفئة أ",
+        "tier_b": "الفئة ب",
+        "tier_c": "الفئة ج",
+        "perlu_review": "يحتاج مراجعة",
+        "laporan_masuk": "تم تقديم بلاغ",
+        "verifikasi_ulang": "إعادة التحقق"
+      }
+    },
+    "date_range": {
+      "label": "نطاق التاريخ",
+      "title": "نطاق تاريخ الانضمام",
+      "from": "من",
+      "to": "إلى",
+      "reset": "إعادة تعيين",
+      "apply": "تطبيق"
+    },
+    "filter_popover": {
+      "title": "تصفية متقدمة",
+      "active_badge": "نشط",
+      "status_label": "الحالة",
+      "method_label": "طريقة التدريس",
+      "skill_label": "المهارة / التخصص",
+      "curriculum_label": "منهج التدريس",
+      "all_option": "الكل",
+      "reset": "إعادة تعيين التصفية",
+      "apply": "تطبيق"
+    },
+    "status": {
+      "verified": "نشط",
+      "suspended": "غير نشط",
+      "rejected": "مرفوض"
+    },
+    "methods": {
+      "online": "عبر الإنترنت",
+      "offline": "حضوري",
+      "hybrid": "عبر الإنترنت وحضوري"
+    },
+    "table": {
+      "teacher": "المعلم",
+      "method": "الطريقة",
+      "location": "الموقع",
+      "students": "الطلاب",
+      "rating": "التقييم",
+      "revenue": "الإيرادات",
+      "status": "الحالة",
+      "featured": "مميز",
+      "joined_date": "تاريخ الانضمام",
+      "actions": "الإجراءات",
+      "empty_title": "لم يتم العثور على بيانات",
+      "reset_all": "إعادة تعيين جميع الفلاتر",
+      "students_count": "{{count}} طالباً",
+      "featured_badge": "مميز"
+    },
+    "actions_menu": {
+      "view_profile": "عرض الملف الشخصي",
+      "verify": "توثيق المعلم",
+      "unverify": "إلغاء توثيق المعلم",
+      "feature": "تعيين كمميز",
+      "unfeature": "إزالة من المميزين",
+      "deactivate": "تعطيل",
+      "reactivate": "إعادة التفعيل"
+    },
+    "mobile": {
+      "empty": "لا توجد بيانات",
+      "reset": "إعادة تعيين التصفية",
+      "method": "الطريقة",
+      "joined_date": "تاريخ الانضمام",
+      "students": "الطلاب",
+      "revenue": "الإيرادات",
+      "inactive_notice": "البيانات غير متاحة للمعلمين غير النشطين"
+    },
+    "pagination": {
+      "empty": "لا توجد بيانات",
+      "showing": "عرض {{start}}–{{end}} من أصل {{total}} عنصراً"
+    },
+    "modals": {
+      "reactivate": {
+        "title": "تم تعطيل المعلم",
+        "reason_heading": "السبب",
+        "default_reason": "لم يتم تحديد سبب.",
+        "deactivated_since": "معطل منذ",
+        "duration": "المدة",
+        "not_specified": "غير محدد",
+        "close": "إغلاق",
+        "submit": "إعادة التفعيل"
+      },
+      "deactivate": {
+        "title": "تعطيل المعلم",
+        "warning": "سيتم تعطيل المعلم {{name}} ولن يتمكن من استقبال طلبات جديدة.",
+        "reason_label": "سبب التعطيل",
+        "reason_placeholder": "مثال: انتهاك شروط المنصة...",
+        "duration_label": "مدة التعطيل",
+        "duration_placeholder": "مثال: 10 أيام، دائم...",
+        "cancel": "إلغاء",
+        "submit": "نعم، تعطيل",
+        "processing": "جاري المعالجة..."
+      }
+    },
+    "toasts": {
+      "deactivated_title": "تم تعطيل {{name}}",
+      "deactivated_reason": "السبب: {{reason}}",
+      "deactivated_message": "لا يمكن للمعلم استقبال طلبات جديدة.",
+      "reactivated_title": "تمت إعادة تفعيل {{name}}",
+      "reactivated_message": "تمت استعادة حالة المعلم إلى نشط.",
+      "verified_title": "تم توثيق {{name}}",
+      "unverified_title": "تم إلغاء توثيق {{name}}",
+      "verified_message": "تم منح المعلم حالة موثق من قبل الإدارة.",
+      "unverified_message": "تم سحب حالة التوثيق الإداري.",
+      "featured_title": "تم تعيين {{name}} كمميز",
+      "unfeatured_title": "تمت إزالة {{name}} من المميزين",
+      "featured_message": "سيظهر المعلم في الصفحة الرئيسية للسوق.",
+      "unfeatured_message": "لم يعد المعلم يظهر كمعلم مميز."
+    }
+  },
+  "applications": {
+    "title": "طلبات المعلمين",
+    "refresh": "تحديث",
+    "search_placeholder": "البحث بالاسم أو البريد الإلكتروني...",
+    "search_button": "بحث",
+    "try_again": "إعادة المحاولة",
+    "fetch_error_title": "فشل تحميل البيانات",
+    "status": {
+      "pending": "قيد الانتظار",
+      "seleksi": "المقابلة والاختبار",
+      "diterima": "مقبول",
+      "ditolak": "مرفوض",
+      "batal": "ملغي",
+      "all": "الكل"
+    },
+    "reschedule_badge": "إعادة جدولة",
+    "table": {
+      "applicant": "مقدم الطلب",
+      "specialization": "التخصص",
+      "status": "الحالة",
+      "actions": "الإجراءات",
+      "applied_date": "تاريخ التقديم",
+      "empty": "لم يتم العثور على طلبات",
+      "detail": "التفاصيل",
+      "reschedule": "إعادة جدولة",
+      "edit_schedule": "تعديل الموعد",
+      "evaluate": "التقييم"
+    },
+    "mobile": {
+      "specialization": "التخصص",
+      "applied_date": "تاريخ التقديم",
+      "empty": "لم يتم العثور على طلبات"
+    },
+    "pagination": {
+      "showing": "عرض {{start}}–{{end}} من أصل {{total}} عنصراً"
+    },
+    "modals": {
+      "schedule": {
+        "title": "جدول مقابلة الاختيار",
+        "reschedule_title": "إعادة جدولة مقابلة الاختيار",
+        "reschedule_alert_title": "طلب إعادة جدولة",
+        "reschedule_alert_desc": "طلب المعلم إعادة الجدولة. يتم عرض الموعد القديم — يرجى التحديث إلى الموعد الجديد وإعادة الإرسال.",
+        "date_label": "تاريخ المقابلة",
+        "time_label": "وقت المقابلة",
+        "timezone_label": "المنطقة الزمنية",
+        "duration_label": "المدة: {{duration}}",
+        "hours": "{{count}} ساعة",
+        "minutes": "{{count}} دقيقة",
+        "hours_minutes": "{{hours}} ساعة و{{mins}} دقيقة",
+        "timezone_detected": "المنطقة الزمنية المكتشفة للمعلم: {{tz}}",
+        "timezone_converted": "وقت المقابلة في موقع المعلم هو {{time}} {{tz}}",
+        "examiner_label": "المختبر / لجنة الاختيار",
+        "examiner_placeholder": "اختر لجنة الاختيار...",
+        "examiner_search_placeholder": "البحث بالاسم أو التخصص...",
+        "examiner_search_button": "بحث",
+        "examiner_empty": "لم يتم العثور على مختبرين",
+        "method_label": "الطريقة",
+        "method_online": "عبر الإنترنت",
+        "method_offline": "حضوري",
+        "meeting_link_label": "رابط اللقاء (Zoom / Google Meet)",
+        "auto_from_examiner": "(تلقائي من المختبر)",
+        "meeting_link_placeholder": "https://zoom.us/j/...",
+        "location_label": "الموقع / العنوان",
+        "applicant_location": "موقع مقدم الطلب: {{location}}",
+        "notes_label": "ملاحظات / معلومات إضافية",
+        "notes_placeholder": "تحضير حفظ السور القصيرة، إحضار الوثائق الأصلية...",
+        "cancel": "إلغاء",
+        "save": "حفظ",
+        "save_reschedule": "حفظ الموعد الجديد"
+      },
+      "email_preview": {
+        "title": "تأكيد إرسال البريد الإلكتروني",
+        "subtitle": "إشعار لمقدم الطلب",
+        "summary_title": "ملخص البريد الإلكتروني المزمع إرساله",
+        "recipient": "المستلم",
+        "schedule": "الموعد",
+        "method_and_link": "الطريقة والرابط",
+        "examiner": "المختبر",
+        "info_hint": "سيتضمن البريد الإلكتروني زري تأكيد الحضور وطلب إعادة الجدولة لمقدم الطلب.",
+        "edit": "تعديل",
+        "send": "إرسال البريد",
+        "sending": "جاري الإرسال..."
+      },
+      "evaluation": {
+        "title": "تقييم الاختيار",
+        "participant": "المشارك: {{name}}",
+        "schedule_info_title": "معلومات موعد المقابلة",
+        "examiner_prefix": "المختبر:",
+        "schedule_unavailable": "بيانات موعد المقابلة غير متوفرة بعد.",
+        "attendance_title": "تأكيد الحضور",
+        "present": "حاضر",
+        "absent": "غائب",
+        "criteria_title": "معايير التقييم (مقياس 1–9)",
+        "fluency": "طلاقة القراءة",
+        "tajweed": "التجويد والمخارج",
+        "intonation": "نبرة الصوت",
+        "appearance": "المظهر العام",
+        "experience": "الخبرة",
+        "average": "المعدل:",
+        "passing_score": "الحد الأدنى للنجاح:",
+        "documentation_title": "صورة / توثيق المقابلة",
+        "upload_photo": "رفع صورة (لقطة شاشة)",
+        "change_photo": "تغيير الصورة",
+        "photo_format_hint": "الصيغة: JPG، PNG (الحد الأقصى 2 ميغابايت)",
+        "attendance_warning": "يرجى تحديد حالة الحضور قبل اتخاذ القرار النهائي.",
+        "reject": "رفض",
+        "accept": "قبول المعلم"
+      }
+    },
+    "toasts": {
+      "select_examiner_title": "اختر لجنة الاختيار",
+      "select_examiner_desc": "يرجى اختيار مختبر من القائمة المنسدلة.",
+      "select_attendance_title": "اختر حالة الحضور",
+      "select_attendance_desc": "يرجى تحديد حالة الحضور أولاً.",
+      "trainer_accepted": "تم قبول المعلم بنجاح",
+      "trainer_rejected": "تم رفض المعلم",
+      "email_simulated_title": "تم حفظ الموعد (محاكاة البريد)",
+      "email_simulated_desc": "تم حفظ البيانات. سيتم إرسال البريد إلى {{email}} بعد إعداد Gmail.",
+      "email_sent_title": "📧 تم إرسال البريد!",
+      "email_sent_desc": "تم إرسال بريد دعوة المقابلة بنجاح إلى {{recipient}}.",
+      "email_failed_title": "فشل إرسال البريد الإلكتروني",
+      "email_failed_desc": "حدث خطأ أثناء إرسال البريد الإلكتروني."
+    }
+  },
+  "calendar": {
+    "title": "التقويم",
+    "filter_button": "تصفية الجدول",
+    "today": "اليوم",
+    "more_schedules": "+{{count}} أخرى",
+    "statuses": {
+      "scheduled": "مجدول",
+      "ongoing": "جارية",
+      "done": "مكتمل",
+      "cancelled": "ملغى",
+      "reschedule": "إعادة جدولة"
+    },
+    "filter": {
+      "title": "تصفية",
+      "examiner": "المختبر",
+      "all_examiners": "جميع المختبرين",
+      "status": "الحالة",
+      "all_statuses": "جميع الحالات",
+      "method": "الطريقة",
+      "all_methods": "جميع الطرق",
+      "online": "عبر الإنترنت",
+      "offline": "حضورياً",
+      "time": "الوقت",
+      "all_times": "جميع الأوقات",
+      "morning": "الصباح (< 12:00)",
+      "afternoon_evening": "الظهر/المساء (>= 12:00)",
+      "reset": "إعادة ضبط التصفية"
+    },
+    "days": {
+      "mon": "إثن",
+      "tue": "ثلا",
+      "wed": "أرب",
+      "thu": "خمي",
+      "fri": "جمع",
+      "sat": "سبت",
+      "sun": "أحد"
+    },
+    "selected_date": {
+      "select_date_prompt": "اختر تاريخاً",
+      "click_calendar_hint": "انقر على تاريخ في التقويم",
+      "schedules_count": "{{count}} جدول اختيار",
+      "empty_title": "لا توجد مواعيد اختيار",
+      "empty_desc": "في هذا التاريخ",
+      "detail_link": "التفاصيل ←"
+    },
+    "modal": {
+      "title": "وثيقة الإثبات ونتائج الاختيار",
+      "close": "إغلاق الوثيقة",
+      "selection_data_title": "بيانات الاختيار",
+      "applicant_name": "اسم المعلم المرشح",
+      "email": "البريد الإلكتروني",
+      "schedule_datetime": "تاريخ / وقت الاختيار",
+      "method": "الطريقة",
+      "examiner": "المختبر",
+      "qualification_title": "الدرجات والمؤهلات",
+      "criteria": {
+        "fluency": "طلاقة القراءة",
+        "tajweed": "التجويد والمخارج",
+        "intonation": "نبرة الصوت",
+        "appearance": "المظهر العام",
+        "experience": "الخبرة"
+      },
+      "result_recommendation": "توصية النتيجة",
+      "recommendations": {
+        "highly_recommended": "موصى به بشدة (مستوى الكبار / التحفيظ)",
+        "eligible": "موصى به للتدريس (مستوى الأطفال)",
+        "not_evaluated": "لم يتم التقييم بعد (لم يكتمل الاختيار)"
+      },
+      "not_graded_title": "لم يتم تقييم العملية بعد",
+      "not_graded_desc": "ستظهر درجات التأهيل ومهارة التجويد وملاءمة التدريس بعد اكتمال التقييم من قبل المختبر.",
+      "documentation_title": "صورة / توثيق المقابلة",
+      "no_photo_title": "لا توجد صورة توثيقية",
+      "no_photo_desc": "لم يتم تحميل لقطة شاشة أو تسجيل للاختيار عبر الإنترنت.",
+      "offline_meeting_title": "مقابلة مباشرة مع المعلم المرشح",
+      "offline_meeting_desc": "طريقة حضورية. يتم التحقق من الحضور الفعلي والمستندات المطبوعة مباشرة بواسطة {{examiner}}."
+    }
   }
 }

@@ -448,6 +448,293 @@
       "empty": "No payments found.",
       "loading": "Loading payment data..."
     },
+    "payout": {
+      "title": "Teacher Payouts",
+      "refresh": "Refresh",
+      "searchPlaceholder": "Search teacher name, user...",
+      "searchButton": "Search",
+      "filter": "Filter",
+      "bulkAction": "Bulk Action",
+      "checkbox_disabled_hint": "Only pending payments can be selected for payout",
+      "stats": {
+        "pendingCount": "Pending Payout",
+        "pendingTotal": "Pending Value",
+        "approvedCount": "Approved"
+      },
+      "filterModal": {
+        "title": "Filter Payout Data",
+        "status": "Status",
+        "all": "All",
+        "pending": "Pending",
+        "approved": "Approved",
+        "rejected": "Rejected",
+        "date": "Date",
+        "from": "From",
+        "to": "To",
+        "amount": "Amount (Rp)",
+        "min": "Min",
+        "max": "Max",
+        "method": "Payment Method",
+        "reset": "Reset Filter",
+        "apply": "Apply Filter"
+      },
+      "table": {
+        "orderCode": "Order Code",
+        "user": "User (Payer)",
+        "teacher": "Teacher (Recipient)",
+        "amount": "Amount",
+        "status": "Status",
+        "paymentDate": "Payment Date",
+        "actions": "Actions",
+        "empty": "No payout data",
+        "tooltips": {
+          "viewUser": "View user profile",
+          "viewTeacher": "View teacher profile"
+        }
+      },
+      "status": {
+        "approved": "Approved",
+        "pending": "Pending",
+        "rejected": "Rejected"
+      },
+      "actions": {
+        "dropdownTitle": "Payout Actions",
+        "markDone": "Mark as Completed",
+        "viewNotes": "View Notes"
+      },
+      "markModal": {
+        "title": "Mark as Paid Out",
+        "subtitle": "Confirm transfer to teacher",
+        "paymentId": "Payment ID",
+        "teacher": "Teacher",
+        "amount": "Amount",
+        "reference": "Payout Reference",
+        "referencePlaceholder": "e.g. TRF-2026-001, REF-BANK-XXX",
+        "notes": "Notes",
+        "optional": "(Optional)",
+        "notesPlaceholder": "Additional notes...",
+        "submit": "Confirm Payout",
+        "submitting": "Processing...",
+        "cancel": "Cancel",
+        "errorRef": "Reference is required",
+        "errorRefDesc": "Please fill in the Payout Reference before continuing.",
+        "successTitle": "Payout Successful",
+        "successDesc": "Payment has been successfully marked as paid out to teacher.",
+        "demoTitle": "[DEMO] Payout Marked",
+        "demoDesc": "Payment marked as paid out (local simulation)."
+      },
+      "bulkModal": {
+        "title": "Bulk Payout",
+        "subtitle": "{{count}} payments selected",
+        "totalSelected": "Total selected: {{count}} payments",
+        "totalValue": "Total value:",
+        "reference": "Payout Reference",
+        "referencePlaceholder": "e.g. BATCH-2026-001",
+        "submit": "Process Bulk Payout",
+        "submitting": "Processing...",
+        "cancel": "Cancel",
+        "successTitle": "Bulk Payout Successful",
+        "successDesc": "{{count}} payments successfully marked as paid out.",
+        "demoTitle": "[DEMO] Bulk Payout",
+        "demoDesc": "{{count}} payments marked (local simulation)."
+      },
+      "viewModal": {
+        "title": "Notes Detail",
+        "adminNotes": "Admin Notes:",
+        "defaultNote": "Transfer Successful!",
+        "close": "Close"
+      }
+    },
+    "refund": {
+      "title": "Refund",
+      "refresh": "Refresh",
+      "searchPlaceholder": "Search name, refund reason...",
+      "searchButton": "Search",
+      "filter": "Filter",
+      "stats": {
+        "pendingCount": "Pending Refund",
+        "totalValue": "Refund Value",
+        "approvedCount": "Approved",
+        "rejectedCount": "Rejected"
+      },
+      "filterModal": {
+        "title": "Filter Refund Data",
+        "status": "Status",
+        "all": "All",
+        "pending": "Pending",
+        "approved": "Approved",
+        "rejected": "Rejected",
+        "dateRange": "Date Range",
+        "from": "From",
+        "to": "To",
+        "amountRange": "Refund Value (Rp)",
+        "moreThan": "More than",
+        "lessThan": "Less than",
+        "reset": "Reset",
+        "apply": "Apply"
+      },
+      "table": {
+        "orderCode": "Order Code",
+        "user": "User",
+        "teacher": "Teacher",
+        "sessions": "Sessions",
+        "status": "Status",
+        "refundAmount": "Refund Value",
+        "requestDate": "Request Date",
+        "actions": "Actions",
+        "empty": "No refund data",
+        "reasonLabel": "Reason: ",
+        "tooltips": {
+          "viewTeacher": "View teacher profile"
+        }
+      },
+      "mobile": {
+        "user": "User:",
+        "teacher": "Teacher:",
+        "sessions": "Sessions:"
+      },
+      "status": {
+        "approved": "Approved",
+        "rejected": "Rejected",
+        "pending": "Pending"
+      },
+      "actions": {
+        "dropdownTitle": "Refund Actions",
+        "approve": "Approve",
+        "reject": "Reject",
+        "viewNotes": "View Notes",
+        "viewRejectReason": "View Rejection Reason",
+        "noAction": "No actions available"
+      },
+      "viewModal": {
+        "title": "Notes Detail",
+        "reasonTitle": "Refund Reason:",
+        "adminNotesTitle": "Admin Notes / Reason:",
+        "emptyNotes": "No notes provided.",
+        "close": "Close"
+      },
+      "actionModal": {
+        "approveTitle": "Approve Refund",
+        "rejectTitle": "Reject Refund",
+        "userLabel": "User:",
+        "refundAmountLabel": "Refund Value:",
+        "rejectReasonLabel": "Rejection Reason",
+        "notesLabel": "Notes (Optional)",
+        "rejectPlaceholder": "e.g. Refund reason is invalid...",
+        "notesPlaceholder": "Additional notes for user...",
+        "submitting": "Processing...",
+        "approveSubmit": "Approve Refund",
+        "rejectSubmit": "Reject Refund",
+        "cancel": "Cancel",
+        "rejectError": "Rejection reason required",
+        "rejectErrorDesc": "Please provide a reason for rejecting the refund.",
+        "successApproveTitle": "Refund Approved",
+        "successApproveDesc": "Refund successfully approved and will be processed to the user.",
+        "successRejectTitle": "Refund Rejected",
+        "successRejectDesc": "Refund successfully rejected.",
+        "demoTitle": "[DEMO] Refund {{status}}",
+        "demoDesc": "Action simulated locally."
+      }
+    },
+    "withdraw": {
+      "title": "Withdraw",
+      "refresh": "Refresh",
+      "searchPlaceholder": "Search user, bank, account no...",
+      "searchButton": "Search",
+      "filter": "Filter",
+      "stats": {
+        "pendingCount": "Pending Withdraw",
+        "pendingTotal": "Withdraw Value",
+        "approvedCount": "Approved",
+        "rejectedCount": "Rejected"
+      },
+      "filterModal": {
+        "title": "Filter Withdraw Data",
+        "status": "Status",
+        "all": "All",
+        "pending": "Pending",
+        "approved": "Approved",
+        "rejected": "Rejected",
+        "target": "Target (Bank / Account No)",
+        "targetPlaceholder": "e.g. BCA, Mandiri, 12345...",
+        "dateRange": "Date Range",
+        "from": "From",
+        "to": "To",
+        "amountRange": "Amount (Rp)",
+        "moreThan": "More than",
+        "lessThan": "Less than",
+        "reset": "Reset",
+        "apply": "Apply"
+      },
+      "table": {
+        "id": "ID",
+        "user": "User",
+        "destination": "Destination",
+        "amount": "Amount",
+        "status": "Status",
+        "requestDate": "Request Date",
+        "actions": "Actions",
+        "empty": "No withdraw data"
+      },
+      "status": {
+        "completed": "Completed",
+        "approved": "Approved",
+        "rejected": "Rejected",
+        "pending": "Pending"
+      },
+      "actions": {
+        "dropdownTitle": "Withdraw Actions",
+        "approve": "Approve",
+        "reject": "Reject",
+        "markComplete": "Mark as Completed",
+        "viewTransferDetail": "View Transfer Details",
+        "viewRejectReason": "View Rejection Reason",
+        "noAction": "No actions available"
+      },
+      "viewModal": {
+        "reasonTitle": "Rejection Reason",
+        "detailTitle": "Transfer Details",
+        "reasonHeader": "Notes / Rejection Reason:",
+        "detailHeader": "Transfer Details:",
+        "amount": "Amount:",
+        "targetBank": "Target Bank:",
+        "accountNumber": "Account Number:",
+        "extTxId": "Transaction ID:",
+        "gatewayRef": "Gateway Ref:",
+        "notes": "Notes:",
+        "emptyNotes": "No notes provided.",
+        "close": "Close"
+      },
+      "actionModal": {
+        "titles": {
+          "approve": "Approve Withdraw Request",
+          "complete": "Mark Withdraw as Completed & Transferred",
+          "reject": "Reject Withdraw Request"
+        },
+        "userLabel": "User:",
+        "amountLabel": "Amount:",
+        "bankLabel": "Bank:",
+        "rejectReason": "Rejection Reason",
+        "rejectReasonPlaceholder": "e.g. Invalid account details...",
+        "rejectReasonRequired": "Rejection reason is required",
+        "rejectReasonRequiredDesc": "Please provide a reason for rejecting the withdrawal.",
+        "extIdLabel": "External Transaction ID",
+        "extIdPlaceholder": "Transaction ID from bank/gateway...",
+        "gatewayRefLabel": "Gateway Reference",
+        "gatewayRefPlaceholder": "Gateway reference...",
+        "optional": "(Optional)",
+        "approveWarning": "Please ensure you have verified the account details before approving this withdrawal.",
+        "confirm": "Confirm",
+        "submitting": "Processing...",
+        "cancel": "Cancel",
+        "approveSuccess": "Withdrawal successfully approved.",
+        "rejectSuccess": "Withdrawal successfully rejected.",
+        "completeSuccess": "Status successfully updated to completed.",
+        "demoApprove": "Status updated to approved (local simulation).",
+        "demoReject": "Status updated to rejected (local simulation).",
+        "demoComplete": "Status updated to completed (local simulation)."
+      }
+    },
     "wallet_page": {
       "title": "Manage User Wallet",
       "subtitle": "Showing profile details, wallet information, and transaction history"
