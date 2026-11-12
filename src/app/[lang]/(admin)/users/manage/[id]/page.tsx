@@ -11,8 +11,7 @@ import { Badge } from "@/components/ui/badge"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { cn } from "@/lib/utils"
 import {
-    Mail, Phone, MapPin, Shield,
-    Clock, Activity, Calendar, ArrowLeft, Loader2, User as UserIcon,
+    Shield, Clock, Activity, Calendar, ArrowLeft,
     Wallet, ShoppingBag, BookOpen, Receipt
 } from "lucide-react"
 import { useI18n } from "@/components/providers/i18n-provider"
@@ -20,7 +19,6 @@ import { useI18n } from "@/components/providers/i18n-provider"
 import { useUserProfile } from "@/hooks/use-user-profile"
 import { walletApi, auditApi, API_BASE } from "@/lib/api"
 import { getKycAll } from "@/utils/api/kyc/fetch"
-import { toast } from "sonner"
 import { getSimWalletBalances, getSimTransactions } from "@/lib/sim-wallet-store"
 import { getSimSetoransByUser } from "@/data/sim-setoran"
 import dummyBillingData from "@/data/billing-dummy.json"
@@ -114,7 +112,6 @@ function UserDetailContent() {
     const [activityLogs, setActivityLogs] = useState<any[]>([])
 
     const [loadingKyc, setLoadingKyc] = useState(false)
-    const [loadingWallet, setLoadingWallet] = useState(false)
     const [loadingLogs, setLoadingLogs] = useState(false)
 
     // Mock user computed metrics
@@ -122,10 +119,6 @@ function UserDetailContent() {
     const [simOrderCount, setSimOrderCount] = useState<number>(0)
     const [simSetoranCount, setSimSetoranCount] = useState<number>(0)
     const [simTxCount, setSimTxCount] = useState<number>(0)
-
-    const [walletForbidden, setWalletForbidden] = useState(false)
-    const [logsForbidden, setLogsForbidden] = useState(false)
-    const [isProcessingWallet, setIsProcessingWallet] = useState(false)
 
     // Cek apakah user terdaftar sebagai guru/trainer
     const trainerInfo = useMemo(() => {
@@ -209,29 +202,19 @@ function UserDetailContent() {
 
     const fetchWallet = async () => {
         if (!userId) return
-        setLoadingWallet(true)
-        setWalletForbidden(false)
         try {
             const res = await walletApi.getWalletByUserId(userId)
             setWalletData(res.data || res)
         } catch (error) {
             console.error("Failed to fetch Wallet", error)
-            if (error instanceof Error && error.message.includes("403")) {
-                // 403 = permission issue, show forbidden state silently without toast
-                setWalletForbidden(true)
-                setWalletData(null)
-            } else {
-                setWalletData(null)
-            }
-        } finally {
-            setLoadingWallet(false)
+            // 403 = permission issue, fail silently without toast
+            setWalletData(null)
         }
     }
 
     const fetchLogs = async () => {
         if (!userId) return
         setLoadingLogs(true)
-        setLogsForbidden(false)
         try {
             const res = await auditApi.getUserLogs(userId)
             let logs: any[] = []
@@ -244,9 +227,6 @@ function UserDetailContent() {
             setActivityLogs(logs.slice(0, 50))
         } catch (error) {
             console.error("Failed to fetch logs", error)
-            if (error instanceof Error && error.message.includes("403")) {
-                setLogsForbidden(true)
-            }
             setActivityLogs([])
         } finally {
             setLoadingLogs(false)
@@ -448,16 +428,16 @@ function UserDetailContent() {
                             <div className="pt-4 pb-6">
                                 {/* OVERVIEW TAB (60:40 Layout) */}
                                 <TabsContent value="overview" className="animate-in fade-in slide-in-from-bottom-2 duration-300">
-                                    <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
+                                    <div className="grid grid-cols-1 lg:grid-cols-12 gap-5">
 
                                         {/* Kiri (60%) */}
                                         <div className="lg:col-span-7">
-                                            <Card className="border border-gray-100 dark:border-gray-800 shadow-none h-full bg-gray-50/50 dark:bg-gray-800/20">
-                                                <CardHeader className="pb-4 border-b border-gray-100 dark:border-gray-800">
+                                            <Card className="border border-gray-100 dark:border-gray-800 shadow-none h-full bg-gray-50/50 dark:bg-gray-800/20 gap-0 py-5">
+                                                <CardHeader className="pb-3.5 border-b border-gray-100 dark:border-gray-800">
                                                     <CardTitle className="text-lg font-bold text-gray-900 dark:text-white">{t("user_detail.overview.personal_title", "Detail Informasi Pribadi")}</CardTitle>
                                                 </CardHeader>
-                                                <CardContent className="pt-6 space-y-6">
-                                                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-y-6 gap-x-4">
+                                                <CardContent className="pt-4 space-y-5">
+                                                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-y-5 gap-x-4">
                                                         <div>
                                                             <p className="text-xs font-semibold text-gray-500 mb-1 uppercase tracking-wider">{t("user_detail.overview.email", "Email")}</p>
                                                             <p className="text-sm font-bold text-gray-900 dark:text-white break-all">{user.email || '-'}</p>
@@ -493,13 +473,13 @@ function UserDetailContent() {
                                         </div>
 
                                         {/* Kanan (40%) */}
-                                        <div className="lg:col-span-5 space-y-6">
+                                        <div className="lg:col-span-5 space-y-5">
                                             {/* Kartu 1: Detail Akun */}
-                                            <Card className="border border-gray-100 dark:border-gray-800 shadow-none bg-gray-50/50 dark:bg-gray-800/20">
-                                                <CardHeader className="pb-4 border-b border-gray-100 dark:border-gray-800">
+                                            <Card className="border border-gray-100 dark:border-gray-800 shadow-none bg-gray-50/50 dark:bg-gray-800/20 gap-0 py-5">
+                                                <CardHeader className="pb-3.5 border-b border-gray-100 dark:border-gray-800">
                                                     <CardTitle className="text-lg font-bold text-gray-900 dark:text-white">{t("user_detail.overview.account_title", "Detail Akun")}</CardTitle>
                                                 </CardHeader>
-                                                <CardContent className="pt-6 space-y-4">
+                                                <CardContent className="pt-4 space-y-3.5">
                                                     <div className="flex justify-between items-center pb-3 border-b border-gray-100 dark:border-gray-800/50">
                                                         <span className="text-sm font-medium text-gray-500">{t("user_detail.overview.joined", "Tanggal Gabung")}</span>
                                                         <span className="text-sm font-bold text-gray-900 dark:text-white">{formatDate(user.created_at || user.createdAt || new Date().toISOString(), locale)}</span>
@@ -522,11 +502,11 @@ function UserDetailContent() {
                                             </Card>
 
                                             {/* Kartu 2: Lokasi & Perangkat */}
-                                            <Card className="border border-gray-100 dark:border-gray-800 shadow-none bg-gray-50/50 dark:bg-gray-800/20">
-                                                <CardHeader className="pb-4 border-b border-gray-100 dark:border-gray-800">
+                                            <Card className="border border-gray-100 dark:border-gray-800 shadow-none bg-gray-50/50 dark:bg-gray-800/20 gap-0 py-5">
+                                                <CardHeader className="pb-3.5 border-b border-gray-100 dark:border-gray-800">
                                                     <CardTitle className="text-lg font-bold text-gray-900 dark:text-white">{t("user_detail.overview.location_title", "Lokasi & Perangkat")}</CardTitle>
                                                 </CardHeader>
-                                                <CardContent className="pt-6 space-y-4">
+                                                <CardContent className="pt-4 space-y-3.5">
                                                     <div>
                                                         <p className="text-xs font-semibold text-gray-500 mb-1 uppercase tracking-wider">{t("user_detail.overview.address_title", "Alamat Lengkap")}</p>
                                                         <p className="text-sm font-bold text-gray-900 dark:text-white">
@@ -673,11 +653,11 @@ function UserDetailContent() {
                                         </div>
                                     )}
                                 </TabsContent>
-</div>
-        </Tabs>
-    </div>
-</Card>
-    </div>
+                            </div>
+                        </Tabs>
+                    </div>
+                </Card>
+        </div>
     )
 }
 
