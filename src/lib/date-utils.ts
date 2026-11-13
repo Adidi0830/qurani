@@ -83,7 +83,7 @@ export function formatTooltipDate(dateInput: Date | string | null | undefined): 
 }
 
 import { formatDistanceToNow } from 'date-fns'
-import { enUS, id as idLocale } from 'date-fns/locale'
+import { enUS, id as idLocale, arSA } from 'date-fns/locale'
 
 export function formatTimeAgo(dateInput: Date | string | null | undefined, localeStr = 'en'): string {
     if (!dateInput) return ""
@@ -107,7 +107,7 @@ export function formatTimeAgo(dateInput: Date | string | null | undefined, local
 
         return formatDistanceToNow(date, { 
             addSuffix: true,
-            locale: localeStr === 'id' ? idLocale : enUS
+            locale: localeStr === 'ar' ? arSA : localeStr === 'id' ? idLocale : enUS
         })
     } catch {
         return ""

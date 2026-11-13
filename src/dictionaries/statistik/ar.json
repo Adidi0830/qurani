@@ -1,20 +1,37 @@
 {
     "statistik": {
         "dashboard": "لوحة التحكم",
+        "users_dashboard": "لوحة تحكم المستخدمين",
+        "all": "الكل",
+        "this_year": "هذا العام",
         "this_month": "هذا الشهر",
-        "deposit_this_month": "إيداع هذا الشهر",
-        "users_all": "جميع المستخدمين",
-        "users_this_year": "مستخدمون هذا العام",
-        "users_this_month": "المستخدمون هذا الشهر",
-        "users_month": "مستخدمون {{month}} {{year}}",
-        "deposit_today": "إيداع اليوم",
+        "period": "الفترة",
+        "recitation_month": "التسميع في {{month}} {{year}}",
+        "recitation_this_month": "التسميع هذا الشهر",
+        "recitation_this_year": "التسميع هذا العام",
+        "recitation_all": "جميع التسميعات",
+        "recitation_today": "التسميع اليوم",
         "popular_surah": "السورة الأكثر شعبية",
         "groups_all": "جميع المجموعات",
         "groups_this_year": "مجموعات هذا العام",
         "groups_this_month": "مجموعات هذا الشهر",
         "groups_month": "مجموعات {{month}} {{year}}",
-        "most_deposit_type": "نوع الإيداع الأكثر",
-        "most_deposit_group": "مجموعة الإيداع الأكثر",
+        "top_recitation_type": "نوع التسميع الأكثر",
+        "monthly_statistics": "الإحصائيات الشهرية",
+        "daily_statistics": "الإحصائيات اليومية",
+        "recitations": "التسميع",
+        "top_recitation_group": "المجموعة الأكثر تسميعاً",
+        "page": "الصفحة",
+        "surah": "السورة",
+        "juz": "الجزء",
+        "users_all": "جميع المستخدمين",
+        "users_this_year": "المستخدمون هذا العام",
+        "users_this_month": "المستخدمون هذا الشهر",
+        "users_month": "المستخدمون في {{month}} {{year}}",
+        "blocked_users_all": "جميع المستخدمين المحظورين",
+        "blocked_users_this_year": "المستخدمون المحظورون هذا العام",
+        "blocked_users_this_month": "المستخدمون المحظورون هذا الشهر",
+        "blocked_users_month": "المستخدمون المحظورون في {{month}} {{year}}",
         "months": {
             "january": "يناير",
             "february": "فبراير",
@@ -28,6 +45,11 @@
             "october": "أكتوبر",
             "november": "نوفمبر",
             "december": "ديسمبر"
+        },
+        "no_data": {
+            "deposit_group": "لا توجد بيانات لمجموعات التسميع",
+            "deposit_type": "لا توجد بيانات لنوع التسميع",
+            "selected_period": "للفترة المحددة"
         }
     }
 }

@@ -544,7 +544,7 @@ export default function Statistik() {
                 <CardContent>
                   {!isLoading && groupSetoranTerbanyak && formattedData && groupSetoranTerbanyak.length > 0 ? (
                     <>
-                      <div className="h-64">
+                      <div className="h-64" dir="ltr" style={{ direction: 'ltr' }}>
                         <ResponsiveContainer width="100%" height="100%">
                           <PieChart>
                               <Pie
@@ -611,7 +611,7 @@ export default function Statistik() {
                 </CardHeader>
                 <CardContent>
                   {!isLoading && monthlyStatsData && monthlyStatsData.length > 0 ? (
-                    <div className="h-64">
+                    <div className="h-64" dir="ltr" style={{ direction: 'ltr' }}>
                       <ResponsiveContainer width="100%" height="100%">
                         <BarChart data={monthlyStatsData}>
                           <CartesianGrid strokeDasharray="3 3" />

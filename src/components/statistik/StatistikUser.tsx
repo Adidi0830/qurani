@@ -419,7 +419,7 @@ export default function StatistikUser() {
                 <CardContent>
                   {!isLoading && groupSetoranTerbanyak && formattedData && groupSetoranTerbanyak.length > 0 ? (
                     <>
-                      <div className="h-64">
+                      <div className="h-64" dir="ltr" style={{ direction: 'ltr' }}>
                         <ResponsiveContainer width="100%" height="100%">
                           <PieChart>
                               <Pie
@@ -486,7 +486,7 @@ export default function StatistikUser() {
                 </CardHeader>
                 <CardContent>
                   {!isLoading && depositTypeData && depositTypeData.length > 0 ? (
-                    <div className="h-64">
+                    <div className="h-64" dir="ltr" style={{ direction: 'ltr' }}>
                       <ResponsiveContainer width="100%" height="100%">
                         <BarChart data={depositTypeData}>
                           <CartesianGrid strokeDasharray="3 3" />
