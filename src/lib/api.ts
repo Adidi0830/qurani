@@ -67,6 +67,7 @@ interface ApiOptions {
     headers?: Record<string, string>;
     token?: string;
     signal?: AbortSignal;
+    skipAuthRedirect?: boolean;
 }
 
 // ============================================
@@ -284,8 +285,20 @@ export async function apiRequest<T>(
                 }
             }
 
-            // Refresh failed, redirect to login
-            console.log('[API] Refresh failed, redirecting to login...');
+            // If background request specifically asked not to trigger page redirect
+            if (options.skipAuthRedirect) {
+                console.warn(`[API] 401 on background endpoint ${endpoint}, skip redirect to avoid reload loop.`);
+                throw new Error(`Unauthorized (401) on background endpoint: ${endpoint}`);
+            }
+
+            // Refresh failed, clean session thoroughly before redirecting
+            console.log('[API] Refresh failed, clearing session and redirecting to login...');
+            clearStoredAuth();
+            try {
+                await fetch('/api/auth/force-logout', { method: 'GET' });
+            } catch {
+                // Ignore network error during logout
+            }
             window.location.href = '/login';
             throw new Error('Session expired. Redirecting to login...');
         }
@@ -1219,7 +1232,10 @@ export const notificationsApi = {
     // GET /api/v1/Notifications/unread-count
     getUnreadCount: async (token?: string) => {
         try {
-            return await apiRequest<any>('/api/v1/Notifications/unread-count', { token });
+            return await apiRequest<any>('/api/v1/Notifications/unread-count', {
+                token,
+                skipAuthRedirect: true,
+            });
         } catch {
             return { data: 0 };
         }

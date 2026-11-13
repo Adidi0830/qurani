@@ -49,6 +49,13 @@ function buildRedirectUrl(request: NextRequest, pathname: string): URL {
     host.includes("127.0.0.1") ||
     host.startsWith("192.168.");
 
+  // Di Vercel atau environment cloud dengan domain dinamis/preview, gunakan origin request host langsung
+  const isVercel = host.includes("vercel.app") || !!process.env.VERCEL;
+  if (isVercel && host) {
+    const proto = request.headers.get("x-forwarded-proto") || "https";
+    return new URL(pathname, `${proto}://${host}`);
+  }
+
   const publicBaseUrl = process.env.NEXT_PUBLIC_BASE_URL;
   if (publicBaseUrl && !isLocal) {
     return new URL(pathname, publicBaseUrl);
