@@ -24,7 +24,7 @@ const localeCodes: Record<Locale, string> = {
 const getCountryNameFromLocale: Record<Locale, string> = {
   id: 'Indonesia',
   en: 'English',
-  ar: 'Arabic',
+  ar: 'العربية',
 };
 
 export function LanguageSwitcher() {

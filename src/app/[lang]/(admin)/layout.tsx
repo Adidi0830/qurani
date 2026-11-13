@@ -65,7 +65,7 @@ function AdminShell({ children }: AdminLayoutProps) {
         <Topbar />
         {/* pt-16 di LTR agar konten tidak tertimpa topbar fixed height 64px */}
         <div
-          dir={isRtl ? "ltr" : undefined}
+          dir={isRtl ? "rtl" : "ltr"}
           className={cn(
             "min-h-screen bg-gradient-to-br from-slate-50 via-white to-slate-100 dark:from-slate-950 dark:via-slate-900 dark:to-slate-800 p-4 lg:px-10 xl:px-10 overflow-y-auto",
             isRtl ? "pt-4" : "pt-16"

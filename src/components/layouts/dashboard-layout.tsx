@@ -156,7 +156,7 @@ export function DashboardLayout({ children }: DashboardLayoutProps) {
         </header>
         {/* Content container - dengan padding top yang cukup untuk mobile header */}
         <div
-          dir={isRtl ? "ltr" : undefined}
+          dir={isRtl ? "rtl" : "ltr"}
           className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-slate-100 dark:from-slate-950 dark:via-slate-900 dark:to-slate-800 pt-20 md:pt-7 p-4 lg:px-10 xl:px-10 overflow-y-auto"
         >
           <div className="lg:pt-0">

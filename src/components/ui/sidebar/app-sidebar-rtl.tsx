@@ -307,7 +307,7 @@ const RtlNavMain = React.memo(function RtlNavMain({ items }: { items: NavItem[] 
                     <SidebarMenuButton tooltip={item.title} isActive={hasActiveSubItem}>
                       {item.icon && <item.icon />}
                       <span>{item.title}</span>
-                      <ChevronRight className="ms-auto transition-transform duration-200 group-data-[state=open]/collapsible:rotate-90 rtl:rotate-180 rtl:group-data-[state=open]/collapsible:rotate-90" />
+                      <ChevronRight className="ms-auto transition-transform duration-200 rotate-180 group-data-[state=open]/collapsible:rotate-90 rtl:rotate-180 rtl:group-data-[state=open]/collapsible:rotate-90" />
                     </SidebarMenuButton>
                   </CollapsibleTrigger>
                   <CollapsibleContent>

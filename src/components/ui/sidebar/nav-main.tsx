@@ -347,7 +347,7 @@ export const NavMain = React.memo(function NavMain({
                           )
                         )}
                         <span className="flex-1 truncate">{item.title}</span>
-                        <ChevronRight className="h-4 w-4 shrink-0 transition-transform duration-200 group-data-[state=open]/collapsible:rotate-90" />
+                        <ChevronRight className="h-4 w-4 shrink-0 transition-transform duration-200 group-data-[state=open]/collapsible:rotate-90 rtl:rotate-180 rtl:group-data-[state=open]/collapsible:rotate-90" />
                       </button>
                     </CollapsibleTrigger>
                     <CollapsibleContent>
@@ -386,7 +386,7 @@ export const NavMain = React.memo(function NavMain({
                                         className="p-1 rounded hover:bg-gray-200 dark:hover:bg-gray-700 outline-none focus-visible:ring-2 focus-visible:ring-green-500"
                                         onClick={(e) => e.stopPropagation()}
                                       >
-                                        <ChevronRight className="h-3 w-3 shrink-0 transition-transform duration-200 group-data-[state=open]/nested-collapsible:rotate-90" />
+                                        <ChevronRight className="h-3 w-3 shrink-0 transition-transform duration-200 group-data-[state=open]/nested-collapsible:rotate-90 rtl:rotate-180 rtl:group-data-[state=open]/nested-collapsible:rotate-90" />
                                       </button>
                                     </CollapsibleTrigger>
                                   </div>
