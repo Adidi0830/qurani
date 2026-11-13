@@ -162,7 +162,7 @@ function PengujiDropdown({
                     <div className="p-2 border-b border-gray-100 dark:border-gray-800">
                         <div className="flex gap-2">
                             <div className="relative flex-1">
-                                <Search className="absolute left-2.5 top-2 w-3.5 h-3.5 text-gray-400" />
+                                <Search className="absolute start-2.5 top-2 w-3.5 h-3.5 text-gray-400" />
                                 <input autoFocus value={search} onChange={e => setSearch(e.target.value)}
                                     onKeyDown={e => {
                                         if (e.key === "Enter") {
@@ -171,7 +171,7 @@ function PengujiDropdown({
                                         }
                                     }}
                                     placeholder={t("applications.modals.schedule.examiner_search_placeholder", "Cari nama atau spesialisasi...")}
-                                    className="w-full pl-8 pr-3 py-1.5 text-xs border border-gray-200 dark:border-gray-700 rounded-lg bg-gray-50 dark:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-emerald-500" />
+                                    className="w-full ps-8 pe-3 py-1.5 text-xs border border-gray-200 dark:border-gray-700 rounded-lg bg-gray-50 dark:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-emerald-500" />
                             </div>
                             <button type="button" onClick={() => setAppliedSearch(search)}
                                 className="px-3 py-1.5 text-xs font-bold text-white bg-emerald-500 hover:bg-emerald-600 rounded-lg transition-colors flex items-center gap-1">
@@ -186,7 +186,7 @@ function PengujiDropdown({
                         ) : filtered.map(p => (
                             <button key={p.id} type="button"
                                 onClick={() => { onSelect(p); setOpen(false); setSearch(""); setAppliedSearch("") }}
-                                className={`w-full flex items-center gap-3 px-3 py-2.5 hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors text-left
+                                className={`w-full flex items-center gap-3 px-3 py-2.5 hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors text-start
                                     ${value?.id === p.id ? "bg-blue-50 dark:bg-blue-900/20" : ""}`}>
                                 <div className="w-8 h-8 rounded-full bg-gradient-to-br from-emerald-400 to-teal-500 flex items-center justify-center text-white text-xs font-bold flex-shrink-0">
                                     {p.avatar}
@@ -195,7 +195,7 @@ function PengujiDropdown({
                                     <p className="text-xs font-bold text-gray-900 dark:text-white truncate">{p.name}</p>
                                     <p className="text-[10px] text-gray-500 dark:text-gray-400">{p.role} · {p.skills.join(", ")}</p>
                                 </div>
-                                <div className="text-right flex-shrink-0">
+                                <div className="text-end flex-shrink-0">
                                     <div className="flex items-center gap-0.5 text-amber-500">
                                         <Star className="w-3 h-3 fill-amber-400" />
                                         <span className="text-[10px] font-bold text-gray-600 dark:text-gray-400">{p.rating}</span>
@@ -582,8 +582,44 @@ function PengajuanContent() {
     // ---------- Filters ----------
     const [search, setSearch] = useState("")
     const [searchInput, setSearchInput] = useState("")
-    const [statusFilter, setStatusFilter] = useState<FilterStatus>("pending")
+    const [statusFilter, setStatusFilter] = useState<FilterStatus>("all")
     const [page, setPage] = useState(1)
+
+    const getTranslatedSpecialization = useCallback((spec: string) => {
+        if (!spec) return ""
+        const translated = t(`applications.specializations.${spec}`, spec)
+        if (translated && translated !== spec) return translated
+
+        if (locale === "ar") {
+            const arabicMap: Record<string, string> = {
+                "Pengajar Tahsin & Tajwid Bersertifikat": "معلم معتمد في التحسين والتجويد",
+                "Pengajar Tahfidz Al-Qur'an": "معلم تحفيظ القرآن الكريم",
+                "Pengajar Tartil & Makhraj": "معلم الترتيل ومخارج الحروف",
+                "Pengajar Tajwid Metode Ummi": "معلم التجويد بطريقة أمي",
+                "Pengajar Al-Qur'an": "معلم القرآن الكريم",
+                "Tahsin": "تحسين التلاوة",
+                "Tajwid": "التجويد",
+                "Tafsir": "التفسير",
+                "Tahfidz": "تحفيظ القرآن",
+                "Tartil": "الترتيل",
+                "Makhraj": "مخارج الحروف",
+                "Fiqih": "الفقه",
+                "Online / Offline": "عن بُعد / حضوري",
+                "Online": "عن بُعد",
+                "Offline": "حضوري",
+            }
+            if (arabicMap[spec]) return arabicMap[spec]
+
+            let res = spec
+            for (const [idKey, arVal] of Object.entries(arabicMap)) {
+                if (res.includes(idKey)) {
+                    res = res.replaceAll(idKey, arVal)
+                }
+            }
+            return res
+        }
+        return spec
+    }, [t, locale])
 
     const effective = useMemo(() =>
         guruList.map(g => ({ ...g, status: (statuses[g.id] ?? "pending") as PengajuanStatus })),
@@ -609,12 +645,12 @@ function PengajuanContent() {
     const paged = filtered.slice((page - 1) * PAGE_SIZE, page * PAGE_SIZE)
 
     const TABS: { key: FilterStatus; labelKey: string; defaultLabel: string; color: string }[] = [
+        { key: "all", labelKey: "all", defaultLabel: "Semua", color: "slate" },
         { key: "pending", labelKey: "pending", defaultLabel: "Menunggu", color: "amber" },
         { key: "seleksi", labelKey: "seleksi", defaultLabel: "Seleksi", color: "blue" },
         { key: "diterima", labelKey: "diterima", defaultLabel: "Diterima", color: "emerald" },
         { key: "ditolak", labelKey: "ditolak", defaultLabel: "Ditolak", color: "rose" },
         { key: "batal", labelKey: "batal", defaultLabel: "Batal", color: "gray" },
-        { key: "all", labelKey: "all", defaultLabel: "Semua", color: "slate" },
     ]
 
     const tabColorMap: Record<string, { active: string; inactive: string }> = {
@@ -678,7 +714,7 @@ function PengajuanContent() {
                                                 className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full border text-xs font-semibold transition-all ${isActive ? colors.active : colors.inactive}`}>
                                                 {tTab.key === "all" && <Sparkles className="w-3 h-3" />}
                                                 {t(`applications.status.${tTab.labelKey}`, tTab.defaultLabel)}
-                                                <span className={`ml-0.5 px-1.5 py-0.5 rounded-full text-[10px] font-bold ${isActive ? "bg-white/25" : "bg-gray-100 dark:bg-gray-800 text-gray-500 dark:text-gray-400"}`}>
+                                                <span className={`ms-1.5 px-1.5 py-0.5 rounded-full text-[10px] font-bold ${isActive ? "bg-white/25" : "bg-gray-100 dark:bg-gray-800 text-gray-500 dark:text-gray-400"}`}>
                                                     {counts[tTab.key]}
                                                 </span>
                                             </button>
@@ -687,15 +723,15 @@ function PengajuanContent() {
                                 </div>
                                 <div className="relative flex w-full lg:w-[22rem]">
                                     <div className="relative flex-grow">
-                                        <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
+                                        <Search className="absolute start-3 rtl:right-3 rtl:left-auto ltr:left-3 ltr:right-auto top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400 pointer-events-none" />
                                         <input value={searchInput} onChange={e => setSearchInput(e.target.value)}
                                             onKeyDown={e => { if (e.key === "Enter") { setSearch(searchInput); setPage(1) } }}
-                                            placeholder={t("applications.search_placeholder", "Cari nama atau email...")}
-                                            className="w-full pl-9 pr-4 py-2 text-sm rounded-l-lg border border-r-0 border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-900 text-gray-900 dark:text-white placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-emerald-500/30 focus:border-emerald-500" />
+                                            placeholder={t("applications.search_placeholder", "البحث بالاسم أو البريد الإلكتروني...")}
+                                            className="w-full ps-10 pe-4 py-2 text-sm rounded-s-lg rounded-e-none border border-e-0 border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-900 text-gray-900 dark:text-white placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-emerald-500/30 focus:border-emerald-500 focus:z-10" />
                                     </div>
-                                    <button onClick={() => { setSearch(searchInput); setPage(1) }}
-                                        className="px-4 py-2 bg-emerald-500 hover:bg-emerald-600 text-white text-sm font-semibold rounded-r-lg border border-emerald-500 transition-colors flex items-center gap-1.5">
-                                        <Search className="w-4 h-4" /> {t("applications.search_button", "Cari")}
+                                    <button type="button" onClick={() => { setSearch(searchInput); setPage(1) }}
+                                        className="px-4 py-2 bg-emerald-500 hover:bg-emerald-600 text-white text-sm font-semibold rounded-e-lg rounded-s-none border border-emerald-500 transition-colors flex items-center gap-1.5 flex-shrink-0">
+                                        <Search className="w-4 h-4" /> {t("applications.search_button", "بحث")}
                                     </button>
                                 </div>
                             </div>
@@ -706,11 +742,11 @@ function PengajuanContent() {
                                     <table className="w-full text-sm">
                                         <thead>
                                             <tr className="bg-gray-50 dark:bg-gray-800/60 border-b border-gray-200 dark:border-gray-700">
-                                                <th className="text-left text-xs font-bold text-gray-700 dark:text-gray-300 px-4 py-3">{t("applications.table.applicant", "Pendaftar")}</th>
-                                                <th className="text-left text-xs font-bold text-gray-700 dark:text-gray-300 px-4 py-3">{t("applications.table.specialization", "Spesialisasi")}</th>
-                                                <th className="text-left text-xs font-bold text-gray-700 dark:text-gray-300 px-4 py-3">{t("applications.table.status", "Status")}</th>
-                                                <th className="text-left text-xs font-bold text-gray-700 dark:text-gray-300 px-4 py-3">{t("applications.table.actions", "Aksi")}</th>
-                                                <th className="text-left text-xs font-bold text-gray-700 dark:text-gray-300 px-4 py-3 text-right">{t("applications.table.applied_date", "Tgl Daftar")}</th>
+                                                <th className="text-start text-xs font-bold text-gray-700 dark:text-gray-300 px-4 py-3">{t("applications.table.applicant", "مقدم الطلب")}</th>
+                                                <th className="text-start text-xs font-bold text-gray-700 dark:text-gray-300 px-4 py-3">{t("applications.table.specialization", "التخصص")}</th>
+                                                <th className="text-start text-xs font-bold text-gray-700 dark:text-gray-300 px-4 py-3">{t("applications.table.status", "الحالة")}</th>
+                                                <th className="text-start text-xs font-bold text-gray-700 dark:text-gray-300 px-4 py-3">{t("applications.table.applied_date", "تاريخ التقديم")}</th>
+                                                <th className="text-start text-xs font-bold text-gray-700 dark:text-gray-300 px-4 py-3">{t("applications.table.actions", "الإجراءات")}</th>
                                             </tr>
                                         </thead>
                                         <tbody className="divide-y divide-gray-100 dark:divide-gray-800">
@@ -723,23 +759,30 @@ function PengajuanContent() {
                                                 </tr>
                                             ) : paged.map(guru => (
                                                 <tr key={guru.id} className="hover:bg-gray-50 dark:hover:bg-gray-800/40 transition-colors group">
-                                                    {/* Pendaftar – nama & avatar bisa diklik */}
-                                                    <td className="px-4 py-3">
+                                                    {/* 1. مقدم الطلب */}
+                                                    <td className="px-4 py-3 text-start">
                                                         <Link href={`/${lang}/teachers/manage/${guru.id}/review`} className="flex items-center gap-3 group/name">
                                                             <div className="w-9 h-9 rounded-full bg-gradient-to-br from-emerald-400 to-teal-500 flex items-center justify-center text-white font-bold flex-shrink-0 text-sm ring-2 ring-transparent group-hover/name:ring-emerald-300 transition-all">
                                                                 {guru.name.charAt(0).toUpperCase()}
                                                             </div>
                                                             <div>
                                                                 <p className="font-bold text-gray-900 dark:text-white text-xs leading-tight group-hover/name:text-emerald-600 dark:group-hover/name:text-emerald-400 transition-colors">{guru.name}</p>
-                                                                <p className="text-[10px] text-gray-400 mt-0.5">@{guru.username}</p>
+                                                                <p className="text-[10px] text-gray-400 mt-0.5">
+                                                                    <span dir="ltr" className="inline-block">
+                                                                        {guru.email || `@${guru.username}`}
+                                                                    </span>
+                                                                </p>
                                                             </div>
                                                         </Link>
                                                     </td>
-                                                    <td className="px-4 py-3 text-xs italic font-semibold text-gray-700 dark:text-gray-300 max-w-[200px] truncate">
-                                                        {guru.specialization}
+
+                                                    {/* 2. التخصص */}
+                                                    <td className="px-4 py-3 text-start text-xs italic font-semibold text-gray-700 dark:text-gray-300 max-w-[200px] truncate">
+                                                        {getTranslatedSpecialization(guru.specialization)}
                                                     </td>
 
-                                                    <td className="px-4 py-3">
+                                                    {/* 3. الحالة */}
+                                                    <td className="px-4 py-3 text-start">
                                                         <div className="flex flex-col items-start gap-1">
                                                             <StatusBadge status={guru.status} />
                                                             {guru.status === "seleksi" && rescheduleFlags[guru.id] && (
@@ -749,12 +792,28 @@ function PengajuanContent() {
                                                             )}
                                                         </div>
                                                     </td>
-                                                    <td className="px-4 py-3">
+
+                                                    {/* 4. تاريخ التقديم */}
+                                                    <td className="px-4 py-3 text-start text-xs text-gray-600 dark:text-gray-400 font-medium">
+                                                        <Tooltip>
+                                                            <TooltipTrigger asChild>
+                                                                <span className="cursor-help border-b border-dashed border-gray-400 dark:border-gray-500 pb-px whitespace-nowrap">
+                                                                    {formatDateRelative(guru.createdAtRaw, locale)}
+                                                                </span>
+                                                            </TooltipTrigger>
+                                                            <TooltipContent side="top">
+                                                                <p className="text-xs">{formatDateFull(guru.createdAtRaw, locale)}</p>
+                                                            </TooltipContent>
+                                                        </Tooltip>
+                                                    </td>
+
+                                                    {/* 5. الإجراءات (paling kiri di RTL) */}
+                                                    <td className="px-4 py-3 text-start">
                                                         <div className="flex items-center gap-1.5 opacity-80 group-hover:opacity-100 transition-opacity flex-wrap">
                                                             {/* Detail button – selalu tampil */}
                                                             <Link href={`/${lang}/teachers/manage/${guru.id}/review`}
                                                                 className="flex items-center gap-1 text-xs text-emerald-600 hover:text-emerald-700 dark:text-emerald-400 font-semibold border border-emerald-200 dark:border-emerald-800 bg-emerald-50 dark:bg-emerald-900/20 px-2 py-1 rounded-lg transition-colors">
-                                                                <Eye className="w-3.5 h-3.5" /> {t("applications.table.detail", "Detail")}
+                                                                <Eye className="w-3.5 h-3.5" /> {t("applications.table.detail", "التفاصيل")}
                                                             </Link>
                                                             {guru.status === "seleksi" && (
                                                                 rescheduleFlags[guru.id] ? (
@@ -776,18 +835,6 @@ function PengajuanContent() {
                                                                 </button>
                                                             )}
                                                         </div>
-                                                    </td>
-                                                    <td className="px-4 py-3 text-xs text-gray-600 dark:text-gray-400 font-medium text-right">
-                                                        <Tooltip>
-                                                            <TooltipTrigger asChild>
-                                                                <span className="cursor-help border-b border-dashed border-gray-400 dark:border-gray-500 pb-px whitespace-nowrap">
-                                                                    {formatDateRelative(guru.createdAtRaw, locale)}
-                                                                </span>
-                                                            </TooltipTrigger>
-                                                            <TooltipContent side="top">
-                                                                <p className="text-xs">{formatDateFull(guru.createdAtRaw, locale)}</p>
-                                                            </TooltipContent>
-                                                        </Tooltip>
                                                     </td>
                                                 </tr>
                                             ))}
@@ -813,7 +860,11 @@ function PengajuanContent() {
                                                 </div>
                                                 <div className="min-w-0">
                                                     <p className="font-bold text-gray-900 dark:text-white text-sm leading-tight truncate group-hover/name:text-emerald-600 dark:group-hover/name:text-emerald-400 transition-colors">{guru.name}</p>
-                                                    <p className="text-[11px] text-gray-400 truncate">@{guru.username}</p>
+                                                    <p className="text-[11px] text-gray-400 truncate">
+                                                        <span dir="ltr" className="inline-block">
+                                                            {guru.email || `@${guru.username}`}
+                                                        </span>
+                                                    </p>
                                                 </div>
                                             </Link>
                                             <div className="flex flex-col items-end gap-1 flex-shrink-0">
@@ -830,7 +881,9 @@ function PengajuanContent() {
                                         <div className="grid grid-cols-2 gap-2 text-xs">
                                             <div className="bg-gray-50 dark:bg-gray-800/50 rounded-lg p-2.5">
                                                 <p className="text-[10px] text-gray-400 font-semibold uppercase mb-0.5">{t("applications.mobile.specialization", "Spesialisasi")}</p>
-                                                <p className="font-semibold text-gray-700 dark:text-gray-300 truncate">{guru.specialization}</p>
+                                                <p className="font-semibold text-gray-700 dark:text-gray-300 truncate">
+                                                    {getTranslatedSpecialization(guru.specialization)}
+                                                </p>
                                             </div>
                                             <div className="bg-gray-50 dark:bg-gray-800/50 rounded-lg p-2.5">
                                                 <p className="text-[10px] text-gray-400 font-semibold uppercase mb-0.5">{t("applications.mobile.applied_date", "Tgl Daftar")}</p>
@@ -889,7 +942,7 @@ function PengajuanContent() {
                                 <div className="flex items-center gap-1">
                                     <button onClick={() => setPage(p => Math.max(1, p - 1))} disabled={page === 1}
                                         className="p-1.5 rounded-lg border border-gray-200 dark:border-gray-700 disabled:opacity-40 hover:bg-white dark:hover:bg-gray-800 transition-colors">
-                                        <ChevronLeft className="w-4 h-4 text-gray-500" />
+                                        <ChevronLeft className="w-4 h-4 text-gray-500 rtl:rotate-180" />
                                     </button>
                                     {Array.from({ length: totalPages }, (_, i) => i + 1).map(p => (
                                         <button key={p} onClick={() => setPage(p)}
@@ -899,7 +952,7 @@ function PengajuanContent() {
                                     ))}
                                     <button onClick={() => setPage(p => Math.min(totalPages, p + 1))} disabled={page === totalPages}
                                         className="p-1.5 rounded-lg border border-gray-200 dark:border-gray-700 disabled:opacity-40 hover:bg-white dark:hover:bg-gray-800 transition-colors">
-                                        <ChevronRight className="w-4 h-4 text-gray-500" />
+                                        <ChevronRight className="w-4 h-4 text-gray-500 rtl:rotate-180" />
                                     </button>
                                 </div>
                             </div>

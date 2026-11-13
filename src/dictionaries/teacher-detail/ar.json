@@ -510,6 +510,23 @@
       "batal": "ملغي",
       "all": "الكل"
     },
+    "specializations": {
+      "Pengajar Tahsin & Tajwid Bersertifikat": "معلم معتمد في التحسين والتجويد",
+      "Pengajar Tahfidz Al-Qur'an": "معلم تحفيظ القرآن الكريم",
+      "Pengajar Tartil & Makhraj": "معلم الترتيل ومخارج الحروف",
+      "Pengajar Tajwid Metode Ummi": "معلم التجويد بطريقة أمي",
+      "Pengajar Al-Qur'an": "معلم القرآن الكريم",
+      "Tahsin": "تحسين التلاوة",
+      "Tajwid": "التجويد",
+      "Tafsir": "التفسير",
+      "Tahfidz": "تحفيظ القرآن",
+      "Tartil": "الترتيل",
+      "Makhraj": "مخارج الحروف",
+      "Fiqih": "الفقه",
+      "Online / Offline": "عن بُعد / حضوري",
+      "Online": "عن بُعد",
+      "Offline": "حضوري"
+    },
     "reschedule_badge": "إعادة جدولة",
     "table": {
       "applicant": "مقدم الطلب",

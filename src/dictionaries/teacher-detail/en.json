@@ -510,6 +510,23 @@
       "batal": "Cancelled",
       "all": "All"
     },
+    "specializations": {
+      "Pengajar Tahsin & Tajwid Bersertifikat": "Certified Tahsin & Tajweed Teacher",
+      "Pengajar Tahfidz Al-Qur'an": "Quran Tahfidz Teacher",
+      "Pengajar Tartil & Makhraj": "Tartil & Makhraj Teacher",
+      "Pengajar Tajwid Metode Ummi": "Ummi Method Tajweed Teacher",
+      "Pengajar Al-Qur'an": "Quran Teacher",
+      "Tahsin": "Tahsin",
+      "Tajwid": "Tajweed",
+      "Tafsir": "Tafsir",
+      "Tahfidz": "Tahfidz",
+      "Tartil": "Tartil",
+      "Makhraj": "Makhraj",
+      "Fiqih": "Fiqh",
+      "Online / Offline": "Online / Offline",
+      "Online": "Online",
+      "Offline": "Offline"
+    },
     "reschedule_badge": "Reschedule",
     "table": {
       "applicant": "Applicant",
