@@ -569,43 +569,42 @@ function RefundContent() {
                                     </div>
                                     <div className="flex justify-between items-center pt-2 border-t border-gray-100 dark:border-gray-700">
                                         <span className="font-bold text-red-600 dark:text-red-400">{formatRupiah(r.refundAmount ?? r.amount)}</span>
-                                        <div onClick={(e) => e.stopPropagation()} className="flex items-center gap-1.5">
-                                            {isPendingRefund(r.status) ? (
-                                                <>
-                                                    <button
-                                                        onClick={() => openAction(r, 'approve')}
-                                                        className="inline-flex items-center gap-1 px-2.5 py-1 text-xs font-semibold rounded-lg bg-emerald-50 text-emerald-700 hover:bg-emerald-100 dark:bg-emerald-900/30 dark:text-emerald-400 border border-emerald-200 dark:border-emerald-800 transition-colors"
-                                                    >
-                                                        <Check className="w-3.5 h-3.5" />
-                                                        <span>{t("billing.refund.actions.approve", "Setuju")}</span>
+                                        <div onClick={(e) => e.stopPropagation()}>
+                                            <DropdownMenu>
+                                                <DropdownMenuTrigger asChild>
+                                                    <button className="p-1.5 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 text-gray-500 transition-colors">
+                                                        <MoreVertical className="w-4 h-4" />
                                                     </button>
-                                                    <button
-                                                        onClick={() => openAction(r, 'reject')}
-                                                        className="inline-flex items-center gap-1 px-2.5 py-1 text-xs font-semibold rounded-lg bg-red-50 text-red-700 hover:bg-red-100 dark:bg-red-900/30 dark:text-red-400 border border-red-200 dark:border-red-800 transition-colors"
-                                                    >
-                                                        <X className="w-3.5 h-3.5" />
-                                                        <span>{t("billing.refund.actions.reject", "Tolak")}</span>
-                                                    </button>
-                                                </>
-                                            ) : isApprovedRefund(r.status) ? (
-                                                <button
-                                                    onClick={() => setViewModal({ open: true, item: r })}
-                                                    className="inline-flex items-center gap-1 px-2.5 py-1 text-xs font-semibold rounded-lg text-teal-700 dark:text-teal-400 bg-teal-50 dark:bg-teal-900/20 border border-teal-200 dark:border-teal-800 transition-colors"
-                                                >
-                                                    <CheckCircle2 className="w-3.5 h-3.5" />
-                                                    <span>{t("billing.refund.actions.viewNotes", "Catatan")}</span>
-                                                </button>
-                                            ) : isRejectedRefund(r.status) ? (
-                                                <button
-                                                    onClick={() => setViewModal({ open: true, item: r })}
-                                                    className="inline-flex items-center gap-1 px-2.5 py-1 text-xs font-semibold rounded-lg text-red-600 dark:text-red-400 bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 transition-colors"
-                                                >
-                                                    <XCircle className="w-3.5 h-3.5" />
-                                                    <span>{t("billing.refund.actions.viewRejectReason", "Alasan")}</span>
-                                                </button>
-                                            ) : (
-                                                <span className="text-gray-400 text-xs">—</span>
-                                            )}
+                                                </DropdownMenuTrigger>
+                                                <DropdownMenuContent align="end" className="w-52">
+                                                    <DropdownMenuLabel>{t("billing.refund.actions.dropdownTitle", "Aksi Refund")}</DropdownMenuLabel>
+                                                    <DropdownMenuSeparator />
+                                                    {isPendingRefund(r.status) && (
+                                                        <>
+                                                            <DropdownMenuItem onClick={() => openAction(r, 'approve')}>
+                                                                <Check className="w-4 h-4 me-2 text-emerald-600" />
+                                                                <span className="text-emerald-600 font-medium">{t("billing.refund.actions.approve", "Setuju")}</span>
+                                                            </DropdownMenuItem>
+                                                            <DropdownMenuItem onClick={() => openAction(r, 'reject')}>
+                                                                <X className="w-4 h-4 me-2 text-red-600" />
+                                                                <span className="text-red-600 font-medium">{t("billing.refund.actions.reject", "Tolak")}</span>
+                                                            </DropdownMenuItem>
+                                                        </>
+                                                    )}
+                                                    {isApprovedRefund(r.status) && (
+                                                        <DropdownMenuItem onClick={() => setViewModal({ open: true, item: r })}>
+                                                            <CheckCircle2 className="w-4 h-4 me-2 text-teal-600" />
+                                                            <span>{t("billing.refund.actions.viewNotes", "Lihat Catatan")}</span>
+                                                        </DropdownMenuItem>
+                                                    )}
+                                                    {isRejectedRefund(r.status) && (
+                                                        <DropdownMenuItem onClick={() => setViewModal({ open: true, item: r })}>
+                                                            <XCircle className="w-4 h-4 me-2 text-red-600" />
+                                                            <span>{t("billing.refund.actions.viewRejectReason", "Lihat Alasan Ditolak")}</span>
+                                                        </DropdownMenuItem>
+                                                    )}
+                                                </DropdownMenuContent>
+                                            </DropdownMenu>
                                         </div>
                                     </div>
                                 </div>
@@ -680,44 +679,41 @@ function RefundContent() {
                                                     </Tooltip>
                                                 </td>
                                                 <td className="px-4 py-3 text-center" onClick={e => e.stopPropagation()}>
-                                                    {isPendingRefund(r.status) ? (
-                                                        <div className="flex items-center justify-center gap-1.5">
-                                                            <button
-                                                                onClick={() => openAction(r, 'approve')}
-                                                                title={t("billing.refund.actions.approve", "Setujui Refund")}
-                                                                className="inline-flex items-center gap-1 px-2.5 py-1 text-xs font-semibold rounded-lg bg-emerald-50 text-emerald-700 hover:bg-emerald-100 dark:bg-emerald-900/30 dark:text-emerald-400 dark:hover:bg-emerald-900/50 border border-emerald-200 dark:border-emerald-800 transition-colors shadow-xs"
-                                                            >
-                                                                <Check className="w-3.5 h-3.5" />
-                                                                <span>{t("billing.refund.actions.approve", "Setuju")}</span>
+                                                    <DropdownMenu>
+                                                        <DropdownMenuTrigger asChild>
+                                                            <button className="p-1.5 text-gray-500 hover:bg-gray-200 dark:hover:bg-gray-700 rounded-lg transition-colors">
+                                                                <MoreVertical className="w-4 h-4" />
                                                             </button>
-                                                            <button
-                                                                onClick={() => openAction(r, 'reject')}
-                                                                title={t("billing.refund.actions.reject", "Tolak Refund")}
-                                                                className="inline-flex items-center gap-1 px-2.5 py-1 text-xs font-semibold rounded-lg bg-red-50 text-red-700 hover:bg-red-100 dark:bg-red-900/30 dark:text-red-400 dark:hover:bg-red-900/50 border border-red-200 dark:border-red-800 transition-colors shadow-xs"
-                                                            >
-                                                                <X className="w-3.5 h-3.5" />
-                                                                <span>{t("billing.refund.actions.reject", "Tolak")}</span>
-                                                            </button>
-                                                        </div>
-                                                    ) : isApprovedRefund(r.status) ? (
-                                                        <button
-                                                            onClick={() => setViewModal({ open: true, item: r })}
-                                                            className="inline-flex items-center gap-1 px-2.5 py-1 text-xs font-semibold rounded-lg text-teal-700 dark:text-teal-400 bg-teal-50 dark:bg-teal-900/20 hover:bg-teal-100 dark:hover:bg-teal-900/30 border border-teal-200 dark:border-teal-800 transition-colors"
-                                                        >
-                                                            <CheckCircle2 className="w-3.5 h-3.5" />
-                                                            <span>{t("billing.refund.actions.viewNotes", "Lihat Catatan")}</span>
-                                                        </button>
-                                                    ) : isRejectedRefund(r.status) ? (
-                                                        <button
-                                                            onClick={() => setViewModal({ open: true, item: r })}
-                                                            className="inline-flex items-center gap-1 px-2.5 py-1 text-xs font-semibold rounded-lg text-red-600 dark:text-red-400 bg-red-50 dark:bg-red-900/20 hover:bg-red-100 dark:hover:bg-red-900/30 border border-red-200 dark:border-red-800 transition-colors"
-                                                        >
-                                                            <XCircle className="w-3.5 h-3.5" />
-                                                            <span>{t("billing.refund.actions.viewRejectReason", "Alasan Ditolak")}</span>
-                                                        </button>
-                                                    ) : (
-                                                        <span className="text-gray-400 text-xs">—</span>
-                                                    )}
+                                                        </DropdownMenuTrigger>
+                                                        <DropdownMenuContent align="end" className="w-52">
+                                                            <DropdownMenuLabel>{t("billing.refund.actions.dropdownTitle", "Aksi Refund")}</DropdownMenuLabel>
+                                                            <DropdownMenuSeparator />
+                                                            {isPendingRefund(r.status) && (
+                                                                <>
+                                                                    <DropdownMenuItem onClick={() => openAction(r, 'approve')}>
+                                                                        <Check className="w-4 h-4 me-2 text-emerald-600" />
+                                                                        <span className="text-emerald-600 font-medium">{t("billing.refund.actions.approve", "Setuju")}</span>
+                                                                    </DropdownMenuItem>
+                                                                    <DropdownMenuItem onClick={() => openAction(r, 'reject')}>
+                                                                        <X className="w-4 h-4 me-2 text-red-600" />
+                                                                        <span className="text-red-600 font-medium">{t("billing.refund.actions.reject", "Tolak")}</span>
+                                                                    </DropdownMenuItem>
+                                                                </>
+                                                            )}
+                                                            {isApprovedRefund(r.status) && (
+                                                                <DropdownMenuItem onClick={() => setViewModal({ open: true, item: r })}>
+                                                                    <CheckCircle2 className="w-4 h-4 me-2 text-teal-600" />
+                                                                    <span>{t("billing.refund.actions.viewNotes", "Lihat Catatan")}</span>
+                                                                </DropdownMenuItem>
+                                                            )}
+                                                            {isRejectedRefund(r.status) && (
+                                                                <DropdownMenuItem onClick={() => setViewModal({ open: true, item: r })}>
+                                                                    <XCircle className="w-4 h-4 me-2 text-red-600" />
+                                                                    <span>{t("billing.refund.actions.viewRejectReason", "Lihat Alasan Ditolak")}</span>
+                                                                </DropdownMenuItem>
+                                                            )}
+                                                        </DropdownMenuContent>
+                                                    </DropdownMenu>
                                                 </td>
                                             </tr>
                                         );
