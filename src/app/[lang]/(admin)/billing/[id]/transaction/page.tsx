@@ -137,7 +137,7 @@ export default function TransactionDetailPage() {
                             onClick={() => router.back()}
                             className="p-2 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors"
                         >
-                            <ArrowLeft className="w-5 h-5 text-gray-600 dark:text-gray-300" />
+                            <ArrowLeft className="w-5 h-5 text-gray-600 dark:text-gray-300 rtl:rotate-180" />
                         </button>
                         <div>
                             <h1 className="text-xl sm:text-2xl font-bold text-gray-900 dark:text-white tracking-tight">Detail Transaksi</h1>
@@ -197,7 +197,7 @@ export default function TransactionDetailPage() {
                                         </div>
                                         <Link 
                                             href={`/${lang}/billing/${txData.userId}/wallet`}
-                                            className="text-left sm:text-right p-3 sm:p-0 bg-gray-50 sm:bg-transparent dark:bg-gray-800/50 sm:dark:bg-transparent rounded-xl sm:rounded-none hover:opacity-80 transition-opacity flex sm:block items-center gap-3"
+                                            className="text-start sm:text-end p-3 sm:p-0 bg-gray-50 sm:bg-transparent dark:bg-gray-800/50 sm:dark:bg-transparent rounded-xl sm:rounded-none hover:opacity-80 transition-opacity flex sm:block items-center gap-3"
                                         >
                                             <div className="w-10 h-10 sm:hidden rounded-full bg-emerald-500 flex items-center justify-center text-white font-bold shrink-0">
                                                 {txData.user?.name?.[0]?.toUpperCase() || 'U'}
@@ -221,7 +221,7 @@ export default function TransactionDetailPage() {
                                             <CreditCard className="w-4 h-4" />
                                             <span className="font-semibold text-sm">Metode Pembayaran</span>
                                         </div>
-                                        <div className="font-semibold text-gray-900 dark:text-white text-left sm:text-right bg-gray-50 sm:bg-transparent dark:bg-gray-800 sm:dark:bg-transparent p-3 sm:p-0 rounded-lg sm:rounded-none">
+                                        <div className="font-semibold text-gray-900 dark:text-white text-start sm:text-end bg-gray-50 sm:bg-transparent dark:bg-gray-800 sm:dark:bg-transparent p-3 sm:p-0 rounded-lg sm:rounded-none">
                                             {getPaymentMethodName(txData.paymentMethod)}
                                         </div>
                                     </div>
@@ -232,7 +232,7 @@ export default function TransactionDetailPage() {
                                             <Clock className="w-4 h-4" />
                                             <span className="font-semibold text-sm">Waktu Transaksi</span>
                                         </div>
-                                        <div className="text-left sm:text-right bg-gray-50 sm:bg-transparent dark:bg-gray-800 sm:dark:bg-transparent p-3 sm:p-0 rounded-lg sm:rounded-none">
+                                        <div className="text-start sm:text-end bg-gray-50 sm:bg-transparent dark:bg-gray-800 sm:dark:bg-transparent p-3 sm:p-0 rounded-lg sm:rounded-none">
                                             <div className="font-semibold text-gray-900 dark:text-white text-sm sm:text-base">
                                                 {formatDate(txData.createdAt, 'long', tz, locale)}
                                             </div>
@@ -249,7 +249,7 @@ export default function TransactionDetailPage() {
                                                 <FileText className="w-4 h-4" />
                                                 <span className="font-semibold text-sm">Nomor Referensi</span>
                                             </div>
-                                            <div className="font-mono text-sm text-gray-900 dark:text-white text-left sm:text-right bg-gray-50 sm:bg-transparent dark:bg-gray-800 sm:dark:bg-transparent p-3 sm:p-0 rounded-lg sm:rounded-none">
+                                            <div className="font-mono text-sm text-gray-900 dark:text-white text-start sm:text-end bg-gray-50 sm:bg-transparent dark:bg-gray-800 sm:dark:bg-transparent p-3 sm:p-0 rounded-lg sm:rounded-none">
                                                 {txData.referenceId}
                                             </div>
                                         </div>
@@ -276,11 +276,11 @@ export default function TransactionDetailPage() {
                                             
                                             <div className="relative z-10 flex flex-col items-center justify-center">
                                                 <div className={`w-8 h-8 rounded-full flex items-center justify-center shadow-sm ${txData.amount < 0 ? 'bg-red-100 text-red-600 dark:bg-red-900/30' : 'bg-emerald-100 text-emerald-600 dark:bg-emerald-900/30'}`}>
-                                                    <ArrowRight className="w-4 h-4" />
+                                                    <ArrowRight className="w-4 h-4 rtl:rotate-180" />
                                                 </div>
                                             </div>
                                             
-                                            <div className="relative z-10 text-right w-2/5">
+                                            <div className="relative z-10 text-end w-2/5">
                                                 <div className="text-xs text-gray-500 mb-1 font-medium">Saldo Akhir</div>
                                                 <div className="font-bold text-gray-900 dark:text-white text-sm sm:text-lg truncate">
                                                     {formatCurrency(txData.balanceAfter || 0)}

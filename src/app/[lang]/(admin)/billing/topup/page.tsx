@@ -94,8 +94,8 @@ interface FilterState {
 
 // ─── Helpers ──────────────────────────────────────────────────────────────────
 
-function formatCurrency(amount: number) {
-    return new Intl.NumberFormat("id-ID", {
+function formatCurrency(amount: number, locale = "id") {
+    return new Intl.NumberFormat(locale === "ar" ? "ar-SA" : locale === "en" ? "en-US" : "id-ID", {
         style: "currency",
         currency: "IDR",
         minimumFractionDigits: 0,
@@ -453,13 +453,13 @@ function WalletPageContent() {
                             {/* Search - bigger */}
                             <div className="flex items-center rounded-lg overflow-hidden border border-gray-200 dark:border-gray-700 focus-within:ring-2 focus-within:ring-emerald-500 transition-shadow flex-1 max-w-md">
                                 <div className="relative bg-white dark:bg-gray-900 flex-1">
-                                    <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
+                                    <Search className="absolute start-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400 pointer-events-none" />
                                     <input
                                         value={searchInput}
                                         onChange={e => setSearchInput(e.target.value)}
                                         onKeyDown={handleKeyDown}
                                         placeholder={t("billing.topup.toolbar.search_placeholder", "Cari nama, metode pembayaran...")}
-                                        className="w-full pl-10 pr-3 py-2.5 text-sm bg-transparent border-none focus:outline-none dark:text-white"
+                                        className="w-full ps-10 pe-3 py-2.5 text-sm bg-transparent border-none focus:outline-none dark:text-white text-start"
                                     />
                                 </div>
                                 <button onClick={handleSearch} className="px-4 py-2.5 bg-emerald-500 hover:bg-emerald-600 text-white text-sm font-semibold transition-colors whitespace-nowrap">{t("billing.topup.toolbar.search_btn", "Cari")}</button>
@@ -598,24 +598,24 @@ function WalletPageContent() {
                                                     {['pending', 'waiting'].includes((item.status || '').toLowerCase()) && (
                                                         <>
                                                             <DropdownMenuItem onClick={() => openModal('confirm_topup', item)}>
-                                                                <Check className="w-4 h-4 mr-2 text-emerald-600" />
+                                                                <Check className="w-4 h-4 me-2 text-emerald-600" />
                                                                 <span>{t("billing.topup.action_menu.confirm", "Confirm Topup")}</span>
                                                             </DropdownMenuItem>
                                                             <DropdownMenuItem onClick={() => openModal('reject_topup', item)}>
-                                                                <X className="w-4 h-4 mr-2 text-red-600" />
+                                                                <X className="w-4 h-4 me-2 text-red-600" />
                                                                 <span className="text-red-600">{t("billing.topup.action_menu.reject", "Reject Topup")}</span>
                                                             </DropdownMenuItem>
                                                         </>
                                                     )}
                                                     {['success', 'completed', 'approved', 'confirmed'].includes((item.status || '').toLowerCase()) && (
                                                         <DropdownMenuItem onClick={() => setRejectionModal({ isOpen: true, reason: item.rejectionReason || 'Tidak ada catatan.', userName: item.user?.name || `User #${item.userId}`, amount: item.amount || 0 })}>
-                                                            <Eye className="w-4 h-4 mr-2 text-blue-600" />
+                                                            <Eye className="w-4 h-4 me-2 text-blue-600" />
                                                             <span>{t("billing.topup.action_menu.view_approval", "Lihat Detail Penerimaan")}</span>
                                                         </DropdownMenuItem>
                                                     )}
                                                     {['failed', 'rejected', 'cancelled'].includes((item.status || '').toLowerCase()) && (
                                                         <DropdownMenuItem onClick={() => setRejectionModal({ isOpen: true, reason: item.rejectionReason || 'Ditolak oleh admin.', userName: item.user?.name || `User #${item.userId}`, amount: item.amount || 0 })}>
-                                                            <Eye className="w-4 h-4 mr-2 text-red-600" />
+                                                            <Eye className="w-4 h-4 me-2 text-red-600" />
                                                             <span className="text-red-600">{t("billing.topup.action_menu.view_rejection", "Lihat Alasan Ditolak")}</span>
                                                         </DropdownMenuItem>
                                                     )}
@@ -631,7 +631,7 @@ function WalletPageContent() {
                                         </div>
                                     </div>
                                     <div className="flex justify-between items-center pt-2 border-t border-gray-100 dark:border-gray-700">
-                                        <div className="font-bold text-emerald-600 dark:text-emerald-400 text-sm">{item.amount !== undefined ? formatCurrency(item.amount) : '—'}</div>
+                                        <div className="font-bold text-emerald-600 dark:text-emerald-400 text-sm">{item.amount !== undefined ? formatCurrency(item.amount, lang) : '—'}</div>
                                         {item.createdAt && (
                                             <span title={formatTooltipDate(item.createdAt)} className="text-xs text-gray-500 cursor-default border-b border-dashed border-gray-400 pb-px">{timeAgo(item.createdAt, t).relative}</span>
                                         )}
@@ -646,12 +646,12 @@ function WalletPageContent() {
                         <table className="w-full text-sm">
                             <thead className="bg-gray-50/50 dark:bg-gray-800/30 text-gray-400 uppercase tracking-widest text-[10px] font-bold border-b border-gray-100 dark:border-gray-800">
                                 <tr>
-                                    <th className="px-6 py-4 text-left">{t("billing.topup.table.id", "ID")}</th>
-                                    <th className="px-6 py-4 text-left">{t("billing.topup.table.user", "User")}</th>
-                                    <th className="px-6 py-4 text-left">{t("billing.topup.table.payment_method", "Metode Pembayaran")}</th>
-                                    <th className="px-6 py-4 text-right">{t("billing.topup.table.amount", "Nominal")}</th>
+                                    <th className="px-6 py-4 text-start">{t("billing.topup.table.id", "ID")}</th>
+                                    <th className="px-6 py-4 text-start">{t("billing.topup.table.user", "User")}</th>
+                                    <th className="px-6 py-4 text-start">{t("billing.topup.table.payment_method", "Metode Pembayaran")}</th>
+                                    <th className="px-6 py-4 text-end">{t("billing.topup.table.amount", "Nominal")}</th>
                                     <th className="px-6 py-4 text-center">{t("billing.topup.table.status", "Status")}</th>
-                                    <th className="px-6 py-4 text-left">{t("billing.topup.table.date", "Tanggal")}</th>
+                                    <th className="px-6 py-4 text-start">{t("billing.topup.table.date", "Tanggal")}</th>
                                     <th className="px-6 py-4 text-center">{t("billing.topup.table.action", "Aksi")}</th>
                                 </tr>
                             </thead>
@@ -709,8 +709,8 @@ function WalletPageContent() {
                                                     {item.paymentMethod || 'Transfer/Payment Gateway'}
                                                 </div>
                                             </td>
-                                            <td className="px-6 py-4 text-right">
-                                                <span className="font-bold text-emerald-600 dark:text-emerald-400">{item.amount !== undefined ? formatCurrency(item.amount) : '—'}</span>
+                                            <td className="px-6 py-4 text-end">
+                                                <span className="font-bold text-emerald-600 dark:text-emerald-400">{item.amount !== undefined ? formatCurrency(item.amount, lang) : '—'}</span>
                                             </td>
                                             <td className="px-6 py-4 text-center">
                                                 <div className="flex items-center justify-center gap-2">
@@ -736,24 +736,24 @@ function WalletPageContent() {
                                                             {isPending && (
                                                                 <>
                                                                     <DropdownMenuItem onClick={() => openModal('confirm_topup', item)}>
-                                                                        <Check className="w-4 h-4 mr-2 text-emerald-600" />
+                                                                        <Check className="w-4 h-4 me-2 text-emerald-600" />
                                                                         <span>{t("billing.topup.action_menu.confirm", "Confirm Topup")}</span>
                                                                     </DropdownMenuItem>
                                                                     <DropdownMenuItem onClick={() => openModal('reject_topup', item)}>
-                                                                        <X className="w-4 h-4 mr-2 text-red-600" />
+                                                                        <X className="w-4 h-4 me-2 text-red-600" />
                                                                         <span className="text-red-600">{t("billing.topup.action_menu.reject", "Reject Topup")}</span>
                                                                     </DropdownMenuItem>
                                                                 </>
                                                             )}
                                                             {!isPending && !isRejected && (
                                                                 <DropdownMenuItem onClick={() => setRejectionModal({ isOpen: true, reason: rejReason || 'Tidak ada catatan.', userName: item.user?.name || `User #${item.userId}`, amount: item.amount || 0 })}>
-                                                                    <Eye className="w-4 h-4 mr-2 text-blue-600" />
+                                                                    <Eye className="w-4 h-4 me-2 text-blue-600" />
                                                                     <span>{t("billing.topup.action_menu.view_approval", "Lihat Detail Penerimaan")}</span>
                                                                 </DropdownMenuItem>
                                                             )}
                                                             {isRejected && (
                                                                 <DropdownMenuItem onClick={() => setRejectionModal({ isOpen: true, reason: rejReason || 'Ditolak oleh admin.', userName: item.user?.name || `User #${item.userId}`, amount: item.amount || 0 })}>
-                                                                    <Eye className="w-4 h-4 mr-2 text-red-600" />
+                                                                    <Eye className="w-4 h-4 me-2 text-red-600" />
                                                                     <span className="text-red-600">{t("billing.topup.action_menu.view_rejection", "Lihat Alasan Ditolak")}</span>
                                                                 </DropdownMenuItem>
                                                             )}

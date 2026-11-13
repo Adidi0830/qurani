@@ -38,8 +38,8 @@ type BookingStatus = "all" | "lunas" | "pending"
 type PackageKey = "all" | "1x" | "5x" | "10x"
 
 // ── Helpers ───────────────────────────────────────────────────────────────────
-function formatRupiah(n: number) {
-    return new Intl.NumberFormat("id-ID", {
+function formatRupiah(n: number, locale = "id") {
+    return new Intl.NumberFormat(locale === "ar" ? "ar-SA" : locale === "en" ? "en-US" : "id-ID", {
         style: "currency", currency: "IDR",
         minimumFractionDigits: 0, maximumFractionDigits: 0,
     }).format(n)
@@ -256,12 +256,12 @@ function SimModal({ onClose, onOrderCreated, initialOrderId }: SimModalProps) {
                         /* Step 1: Pilih Member */
                         <>
                             <p className="text-xs text-gray-500 font-medium mb-1">Pilih member yang memesan:</p>
-                            <div className="space-y-1.5 max-h-64 overflow-y-auto pr-1">
+                            <div className="space-y-1.5 max-h-64 overflow-y-auto pe-1">
                                 {SIM_MEMBERS.map((m: any) => (
                                     <button
                                         key={m.id}
                                         onClick={() => setSelMember(m)}
-                                        className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-lg border text-left transition-colors ${selMember?.id === m.id ? "border-emerald-500 bg-emerald-50 dark:bg-emerald-900/20" : "border-gray-200 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-800"}`}
+                                        className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-lg border text-start transition-colors ${selMember?.id === m.id ? "border-emerald-500 bg-emerald-50 dark:bg-emerald-900/20" : "border-gray-200 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-800"}`}
                                     >
                                         <div className="w-8 h-8 rounded-full bg-gradient-to-br from-emerald-400 to-teal-500 flex items-center justify-center text-white text-xs font-bold flex-shrink-0">
                                             {m.name.charAt(0)}
@@ -270,7 +270,7 @@ function SimModal({ onClose, onOrderCreated, initialOrderId }: SimModalProps) {
                                             <p className="text-sm font-semibold text-gray-900 dark:text-white">{m.name}</p>
                                             <p className="text-[11px] text-gray-400">{m.email}</p>
                                         </div>
-                                        {selMember?.id === m.id && <CheckCircle2 className="w-4 h-4 text-emerald-500 ml-auto" />}
+                                        {selMember?.id === m.id && <CheckCircle2 className="w-4 h-4 text-emerald-500 ms-auto" />}
                                     </button>
                                 ))}
                             </div>
@@ -279,19 +279,19 @@ function SimModal({ onClose, onOrderCreated, initialOrderId }: SimModalProps) {
                         /* Step 2: Pilih Guru */
                         <>
                             <p className="text-xs text-gray-500 font-medium mb-1">Pilih guru:</p>
-                            <div className="space-y-1.5 max-h-64 overflow-y-auto pr-1">
+                            <div className="space-y-1.5 max-h-64 overflow-y-auto pe-1">
                                 {SIM_TRAINERS.map((t: any) => (
                                     <button
                                         key={t.id}
                                         onClick={() => { setSelTrainer(t); setSelPkg(null) }}
-                                        className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-lg border text-left transition-colors ${selTrainer?.id === t.id ? "border-emerald-500 bg-emerald-50 dark:bg-emerald-900/20" : "border-gray-200 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-800"}`}
+                                        className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-lg border text-start transition-colors ${selTrainer?.id === t.id ? "border-emerald-500 bg-emerald-50 dark:bg-emerald-900/20" : "border-gray-200 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-800"}`}
                                     >
                                         <img src={t.avatar || `https://ui-avatars.com/api/?name=${encodeURIComponent(t.name)}&background=10b981&color=fff`} alt={t.name} className="w-8 h-8 rounded-full object-cover flex-shrink-0" />
                                         <div>
                                             <p className="text-sm font-semibold text-gray-900 dark:text-white">{t.name}</p>
                                             <p className="text-[11px] text-gray-400">⭐ {t.rating} · {t.totalStudents} murid</p>
                                         </div>
-                                        {selTrainer?.id === t.id && <CheckCircle2 className="w-4 h-4 text-emerald-500 ml-auto" />}
+                                        {selTrainer?.id === t.id && <CheckCircle2 className="w-4 h-4 text-emerald-500 ms-auto" />}
                                     </button>
                                 ))}
                             </div>
@@ -308,15 +308,15 @@ function SimModal({ onClose, onOrderCreated, initialOrderId }: SimModalProps) {
                                         <button
                                             key={p.id}
                                             onClick={() => setSelPkg(p)}
-                                            className={`w-full flex items-center justify-between px-3 py-2.5 rounded-lg border text-left transition-colors ${selPkg?.id === p.id ? "border-emerald-500 bg-emerald-50 dark:bg-emerald-900/20" : "border-gray-200 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-800"}`}
+                                            className={`w-full flex items-center justify-between px-3 py-2.5 rounded-lg border text-start transition-colors ${selPkg?.id === p.id ? "border-emerald-500 bg-emerald-50 dark:bg-emerald-900/20" : "border-gray-200 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-800"}`}
                                         >
                                             <div>
                                                 <p className="text-sm font-semibold text-gray-900 dark:text-white">{p.name}</p>
                                                 <p className="text-[11px] text-gray-400">{p.sessions}x sesi · {p.category}</p>
                                             </div>
-                                            <div className="text-right">
+                                            <div className="text-end">
                                                 <p className="text-sm font-bold text-emerald-600">{formatRupiah(p.totalPrice)}</p>
-                                                {selPkg?.id === p.id && <CheckCircle2 className="w-4 h-4 text-emerald-500 ml-auto" />}
+                                                {selPkg?.id === p.id && <CheckCircle2 className="w-4 h-4 text-emerald-500 ms-auto" />}
                                             </div>
                                         </button>
                                     ))}
@@ -486,7 +486,7 @@ function MemberSubscriptionContent() {
 
     function SortIcon({ field }: { field: string }) {
         return (
-            <ChevronsUpDown className={`w-3 h-3 inline ml-1 ${sortField === field ? "text-emerald-500" : "text-gray-300 dark:text-gray-600"}`} />
+            <ChevronsUpDown className={`w-3 h-3 inline ms-1 ${sortField === field ? "text-emerald-500" : "text-gray-300 dark:text-gray-600"}`} />
         )
     }
 
@@ -563,13 +563,13 @@ function MemberSubscriptionContent() {
                 {/* ── Toolbar ── */}
                 <div className="flex items-center gap-3 flex-wrap">
                     <div className="relative flex-1 min-w-[220px]">
-                        <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
+                        <Search className="absolute start-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
                         <input
                             type="text"
                             placeholder="Cari nama, email, trainer, atau paket..."
                             value={search}
                             onChange={e => { setSearch(e.target.value); setPage(1) }}
-                            className="w-full pl-9 pr-4 py-2 text-sm rounded-lg border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-900 text-gray-900 dark:text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent"
+                            className="w-full ps-9 pe-4 py-2 text-start text-sm rounded-lg border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-900 text-gray-900 dark:text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent"
                         />
                     </div>
                     <div className="flex items-center gap-2">
@@ -602,17 +602,17 @@ function MemberSubscriptionContent() {
                         <table className="w-full text-sm">
                             <thead>
                                 <tr className="bg-gray-50 dark:bg-gray-800/60 border-b border-gray-200 dark:border-gray-700">
-                                    <th className="text-left text-xs font-bold text-gray-800 dark:text-gray-200 px-4 py-3 cursor-pointer select-none whitespace-nowrap" onClick={() => handleSort("id")}>ID <SortIcon field="id" /></th>
-                                    <th className="text-left text-xs font-bold text-gray-800 dark:text-gray-200 px-4 py-3 cursor-pointer select-none whitespace-nowrap" onClick={() => handleSort("userName")}>Member <SortIcon field="userName" /></th>
-                                    <th className="text-left text-xs font-bold text-gray-800 dark:text-gray-200 px-4 py-3 cursor-pointer select-none whitespace-nowrap" onClick={() => handleSort("trainerName")}>Guru <SortIcon field="trainerName" /></th>
-                                    <th className="text-left text-xs font-bold text-gray-800 dark:text-gray-200 px-4 py-3 cursor-pointer select-none whitespace-nowrap" onClick={() => handleSort("packageName")}>Paket <SortIcon field="packageName" /></th>
-                                    <th className="text-left text-xs font-bold text-gray-800 dark:text-gray-200 px-4 py-3 cursor-pointer select-none whitespace-nowrap" onClick={() => handleSort("packageKey")}>Sesi <SortIcon field="packageKey" /></th>
-                                    <th className="text-left text-xs font-bold text-gray-800 dark:text-gray-200 px-4 py-3 cursor-pointer select-none whitespace-nowrap" onClick={() => handleSort("completedSessions")}>Progress <SortIcon field="completedSessions" /></th>
-                                    <th className="text-left text-xs font-bold text-gray-800 dark:text-gray-200 px-4 py-3 cursor-pointer select-none whitespace-nowrap" onClick={() => handleSort("totalPayment")}>Harga <SortIcon field="totalPayment" /></th>
-                                    <th className="text-left text-xs font-bold text-gray-800 dark:text-gray-200 px-4 py-3 cursor-pointer select-none whitespace-nowrap" onClick={() => handleSort("status")}>Status <SortIcon field="status" /></th>
-                                    <th className="text-left text-xs font-bold text-gray-800 dark:text-gray-200 px-4 py-3 cursor-pointer select-none whitespace-nowrap" onClick={() => handleSort("bookingDate")}>Tgl Pesan <SortIcon field="bookingDate" /></th>
-                                    <th className="text-left text-xs font-extrabold text-slate-900 dark:text-slate-200 px-4 py-3 whitespace-nowrap">Payment</th>
-                                    <th className="text-left text-xs font-bold text-gray-800 dark:text-gray-200 px-4 py-3 whitespace-nowrap">Aksi</th>
+                                    <th className="text-start text-xs font-bold text-gray-800 dark:text-gray-200 px-4 py-3 cursor-pointer select-none whitespace-nowrap" onClick={() => handleSort("id")}>ID <SortIcon field="id" /></th>
+                                    <th className="text-start text-xs font-bold text-gray-800 dark:text-gray-200 px-4 py-3 cursor-pointer select-none whitespace-nowrap" onClick={() => handleSort("userName")}>Member <SortIcon field="userName" /></th>
+                                    <th className="text-start text-xs font-bold text-gray-800 dark:text-gray-200 px-4 py-3 cursor-pointer select-none whitespace-nowrap" onClick={() => handleSort("trainerName")}>Guru <SortIcon field="trainerName" /></th>
+                                    <th className="text-start text-xs font-bold text-gray-800 dark:text-gray-200 px-4 py-3 cursor-pointer select-none whitespace-nowrap" onClick={() => handleSort("packageName")}>Paket <SortIcon field="packageName" /></th>
+                                    <th className="text-start text-xs font-bold text-gray-800 dark:text-gray-200 px-4 py-3 cursor-pointer select-none whitespace-nowrap" onClick={() => handleSort("packageKey")}>Sesi <SortIcon field="packageKey" /></th>
+                                    <th className="text-start text-xs font-bold text-gray-800 dark:text-gray-200 px-4 py-3 cursor-pointer select-none whitespace-nowrap" onClick={() => handleSort("completedSessions")}>Progress <SortIcon field="completedSessions" /></th>
+                                    <th className="text-start text-xs font-bold text-gray-800 dark:text-gray-200 px-4 py-3 cursor-pointer select-none whitespace-nowrap" onClick={() => handleSort("totalPayment")}>Harga <SortIcon field="totalPayment" /></th>
+                                    <th className="text-start text-xs font-bold text-gray-800 dark:text-gray-200 px-4 py-3 cursor-pointer select-none whitespace-nowrap" onClick={() => handleSort("status")}>Status <SortIcon field="status" /></th>
+                                    <th className="text-start text-xs font-bold text-gray-800 dark:text-gray-200 px-4 py-3 cursor-pointer select-none whitespace-nowrap" onClick={() => handleSort("bookingDate")}>Tgl Pesan <SortIcon field="bookingDate" /></th>
+                                    <th className="text-start text-xs font-extrabold text-slate-900 dark:text-slate-200 px-4 py-3 whitespace-nowrap">Payment</th>
+                                    <th className="text-start text-xs font-bold text-gray-800 dark:text-gray-200 px-4 py-3 whitespace-nowrap">Aksi</th>
                                 </tr>
                             </thead>
                             <tbody className="divide-y divide-gray-100 dark:divide-gray-800">
@@ -633,7 +633,7 @@ function MemberSubscriptionContent() {
                                             <td className="px-4 py-3 text-xs text-slate-600 font-bold font-mono">
                                                 #{booking.id}
                                                 {booking._isSim && (
-                                                    <span className="ml-1 text-[9px] bg-emerald-100 dark:bg-emerald-900/40 text-emerald-600 dark:text-emerald-400 px-1 py-0.5 rounded font-bold">SIM</span>
+                                                    <span className="ms-1 text-[9px] bg-emerald-100 dark:bg-emerald-900/40 text-emerald-600 dark:text-emerald-400 px-1 py-0.5 rounded font-bold">SIM</span>
                                                 )}
                                             </td>
                                             {/* Member */}
@@ -694,7 +694,7 @@ function MemberSubscriptionContent() {
                         <div className="flex items-center gap-1">
                             <button onClick={() => setPage(p => Math.max(1, p - 1))} disabled={page === 1}
                                 className="p-1.5 rounded-lg border border-gray-200 dark:border-gray-700 text-gray-500 hover:bg-white dark:hover:bg-gray-800 disabled:opacity-40 disabled:cursor-not-allowed transition-colors">
-                                <ChevronLeft className="w-4 h-4" />
+                                <ChevronLeft className="w-4 h-4 rtl:rotate-180" />
                             </button>
                             {Array.from({ length: totalPages }, (_, i) => i + 1).map(p => (
                                 <button key={p} onClick={() => setPage(p)}
@@ -707,7 +707,7 @@ function MemberSubscriptionContent() {
                             ))}
                             <button onClick={() => setPage(p => Math.min(totalPages, p + 1))} disabled={page === totalPages}
                                 className="p-1.5 rounded-lg border border-gray-200 dark:border-gray-700 text-gray-500 hover:bg-white dark:hover:bg-gray-800 disabled:opacity-40 disabled:cursor-not-allowed transition-colors">
-                                <ChevronRight className="w-4 h-4" />
+                                <ChevronRight className="w-4 h-4 rtl:rotate-180" />
                             </button>
                         </div>
                     </div>

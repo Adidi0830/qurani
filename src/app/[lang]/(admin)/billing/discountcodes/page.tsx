@@ -868,8 +868,8 @@ function DiscountCodesContent() {
         setPage(1)
     }
     function SortIcon({ field }: { field: SortField }) {
-        if (sortField !== field) return <ChevronsUpDown className="w-3 h-3 ml-0.5 opacity-40 inline-block" />
-        return <span className="ml-0.5 text-emerald-500 inline-block">{sortDir === "asc" ? "↑" : "↓"}</span>
+        if (sortField !== field) return <ChevronsUpDown className="w-3 h-3 ms-0.5 opacity-40 inline-block" />
+        return <span className="ms-0.5 text-emerald-500 inline-block">{sortDir === "asc" ? "↑" : "↓"}</span>
     }
     function handleCopy(id: number, code: string) {
         navigator.clipboard.writeText(code); setCopiedId(id)
@@ -1045,11 +1045,11 @@ function DiscountCodesContent() {
                 <div className="flex flex-wrap items-center gap-2">
                     {/* Search */}
                     <div className="flex items-center flex-1 min-w-[200px] md:max-w-sm h-10 shadow-sm rounded-lg overflow-hidden border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-900 transition-all focus-within:ring-2 focus-within:ring-emerald-400 focus-within:border-emerald-400">
-                        <Search className="ml-3 h-4 w-4 text-gray-400 flex-shrink-0" />
+                        <Search className="ms-3 h-4 w-4 text-gray-400 flex-shrink-0 pointer-events-none" />
                         <input type="text" placeholder={t("billing.discount_codes.toolbar.search_placeholder", "Cari kode atau nama promo...")} value={searchInput}
                             onChange={e => setSearchInput(e.target.value)}
                             onKeyDown={e => { if (e.key === "Enter") { setSearch(searchInput); setPage(1) } }}
-                            className="w-full h-full px-3 text-sm bg-transparent border-0 focus:outline-none text-gray-700 dark:text-gray-200" />
+                            className="w-full h-full px-3 text-sm bg-transparent border-0 focus:outline-none text-gray-700 dark:text-gray-200 text-start" />
                         <button onClick={() => { setSearch(searchInput); setPage(1) }}
                             className="h-full px-4 bg-emerald-500 hover:bg-emerald-600 text-white font-medium text-sm transition-colors flex items-center gap-2">
                             <Search className="w-4 h-4" />
@@ -1067,7 +1067,7 @@ function DiscountCodesContent() {
                         <Filter className="w-4 h-4" /> {t("billing.discount_codes.toolbar.filter", "Filter")}
                     </button>
                     {/* Action Buttons */}
-                    <div className="flex items-center gap-2 ml-auto flex-wrap">
+                    <div className="flex items-center gap-2 ms-auto flex-wrap">
                         <button onClick={() => setExportOpen(true)} title="Export CSV"
                             className="flex items-center gap-1.5 px-3 py-2 text-sm font-semibold text-gray-600 dark:text-gray-300 bg-white dark:bg-gray-900 hover:bg-gray-50 dark:hover:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg transition-colors shadow-sm whitespace-nowrap">
                             <Download className="w-4 h-4" /> {t("billing.discount_codes.toolbar.export", "Export")}
@@ -1093,13 +1093,13 @@ function DiscountCodesContent() {
                         <table className="w-full text-sm">
                             <thead>
                                 <tr className="bg-gray-50 dark:bg-gray-800/60 border-b border-gray-200 dark:border-gray-700">
-                                    <th className="text-left text-xs font-bold text-gray-500 dark:text-gray-400 uppercase tracking-wide px-4 py-3 whitespace-nowrap cursor-pointer select-none" onClick={() => handleSort("code")}>{t("billing.discount_codes.table.code", "Kode Promo")} <SortIcon field="code" /></th>
-                                    <th className="text-left text-xs font-bold text-gray-500 dark:text-gray-400 uppercase tracking-wide px-4 py-3">{t("billing.discount_codes.table.name_desc", "Nama / Deskripsi")}</th>
-                                    <th className="text-left text-xs font-bold text-gray-500 dark:text-gray-400 uppercase tracking-wide px-4 py-3 whitespace-nowrap cursor-pointer select-none" onClick={() => handleSort("value")}>{t("billing.discount_codes.table.discount", "Diskon")} <SortIcon field="value" /></th>
-                                    <th className="text-left text-xs font-bold text-gray-500 dark:text-gray-400 uppercase tracking-wide px-4 py-3 whitespace-nowrap">{t("billing.discount_codes.table.status", "Status")}</th>
-                                    <th className="text-left text-xs font-bold text-gray-500 dark:text-gray-400 uppercase tracking-wide px-4 py-3 whitespace-nowrap cursor-pointer select-none" onClick={() => handleSort("usageCount")}>{t("billing.discount_codes.table.usage", "Penggunaan")} <SortIcon field="usageCount" /></th>
-                                    <th className="text-left text-xs font-bold text-gray-500 dark:text-gray-400 uppercase tracking-wide px-4 py-3 whitespace-nowrap cursor-pointer select-none" onClick={() => handleSort("validUntil")}>{t("billing.discount_codes.table.validity", "Berlaku")} <SortIcon field="validUntil" /></th>
-                                    <th className="text-left text-xs font-bold text-gray-500 dark:text-gray-400 uppercase tracking-wide px-4 py-3 whitespace-nowrap">{t("billing.discount_codes.table.action", "Aksi")}</th>
+                                    <th className="text-start text-xs font-bold text-gray-500 dark:text-gray-400 uppercase tracking-wide px-4 py-3 whitespace-nowrap cursor-pointer select-none" onClick={() => handleSort("code")}>{t("billing.discount_codes.table.code", "Kode Promo")} <SortIcon field="code" /></th>
+                                    <th className="text-start text-xs font-bold text-gray-500 dark:text-gray-400 uppercase tracking-wide px-4 py-3">{t("billing.discount_codes.table.name_desc", "Nama / Deskripsi")}</th>
+                                    <th className="text-start text-xs font-bold text-gray-500 dark:text-gray-400 uppercase tracking-wide px-4 py-3 whitespace-nowrap cursor-pointer select-none" onClick={() => handleSort("value")}>{t("billing.discount_codes.table.discount", "Diskon")} <SortIcon field="value" /></th>
+                                    <th className="text-start text-xs font-bold text-gray-500 dark:text-gray-400 uppercase tracking-wide px-4 py-3 whitespace-nowrap">{t("billing.discount_codes.table.status", "Status")}</th>
+                                    <th className="text-start text-xs font-bold text-gray-500 dark:text-gray-400 uppercase tracking-wide px-4 py-3 whitespace-nowrap cursor-pointer select-none" onClick={() => handleSort("usageCount")}>{t("billing.discount_codes.table.usage", "Penggunaan")} <SortIcon field="usageCount" /></th>
+                                    <th className="text-start text-xs font-bold text-gray-500 dark:text-gray-400 uppercase tracking-wide px-4 py-3 whitespace-nowrap cursor-pointer select-none" onClick={() => handleSort("validUntil")}>{t("billing.discount_codes.table.validity", "Berlaku")} <SortIcon field="validUntil" /></th>
+                                    <th className="text-start text-xs font-bold text-gray-500 dark:text-gray-400 uppercase tracking-wide px-4 py-3 whitespace-nowrap">{t("billing.discount_codes.table.action", "Aksi")}</th>
                                 </tr>
                             </thead>
                             <tbody className="divide-y divide-gray-100 dark:divide-gray-800">
@@ -1170,20 +1170,20 @@ function DiscountCodesContent() {
                                                     <MoreVertical className="w-4 h-4" />
                                                 </button>
                                                 {openMenuId === c.id && (
-                                                    <div className="absolute right-0 top-full mt-1 z-50 min-w-[180px] bg-white dark:bg-gray-900 rounded-xl shadow-xl border border-gray-200 dark:border-gray-700 py-1.5 overflow-hidden" onClick={(e) => e.stopPropagation()}>
-                                                        <button onClick={() => { router.push(`/${langCode}/billing/discountcodes/${c.id}`); setOpenMenuId(null) }} className="w-full flex items-center gap-2.5 px-4 py-2 text-xs font-medium text-emerald-600 dark:text-emerald-400 hover:bg-emerald-50 dark:hover:bg-emerald-900/20 transition-colors text-left">
+                                                    <div className="absolute end-0 top-full mt-1 z-50 min-w-[180px] bg-white dark:bg-gray-900 rounded-xl shadow-xl border border-gray-200 dark:border-gray-700 py-1.5 overflow-hidden" onClick={(e) => e.stopPropagation()}>
+                                                        <button onClick={() => { router.push(`/${langCode}/billing/discountcodes/${c.id}`); setOpenMenuId(null) }} className="w-full flex items-center gap-2.5 px-4 py-2 text-xs font-medium text-emerald-600 dark:text-emerald-400 hover:bg-emerald-50 dark:hover:bg-emerald-900/20 transition-colors text-start">
                                                             <ExternalLink className="w-3.5 h-3.5" /> {t("billing.discount_codes.actions.view_detail", "Lihat Detail")}
                                                         </button>
                                                         <div className="border-t border-gray-100 dark:border-gray-800 my-1" />
-                                                        <button onClick={() => { handleToggle(c); setOpenMenuId(null) }} className="w-full flex items-center gap-2.5 px-4 py-2 text-xs font-medium text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors text-left">
+                                                        <button onClick={() => { handleToggle(c); setOpenMenuId(null) }} className="w-full flex items-center gap-2.5 px-4 py-2 text-xs font-medium text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors text-start">
                                                             {c.isActive ? <PauseCircle className="w-3.5 h-3.5 text-amber-500" /> : <Play className="w-3.5 h-3.5 text-emerald-500" />}
                                                             {c.isActive ? t("billing.discount_codes.actions.pause", "Jeda") : t("billing.discount_codes.actions.activate", "Aktifkan")}
                                                         </button>
                                                         <div className="border-t border-gray-100 dark:border-gray-800 my-1" />
-                                                        <button onClick={() => { setEditItem(c); setFormOpen(true); setOpenMenuId(null) }} className="w-full flex items-center gap-2.5 px-4 py-2 text-xs font-medium text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors text-left">
+                                                        <button onClick={() => { setEditItem(c); setFormOpen(true); setOpenMenuId(null) }} className="w-full flex items-center gap-2.5 px-4 py-2 text-xs font-medium text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors text-start">
                                                             <Pencil className="w-3.5 h-3.5 text-blue-500" /> {t("billing.discount_codes.actions.edit", "Edit")}
                                                         </button>
-                                                        <button onClick={() => { setConfirmDelete(c); setOpenMenuId(null) }} className="w-full flex items-center gap-2.5 px-4 py-2 text-xs font-medium text-red-600 dark:text-red-400 hover:bg-red-50 dark:hover:bg-red-900/20 transition-colors text-left">
+                                                        <button onClick={() => { setConfirmDelete(c); setOpenMenuId(null) }} className="w-full flex items-center gap-2.5 px-4 py-2 text-xs font-medium text-red-600 dark:text-red-400 hover:bg-red-50 dark:hover:bg-red-900/20 transition-colors text-start">
                                                             <Trash2 className="w-3.5 h-3.5" /> {t("billing.discount_codes.actions.delete", "Hapus")}
                                                         </button>
                                                     </div>

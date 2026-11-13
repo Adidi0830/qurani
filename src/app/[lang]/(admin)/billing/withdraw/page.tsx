@@ -28,11 +28,11 @@ import {
     DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
 import { formatDistanceToNowStrict } from "date-fns"
-import { id, enUS } from "date-fns/locale"
+import { id, enUS, arSA } from "date-fns/locale"
 
 // ── helpers ──────────────────────────────────────────────────────────────────
-function formatRupiah(n: number) {
-    return new Intl.NumberFormat("id-ID", {
+function formatRupiah(n: number, locale = "id") {
+    return new Intl.NumberFormat(locale === "ar" ? "ar-SA" : locale === "en" ? "en-US" : "id-ID", {
         style: "currency", currency: "IDR",
         minimumFractionDigits: 0, maximumFractionDigits: 0,
     }).format(n).replace("IDR", "Rp")
@@ -47,14 +47,14 @@ function formatDate(dateString: string | null, variant: 'short' | 'long' | 'rela
         const date = new Date(dateStr)
         if (Number.isNaN(date.getTime())) return dateString
         if (variant === 'relative') {
-            return formatDistanceToNowStrict(date, { addSuffix: true, locale: locale === 'id' ? id : enUS })
+            return formatDistanceToNowStrict(date, { addSuffix: true, locale: locale === 'ar' ? arSA : locale === 'id' ? id : enUS })
         }
         const options: Intl.DateTimeFormatOptions = { day: "2-digit", month: "short", timeZone: tz }
         if (variant === 'long') {
             options.year = "numeric"; options.hour = "2-digit"; options.minute = "2-digit"
             options.hour12 = false; options.timeZoneName = "short"
         }
-        return new Intl.DateTimeFormat(locale === 'id' ? 'id-ID' : 'en-GB', options).format(date)
+        return new Intl.DateTimeFormat(locale === 'ar' ? 'ar-SA' : locale === 'id' ? 'id-ID' : 'en-GB', options).format(date)
     } catch { return dateString }
 }
 
@@ -381,8 +381,8 @@ function WithdrawContent() {
                                 {/* Search */}
                                 <div className="flex items-center rounded-lg overflow-hidden border border-gray-200 dark:border-gray-700 focus-within:ring-2 focus-within:ring-emerald-500 transition-shadow flex-1 max-w-md">
                                     <div className="relative bg-white dark:bg-gray-900 flex-1">
-                                        <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
-                                        <input value={search} onChange={e => setSearch(e.target.value)} onKeyDown={handleKeyDown} placeholder={t("billing.withdraw.searchPlaceholder", "Cari user, bank, no. rekening...")} className="w-full pl-10 pr-3 py-2.5 text-sm bg-transparent border-none focus:outline-none dark:text-white" />
+                                        <Search className="absolute start-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400 pointer-events-none" />
+                                        <input value={search} onChange={e => setSearch(e.target.value)} onKeyDown={handleKeyDown} placeholder={t("billing.withdraw.searchPlaceholder", "Cari user, bank, no. rekening...")} className="w-full ps-10 pe-3 py-2.5 text-sm bg-transparent border-none focus:outline-none dark:text-white text-start" />
                                     </div>
                                     <button onClick={handleSearch} className="px-4 py-2.5 bg-emerald-500 hover:bg-emerald-600 text-white text-sm font-semibold transition-colors whitespace-nowrap">
                                         {t("billing.withdraw.searchButton", "Cari")}
@@ -496,29 +496,29 @@ function WithdrawContent() {
                                                         <DropdownMenuSeparator />
                                                         {s === 'pending' && <>
                                                             <DropdownMenuItem onClick={() => openModal(w, 'approve')}>
-                                                                <Check className="w-4 h-4 mr-2 text-emerald-600" />
+                                                                <Check className="w-4 h-4 me-2 text-emerald-600" />
                                                                 <span className="text-emerald-600 font-medium">{t("billing.withdraw.actions.approve", "Approve")}</span>
                                                             </DropdownMenuItem>
                                                             <DropdownMenuItem onClick={() => openModal(w, 'reject')}>
-                                                                <X className="w-4 h-4 mr-2 text-red-600" />
+                                                                <X className="w-4 h-4 me-2 text-red-600" />
                                                                 <span className="text-red-600 font-medium">{t("billing.withdraw.actions.reject", "Tolak")}</span>
                                                             </DropdownMenuItem>
                                                         </>}
                                                         {s === 'approved' && (
                                                             <DropdownMenuItem onClick={() => openModal(w, 'complete')}>
-                                                                <CheckCircle2 className="w-4 h-4 mr-2 text-teal-600" />
+                                                                <CheckCircle2 className="w-4 h-4 me-2 text-teal-600" />
                                                                 <span className="text-teal-600 font-medium">{t("billing.withdraw.actions.markComplete", "Tandai Selesai")}</span>
                                                             </DropdownMenuItem>
                                                         )}
                                                         {s === 'completed' && (
                                                             <DropdownMenuItem onClick={() => setViewModal({ open: true, item: w, mode: 'detail' })}>
-                                                                <FileText className="w-4 h-4 mr-2 text-blue-600" />
+                                                                <FileText className="w-4 h-4 me-2 text-blue-600" />
                                                                 <span>{t("billing.withdraw.actions.viewTransferDetail", "Lihat Detail Transfer")}</span>
                                                             </DropdownMenuItem>
                                                         )}
                                                         {(s === 'rejected' || s === 'failed') && (
                                                             <DropdownMenuItem onClick={() => setViewModal({ open: true, item: w, mode: 'reason' })}>
-                                                                <Eye className="w-4 h-4 mr-2 text-red-600" />
+                                                                <Eye className="w-4 h-4 me-2 text-red-600" />
                                                                 <span>{t("billing.withdraw.actions.viewRejectReason", "Lihat Alasan Ditolak")}</span>
                                                             </DropdownMenuItem>
                                                         )}
@@ -549,12 +549,12 @@ function WithdrawContent() {
                             <table className="w-full text-sm">
                                 <thead className="bg-gray-50 dark:bg-gray-900/50 border-b border-gray-100 dark:border-gray-800">
                                     <tr>
-                                        <th className="text-left text-[11px] font-bold text-gray-500 uppercase tracking-wider px-4 py-3">{t("billing.withdraw.table.id", "ID")}</th>
-                                        <th className="text-left text-[11px] font-bold text-gray-500 uppercase tracking-wider px-4 py-3">{t("billing.withdraw.table.user", "User")}</th>
-                                        <th className="text-left text-[11px] font-bold text-gray-500 uppercase tracking-wider px-4 py-3 hidden md:table-cell">{t("billing.withdraw.table.destination", "Tujuan")}</th>
-                                        <th className="text-right text-[11px] font-bold text-gray-500 uppercase tracking-wider px-4 py-3 pr-8">{t("billing.withdraw.table.amount", "Nominal")}</th>
+                                        <th className="text-start text-[11px] font-bold text-gray-500 uppercase tracking-wider px-4 py-3">{t("billing.withdraw.table.id", "ID")}</th>
+                                        <th className="text-start text-[11px] font-bold text-gray-500 uppercase tracking-wider px-4 py-3">{t("billing.withdraw.table.user", "User")}</th>
+                                        <th className="text-start text-[11px] font-bold text-gray-500 uppercase tracking-wider px-4 py-3 hidden md:table-cell">{t("billing.withdraw.table.destination", "Tujuan")}</th>
+                                        <th className="text-end text-[11px] font-bold text-gray-500 uppercase tracking-wider px-4 py-3 pe-8">{t("billing.withdraw.table.amount", "Nominal")}</th>
                                         <th className="text-center text-[11px] font-bold text-gray-500 uppercase tracking-wider px-4 py-3">{t("billing.withdraw.table.status", "Status")}</th>
-                                        <th className="text-left text-[11px] font-bold text-gray-500 uppercase tracking-wider px-4 py-3 hidden lg:table-cell">{t("billing.withdraw.table.requestDate", "Tgl Request")}</th>
+                                        <th className="text-start text-[11px] font-bold text-gray-500 uppercase tracking-wider px-4 py-3 hidden lg:table-cell">{t("billing.withdraw.table.requestDate", "Tgl Request")}</th>
                                         <th className="text-center text-[11px] font-bold text-gray-500 uppercase tracking-wider px-4 py-3">{t("billing.withdraw.table.actions", "Aksi")}</th>
                                     </tr>
                                 </thead>
@@ -573,7 +573,7 @@ function WithdrawContent() {
                                                 </td>
                                                 <td className="px-4 py-3">
                                                     <div>
-                                                        <button onClick={(e) => { e.stopPropagation(); router.push(`/${locale}/users/manage/${w.userId || w.id}`); }} className="font-bold text-gray-900 dark:text-white text-sm leading-tight hover:text-emerald-600 dark:hover:text-emerald-400 hover:underline text-left">{w.user?.name || `User ID: ${w.userId}`}</button>
+                                                        <button onClick={(e) => { e.stopPropagation(); router.push(`/${locale}/users/manage/${w.userId || w.id}`); }} className="font-bold text-gray-900 dark:text-white text-sm leading-tight hover:text-emerald-600 dark:hover:text-emerald-400 hover:underline text-start">{w.user?.name || `User ID: ${w.userId}`}</button>
                                                         {userUsername && <p className="text-[11px] text-gray-400">{userUsername}</p>}
                                                     </div>
                                                 </td>
@@ -582,8 +582,8 @@ function WithdrawContent() {
                                                     <div className="text-[11px] font-mono text-gray-500">{w.accountNumber || ''}</div>
                                                     <div className="text-[10px] text-gray-400 uppercase">{w.accountName || ''}</div>
                                                 </td>
-                                                <td className="px-4 py-3 text-right pr-8">
-                                                    <span className="font-bold text-emerald-600 dark:text-emerald-400">{formatRupiah(w.amount)}</span>
+                                                <td className="px-4 py-3 text-end pe-8">
+                                                    <span className="font-bold text-emerald-600 dark:text-emerald-400">{formatRupiah(w.amount, locale)}</span>
                                                 </td>
                                                 <td className="px-4 py-3 text-center">{getWithdrawStatusBadge(w.status, t)}</td>
                                                 <td className="px-4 py-3 hidden lg:table-cell">
@@ -608,29 +608,29 @@ function WithdrawContent() {
                                                             <DropdownMenuSeparator />
                                                             {s === 'pending' && <>
                                                                 <DropdownMenuItem onClick={() => openModal(w, 'approve')}>
-                                                                    <Check className="w-4 h-4 mr-2 text-emerald-600" />
+                                                                    <Check className="w-4 h-4 me-2 text-emerald-600" />
                                                                     <span className="text-emerald-600 font-medium">{t("billing.withdraw.actions.approve", "Approve")}</span>
                                                                 </DropdownMenuItem>
                                                                 <DropdownMenuItem onClick={() => openModal(w, 'reject')}>
-                                                                    <X className="w-4 h-4 mr-2 text-red-600" />
+                                                                    <X className="w-4 h-4 me-2 text-red-600" />
                                                                     <span className="text-red-600 font-medium">{t("billing.withdraw.actions.reject", "Tolak")}</span>
                                                                 </DropdownMenuItem>
                                                             </>}
                                                             {s === 'approved' && (
                                                                 <DropdownMenuItem onClick={() => openModal(w, 'complete')}>
-                                                                    <CheckCircle2 className="w-4 h-4 mr-2 text-teal-600" />
+                                                                    <CheckCircle2 className="w-4 h-4 me-2 text-teal-600" />
                                                                     <span className="text-teal-600 font-medium">{t("billing.withdraw.actions.markComplete", "Tandai Selesai")}</span>
                                                                 </DropdownMenuItem>
                                                             )}
                                                             {s === 'completed' && (
                                                                 <DropdownMenuItem onClick={() => setViewModal({ open: true, item: w, mode: 'detail' })}>
-                                                                    <FileText className="w-4 h-4 mr-2 text-blue-600" />
+                                                                    <FileText className="w-4 h-4 me-2 text-blue-600" />
                                                                     <span>{t("billing.withdraw.actions.viewTransferDetail", "Lihat Detail Transfer")}</span>
                                                                 </DropdownMenuItem>
                                                             )}
                                                             {(s === 'rejected' || s === 'failed') && (
                                                                 <DropdownMenuItem onClick={() => setViewModal({ open: true, item: w, mode: 'reason' })}>
-                                                                    <Eye className="w-4 h-4 mr-2 text-red-600" />
+                                                                    <Eye className="w-4 h-4 me-2 text-red-600" />
                                                                     <span>{t("billing.withdraw.actions.viewRejectReason", "Lihat Alasan Ditolak")}</span>
                                                                 </DropdownMenuItem>
                                                             )}

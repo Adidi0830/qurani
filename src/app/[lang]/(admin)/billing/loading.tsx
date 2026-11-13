@@ -24,7 +24,7 @@ export default function Loading() {
               <thead className="bg-gray-50/50 dark:bg-gray-800/30">
                 <tr>
                   {["ID", "Tanggal", "User", "Kategori", "Nominal", "Aksi"].map((h) => (
-                    <th key={h} className="px-6 py-4 text-left"><Skeleton className="h-3 w-16 bg-slate-200" /></th>
+                    <th key={h} className="px-6 py-4 text-start"><Skeleton className="h-3 w-16 bg-slate-200" /></th>
                   ))}
                 </tr>
               </thead>

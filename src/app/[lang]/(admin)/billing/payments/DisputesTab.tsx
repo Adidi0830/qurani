@@ -311,14 +311,14 @@ export default function DisputesTab() {
                 <div className="flex items-center w-full sm:w-auto">
                     <div className="flex w-full sm:w-[350px] shadow-sm rounded-lg overflow-hidden border border-gray-200 dark:border-gray-700">
                         <div className="relative flex-1 bg-white dark:bg-gray-900">
-                            <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
+                            <Search className="absolute start-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
                             <input
                                 type="text"
                                 placeholder={t("billing.payments.disputes.search_placeholder", "Cari sengketa...")}
                                 value={searchInput}
                                 onChange={(e) => setSearchInput(e.target.value)}
                                 onKeyDown={(e) => e.key === 'Enter' && handleSearch()}
-                                className="w-full pl-9 pr-3 py-2.5 text-sm bg-transparent border-none focus:ring-0 dark:text-white"
+                                className="w-full ps-9 pe-3 py-2.5 text-sm bg-transparent border-none focus:ring-0 dark:text-white text-start"
                             />
                         </div>
                         <button onClick={handleSearch} className="px-4 py-2.5 bg-emerald-500 hover:bg-emerald-600 text-white text-sm font-semibold transition-colors">
@@ -368,13 +368,13 @@ export default function DisputesTab() {
                                         </DropdownMenuTrigger>
                                         <DropdownMenuContent align="end">
                                             <DropdownMenuItem onClick={() => setDetailModal(item)}>
-                                                <Eye className="w-4 h-4 mr-2" /> {t("billing.payments.disputes.action.detail", "Lihat Detail")}
+                                                <Eye className="w-4 h-4 me-2" /> {t("billing.payments.disputes.action.detail", "Lihat Detail")}
                                             </DropdownMenuItem>
                                             <DropdownMenuItem onClick={() => setRespondModal(item)}>
-                                                <MessageSquare className="w-4 h-4 mr-2" /> {t("billing.payments.disputes.action.reply", "Balas")}
+                                                <MessageSquare className="w-4 h-4 me-2" /> {t("billing.payments.disputes.action.reply", "Balas")}
                                             </DropdownMenuItem>
                                             <DropdownMenuItem onClick={() => setResolveModal(item)}>
-                                                <CheckCircle2 className="w-4 h-4 mr-2" /> {t("billing.payments.disputes.action.resolve", "Selesaikan")}
+                                                <CheckCircle2 className="w-4 h-4 me-2" /> {t("billing.payments.disputes.action.resolve", "Selesaikan")}
                                             </DropdownMenuItem>
                                         </DropdownMenuContent>
                                     </DropdownMenu>
@@ -401,7 +401,7 @@ export default function DisputesTab() {
 
                 {/* TABLE VIEW (Tablet & Desktop) */}
                 <div className="hidden sm:block overflow-x-auto">
-                    <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+                    <table className="w-full text-sm text-start text-gray-500 dark:text-gray-400">
                         <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-900/50 dark:text-gray-300 border-b border-gray-200 dark:border-gray-700">
                             <tr>
                                 <th className="px-4 py-3">{t("billing.payments.disputes.table.date", "Tanggal")}</th>
@@ -477,13 +477,13 @@ export default function DisputesTab() {
                                                     </DropdownMenuTrigger>
                                                     <DropdownMenuContent align="end">
                                                         <DropdownMenuItem onClick={() => setDetailModal(item)}>
-                                                            <Eye className="w-4 h-4 mr-2" /> {t("billing.payments.disputes.action.detail", "Lihat Detail")}
+                                                            <Eye className="w-4 h-4 me-2" /> {t("billing.payments.disputes.action.detail", "Lihat Detail")}
                                                         </DropdownMenuItem>
                                                         <DropdownMenuItem onClick={() => setRespondModal(item)}>
-                                                            <MessageSquare className="w-4 h-4 mr-2" /> {t("billing.payments.disputes.action.reply", "Balas")}
+                                                            <MessageSquare className="w-4 h-4 me-2" /> {t("billing.payments.disputes.action.reply", "Balas")}
                                                         </DropdownMenuItem>
                                                         <DropdownMenuItem onClick={() => setResolveModal(item)}>
-                                                            <CheckCircle2 className="w-4 h-4 mr-2" /> {t("billing.payments.disputes.action.resolve", "Selesaikan")}
+                                                            <CheckCircle2 className="w-4 h-4 me-2" /> {t("billing.payments.disputes.action.resolve", "Selesaikan")}
                                                         </DropdownMenuItem>
                                                     </DropdownMenuContent>
                                                 </DropdownMenu>

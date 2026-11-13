@@ -11,8 +11,8 @@ import { Select, SelectContent, SelectGroup, SelectItem, SelectTrigger, SelectVa
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
 import { SmartPagination } from "@/components/ui/smart-pagination";
 
-function formatCurrency(amount: number) {
-    return new Intl.NumberFormat("id-ID", {
+function formatCurrency(amount: number, locale: string = "id") {
+    return new Intl.NumberFormat(locale === "ar" ? "ar-SA" : locale === "en" ? "en-US" : "id-ID", {
         style: "currency",
         currency: "IDR",
         minimumFractionDigits: 0,
@@ -263,7 +263,7 @@ function HistoryPageContent() {
                     <div className="min-w-0">
                         <button
                             onClick={(e) => { e.stopPropagation(); router.push(`/${lang}/billing/${item.userId}/wallet`); }}
-                            className="font-bold text-gray-900 dark:text-white text-sm hover:text-emerald-600 dark:hover:text-emerald-400 hover:underline transition-colors text-left"
+                            className="font-bold text-gray-900 dark:text-white text-sm hover:text-emerald-600 dark:hover:text-emerald-400 hover:underline transition-colors text-start"
                         >
                             {item.user?.name || `User ID: ${item.userId}`}
                         </button>
@@ -312,13 +312,13 @@ function HistoryPageContent() {
                             
                             <div className="flex flex-1 sm:flex-none sm:w-64 shadow-sm rounded-lg overflow-hidden border border-gray-200 dark:border-gray-700 focus-within:ring-2 focus-within:ring-emerald-500 transition-shadow">
                                 <div className="relative flex-1 bg-gray-50 dark:bg-gray-800">
-                                    <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
+                                    <Search className="absolute start-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400 pointer-events-none" />
                                     <input
                                         value={searchInput}
                                         onChange={e => setSearchInput(e.target.value)}
                                         onKeyDown={handleKeyDown}
                                         placeholder="Cari user, ref..."
-                                        className="w-full pl-9 pr-3 py-2 text-sm bg-transparent border-none focus:outline-none focus:ring-0 dark:text-white"
+                                        className="w-full ps-9 pe-3 py-2 text-sm bg-transparent border-none focus:outline-none focus:ring-0 dark:text-white text-start"
                                     />
                                 </div>
                                 <button onClick={handleSearch} className="px-4 py-2 bg-emerald-500 hover:bg-emerald-600 text-white text-sm font-semibold transition-colors">
@@ -457,13 +457,13 @@ function HistoryPageContent() {
                         <table className="w-full text-sm">
                             <thead className="bg-gray-50/80 dark:bg-gray-900/50 border-b border-gray-100 dark:border-gray-800">
                                 <tr>
-                                    <th className="text-left text-[11px] font-bold text-gray-500 uppercase tracking-wider px-6 py-4">ID</th>
-                                    <th className="text-left text-[11px] font-bold text-gray-500 uppercase tracking-wider px-6 py-4">User</th>
-                                    <th className="text-left text-[11px] font-bold text-gray-500 uppercase tracking-wider px-6 py-4 hidden lg:table-cell">Kategori</th>
-                                    <th className="text-right text-[11px] font-bold text-gray-500 uppercase tracking-wider px-6 py-4">Nominal</th>
-                                    <th className="text-left text-[11px] font-bold text-gray-500 uppercase tracking-wider px-6 py-4">Metode</th>
-                                    <th className="text-left text-[11px] font-bold text-gray-500 uppercase tracking-wider px-6 py-4">Status</th>
-                                    <th className="text-left text-[11px] font-bold text-gray-500 uppercase tracking-wider px-6 py-4 hidden xl:table-cell">Tanggal</th>
+                                    <th className="text-start text-[11px] font-bold text-gray-500 uppercase tracking-wider px-6 py-4">ID</th>
+                                    <th className="text-start text-[11px] font-bold text-gray-500 uppercase tracking-wider px-6 py-4">User</th>
+                                    <th className="text-start text-[11px] font-bold text-gray-500 uppercase tracking-wider px-6 py-4 hidden lg:table-cell">Kategori</th>
+                                    <th className="text-end text-[11px] font-bold text-gray-500 uppercase tracking-wider px-6 py-4">Nominal</th>
+                                    <th className="text-start text-[11px] font-bold text-gray-500 uppercase tracking-wider px-6 py-4">Metode</th>
+                                    <th className="text-start text-[11px] font-bold text-gray-500 uppercase tracking-wider px-6 py-4">Status</th>
+                                    <th className="text-start text-[11px] font-bold text-gray-500 uppercase tracking-wider px-6 py-4 hidden xl:table-cell">Tanggal</th>
                                     <th className="text-center text-[11px] font-bold text-gray-500 uppercase tracking-wider px-6 py-4">Aksi</th>
                                 </tr>
                             </thead>
@@ -495,7 +495,7 @@ function HistoryPageContent() {
                                         <td className="px-6 py-4 whitespace-nowrap">
                                             <button
                                                 onClick={(e) => { e.stopPropagation(); router.push(`/${lang}/billing/${item.userId || item.id}/wallet`); }}
-                                                className="font-bold text-gray-900 dark:text-white text-sm hover:text-emerald-600 dark:hover:text-emerald-400 hover:underline transition-colors text-left"
+                                                className="font-bold text-gray-900 dark:text-white text-sm hover:text-emerald-600 dark:hover:text-emerald-400 hover:underline transition-colors text-start"
                                             >
                                                 {item.user?.name || `User ID: ${item.userId}`}
                                             </button>
@@ -505,9 +505,9 @@ function HistoryPageContent() {
                                             <div className="mb-1">{getTxTypeBadge(item.type)}</div>
                                             <p className="text-xs text-gray-600 dark:text-gray-300 max-w-[200px] truncate">{item.description || '—'}</p>
                                         </td>
-                                        <td className="px-6 py-4 text-right whitespace-nowrap">
+                                        <td className="px-6 py-4 text-end whitespace-nowrap">
                                             <span className={`font-bold text-sm ${item.amount < 0 ? 'text-red-600 dark:text-red-400' : 'text-emerald-600 dark:text-emerald-400'}`}>
-                                                {item.amount < 0 ? '-' : '+'}{formatCurrency(Math.abs(item.amount))}
+                                                {item.amount < 0 ? '-' : '+'}{formatCurrency(Math.abs(item.amount), lang)}
                                             </span>
                                         </td>
                                         <td className="px-6 py-4 whitespace-nowrap">

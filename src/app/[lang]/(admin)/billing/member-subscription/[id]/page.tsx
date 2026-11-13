@@ -79,7 +79,7 @@ function SimOrderDetail({ order }: { order: SimOrder }) {
                 <div className="flex items-center gap-3">
                     <Link href="/billing/member-subscription"
                         className="flex items-center justify-center w-9 h-9 rounded-xl bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 text-gray-500 hover:text-emerald-600 hover:border-emerald-400 transition-all shadow-sm">
-                        <ArrowLeft className="w-5 h-5" />
+                        <ArrowLeft className="w-5 h-5 rtl:rotate-180" />
                     </Link>
                     <div className="flex items-center gap-2 flex-wrap">
                         <h1 className="text-xl font-bold text-gray-900 dark:text-white">Detail Pesan</h1>
@@ -158,7 +158,7 @@ function SimOrderDetail({ order }: { order: SimOrder }) {
                                                     </p>
                                                     <p className="text-xs text-gray-500 mt-0.5">{dateStr}</p>
                                                 </div>
-                                                <div className="text-right flex-shrink-0">
+                                                <div className="text-end flex-shrink-0">
                                                     <p className="text-xs font-bold text-gray-700 dark:text-gray-300">
                                                         {sess.startTime} – {sess.endTime}
                                                     </p>
@@ -298,7 +298,7 @@ function BookingDetailContent({ id }: { id: number }) {
                 <p className="text-gray-500 text-sm">ID #{id} tidak ada dalam data.</p>
                 <Link href="/billing/member-subscription"
                     className="text-sm px-4 py-2 bg-emerald-500 hover:bg-emerald-600 text-white rounded-lg flex items-center gap-2 transition-colors">
-                    <ArrowLeft className="w-4 h-4" /> Kembali ke daftar
+                    <ArrowLeft className="w-4 h-4 rtl:rotate-180" /> Kembali ke daftar
                 </Link>
             </div>
         )
@@ -320,7 +320,7 @@ function BookingDetailContent({ id }: { id: number }) {
                 <div className="flex items-center gap-3">
                     <Link href="/billing/member-subscription"
                         className="p-2 rounded-lg border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-900 text-gray-500 hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors">
-                        <ArrowLeft className="w-4 h-4" />
+                        <ArrowLeft className="w-4 h-4 rtl:rotate-180" />
                     </Link>
                     <div className="flex-1">
                         <div className="flex items-center gap-2 flex-wrap">
@@ -391,7 +391,7 @@ function BookingDetailContent({ id }: { id: number }) {
                                                     </span>
                                                 </div>
                                             </div>
-                                            <div className="text-right shrink-0">
+                                            <div className="text-end shrink-0">
                                                 <p className="text-xs font-bold text-gray-950 dark:text-gray-300">{s.date}</p>
                                                 <p className="text-[10px] text-gray-400">{s.time}</p>
                                             </div>
@@ -422,10 +422,10 @@ function BookingDetailContent({ id }: { id: number }) {
                                     </div>
                                     <div className="flex justify-between items-center text-xs">
                                         <span className="text-gray-400 font-bold uppercase tracking-tighter">Waktu Bayar</span>
-                                        <span className="text-gray-600 font-bold dark:text-gray-300 text-right">{formatDateTime(detail.payment.paidAt)}</span>
+                                        <span className="text-gray-600 font-bold dark:text-gray-300 text-end">{formatDateTime(detail.payment.paidAt)}</span>
                                     </div>
                                 </div>
-                                <div className="border-t md:border-t-0 md:border-l border-gray-100 dark:border-gray-800 pt-3 md:pt-0 md:pl-6 space-y-2">
+                                <div className="border-t md:border-t-0 md:border-s border-gray-100 dark:border-gray-800 pt-3 md:pt-0 md:ps-6 space-y-2">
                                     <div className="flex justify-between text-xs">
                                         <span className="text-gray-400 font-bold uppercase">Harga Paket</span>
                                         <span className="font-bold text-gray-950">{formatRupiah(detail.payment.pricePackage)}</span>
@@ -531,7 +531,7 @@ function BookingDetailContent({ id }: { id: number }) {
                                             {booking.mode === "online" ? <Wifi className="w-3 h-3" /> : <MapPin className="w-3 h-3" />}
                                             {booking.mode === "online" ? "Online" : "Offline"}
                                         </span>
-                                        <span className="font-bold text-gray-700 dark:text-gray-300 italic border-l border-gray-200 dark:border-gray-700 pl-2">{booking.paymentMethod}</span>
+                                        <span className="font-bold text-gray-700 dark:text-gray-300 italic border-s border-gray-200 dark:border-gray-700 ps-2">{booking.paymentMethod}</span>
                                     </div>
                                 </div>
                                 <div>

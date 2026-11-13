@@ -34,11 +34,11 @@ import {
     DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
 import { formatDistanceToNowStrict } from "date-fns"
-import { id, enUS } from "date-fns/locale"
+import { id, enUS, arSA } from "date-fns/locale"
 
 // ── helpers ──────────────────────────────────────────────────────────────────
-function formatRupiah(n: number) {
-    return new Intl.NumberFormat("id-ID", {
+function formatRupiah(n: number, locale = "id") {
+    return new Intl.NumberFormat(locale === "ar" ? "ar-SA" : locale === "en" ? "en-US" : "id-ID", {
         style: "currency", currency: "IDR",
         minimumFractionDigits: 0, maximumFractionDigits: 0,
     }).format(n).replace("IDR", "Rp")
@@ -58,7 +58,7 @@ function formatDate(dateString: string | null, variant: 'short' | 'long' | 'rela
         if (Number.isNaN(date.getTime())) return dateString
 
         if (variant === 'relative') {
-            const localeObj = locale === 'id' ? id : enUS
+            const localeObj = locale === 'ar' ? arSA : locale === 'id' ? id : enUS
             return formatDistanceToNowStrict(date, { addSuffix: true, locale: localeObj })
         }
 
@@ -422,13 +422,13 @@ function PayoutContent() {
                                 {/* Search - bigger */}
                                 <div className="flex items-center rounded-lg overflow-hidden border border-gray-200 dark:border-gray-700 focus-within:ring-2 focus-within:ring-emerald-500 transition-shadow flex-1 max-w-md min-w-0">
                                     <div className="relative bg-white dark:bg-gray-900 flex-1 min-w-0">
-                                        <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
+                                        <Search className="absolute start-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400 pointer-events-none" />
                                         <input
                                             value={searchInput}
                                             onChange={e => setSearchInput(e.target.value)}
                                             onKeyDown={handleKeyDown}
                                             placeholder={t("billing.payout.searchPlaceholder", "Cari nama guru, user...")}
-                                            className="w-full pl-10 pr-3 py-2.5 text-sm bg-transparent border-none focus:outline-none focus:ring-0 dark:text-white"
+                                            className="w-full ps-10 pe-3 py-2.5 text-sm bg-transparent border-none focus:outline-none focus:ring-0 dark:text-white text-start"
                                         />
                                     </div>
                                     <button
@@ -578,7 +578,7 @@ function PayoutContent() {
                                         </div>
                                         <div className="text-xs text-gray-500 space-y-1">
                                             <div>{t("billing.payout.table.user", "User (Pembayar)")}: <button onClick={(e) => { e.stopPropagation(); router.push(`/${locale || 'id'}/users/manage/${p.userId}?tab=wallet`); }} title={t("billing.payout.table.tooltips.viewUser", "Lihat profil")} className="font-medium text-gray-900 dark:text-white hover:text-emerald-600 dark:hover:text-emerald-400 hover:underline">{p.userName || `ID: ${p.userId}`}</button></div>
-                                            <div>{t("billing.payout.table.teacher", "Guru (Penerima)")}: <button onClick={(e) => { e.stopPropagation(); if (p.trainerId) router.push(`/${locale || 'id'}/teachers/manage/${p.trainerId}?from=payout`); }} title={p.trainerId ? t("billing.payout.table.tooltips.viewTeacher", "Lihat profil guru") : ""} className={`text-sm leading-tight text-left ${p.trainerId ? 'font-semibold text-gray-900 dark:text-white hover:text-emerald-600 dark:hover:text-emerald-400 hover:underline cursor-pointer' : 'text-gray-700 dark:text-gray-300'}`}>{p.trainerName || `Trainer ID: ${p.trainerId}`}</button></div>
+                                            <div>{t("billing.payout.table.teacher", "Guru (Penerima)")}: <button onClick={(e) => { e.stopPropagation(); if (p.trainerId) router.push(`/${locale || 'id'}/teachers/manage/${p.trainerId}?from=payout`); }} title={p.trainerId ? t("billing.payout.table.tooltips.viewTeacher", "Lihat profil guru") : ""} className={`text-sm leading-tight text-start ${p.trainerId ? 'font-semibold text-gray-900 dark:text-white hover:text-emerald-600 dark:hover:text-emerald-400 hover:underline cursor-pointer' : 'text-gray-700 dark:text-gray-300'}`}>{p.trainerName || `Trainer ID: ${p.trainerId}`}</button></div>
                                         </div>
                                         <div className="flex justify-between items-center pt-2 border-t border-gray-100 dark:border-gray-700">
                                             <span className="font-bold text-emerald-600 dark:text-emerald-400">{formatRupiah(p.amount)}</span>
@@ -594,12 +594,12 @@ function PayoutContent() {
                                                         <DropdownMenuSeparator />
                                                         {isPending ? (
                                                             <DropdownMenuItem onClick={() => setMarkPayoutModal(p)}>
-                                                                <Check className="w-4 h-4 mr-2 text-emerald-600" />
+                                                                <Check className="w-4 h-4 me-2 text-emerald-600" />
                                                                 <span className="font-medium text-emerald-600">{t("billing.payout.actions.markDone", "Tandai Selesai")}</span>
                                                             </DropdownMenuItem>
                                                         ) : (
                                                             <DropdownMenuItem onClick={() => setViewModal({ open: true, item: p })}>
-                                                                <FileText className="w-4 h-4 mr-2 text-emerald-600" />
+                                                                <FileText className="w-4 h-4 me-2 text-emerald-600" />
                                                                 <span className="font-medium text-emerald-600">{t("billing.payout.actions.viewNotes", "Lihat Catatan")}</span>
                                                             </DropdownMenuItem>
                                                         )}
@@ -635,12 +635,12 @@ function PayoutContent() {
                                                 )}
                                             </Tooltip>
                                         </th>
-                                        <th className="text-left text-[11px] font-bold text-gray-500 uppercase tracking-wider px-4 py-3">{t("billing.payout.table.orderCode", "Kode Pesanan")}</th>
-                                        <th className="text-left text-[11px] font-bold text-gray-500 uppercase tracking-wider px-4 py-3">{t("billing.payout.table.user", "User (Pembayar)")}</th>
-                                        <th className="text-left text-[11px] font-bold text-gray-500 uppercase tracking-wider px-4 py-3">{t("billing.payout.table.teacher", "Guru (Penerima)")}</th>
-                                        <th className="text-right text-[11px] font-bold text-gray-500 uppercase tracking-wider px-4 py-3 pr-8">{t("billing.payout.table.amount", "Nominal")}</th>
+                                        <th className="text-start text-[11px] font-bold text-gray-500 uppercase tracking-wider px-4 py-3">{t("billing.payout.table.orderCode", "Kode Pesanan")}</th>
+                                        <th className="text-start text-[11px] font-bold text-gray-500 uppercase tracking-wider px-4 py-3">{t("billing.payout.table.user", "User (Pembayar)")}</th>
+                                        <th className="text-start text-[11px] font-bold text-gray-500 uppercase tracking-wider px-4 py-3">{t("billing.payout.table.teacher", "Guru (Penerima)")}</th>
+                                        <th className="text-end text-[11px] font-bold text-gray-500 uppercase tracking-wider px-4 py-3 pe-8">{t("billing.payout.table.amount", "Nominal")}</th>
                                         <th className="text-center text-[11px] font-bold text-gray-500 uppercase tracking-wider px-4 py-3">{t("billing.payout.table.status", "Status")}</th>
-                                        <th className="text-left text-[11px] font-bold text-gray-500 uppercase tracking-wider px-4 py-3 hidden lg:table-cell">{t("billing.payout.table.paymentDate", "Tgl Bayar")}</th>
+                                        <th className="text-start text-[11px] font-bold text-gray-500 uppercase tracking-wider px-4 py-3 hidden lg:table-cell">{t("billing.payout.table.paymentDate", "Tgl Bayar")}</th>
                                         <th className="text-center text-[11px] font-bold text-gray-500 uppercase tracking-wider px-4 py-3">{t("billing.payout.table.actions", "Aksi")}</th>
                                     </tr>
                                 </thead>
@@ -690,13 +690,13 @@ function PayoutContent() {
                                                     </span>
                                                 </td>
                                                 <td className="px-4 py-3">
-                                                    <button onClick={(e) => { e.stopPropagation(); router.push(`/${locale || 'id'}/users/manage/${p.userId}?tab=wallet`); }} title={t("billing.payout.table.tooltips.viewUser", "Lihat profil")} className="font-medium text-gray-900 dark:text-white text-sm hover:text-emerald-600 dark:hover:text-emerald-400 hover:underline text-left">{p.userName || `User ID: ${p.userId}`}</button>
+                                                    <button onClick={(e) => { e.stopPropagation(); router.push(`/${locale || 'id'}/users/manage/${p.userId}?tab=wallet`); }} title={t("billing.payout.table.tooltips.viewUser", "Lihat profil")} className="font-medium text-gray-900 dark:text-white text-sm hover:text-emerald-600 dark:hover:text-emerald-400 hover:underline text-start">{p.userName || `User ID: ${p.userId}`}</button>
                                                 </td>
                                                 <td className="px-4 py-3">
-                                                    <button onClick={(e) => { e.stopPropagation(); if (p.trainerId) router.push(`/${locale || 'id'}/teachers/manage/${p.trainerId}?from=payout`); }} title={p.trainerId ? t("billing.payout.table.tooltips.viewTeacher", "Lihat profil guru") : ""} className={`text-left ${p.trainerId ? 'font-medium text-gray-900 dark:text-white text-sm hover:text-emerald-600 dark:hover:text-emerald-400 hover:underline cursor-pointer' : 'font-medium text-gray-900 dark:text-white text-sm'}`}>{p.trainerName || `Trainer ID: ${p.trainerId}`}</button>
+                                                    <button onClick={(e) => { e.stopPropagation(); if (p.trainerId) router.push(`/${locale || 'id'}/teachers/manage/${p.trainerId}?from=payout`); }} title={p.trainerId ? t("billing.payout.table.tooltips.viewTeacher", "Lihat profil guru") : ""} className={`text-start ${p.trainerId ? 'font-medium text-gray-900 dark:text-white text-sm hover:text-emerald-600 dark:hover:text-emerald-400 hover:underline cursor-pointer' : 'font-medium text-gray-900 dark:text-white text-sm'}`}>{p.trainerName || `Trainer ID: ${p.trainerId}`}</button>
                                                 </td>
-                                                <td className="px-4 py-3 text-right pr-8">
-                                                    <span className="font-bold text-emerald-600 dark:text-emerald-400">{formatRupiah(p.amount)}</span>
+                                                <td className="px-4 py-3 text-end pe-8">
+                                                    <span className="font-bold text-emerald-600 dark:text-emerald-400">{formatRupiah(p.amount, locale)}</span>
                                                 </td>
                                                 <td className="px-4 py-3 text-center">
                                                     {getPayoutStatusBadge(p.status, t)}
@@ -725,12 +725,12 @@ function PayoutContent() {
                                                             <DropdownMenuSeparator />
                                                             {isPending ? (
                                                                 <DropdownMenuItem onClick={() => setMarkPayoutModal(p)}>
-                                                                    <Check className="w-4 h-4 mr-2 text-emerald-600" />
+                                                                    <Check className="w-4 h-4 me-2 text-emerald-600" />
                                                                     <span className="font-medium text-emerald-600">{t("billing.payout.actions.markDone", "Tandai Selesai")}</span>
                                                                 </DropdownMenuItem>
                                                             ) : (
                                                                 <DropdownMenuItem onClick={() => setViewModal({ open: true, item: p })}>
-                                                                    <FileText className="w-4 h-4 mr-2 text-emerald-600" />
+                                                                    <FileText className="w-4 h-4 me-2 text-emerald-600" />
                                                                     <span className="font-medium text-emerald-600">{t("billing.payout.actions.viewNotes", "Lihat Catatan")}</span>
                                                                 </DropdownMenuItem>
                                                             )}

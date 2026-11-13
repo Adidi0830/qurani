@@ -318,7 +318,7 @@ function Row({ label, children }: { label: string; children: React.ReactNode }) 
     return (
         <div className="flex items-start justify-between gap-4 py-2 border-b border-gray-50 dark:border-gray-800/80 last:border-0">
             <span className="text-xs text-gray-400 dark:text-gray-500 flex-shrink-0 w-36">{label}</span>
-            <span className="text-xs font-medium text-gray-800 dark:text-gray-200 text-right flex-1 min-w-0">{children}</span>
+            <span className="text-xs font-medium text-gray-800 dark:text-gray-200 text-end flex-1 min-w-0">{children}</span>
         </div>
     )
 }
@@ -582,7 +582,7 @@ function DiscountCodeDetailContent() {
                     <Tag className="w-12 h-12 mx-auto mb-3 text-gray-300 dark:text-gray-600" />
                     <p className="text-gray-500 dark:text-gray-400 font-medium">Kode diskon tidak ditemukan</p>
                     <button onClick={() => router.push("/billing/discountcodes")} className="mt-4 inline-flex items-center gap-2 px-4 py-2 text-sm font-semibold text-emerald-600 hover:text-emerald-700 transition-colors">
-                        <ArrowLeft className="w-4 h-4" /> Kembali ke Daftar
+                        <ArrowLeft className="w-4 h-4 rtl:rotate-180" /> Kembali ke Daftar
                     </button>
                 </div>
             </div>
@@ -616,7 +616,7 @@ function DiscountCodeDetailContent() {
                             onClick={() => router.push("/billing/discountcodes")}
                             className="flex items-center gap-1.5 text-sm text-gray-500 dark:text-gray-400 hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors font-medium"
                         >
-                            <ArrowLeft className="w-4 h-4" />
+                            <ArrowLeft className="w-4 h-4 rtl:rotate-180" />
                             <span>Promo &amp; Kupon</span>
                         </button>
                         <div className="flex items-center gap-2">
@@ -695,7 +695,7 @@ function DiscountCodeDetailContent() {
                                 <p className="text-[10px] uppercase tracking-wide font-semibold text-gray-400 dark:text-gray-500 mb-0.5">Penggunaan</p>
                                 <p className="text-sm font-bold text-gray-900 dark:text-white">
                                     {code.usageCount}{code.usageLimit > 0 ? `/${code.usageLimit}` : ""}
-                                    {code.usageLimit > 0 && <span className="ml-1 text-xs font-normal text-gray-400">({usagePercent}%)</span>}
+                                    {code.usageLimit > 0 && <span className="ms-1 text-xs font-normal text-gray-400">({usagePercent}%)</span>}
                                 </p>
                                 {code.usageLimit > 0 && (
                                     <div className="w-full h-1.5 bg-gray-100 dark:bg-gray-800 rounded-full mt-1 overflow-hidden">
@@ -804,7 +804,7 @@ function DiscountCodeDetailContent() {
                             <div className="mt-6 pt-5 border-t border-gray-100 dark:border-gray-800">
                                 <h4 className="text-[10px] font-bold text-gray-400 dark:text-gray-500 uppercase tracking-widest mb-3 flex items-center gap-2">
                                     <Calendar className="w-3.5 h-3.5" /> Jadwal Aktivasi
-                                    <span className="ml-1 text-[9px] text-gray-300 dark:text-gray-600 font-normal normal-case tracking-normal">
+                                    <span className="ms-1 text-[9px] text-gray-300 dark:text-gray-600 font-normal normal-case tracking-normal">
                                         POST /api/v1/DiscountCodes/{id}/schedule
                                     </span>
                                 </h4>
@@ -866,7 +866,7 @@ function DiscountCodeDetailContent() {
                                         <thead className="bg-gray-50 dark:bg-gray-800/60 border-b border-gray-200 dark:border-gray-700">
                                             <tr>
                                                 {["#", "Pengguna", "Email", "Order ID", "Diskon", "Total Pesanan", "Waktu Pakai"].map(h => (
-                                                    <th key={h} className="text-left text-[10px] font-bold text-gray-500 dark:text-gray-400 uppercase tracking-wide px-4 py-3 whitespace-nowrap">{h}</th>
+                                                    <th key={h} className="text-start text-[10px] font-bold text-gray-500 dark:text-gray-400 uppercase tracking-wide px-4 py-3 whitespace-nowrap">{h}</th>
                                                 ))}
                                             </tr>
                                         </thead>
@@ -896,9 +896,9 @@ function DiscountCodeDetailContent() {
                             <div className="flex items-center justify-between px-5 py-3 border-t border-gray-100 dark:border-gray-800 bg-gray-50 dark:bg-gray-900">
                                 <span className="text-xs text-gray-500 dark:text-gray-400">Total pemakaian: <strong className="text-gray-900 dark:text-white">{code.usageCount}</strong></span>
                                 <div className="flex items-center gap-1">
-                                    <button onClick={() => setUsagePage(p => Math.max(1, p - 1))} disabled={usagePage === 1 || usageLoading} className="p-1.5 rounded-lg border border-gray-200 dark:border-gray-700 text-gray-500 hover:bg-white dark:hover:bg-gray-800 disabled:opacity-40 transition-colors"><ChevronLeft className="w-4 h-4" /></button>
+                                    <button onClick={() => setUsagePage(p => Math.max(1, p - 1))} disabled={usagePage === 1 || usageLoading} className="p-1.5 rounded-lg border border-gray-200 dark:border-gray-700 text-gray-500 hover:bg-white dark:hover:bg-gray-800 disabled:opacity-40 transition-colors"><ChevronLeft className="w-4 h-4 rtl:rotate-180" /></button>
                                     <span className="flex items-center px-3 text-xs text-gray-500">Hal. {usagePage}</span>
-                                    <button onClick={() => setUsagePage(p => p + 1)} disabled={displayUsages.length < 10 || usageLoading} className="p-1.5 rounded-lg border border-gray-200 dark:border-gray-700 text-gray-500 hover:bg-white dark:hover:bg-gray-800 disabled:opacity-40 transition-colors"><ChevronRight className="w-4 h-4" /></button>
+                                    <button onClick={() => setUsagePage(p => p + 1)} disabled={displayUsages.length < 10 || usageLoading} className="p-1.5 rounded-lg border border-gray-200 dark:border-gray-700 text-gray-500 hover:bg-white dark:hover:bg-gray-800 disabled:opacity-40 transition-colors"><ChevronRight className="w-4 h-4 rtl:rotate-180" /></button>
                                 </div>
                             </div>
                         </div>
@@ -985,7 +985,7 @@ function DiscountCodeDetailContent() {
                                                     const colors = ["bg-violet-500", "bg-blue-500", "bg-emerald-500", "bg-amber-500", "bg-pink-500"]
                                                     return (
                                                         <div key={city.city} className="flex items-center gap-3">
-                                                            <span className="text-xs font-bold text-gray-400 w-5 text-right">{i + 1}</span>
+                                                            <span className="text-xs font-bold text-gray-400 w-5 text-end">{i + 1}</span>
                                                             <span className="text-sm text-gray-700 dark:text-gray-300 w-28 truncate font-medium">{city.city}</span>
                                                             <div className="flex-1 h-2.5 bg-gray-200 dark:bg-gray-700 rounded-full overflow-hidden">
                                                                 <div

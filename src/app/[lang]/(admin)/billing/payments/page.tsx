@@ -35,8 +35,8 @@ interface PaymentData {
 // DUMMY lama dihapus — getSimPayments() sudah mengembalikan 10 entries
 // yang sesuai persis dengan 10 pesanan di halaman Orders/Pesanan.
 
-function formatCurrency(amount: number, currency: string = "IDR") {
-    return new Intl.NumberFormat("id-ID", { 
+function formatCurrency(amount: number, currency: string = "IDR", locale: string = "id") {
+    return new Intl.NumberFormat(locale === "ar" ? "ar-SA" : locale === "en" ? "en-US" : "id-ID", { 
         style: "currency", 
         currency: currency, 
         minimumFractionDigits: 0,
@@ -116,17 +116,17 @@ function ActionDropdown({ payment, onSendInvoice, onUpdateStatus, t }: { payment
                 <MoreHorizontal className="w-5 h-5" />
             </button>
             {open && (
-                <div className="absolute right-0 mt-1 w-44 bg-white dark:bg-gray-800 rounded-lg shadow-xl border border-gray-100 dark:border-gray-700 z-50 overflow-hidden">
+                <div className="absolute end-0 mt-1 w-44 bg-white dark:bg-gray-800 rounded-lg shadow-xl border border-gray-100 dark:border-gray-700 z-50 overflow-hidden">
                     <button 
                         onClick={() => { setOpen(false); onSendInvoice(); }}
-                        className="w-full text-left px-4 py-2 text-sm text-blue-600 dark:text-blue-400 hover:bg-blue-50 dark:hover:bg-blue-900/20 transition-colors flex items-center gap-2"
+                        className="w-full text-start px-4 py-2 text-sm text-blue-600 dark:text-blue-400 hover:bg-blue-50 dark:hover:bg-blue-900/20 transition-colors flex items-center gap-2"
                     >
                         <Send className="w-3.5 h-3.5" />
                         {t("billing.payments.actions.send_invoice", "Send Invoice")}
                     </button>
                     <button 
                         onClick={() => { setOpen(false); onUpdateStatus(); }}
-                        className="w-full text-left px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors flex items-center gap-2"
+                        className="w-full text-start px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors flex items-center gap-2"
                     >
                         <CheckSquare className="w-3.5 h-3.5" />
                         {t("billing.payments.actions.update_status", "Update Status")}
@@ -534,14 +534,14 @@ function PaymentsContent() {
                             {/* Search */}
                             <div className="flex flex-1 sm:flex-none sm:w-64 shadow-sm rounded-lg overflow-hidden border border-gray-200 dark:border-gray-700 focus-within:ring-2 focus-within:ring-emerald-500 transition-shadow">
                                 <div className="relative flex-1 bg-gray-50 dark:bg-gray-800">
-                                    <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
+                                    <Search className="absolute start-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400 pointer-events-none" />
                                     <input
                                         type="text"
                                         placeholder={t("billing.payments.searchPlaceholder", "Cari kode pesanan, metode...")}
                                         value={searchInput}
                                         onChange={(e) => setSearchInput(e.target.value)}
                                         onKeyDown={handleKeyPress}
-                                        className="w-full pl-9 pr-3 py-2 text-sm bg-transparent border-none focus:outline-none focus:ring-0 dark:text-white"
+                                        className="w-full ps-9 pe-3 py-2 text-sm bg-transparent border-none focus:outline-none focus:ring-0 dark:text-white text-start"
                                     />
                                 </div>
                                 <button
@@ -731,7 +731,7 @@ function PaymentsContent() {
                         {loading ? (
                             <div className="space-y-3">
                                 {[...Array(4)].map((_, i) => (
-                                    <div key={i} className="border-l-4 border-l-gray-200 dark:border-l-gray-700 border border-gray-100 dark:border-gray-800 rounded-xl p-4 space-y-3 bg-white dark:bg-gray-800 animate-pulse">
+                                    <div key={i} className="border-s-4 border-s-gray-200 dark:border-s-gray-700 border border-gray-100 dark:border-gray-800 rounded-xl p-4 space-y-3 bg-white dark:bg-gray-800 animate-pulse">
                                         <div className="flex justify-between items-start">
                                             <div className="flex items-center gap-2">
                                                 <Skeleton className="h-4 w-12 rounded" />
@@ -758,15 +758,15 @@ function PaymentsContent() {
                         ) : (
                             payments.map((payment) => {
                                 const statusBorderColor =
-                                    payment.status === 'paid' ? 'border-l-emerald-500' :
-                                    payment.status === 'pending' ? 'border-l-amber-400' :
-                                    payment.status === 'refunded' ? 'border-l-blue-500' :
-                                    payment.status === 'disputed' ? 'border-l-purple-500' :
-                                    'border-l-rose-500';
+                                    payment.status === 'paid' ? 'border-s-emerald-500' :
+                                    payment.status === 'pending' ? 'border-s-amber-400' :
+                                    payment.status === 'refunded' ? 'border-s-blue-500' :
+                                    payment.status === 'disputed' ? 'border-s-purple-500' :
+                                    'border-s-rose-500';
                                 return (
                                     <div
                                         key={payment.id}
-                                        className={`border-l-4 ${statusBorderColor} border border-gray-100 dark:border-gray-800 rounded-xl overflow-hidden bg-white dark:bg-gray-800 shadow-sm transition-all active:scale-[0.99] ${payment.bookingId ? 'cursor-pointer hover:shadow-md hover:border-gray-200 dark:hover:border-gray-700' : ''}`}
+                                        className={`border-s-4 ${statusBorderColor} border border-gray-100 dark:border-gray-800 rounded-xl overflow-hidden bg-white dark:bg-gray-800 shadow-sm transition-all active:scale-[0.99] ${payment.bookingId ? 'cursor-pointer hover:shadow-md hover:border-gray-200 dark:hover:border-gray-700' : ''}`}
                                     >
                                         <div className="p-4 space-y-3">
                                             {/* Row 1: Kode + Status + Action */}
@@ -816,7 +816,7 @@ function PaymentsContent() {
                                                     <button
                                                         onClick={(e) => { e.stopPropagation(); if (payment.userId) { router.push(`/${lang}/users/manage/${payment.userId}?tab=wallet`); } }}
                                                         title={t("billing.payments.tooltips.view_profile", "Lihat profil")}
-                                                        className="text-sm font-semibold text-gray-900 dark:text-white hover:text-emerald-600 dark:hover:text-emerald-400 hover:underline text-left leading-tight"
+                                                        className="text-sm font-semibold text-gray-900 dark:text-white hover:text-emerald-600 dark:hover:text-emerald-400 hover:underline text-start leading-tight"
                                                     >
                                                         {payment.userName || '-'}
                                                     </button>
@@ -826,7 +826,7 @@ function PaymentsContent() {
                                                     <button
                                                         onClick={(e) => { e.stopPropagation(); if (payment.trainerId) { router.push(`/${lang}/teachers/manage/${payment.trainerId}?from=payments`); } }}
                                                         title={payment.trainerId ? t("billing.payments.tooltips.view_teacher", "Lihat profil guru") : ""}
-                                                        className={`text-sm leading-tight text-left ${payment.trainerId ? 'font-semibold text-gray-900 dark:text-white hover:text-emerald-600 dark:hover:text-emerald-400 hover:underline cursor-pointer' : 'text-gray-700 dark:text-gray-300'}`}
+                                                        className={`text-sm leading-tight text-start ${payment.trainerId ? 'font-semibold text-gray-900 dark:text-white hover:text-emerald-600 dark:hover:text-emerald-400 hover:underline cursor-pointer' : 'text-gray-700 dark:text-gray-300'}`}
                                                     >
                                                         {payment.trainerName || '-'}
                                                     </button>
@@ -840,7 +840,7 @@ function PaymentsContent() {
                                             {/* Row 3: Amount + Date */}
                                             <div className="flex justify-between items-center pt-2.5 border-t border-gray-100 dark:border-gray-700">
                                                 <span className="text-base font-bold text-emerald-600 dark:text-emerald-400">
-                                                    {formatCurrency(payment.amount)}
+                                                    {formatCurrency(payment.amount, "IDR", lang)}
                                                 </span>
                                                 <span
                                                     className="text-[11px] text-gray-400 dark:text-gray-500 border-b border-dashed border-gray-300 dark:border-gray-600 cursor-default"
@@ -857,7 +857,7 @@ function PaymentsContent() {
 
                         {/* Mobile Bulk Action Bar */}
                         {selectedIds.length > 0 && (
-                            <div className="fixed bottom-4 left-4 right-4 z-40 bg-gray-900 dark:bg-gray-100 text-white dark:text-gray-900 rounded-2xl shadow-2xl p-3 flex items-center justify-between">
+                            <div className="fixed bottom-4 inset-x-4 z-40 bg-gray-900 dark:bg-gray-100 text-white dark:text-gray-900 rounded-2xl shadow-2xl p-3 flex items-center justify-between">
                                 <span className="text-sm font-semibold">{t("billing.payments.bulk.selected", "{{count}} dipilih", { count: selectedIds.length })}</span>
                                 <div className="flex gap-2">
                                     <button
@@ -872,7 +872,7 @@ function PaymentsContent() {
                     </div>
 
                     <div className="hidden sm:block overflow-x-auto">
-                        <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+                        <table className="w-full text-sm text-start text-gray-500 dark:text-gray-400">
                             <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-900/50 dark:text-gray-300 border-b border-gray-200 dark:border-gray-700">
                                 <tr>
                                     <th className="px-4 py-3 w-10 text-center">
@@ -883,13 +883,13 @@ function PaymentsContent() {
                                             onChange={toggleSelectAll}
                                         />
                                     </th>
-                                    <th className="px-4 py-3 font-semibold">{t("billing.payments.table.order_code", "Kode Pesanan")}</th>
-                                    <th className="px-4 py-3 font-semibold">{t("billing.payments.table.user", "User")}</th>
-                                    <th className="px-4 py-3 font-semibold">{t("billing.payments.table.trainer", "Trainer")}</th>
-                                    <th className="px-4 py-3 font-semibold text-right pr-16">{t("billing.payments.table.amount", "Nominal")}</th>
+                                    <th className="px-4 py-3 font-semibold text-start">{t("billing.payments.table.order_code", "Kode Pesanan")}</th>
+                                    <th className="px-4 py-3 font-semibold text-start">{t("billing.payments.table.user", "User")}</th>
+                                    <th className="px-4 py-3 font-semibold text-start">{t("billing.payments.table.trainer", "Trainer")}</th>
+                                    <th className="px-4 py-3 font-semibold text-end pe-16">{t("billing.payments.table.amount", "Nominal")}</th>
                                     <th className="px-4 py-3 font-semibold text-center">{t("billing.payments.table.status", "Status")}</th>
-                                    <th className="px-4 py-3 font-semibold">{t("billing.payments.table.paymentMethod", "Metode")}</th>
-                                    <th className="px-4 py-3 font-semibold">{t("billing.payments.table.paymentDate", "Tgl Bayar")}</th>
+                                    <th className="px-4 py-3 font-semibold text-start">{t("billing.payments.table.paymentMethod", "Metode")}</th>
+                                    <th className="px-4 py-3 font-semibold text-start">{t("billing.payments.table.paymentDate", "Tgl Bayar")}</th>
                                     <th className="px-4 py-3 font-semibold text-center">{t("billing.payments.table.actions", "Aksi")}</th>
                                 </tr>
                             </thead>
@@ -944,19 +944,19 @@ function PaymentsContent() {
                                                 </span>
                                             </td>
                                             <td className="px-4 py-3">
-                                                <button onClick={(e) => { e.stopPropagation(); if (payment.userId) { router.push(`/${lang}/users/manage/${payment.userId}?tab=wallet`); } }} title={t("billing.payments.tooltips.view_profile", "Lihat profil pengguna")} className="font-medium text-gray-900 dark:text-white hover:text-emerald-600 dark:hover:text-emerald-400 hover:underline text-left">{payment.userName || '-'}</button>
+                                                <button onClick={(e) => { e.stopPropagation(); if (payment.userId) { router.push(`/${lang}/users/manage/${payment.userId}?tab=wallet`); } }} title={t("billing.payments.tooltips.view_profile", "Lihat profil pengguna")} className="font-medium text-gray-900 dark:text-white hover:text-emerald-600 dark:hover:text-emerald-400 hover:underline text-start">{payment.userName || '-'}</button>
                                             </td>
                                             <td className="px-4 py-3">
                                                 <button
                                                     onClick={(e) => { e.stopPropagation(); if (payment.trainerId) { router.push(`/${lang}/teachers/manage/${payment.trainerId}?from=payments`); } }}
                                                     title={payment.trainerId ? t("billing.payments.tooltips.view_teacher", "Lihat profil guru") : ""}
-                                                    className={`text-left ${payment.trainerId ? 'font-medium text-gray-900 dark:text-white hover:text-emerald-600 dark:hover:text-emerald-400 hover:underline cursor-pointer' : 'font-medium text-gray-900 dark:text-white'}`}
+                                                    className={`text-start ${payment.trainerId ? 'font-medium text-gray-900 dark:text-white hover:text-emerald-600 dark:hover:text-emerald-400 hover:underline cursor-pointer' : 'font-medium text-gray-900 dark:text-white'}`}
                                                 >
                                                     {payment.trainerName || '-'}
                                                 </button>
                                             </td>
-                                            <td className="px-4 py-3 font-semibold text-emerald-600 dark:text-emerald-400 text-right pr-16">
-                                                {formatCurrency(payment.amount)}
+                                            <td className="px-4 py-3 font-semibold text-emerald-600 dark:text-emerald-400 text-end pe-16">
+                                                {formatCurrency(payment.amount, "IDR", lang)}
                                             </td>
                                             <td className="px-4 py-3 text-center">
                                                 <span className={`px-2.5 py-1 rounded-full text-[10px] font-semibold tracking-wide uppercase ${

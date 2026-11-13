@@ -697,7 +697,7 @@ table.mutasi tbody td.r{text-align:right}
                             </div>
                         </div>
                     </div>
-                    <div className="flex sm:flex-col items-center sm:items-end gap-1 text-right">
+                    <div className="flex sm:flex-col items-center sm:items-end gap-1 text-end">
                         <div className="flex items-center gap-2 mb-1">
                             <span className="text-xs text-gray-500 dark:text-gray-400 font-medium">
                                 {t("billing.wallet_detail.status_label", "Status:")}
@@ -773,7 +773,7 @@ table.mutasi tbody td.r{text-align:right}
                                 onClick={() => { setSuspendReason(""); setIsSuspendModalOpen(true); }}
                                 disabled={isProcessing}
                             >
-                                {isProcessing && <Loader2 className="w-4 h-4 mr-2 animate-spin" />}
+                                {isProcessing && <Loader2 className="w-4 h-4 me-2 animate-spin" />}
                                 {t("billing.wallet_detail.suspend", "Suspend")}
                             </Button>
                         )}
@@ -904,14 +904,13 @@ table.mutasi tbody td.r{text-align:right}
                                 <SlidersHorizontal className="w-3.5 h-3.5" />
                                 {t("user_detail.wallet_statement.filter_type", "Filter")}
                                 {hasActiveFilters && (
-                                    <span className="ml-0.5 w-1.5 h-1.5 rounded-full bg-emerald-500 inline-block" />
+                                    <span className="ms-0.5 w-1.5 h-1.5 rounded-full bg-emerald-500 inline-block" />
                                 )}
                                 <ChevronDown className={`w-3 h-3 transition-transform ${filterOpen ? "rotate-180" : ""}`} />
                             </button>
 
                             {filterOpen && (
-                                <div className="absolute top-full mt-2 z-30 w-72 bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 rounded-2xl shadow-xl p-4 space-y-3"
-                                    style={{ [isRTL ? "right" : "left"]: 0 }}>
+                                <div className="absolute top-full mt-2 z-30 w-72 bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 rounded-2xl shadow-xl p-4 space-y-3 start-0">
                                     <p className="text-xs font-bold text-gray-700 dark:text-gray-300 uppercase tracking-wider">
                                         {t("user_detail.wallet_statement.filter_type", "Filter Transaksi")}
                                     </p>
@@ -995,7 +994,7 @@ table.mutasi tbody td.r{text-align:right}
 
                         {/* Result count */}
                         {hasActiveFilters && (
-                            <span className="text-[10px] text-gray-400 font-medium ml-1">
+                            <span className="text-[10px] text-gray-400 font-medium ms-1">
                                 {filteredTransactions.length} {t("billing.wallet_detail.transactions", "transaksi")}
                             </span>
                         )}
@@ -1015,7 +1014,7 @@ table.mutasi tbody td.r{text-align:right}
                         ) : (
                             <div>
                                 <div className="hidden sm:block overflow-x-auto">
-                                    <table className="w-full text-sm text-left whitespace-nowrap">
+                                    <table className="w-full text-sm text-start whitespace-nowrap">
                                     <thead className="text-[11px] text-gray-500 uppercase bg-gray-50/80 dark:bg-gray-800/50 border-y border-gray-100 dark:border-gray-800 tracking-wider font-bold">
                                         <tr>
                                             <th className="px-5 py-3.5">{t("billing.wallet_detail.table.id", "ID")}</th>
@@ -1192,14 +1191,14 @@ table.mutasi tbody td.r{text-align:right}
                                 {/* ── Bank Statement Table ── */}
                                 {/* Desktop: full table */}
                                 <div className="hidden sm:block overflow-x-auto border-t border-gray-100 dark:border-gray-800">
-                                    <table className="w-full text-sm text-left whitespace-nowrap">
+                                    <table className="w-full text-sm text-start whitespace-nowrap">
                                         <thead className="text-[11px] text-gray-500 uppercase bg-gray-50/80 dark:bg-gray-800/50 border-y border-gray-100 dark:border-gray-800 tracking-wider font-bold">
                                             <tr>
                                                 <th className="px-5 py-3.5">{t("user_detail.wallet_statement.col_date", "Tanggal")}</th>
                                                 <th className="px-5 py-3.5">{t("user_detail.wallet_statement.col_desc", "Keterangan")}</th>
-                                                <th className="px-5 py-3.5 text-right">{t("user_detail.wallet_statement.col_debit", "Debit")}</th>
-                                                <th className="px-5 py-3.5 text-right">{t("user_detail.wallet_statement.col_credit", "Kredit")}</th>
-                                                <th className="px-5 py-3.5 text-right">{t("user_detail.wallet_statement.col_balance", "Saldo Akhir")}</th>
+                                                <th className="px-5 py-3.5 text-end">{t("user_detail.wallet_statement.col_debit", "Debit")}</th>
+                                                <th className="px-5 py-3.5 text-end">{t("user_detail.wallet_statement.col_credit", "Kredit")}</th>
+                                                <th className="px-5 py-3.5 text-end">{t("user_detail.wallet_statement.col_balance", "Saldo Akhir")}</th>
                                             </tr>
                                         </thead>
                                         <tbody className="divide-y divide-gray-50 dark:divide-gray-800/60">
@@ -1234,7 +1233,7 @@ table.mutasi tbody td.r{text-align:right}
                                                                 </span>
                                                             </div>
                                                         </td>
-                                                        <td className="px-5 py-4 text-right">
+                                                        <td className="px-5 py-4 text-end">
                                                             {isDebit ? (
                                                                 <span className="font-bold text-red-600 dark:text-red-400">
                                                                     {formatCurrency(Math.abs(tx.amount), locale)}
@@ -1243,7 +1242,7 @@ table.mutasi tbody td.r{text-align:right}
                                                                 <span className="text-gray-300 dark:text-gray-700">—</span>
                                                             )}
                                                         </td>
-                                                        <td className="px-5 py-4 text-right">
+                                                        <td className="px-5 py-4 text-end">
                                                             {!isDebit ? (
                                                                 <span className="font-bold text-emerald-600 dark:text-emerald-400">
                                                                     {formatCurrency(tx.amount, locale)}
@@ -1252,7 +1251,7 @@ table.mutasi tbody td.r{text-align:right}
                                                                 <span className="text-gray-300 dark:text-gray-700">—</span>
                                                             )}
                                                         </td>
-                                                        <td className="px-5 py-4 text-right">
+                                                        <td className="px-5 py-4 text-end">
                                                             <span className="font-bold text-gray-800 dark:text-gray-200">
                                                                 {formatCurrency(tx.runningBalance, locale)}
                                                             </span>
@@ -1294,7 +1293,7 @@ table.mutasi tbody td.r{text-align:right}
                                                             {formatDate(tx.createdAt, "relative", tz, locale, t)}
                                                         </span>
                                                     </div>
-                                                    <div className="text-right">
+                                                    <div className="text-end">
                                                         <p className="text-[10px] font-semibold text-gray-400 uppercase tracking-wider">Saldo</p>
                                                         <p className="text-sm font-bold text-gray-700 dark:text-gray-200">{formatCurrency(tx.runningBalance, locale)}</p>
                                                     </div>
@@ -1337,7 +1336,7 @@ table.mutasi tbody td.r{text-align:right}
                             { id: "maxBalance", label: t("billing.wallet_detail.limit_modal.max_balance", "Max Balance"), placeholder: t("billing.wallet_detail.limit_modal.optional_max", "Opsional (mis: 100000000)") },
                         ].map(({ id, label, placeholder }) => (
                             <div key={id} className="grid grid-cols-4 items-center gap-4">
-                                <Label htmlFor={id} className="text-right text-xs">{label}</Label>
+                                <Label htmlFor={id} className="text-end text-xs">{label}</Label>
                                 <Input
                                     id={id}
                                     value={(limits as any)[id]}
@@ -1353,7 +1352,7 @@ table.mutasi tbody td.r{text-align:right}
                             {t("billing.wallet_detail.limit_modal.cancel", "Batal")}
                         </Button>
                         <Button onClick={handleSaveLimit} disabled={isProcessing}>
-                            {isProcessing && <Loader2 className="w-4 h-4 mr-2 animate-spin" />}
+                            {isProcessing && <Loader2 className="w-4 h-4 me-2 animate-spin" />}
                             {t("billing.wallet_detail.limit_modal.save", "Simpan")}
                         </Button>
                     </DialogFooter>
@@ -1388,7 +1387,7 @@ table.mutasi tbody td.r{text-align:right}
                             onClick={handleSuspendWallet}
                             disabled={isProcessing || !suspendReason.trim()}
                         >
-                            {isProcessing && <Loader2 className="w-4 h-4 mr-2 animate-spin" />}
+                            {isProcessing && <Loader2 className="w-4 h-4 me-2 animate-spin" />}
                             {t("billing.wallet_detail.suspend_modal.confirm", "Suspend")}
                         </Button>
                     </DialogFooter>
@@ -1421,7 +1420,7 @@ table.mutasi tbody td.r{text-align:right}
                             onClick={handleActivateWallet}
                             disabled={isProcessing}
                         >
-                            {isProcessing && <Loader2 className="w-4 h-4 mr-2 animate-spin" />}
+                            {isProcessing && <Loader2 className="w-4 h-4 me-2 animate-spin" />}
                             {t("billing.wallet_detail.activate_modal.confirm", "Aktifkan")}
                         </Button>
                     </DialogFooter>
@@ -1517,7 +1516,7 @@ table.mutasi tbody td.r{text-align:right}
                                             </div>
 
                                             {/* Amount + status */}
-                                            <div className="text-right shrink-0">
+                                            <div className="text-end shrink-0">
                                                 <p className={`text-sm font-black ${
                                                     isCompleted
                                                         ? "text-emerald-600 dark:text-emerald-400"

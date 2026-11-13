@@ -155,8 +155,8 @@ function getFilterDates(filter: FilterKey) {
 }
 
 // ─── Helpers ──────────────────────────────────────────────────────────────────
-function formatRupiah(amount: number) {
-    return new Intl.NumberFormat("id-ID", {
+function formatRupiah(amount: number, locale = "id") {
+    return new Intl.NumberFormat(locale === "ar" ? "ar-SA" : locale === "en" ? "en-US" : "id-ID", {
         style: "currency",
         currency: "IDR",
         minimumFractionDigits: 0,
@@ -217,13 +217,13 @@ function FilterDropdown({ value, onChange }: { value: FilterKey; onChange: (k: F
                 className="flex items-center gap-2 px-3 py-2 text-sm text-gray-700 dark:text-gray-300 bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 rounded-xl hover:border-emerald-400 dark:hover:border-emerald-500 transition-all shadow-sm min-w-[180px]"
             >
                 <Calendar className="w-4 h-4 text-gray-400 flex-shrink-0" />
-                <span className="flex-1 text-left font-medium text-xs">{displayDate}</span>
+                <span className="flex-1 text-start font-medium text-xs">{displayDate}</span>
                 <ChevronDown className={`w-3.5 h-3.5 text-gray-400 transition-transform ${open ? "rotate-180" : ""}`} />
             </button>
 
             {/* Dropdown */}
             {open && (
-                <div className="absolute right-0 top-full mt-1.5 w-48 bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 rounded-xl shadow-xl z-50 overflow-hidden py-1.5">
+                <div className="absolute end-0 top-full mt-1.5 w-48 bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 rounded-xl shadow-xl z-50 overflow-hidden py-1.5">
                     {groups.map((group, gi) => {
                         const items = FILTER_OPTIONS.filter(o => o.group === group)
                         return (
@@ -234,7 +234,7 @@ function FilterDropdown({ value, onChange }: { value: FilterKey; onChange: (k: F
                                         <button
                                             key={opt.key}
                                             onClick={() => { onChange(opt.key); setOpen(false) }}
-                                            className={`w-full flex items-center justify-between px-2 py-1.5 rounded-lg text-sm text-left transition-colors ${value === opt.key
+                                            className={`w-full flex items-center justify-between px-2 py-1.5 rounded-lg text-sm text-start transition-colors ${value === opt.key
                                                 ? "bg-emerald-50 dark:bg-emerald-900/20 text-emerald-700 dark:text-emerald-400 font-semibold"
                                                 : "text-gray-600 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-800/60"
                                                 }`}
@@ -405,7 +405,7 @@ function BillingDashboardContent() {
         {
             title: t("billing.dashboard.total_revenue", "Total Revenue"),
             icon: DollarSign,
-            value: formatRupiah(stats.totalRevenue),
+            value: formatRupiah(stats.totalRevenue, locale),
             sub: `${stats.successfulPayments} ${t("billing.dashboard.successful_transactions", "transaksi berhasil")}`,
             color: "emerald"
         },
@@ -426,7 +426,7 @@ function BillingDashboardContent() {
         {
             title: t("billing.dashboard.avg_transaction", "Avg. Transaksi"),
             icon: Banknote,
-            value: formatRupiah(stats.avgTransaction),
+            value: formatRupiah(stats.avgTransaction, locale),
             sub: `${stats.successfulPayments} ${t("billing.dashboard.transactions", "transaksi")}`,
             color: "amber"
         },
@@ -552,10 +552,10 @@ function BillingDashboardContent() {
                             <CardContent className="flex flex-col gap-4 px-6 py-4">
                                 <div>
                                     <span className="text-3xl font-bold text-emerald-600 dark:text-emerald-400">
-                                        {formatRupiah(stats.totalRevenue)}
+                                        {formatRupiah(stats.totalRevenue, locale)}
                                     </span>
                                     <div className="flex items-center gap-1 mt-1">
-                                        <ArrowUpRight className="w-4 h-4 text-emerald-500" />
+                                        <ArrowUpRight className="w-4 h-4 text-emerald-500 rtl:rotate-[-90deg]" />
                                         <span className="text-sm text-emerald-600 dark:text-emerald-400 font-medium">
                                             {stats.successfulPayments} {t("billing.dashboard.transactions", "transaksi")}
                                         </span>
@@ -637,7 +637,7 @@ function BillingDashboardContent() {
                                                     </div>
                                                 </div>
                                                 <div className="flex items-center justify-between">
-                                                    <span className={`text-sm px-2 py-1 rounded ${badgeMap[s.color]}`}>Active</span>
+                                                    <span className={`text-sm px-2 py-1 rounded ${badgeMap[s.color]}`}>{t("billing.orders.list.status.active", "Active")}</span>
                                                     <span className="text-lg font-bold text-gray-900 dark:text-white">{s.count}</span>
                                                 </div>
                                             </div>
@@ -660,7 +660,7 @@ function BillingDashboardContent() {
                             </CardHeader>
                             <CardContent className="pt-2">
                                 <div className="space-y-3">
-                                    <div className="h-44 relative">
+                                    <div className="h-44 relative" dir="ltr">
                                         {chartData.every(d => d.revenue === 0) ? (
                                             <div className="h-full flex items-center justify-center text-xs text-gray-400">
                                                 {t("billing.dashboard.no_revenue_data", "Tidak ada data revenue pada periode ini")}
@@ -686,7 +686,7 @@ function BillingDashboardContent() {
                                             </svg>
                                         )}
                                     </div>
-                                    <div className="flex justify-between px-1">
+                                    <div className="flex justify-between px-1" dir="ltr">
                                         {chartData.map(d => (
                                             <span key={d.label} className="text-[10px] text-gray-400 dark:text-gray-500">{d.label}</span>
                                         ))}
@@ -703,7 +703,7 @@ function BillingDashboardContent() {
                                 <CardTitle className="text-gray-900 dark:text-white text-base">
                                     {t("billing.dashboard.payments_table_title", "Pembayaran")}
                                     {filteredPayments.length === 0 && (
-                                        <span className="ml-2 text-xs font-normal text-gray-400">{t("billing.dashboard.no_data_short", "— tidak ada data pada periode ini")}</span>
+                                        <span className="ms-2 text-xs font-normal text-gray-400">{t("billing.dashboard.no_data_short", "— tidak ada data pada periode ini")}</span>
                                     )}
                                 </CardTitle>
                                 <span className="text-xs text-gray-400">{filteredPayments.length} {t("billing.dashboard.transactions", "transaksi")}</span>
@@ -720,13 +720,13 @@ function BillingDashboardContent() {
                                         <table className="w-full text-sm">
                                             <thead className="sticky top-0 bg-white dark:bg-gray-900 z-10">
                                                 <tr className="border-b border-gray-100 dark:border-gray-800">
-                                                    <th className="text-left text-xs font-medium text-gray-500 dark:text-gray-400 px-6 py-3">{t("billing.dashboard.col_id", "ID")}</th>
-                                                    <th className="text-left text-xs font-medium text-gray-500 dark:text-gray-400 px-4 py-3">{t("billing.dashboard.col_user", "User")}</th>
-                                                    <th className="text-left text-xs font-medium text-gray-500 dark:text-gray-400 px-4 py-3">{t("billing.dashboard.col_trainer", "Trainer")}</th>
-                                                    <th className="text-left text-xs font-medium text-gray-500 dark:text-gray-400 px-4 py-3">{t("billing.dashboard.col_payment", "Payment")}</th>
-                                                    <th className="text-left text-xs font-medium text-gray-500 dark:text-gray-400 px-4 py-3">{t("billing.dashboard.col_amount", "Jumlah")}</th>
-                                                    <th className="text-left text-xs font-medium text-gray-500 dark:text-gray-400 px-4 py-3">{t("billing.dashboard.col_status", "Status")}</th>
-                                                    <th className="text-left text-xs font-medium text-gray-500 dark:text-gray-400 px-4 py-3">{t("billing.dashboard.col_date", "Tanggal")}</th>
+                                                    <th className="text-start text-xs font-medium text-gray-500 dark:text-gray-400 px-6 py-3">{t("billing.dashboard.col_id", "ID")}</th>
+                                                    <th className="text-start text-xs font-medium text-gray-500 dark:text-gray-400 px-4 py-3">{t("billing.dashboard.col_user", "User")}</th>
+                                                    <th className="text-start text-xs font-medium text-gray-500 dark:text-gray-400 px-4 py-3">{t("billing.dashboard.col_trainer", "Trainer")}</th>
+                                                    <th className="text-start text-xs font-medium text-gray-500 dark:text-gray-400 px-4 py-3">{t("billing.dashboard.col_payment", "Payment")}</th>
+                                                    <th className="text-start text-xs font-medium text-gray-500 dark:text-gray-400 px-4 py-3">{t("billing.dashboard.col_amount", "Jumlah")}</th>
+                                                    <th className="text-start text-xs font-medium text-gray-500 dark:text-gray-400 px-4 py-3">{t("billing.dashboard.col_status", "Status")}</th>
+                                                    <th className="text-start text-xs font-medium text-gray-500 dark:text-gray-400 px-4 py-3">{t("billing.dashboard.col_date", "Tanggal")}</th>
                                                 </tr>
                                             </thead>
                                             <tbody className="divide-y divide-gray-50 dark:divide-gray-800">
@@ -750,7 +750,7 @@ function BillingDashboardContent() {
                                                                     </div>
                                                                 </td>
                                                                 <td className="px-4 py-3 text-xs text-gray-600 dark:text-gray-400">{p.paymentMethod}</td>
-                                                                <td className="px-4 py-3 text-xs font-semibold text-gray-900 dark:text-white">{formatRupiah(p.amount)}</td>
+                                                                <td className="px-4 py-3 text-xs font-semibold text-gray-900 dark:text-white">{formatRupiah(p.amount, locale)}</td>
                                                                 <td className="px-4 py-3">
                                                                     <span className={`inline-flex items-center rounded-full px-2 py-0.5 text-[10px] font-semibold ${s.cls}`}>
                                                                         {s.label}

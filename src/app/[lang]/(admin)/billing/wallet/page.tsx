@@ -301,7 +301,7 @@ export default function FinanceDashboardPage() {
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                         {/* Active Balance */}
                         <div className="bg-white dark:bg-gray-900 rounded-2xl border border-gray-200 dark:border-gray-800 p-6 shadow-sm relative overflow-hidden">
-                            <div className="absolute top-6 right-6 p-2.5 bg-emerald-50 dark:bg-emerald-900/20 rounded-xl">
+                            <div className="absolute top-6 end-6 p-2.5 bg-emerald-50 dark:bg-emerald-900/20 rounded-xl">
                                 <Wallet className="w-5 h-5 text-emerald-600 dark:text-emerald-400" />
                             </div>
                             <h3 className="text-sm font-medium text-gray-500 dark:text-gray-400 mb-2">{t("billing.wallet.active_balance", "Saldo Aktif")}</h3>
@@ -312,7 +312,7 @@ export default function FinanceDashboardPage() {
 
                         {/* Pending Balance */}
                         <div className="bg-white dark:bg-gray-900 rounded-2xl border border-gray-200 dark:border-gray-800 p-6 shadow-sm relative overflow-hidden">
-                            <div className="absolute top-6 right-6 p-2.5 bg-amber-50 dark:bg-amber-900/20 rounded-xl">
+                            <div className="absolute top-6 end-6 p-2.5 bg-amber-50 dark:bg-amber-900/20 rounded-xl">
                                 <Clock className="w-5 h-5 text-amber-600 dark:text-amber-400" />
                             </div>
                             <h3 className="text-sm font-medium text-gray-500 dark:text-gray-400 mb-2">{t("billing.wallet.pending_balance", "Saldo Pending")}</h3>
@@ -357,13 +357,13 @@ export default function FinanceDashboardPage() {
 
                         {/* Desktop Table */}
                         <div className="hidden sm:block overflow-x-auto">
-                            <table className="w-full text-left text-sm whitespace-nowrap">
+                            <table className="w-full text-start text-sm whitespace-nowrap">
                                 <thead className="bg-gray-50/80 dark:bg-gray-800/50 border-b border-gray-100 dark:border-gray-800">
                                     <tr>
                                         <th className="px-6 py-3 text-[11px] font-bold text-gray-500 uppercase tracking-wider">{t("billing.wallet.table.id", "ID")}</th>
                                         <th className="px-6 py-3 text-[11px] font-bold text-gray-500 uppercase tracking-wider">{t("billing.wallet.table.user", "User")}</th>
                                         <th className="px-6 py-3 text-[11px] font-bold text-gray-500 uppercase tracking-wider hidden lg:table-cell">{t("billing.wallet.table.category", "Kategori")}</th>
-                                        <th className="px-6 py-3 text-[11px] font-bold text-gray-500 uppercase tracking-wider text-right">{t("billing.wallet.table.amount", "Nominal")}</th>
+                                        <th className="px-6 py-3 text-[11px] font-bold text-gray-500 uppercase tracking-wider text-end">{t("billing.wallet.table.amount", "Nominal")}</th>
                                         <th className="px-6 py-3 text-[11px] font-bold text-gray-500 uppercase tracking-wider">{t("billing.wallet.table.method", "Metode")}</th>
                                         <th className="px-6 py-3 text-[11px] font-bold text-gray-500 uppercase tracking-wider">{t("billing.wallet.table.status", "Status")}</th>
                                         <th className="px-6 py-3 text-[11px] font-bold text-gray-500 uppercase tracking-wider hidden xl:table-cell">{t("billing.wallet.table.time", "Waktu")}</th>
@@ -376,7 +376,7 @@ export default function FinanceDashboardPage() {
                                                 <td className="px-6 py-4"><Skeleton className="h-4 w-16" /></td>
                                                 <td className="px-6 py-4"><Skeleton className="h-4 w-28" /></td>
                                                 <td className="px-6 py-4 hidden lg:table-cell"><Skeleton className="h-4 w-20" /></td>
-                                                <td className="px-6 py-4 text-right"><Skeleton className="h-4 w-24 ml-auto" /></td>
+                                                <td className="px-6 py-4 text-end"><Skeleton className="h-4 w-24 ms-auto" /></td>
                                                 <td className="px-6 py-4"><Skeleton className="h-4 w-20" /></td>
                                                 <td className="px-6 py-4"><Skeleton className="h-5 w-16 rounded-full" /></td>
                                                 <td className="px-6 py-4 hidden xl:table-cell"><Skeleton className="h-4 w-24" /></td>
@@ -402,7 +402,7 @@ export default function FinanceDashboardPage() {
                                                 <td className="px-6 py-4 whitespace-nowrap">
                                                     <button
                                                         onClick={(e) => { e.stopPropagation(); if (tx.userId) { router.push(`/${lang}/users/manage/${tx.userId}?tab=wallet`) } }}
-                                                        className="font-bold text-gray-900 dark:text-white text-sm hover:text-emerald-600 dark:hover:text-emerald-400 hover:underline transition-colors text-left"
+                                                        className="font-bold text-gray-900 dark:text-white text-sm hover:text-emerald-600 dark:hover:text-emerald-400 hover:underline transition-colors text-start"
                                                         title={t("billing.wallet.view_profile", "Lihat profil")}
                                                     >
                                                         {tx.user?.name || `User ID: ${tx.userId}`}
@@ -413,7 +413,7 @@ export default function FinanceDashboardPage() {
                                                     <div className="mb-1">{getTxTypeBadge(tx.type, tx.typeName, t)}</div>
                                                     <p className="text-xs text-gray-600 dark:text-gray-300 max-w-[200px] truncate">{tx.description || '-'}</p>
                                                 </td>
-                                                <td className="px-6 py-4 text-right whitespace-nowrap">
+                                                <td className="px-6 py-4 text-end whitespace-nowrap">
                                                     <span className={`font-bold text-sm ${tx.amount < 0 ? 'text-red-600 dark:text-red-400' : 'text-emerald-600 dark:text-emerald-400'}`}>
                                                         {tx.amount < 0 ? '-' : '+'}{formatCurrency(Math.abs(tx.amount || 0))}
                                                     </span>
@@ -479,7 +479,7 @@ export default function FinanceDashboardPage() {
                                             <div className="min-w-0 flex-1">
                                                 <button
                                                     onClick={(e) => { e.stopPropagation(); if (tx.userId) { router.push(`/${lang}/users/manage/${tx.userId}?tab=wallet`) } }}
-                                                    className="font-semibold text-gray-900 dark:text-white text-sm hover:text-emerald-600 dark:hover:text-emerald-400 hover:underline transition-colors text-left truncate block w-full"
+                                                    className="font-semibold text-gray-900 dark:text-white text-sm hover:text-emerald-600 dark:hover:text-emerald-400 hover:underline transition-colors text-start truncate block w-full"
                                                 >
                                                     {tx.user?.name || `User ID: ${tx.userId}`}
                                                 </button>
