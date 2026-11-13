@@ -26,12 +26,12 @@ import {
     DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
 import { formatDistanceToNowStrict } from "date-fns"
-import { id, enUS } from "date-fns/locale"
+import { id, enUS, arSA } from "date-fns/locale"
 import { useRouter } from "next/navigation"
 
 // ── helpers ──────────────────────────────────────────────────────────────────
-function formatRupiah(n: number) {
-    return new Intl.NumberFormat("id-ID", {
+function formatRupiah(n: number, locale = "id") {
+    return new Intl.NumberFormat(locale === "ar" ? "ar-SA" : locale === "en" ? "en-US" : "id-ID", {
         style: "currency", currency: "IDR",
         minimumFractionDigits: 0, maximumFractionDigits: 0,
     }).format(n).replace("IDR", "Rp")
@@ -46,11 +46,11 @@ function formatDate(dateString: string | null, variant: 'short' | 'long' | 'rela
         const date = new Date(dateStr)
         if (Number.isNaN(date.getTime())) return dateString
         if (variant === 'relative') {
-            return formatDistanceToNowStrict(date, { addSuffix: true, locale: locale === 'id' ? id : enUS })
+            return formatDistanceToNowStrict(date, { addSuffix: true, locale: locale === 'ar' ? arSA : locale === 'id' ? id : enUS })
         }
         const options: Intl.DateTimeFormatOptions = { day: "2-digit", month: "short", timeZone: tz }
         if (variant === 'long') { options.year = "numeric"; options.hour = "2-digit"; options.minute = "2-digit"; options.hour12 = false; options.timeZoneName = "short" }
-        return new Intl.DateTimeFormat(locale === 'id' ? 'id-ID' : 'en-GB', options).format(date)
+        return new Intl.DateTimeFormat(locale === 'ar' ? 'ar-SA' : locale === 'id' ? 'id-ID' : 'en-GB', options).format(date)
     } catch { return dateString }
 }
 
@@ -81,13 +81,27 @@ interface FilterState {
     amountMax: string;
 }
 
+function isPendingRefund(status?: string): boolean {
+    const s = String(status || '').toLowerCase().trim();
+    return s === 'pending' || s === 'waiting' || s === 'pending_refund' || s === 'requested' || !s;
+}
+
+function isApprovedRefund(status?: string): boolean {
+    const s = String(status || '').toLowerCase().trim();
+    return s === 'approved' || s === 'refunded' || s === 'processed' || s === 'completed';
+}
+
+function isRejectedRefund(status?: string): boolean {
+    const s = String(status || '').toLowerCase().trim();
+    return s === 'rejected' || s === 'failed' || s === 'declined';
+}
+
 function getStatusBadge(status: string, t: (key: string, fallback?: string) => string) {
-    const s = status?.toLowerCase() || '';
-    if (s === 'refunded' || s === 'approved')
-        return <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-bold bg-emerald-100 dark:bg-emerald-900/30 text-emerald-700 dark:text-emerald-400"><CheckCircle2 className="w-3 h-3" />{t("billing.refund.status.approved", "Disetujui")}</span>;
-    if (s === 'rejected' || s === 'failed')
-        return <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-bold bg-red-100 dark:bg-red-900/30 text-red-700 dark:text-red-400"><XCircle className="w-3 h-3" />{t("billing.refund.status.rejected", "Ditolak")}</span>;
-    return <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-bold bg-amber-100 dark:bg-amber-900/30 text-amber-700 dark:text-amber-400"><Clock className="w-3 h-3" />{t("billing.refund.status.pending", "Pending")}</span>;
+    if (isApprovedRefund(status))
+        return <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-emerald-100 dark:bg-emerald-900/30 text-emerald-700 dark:text-emerald-400"><CheckCircle2 className="w-3 h-3" />{t("billing.refund.status.approved", "Disetujui")}</span>;
+    if (isRejectedRefund(status))
+        return <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-red-100 dark:bg-red-900/30 text-red-700 dark:text-red-400"><XCircle className="w-3 h-3" />{t("billing.refund.status.rejected", "Ditolak")}</span>;
+    return <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-amber-100 dark:bg-amber-900/30 text-amber-700 dark:text-amber-400"><Clock className="w-3 h-3" />{t("billing.refund.status.pending", "Pending")}</span>;
 }
 
 function RefundContent() {
@@ -159,24 +173,38 @@ function RefundContent() {
     const fetchAll = useCallback(async () => {
         setLoading(true);
         try {
-            const [pendingRes, processedRes] = await Promise.allSettled([
+            const [pendingRes, processedRes, searchPendingRes] = await Promise.allSettled([
                 paymentsApi.getPendingRefunds({ page: 1, pageSize: 100 } as any),
                 paymentsApi.search({ Status: 'refunded', Page: 1, PageSize: 100 } as any),
+                paymentsApi.search({ RefundRequested: 1, Page: 1, PageSize: 100 } as any),
             ]);
 
             let pendingItems: RefundItem[] = [];
             let processedItems: RefundItem[] = [];
+            let extraPending: RefundItem[] = [];
 
             if (pendingRes.status === 'fulfilled') {
                 const res = pendingRes.value;
-                pendingItems = Array.isArray(res) ? res : (res?.data || res?.items || []);
+                pendingItems = Array.isArray(res) ? res : (res?.data?.items || res?.data || res?.items || []);
             }
             if (processedRes.status === 'fulfilled') {
                 const res = processedRes.value;
-                processedItems = Array.isArray(res) ? res : (res?.data || res?.items || []);
+                processedItems = Array.isArray(res) ? res : (res?.data?.items || res?.data || res?.items || []);
+            }
+            if (searchPendingRes.status === 'fulfilled') {
+                const res = searchPendingRes.value;
+                extraPending = Array.isArray(res) ? res : (res?.data?.items || res?.data || res?.items || []);
             }
 
-            let combined: RefundItem[] = [...pendingItems, ...processedItems];
+            // Deduplicate items by ID
+            const itemMap = new Map<string | number, RefundItem>();
+            [...pendingItems, ...extraPending, ...processedItems].forEach(item => {
+                if (item && item.id != null) {
+                    itemMap.set(item.id, item);
+                }
+            });
+
+            let combined: RefundItem[] = Array.from(itemMap.values());
 
             if (combined.length === 0) {
                 const simPending = getSimRefundPending();
@@ -189,19 +217,10 @@ function RefundContent() {
 
             setAllRefunds(combined);
             setStats({
-                pendingCount: combined.filter(r => {
-                    const s = (r.status || '').toLowerCase();
-                    return s === 'pending' || s === 'waiting' || s === 'pending_refund';
-                }).length,
-                totalValue: combined.reduce((a, b) => a + (b.refundAmount ?? b.amount), 0),
-                approvedCount: combined.filter(r => {
-                    const s = (r.status || '').toLowerCase();
-                    return s === 'refunded' || s === 'approved';
-                }).length,
-                rejectedCount: combined.filter(r => {
-                    const s = (r.status || '').toLowerCase();
-                    return s === 'rejected' || s === 'failed';
-                }).length,
+                pendingCount: combined.filter(r => isPendingRefund(r.status)).length,
+                totalValue: combined.reduce((a, b) => a + (b.refundAmount ?? b.amount ?? 0), 0),
+                approvedCount: combined.filter(r => isApprovedRefund(r.status)).length,
+                rejectedCount: combined.filter(r => isRejectedRefund(r.status)).length,
             });
         } catch {
             const simPending = getSimRefundPending();
@@ -210,10 +229,10 @@ function RefundContent() {
             setAllRefunds(combined);
             setIsDemoMode(true);
             setStats({
-                pendingCount: combined.filter(r => ['pending', 'waiting', 'pending_refund'].includes((r.status || '').toLowerCase())).length,
-                totalValue: combined.reduce((a: number, b: any) => a + (b.refundAmount ?? b.amount), 0),
-                approvedCount: combined.filter(r => ['refunded', 'approved'].includes((r.status || '').toLowerCase())).length,
-                rejectedCount: combined.filter(r => ['rejected', 'failed'].includes((r.status || '').toLowerCase())).length,
+                pendingCount: combined.filter(r => isPendingRefund(r.status)).length,
+                totalValue: combined.reduce((a: number, b: any) => a + (b.refundAmount ?? b.amount ?? 0), 0),
+                approvedCount: combined.filter(r => isApprovedRefund(r.status)).length,
+                rejectedCount: combined.filter(r => isRejectedRefund(r.status)).length,
             });
         } finally {
             setLoading(false);
@@ -231,10 +250,9 @@ function RefundContent() {
         }
         // Status filter
         if (activeFilter.status) {
-            const s = (r.status || '').toLowerCase();
-            if (activeFilter.status === 'pending' && !['pending', 'waiting', 'pending_refund'].includes(s)) return false;
-            if (activeFilter.status === 'approved' && !['approved', 'refunded'].includes(s)) return false;
-            if (activeFilter.status === 'rejected' && !['rejected', 'failed'].includes(s)) return false;
+            if (activeFilter.status === 'pending' && !isPendingRefund(r.status)) return false;
+            if (activeFilter.status === 'approved' && !isApprovedRefund(r.status)) return false;
+            if (activeFilter.status === 'rejected' && !isRejectedRefund(r.status)) return false;
         }
         // Date from
         if (activeFilter.dateFrom) {
@@ -303,8 +321,10 @@ function RefundContent() {
             return;
         }
         setIsSubmitting(true);
+        const rawId = actionModal.item.bookingId || actionModal.item.id;
+        const apiPaymentId = typeof rawId === 'string' && rawId.startsWith('REF-') ? rawId.replace('REF-', '') : rawId;
         try {
-            await paymentsApi.processRefund(actionModal.item.id, {
+            await paymentsApi.processRefund(apiPaymentId, {
                 approved: actionModal.type === 'approve' ? 1 : 0,
                 notes: notes.trim() || undefined,
                 amount: actionModal.item.refundAmount ?? actionModal.item.amount,
@@ -332,10 +352,10 @@ function RefundContent() {
             const combined = [...simPending, ...simProcessed];
             setAllRefunds(combined);
             setStats({
-                pendingCount: combined.filter(r => ['pending', 'waiting', 'pending_refund'].includes((r.status || '').toLowerCase())).length,
-                totalValue: combined.reduce((a: number, b: any) => a + (b.refundAmount ?? b.amount), 0),
-                approvedCount: combined.filter(r => ['refunded', 'approved'].includes((r.status || '').toLowerCase())).length,
-                rejectedCount: combined.filter(r => ['rejected', 'failed'].includes((r.status || '').toLowerCase())).length,
+                pendingCount: combined.filter(r => isPendingRefund(r.status)).length,
+                totalValue: combined.reduce((a: number, b: any) => a + (b.refundAmount ?? b.amount ?? 0), 0),
+                approvedCount: combined.filter(r => isApprovedRefund(r.status)).length,
+                rejectedCount: combined.filter(r => isRejectedRefund(r.status)).length,
             });
 
             const statusText = actionModal.type === 'approve'
@@ -349,6 +369,7 @@ function RefundContent() {
             setActionModal({ open: false, item: null, type: 'approve' });
         } finally {
             setIsSubmitting(false);
+            setNotes("");
         }
     };
 
@@ -404,13 +425,13 @@ function RefundContent() {
                             <div className="flex items-center gap-2 flex-1">
                                 <div className="flex items-center rounded-lg overflow-hidden border border-gray-200 dark:border-gray-700 focus-within:ring-2 focus-within:ring-emerald-500 transition-shadow flex-1 max-w-md">
                                     <div className="relative bg-white dark:bg-gray-900 flex-1">
-                                        <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
+                                        <Search className="absolute start-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400 pointer-events-none" />
                                         <input
                                             value={search}
                                             onChange={e => setSearch(e.target.value)}
                                             onKeyDown={handleKeyDown}
                                             placeholder={t("billing.refund.searchPlaceholder", "Cari nama, alasan refund...")}
-                                            className="w-full pl-10 pr-3 py-2.5 text-sm bg-transparent border-none focus:outline-none dark:text-white"
+                                            className="w-full ps-10 pe-3 py-2.5 text-sm bg-transparent border-none focus:outline-none dark:text-white text-start"
                                         />
                                     </div>
                                     <button onClick={handleSearch} className="px-4 py-2.5 bg-emerald-500 hover:bg-emerald-600 text-white text-sm font-semibold transition-colors whitespace-nowrap">
@@ -542,51 +563,49 @@ function RefundContent() {
                                     </div>
                                     <div className="text-xs text-gray-500 space-y-1">
                                         <div>{t("billing.refund.mobile.user", "User:")} <button onClick={(e) => { e.stopPropagation(); router.push(`/${locale}/users/manage/${r.userId}`); }} className="font-medium text-gray-900 dark:text-white hover:text-emerald-600 dark:hover:text-emerald-400 hover:underline">{r.userName || `ID: ${r.userId}`}</button></div>
-                                        <div>{t("billing.refund.mobile.teacher", "Guru:")} <button onClick={(e) => { e.stopPropagation(); if (r.trainerId) router.push(`/${locale}/teachers/manage/${r.trainerId}?from=refund`); }} title={r.trainerId ? t("billing.refund.table.tooltips.viewTeacher", "Lihat profil guru") : ""} className={`text-left ${r.trainerId ? 'font-medium text-gray-900 dark:text-white hover:text-emerald-600 dark:hover:text-emerald-400 hover:underline cursor-pointer' : 'font-medium text-gray-900 dark:text-white'}`}>{r.trainerName}</button></div>
+                                        <div>{t("billing.refund.mobile.teacher", "Guru:")} <button onClick={(e) => { e.stopPropagation(); if (r.trainerId) router.push(`/${locale}/teachers/manage/${r.trainerId}?from=refund`); }} title={r.trainerId ? t("billing.refund.table.tooltips.viewTeacher", "Lihat profil guru") : ""} className={`text-start ${r.trainerId ? 'font-medium text-gray-900 dark:text-white hover:text-emerald-600 dark:hover:text-emerald-400 hover:underline cursor-pointer' : 'font-medium text-gray-900 dark:text-white'}`}>{r.trainerName}</button></div>
                                         {r.sessionsInfo && <div>{t("billing.refund.mobile.sessions", "Sesi:")} <span className="font-medium text-emerald-600 dark:text-emerald-400">{r.sessionsInfo}</span></div>}
                                         {r.refundReason && <div className="text-gray-500 italic">"{r.refundReason}"</div>}
                                     </div>
                                     <div className="flex justify-between items-center pt-2 border-t border-gray-100 dark:border-gray-700">
                                         <span className="font-bold text-red-600 dark:text-red-400">{formatRupiah(r.refundAmount ?? r.amount)}</span>
-                                        <div onClick={(e) => e.stopPropagation()}>
-                                            <DropdownMenu>
-                                                <DropdownMenuTrigger asChild>
-                                                    <button className="p-1.5 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 text-gray-500 transition-colors"><MoreVertical className="w-4 h-4" /></button>
-                                                </DropdownMenuTrigger>
-                                                <DropdownMenuContent align="end" className="w-52">
-                                                    <DropdownMenuLabel>{t("billing.refund.actions.dropdownTitle", "Aksi Refund")}</DropdownMenuLabel>
-                                                    <DropdownMenuSeparator />
-                                                    {(r.status?.toLowerCase() === 'pending' || r.status?.toLowerCase() === 'waiting' || r.status?.toLowerCase() === 'pending_refund') && (
-                                                        <>
-                                                            <DropdownMenuItem onClick={() => openAction(r, 'approve')}>
-                                                                <Check className="w-4 h-4 mr-2 text-emerald-600" />
-                                                                <span className="text-emerald-600 font-medium">{t("billing.refund.actions.approve", "Setuju")}</span>
-                                                            </DropdownMenuItem>
-                                                            <DropdownMenuItem onClick={() => openAction(r, 'reject')}>
-                                                                <X className="w-4 h-4 mr-2 text-red-600" />
-                                                                <span className="text-red-600 font-medium">{t("billing.refund.actions.reject", "Tolak")}</span>
-                                                            </DropdownMenuItem>
-                                                        </>
-                                                    )}
-                                                    {(r.status?.toLowerCase() === 'approved' || r.status?.toLowerCase() === 'refunded') && (
-                                                        <DropdownMenuItem onClick={() => setViewModal({ open: true, item: r })}>
-                                                            <CheckCircle2 className="w-4 h-4 mr-2 text-teal-600" />
-                                                            <span>{t("billing.refund.actions.viewNotes", "Lihat Catatan")}</span>
-                                                        </DropdownMenuItem>
-                                                    )}
-                                                    {(r.status?.toLowerCase() === 'rejected' || r.status?.toLowerCase() === 'failed') && (
-                                                        <DropdownMenuItem onClick={() => setViewModal({ open: true, item: r })}>
-                                                            <XCircle className="w-4 h-4 mr-2 text-red-600" />
-                                                            <span>{t("billing.refund.actions.viewRejectReason", "Lihat Alasan Ditolak")}</span>
-                                                        </DropdownMenuItem>
-                                                    )}
-                                                    {!['pending', 'waiting', 'pending_refund', 'approved', 'refunded', 'rejected', 'failed'].includes(r.status?.toLowerCase() || '') && (
-                                                        <DropdownMenuItem disabled>
-                                                            <span className="text-gray-400 text-xs">{t("billing.refund.actions.noAction", "Tidak ada aksi")}</span>
-                                                        </DropdownMenuItem>
-                                                    )}
-                                                </DropdownMenuContent>
-                                            </DropdownMenu>
+                                        <div onClick={(e) => e.stopPropagation()} className="flex items-center gap-1.5">
+                                            {isPendingRefund(r.status) ? (
+                                                <>
+                                                    <button
+                                                        onClick={() => openAction(r, 'approve')}
+                                                        className="inline-flex items-center gap-1 px-2.5 py-1 text-xs font-semibold rounded-lg bg-emerald-50 text-emerald-700 hover:bg-emerald-100 dark:bg-emerald-900/30 dark:text-emerald-400 border border-emerald-200 dark:border-emerald-800 transition-colors"
+                                                    >
+                                                        <Check className="w-3.5 h-3.5" />
+                                                        <span>{t("billing.refund.actions.approve", "Setuju")}</span>
+                                                    </button>
+                                                    <button
+                                                        onClick={() => openAction(r, 'reject')}
+                                                        className="inline-flex items-center gap-1 px-2.5 py-1 text-xs font-semibold rounded-lg bg-red-50 text-red-700 hover:bg-red-100 dark:bg-red-900/30 dark:text-red-400 border border-red-200 dark:border-red-800 transition-colors"
+                                                    >
+                                                        <X className="w-3.5 h-3.5" />
+                                                        <span>{t("billing.refund.actions.reject", "Tolak")}</span>
+                                                    </button>
+                                                </>
+                                            ) : isApprovedRefund(r.status) ? (
+                                                <button
+                                                    onClick={() => setViewModal({ open: true, item: r })}
+                                                    className="inline-flex items-center gap-1 px-2.5 py-1 text-xs font-semibold rounded-lg text-teal-700 dark:text-teal-400 bg-teal-50 dark:bg-teal-900/20 border border-teal-200 dark:border-teal-800 transition-colors"
+                                                >
+                                                    <CheckCircle2 className="w-3.5 h-3.5" />
+                                                    <span>{t("billing.refund.actions.viewNotes", "Catatan")}</span>
+                                                </button>
+                                            ) : isRejectedRefund(r.status) ? (
+                                                <button
+                                                    onClick={() => setViewModal({ open: true, item: r })}
+                                                    className="inline-flex items-center gap-1 px-2.5 py-1 text-xs font-semibold rounded-lg text-red-600 dark:text-red-400 bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 transition-colors"
+                                                >
+                                                    <XCircle className="w-3.5 h-3.5" />
+                                                    <span>{t("billing.refund.actions.viewRejectReason", "Alasan")}</span>
+                                                </button>
+                                            ) : (
+                                                <span className="text-gray-400 text-xs">—</span>
+                                            )}
                                         </div>
                                     </div>
                                 </div>
@@ -598,13 +617,13 @@ function RefundContent() {
                             <table className="w-full text-sm">
                                 <thead className="bg-gray-50 dark:bg-gray-900/50 border-b border-gray-100 dark:border-gray-800">
                                     <tr>
-                                        <th className="text-left text-[11px] font-bold text-gray-500 uppercase tracking-wider px-4 py-3">{t("billing.refund.table.orderCode", "Kode Pesanan")}</th>
-                                        <th className="text-left text-[11px] font-bold text-gray-500 uppercase tracking-wider px-4 py-3">{t("billing.refund.table.user", "User")}</th>
-                                        <th className="text-left text-[11px] font-bold text-gray-500 uppercase tracking-wider px-4 py-3 hidden md:table-cell">{t("billing.refund.table.teacher", "Guru")}</th>
-                                        <th className="text-left text-[11px] font-bold text-gray-500 uppercase tracking-wider px-4 py-3 hidden xl:table-cell">{t("billing.refund.table.sessions", "Sesi")}</th>
+                                        <th className="text-start text-[11px] font-bold text-gray-500 uppercase tracking-wider px-4 py-3">{t("billing.refund.table.orderCode", "Kode Pesanan")}</th>
+                                        <th className="text-start text-[11px] font-bold text-gray-500 uppercase tracking-wider px-4 py-3">{t("billing.refund.table.user", "User")}</th>
+                                        <th className="text-start text-[11px] font-bold text-gray-500 uppercase tracking-wider px-4 py-3 hidden md:table-cell">{t("billing.refund.table.teacher", "Guru")}</th>
+                                        <th className="text-start text-[11px] font-bold text-gray-500 uppercase tracking-wider px-4 py-3 hidden xl:table-cell">{t("billing.refund.table.sessions", "Sesi")}</th>
                                         <th className="text-center text-[11px] font-bold text-gray-500 uppercase tracking-wider px-4 py-3">{t("billing.refund.table.status", "Status")}</th>
-                                        <th className="text-right text-[11px] font-bold text-gray-500 uppercase tracking-wider px-4 py-3 pr-8">{t("billing.refund.table.refundAmount", "Nilai Refund")}</th>
-                                        <th className="text-left text-[11px] font-bold text-gray-500 uppercase tracking-wider px-4 py-3 hidden lg:table-cell">{t("billing.refund.table.requestDate", "Tgl Request")}</th>
+                                        <th className="text-end text-[11px] font-bold text-gray-500 uppercase tracking-wider px-4 py-3 pe-8">{t("billing.refund.table.refundAmount", "Nilai Refund")}</th>
+                                        <th className="text-start text-[11px] font-bold text-gray-500 uppercase tracking-wider px-4 py-3 hidden lg:table-cell">{t("billing.refund.table.requestDate", "Tgl Request")}</th>
                                         <th className="text-center text-[11px] font-bold text-gray-500 uppercase tracking-wider px-4 py-3">{t("billing.refund.table.actions", "Aksi")}</th>
                                     </tr>
                                 </thead>
@@ -633,10 +652,10 @@ function RefundContent() {
                                                     </span>
                                                 </td>
                                                 <td className="px-4 py-3">
-                                                    <button onClick={(e) => { e.stopPropagation(); router.push(`/${locale}/users/manage/${r.userId}`); }} className="font-medium text-gray-900 dark:text-white text-sm hover:text-emerald-600 dark:hover:text-emerald-400 hover:underline text-left">{r.userName || `ID: ${r.userId}`}</button>
+                                                    <button onClick={(e) => { e.stopPropagation(); router.push(`/${locale}/users/manage/${r.userId}`); }} className="font-medium text-gray-900 dark:text-white text-sm hover:text-emerald-600 dark:hover:text-emerald-400 hover:underline text-start">{r.userName || `ID: ${r.userId}`}</button>
                                                 </td>
                                                 <td className="px-4 py-3 hidden md:table-cell">
-                                                    <button onClick={(e) => { e.stopPropagation(); if (r.trainerId) router.push(`/${locale}/teachers/manage/${r.trainerId}?from=refund`); }} title={r.trainerId ? t("billing.refund.table.tooltips.viewTeacher", "Lihat profil guru") : ""} className={`text-left text-sm ${r.trainerId ? 'font-medium text-gray-900 dark:text-white hover:text-emerald-600 dark:hover:text-emerald-400 hover:underline cursor-pointer' : 'font-medium text-gray-900 dark:text-white'}`}>{r.trainerName || `ID: ${r.trainerId}`}</button>
+                                                    <button onClick={(e) => { e.stopPropagation(); if (r.trainerId) router.push(`/${locale}/teachers/manage/${r.trainerId}?from=refund`); }} title={r.trainerId ? t("billing.refund.table.tooltips.viewTeacher", "Lihat profil guru") : ""} className={`text-start text-sm ${r.trainerId ? 'font-medium text-gray-900 dark:text-white hover:text-emerald-600 dark:hover:text-emerald-400 hover:underline cursor-pointer' : 'font-medium text-gray-900 dark:text-white'}`}>{r.trainerName || `ID: ${r.trainerId}`}</button>
                                                 </td>
                                                 <td className="px-4 py-3 hidden xl:table-cell">
                                                     <div className="text-[11px] font-semibold text-emerald-700 bg-emerald-50 dark:text-emerald-400 dark:bg-emerald-900/20 px-2 py-0.5 rounded border border-emerald-100 dark:border-emerald-800 max-w-fit">{r.sessionsInfo || '—'}</div>
@@ -644,8 +663,8 @@ function RefundContent() {
                                                 <td className="px-4 py-3 text-center">
                                                     {getStatusBadge(r.status, t)}
                                                 </td>
-                                                <td className="px-4 py-3 text-right pr-8">
-                                                    <span className="font-bold text-red-600 dark:text-red-400">{formatRupiah(r.refundAmount ?? r.amount)}</span>
+                                                <td className="px-4 py-3 text-end pe-8">
+                                                    <span className="font-bold text-red-600 dark:text-red-400">{formatRupiah(r.refundAmount ?? r.amount, locale)}</span>
                                                 </td>
                                                 <td className="px-4 py-3 hidden lg:table-cell">
                                                     <Tooltip>
@@ -661,46 +680,44 @@ function RefundContent() {
                                                     </Tooltip>
                                                 </td>
                                                 <td className="px-4 py-3 text-center" onClick={e => e.stopPropagation()}>
-                                                    <DropdownMenu>
-                                                        <DropdownMenuTrigger asChild>
-                                                            <button className="p-1.5 text-gray-500 hover:bg-gray-200 dark:hover:bg-gray-700 rounded-lg transition-colors">
-                                                                <MoreVertical className="w-4 h-4" />
+                                                    {isPendingRefund(r.status) ? (
+                                                        <div className="flex items-center justify-center gap-1.5">
+                                                            <button
+                                                                onClick={() => openAction(r, 'approve')}
+                                                                title={t("billing.refund.actions.approve", "Setujui Refund")}
+                                                                className="inline-flex items-center gap-1 px-2.5 py-1 text-xs font-semibold rounded-lg bg-emerald-50 text-emerald-700 hover:bg-emerald-100 dark:bg-emerald-900/30 dark:text-emerald-400 dark:hover:bg-emerald-900/50 border border-emerald-200 dark:border-emerald-800 transition-colors shadow-xs"
+                                                            >
+                                                                <Check className="w-3.5 h-3.5" />
+                                                                <span>{t("billing.refund.actions.approve", "Setuju")}</span>
                                                             </button>
-                                                        </DropdownMenuTrigger>
-                                                        <DropdownMenuContent align="end" className="w-52">
-                                                            <DropdownMenuLabel>{t("billing.refund.actions.dropdownTitle", "Aksi Refund")}</DropdownMenuLabel>
-                                                            <DropdownMenuSeparator />
-                                                            {(r.status?.toLowerCase() === 'pending' || r.status?.toLowerCase() === 'waiting' || r.status?.toLowerCase() === 'pending_refund') && (
-                                                                <>
-                                                                    <DropdownMenuItem onClick={() => openAction(r, 'approve')}>
-                                                                        <Check className="w-4 h-4 mr-2 text-emerald-600" />
-                                                                        <span className="text-emerald-600 font-medium">{t("billing.refund.actions.approve", "Setuju")}</span>
-                                                                    </DropdownMenuItem>
-                                                                    <DropdownMenuItem onClick={() => openAction(r, 'reject')}>
-                                                                        <X className="w-4 h-4 mr-2 text-red-600" />
-                                                                        <span className="text-red-600 font-medium">{t("billing.refund.actions.reject", "Tolak")}</span>
-                                                                    </DropdownMenuItem>
-                                                                </>
-                                                            )}
-                                                            {(r.status?.toLowerCase() === 'approved' || r.status?.toLowerCase() === 'refunded') && (
-                                                                <DropdownMenuItem onClick={() => setViewModal({ open: true, item: r })}>
-                                                                    <CheckCircle2 className="w-4 h-4 mr-2 text-teal-600" />
-                                                                    <span>{t("billing.refund.actions.viewNotes", "Lihat Catatan")}</span>
-                                                                </DropdownMenuItem>
-                                                            )}
-                                                            {(r.status?.toLowerCase() === 'rejected' || r.status?.toLowerCase() === 'failed') && (
-                                                                <DropdownMenuItem onClick={() => setViewModal({ open: true, item: r })}>
-                                                                    <XCircle className="w-4 h-4 mr-2 text-red-600" />
-                                                                    <span>{t("billing.refund.actions.viewRejectReason", "Lihat Alasan Ditolak")}</span>
-                                                                </DropdownMenuItem>
-                                                            )}
-                                                            {!['pending', 'waiting', 'pending_refund', 'approved', 'refunded', 'rejected', 'failed'].includes(r.status?.toLowerCase() || '') && (
-                                                                <DropdownMenuItem disabled>
-                                                                    <span className="text-gray-400 text-xs">{t("billing.refund.actions.noAction", "Tidak ada aksi")}</span>
-                                                                </DropdownMenuItem>
-                                                            )}
-                                                        </DropdownMenuContent>
-                                                    </DropdownMenu>
+                                                            <button
+                                                                onClick={() => openAction(r, 'reject')}
+                                                                title={t("billing.refund.actions.reject", "Tolak Refund")}
+                                                                className="inline-flex items-center gap-1 px-2.5 py-1 text-xs font-semibold rounded-lg bg-red-50 text-red-700 hover:bg-red-100 dark:bg-red-900/30 dark:text-red-400 dark:hover:bg-red-900/50 border border-red-200 dark:border-red-800 transition-colors shadow-xs"
+                                                            >
+                                                                <X className="w-3.5 h-3.5" />
+                                                                <span>{t("billing.refund.actions.reject", "Tolak")}</span>
+                                                            </button>
+                                                        </div>
+                                                    ) : isApprovedRefund(r.status) ? (
+                                                        <button
+                                                            onClick={() => setViewModal({ open: true, item: r })}
+                                                            className="inline-flex items-center gap-1 px-2.5 py-1 text-xs font-semibold rounded-lg text-teal-700 dark:text-teal-400 bg-teal-50 dark:bg-teal-900/20 hover:bg-teal-100 dark:hover:bg-teal-900/30 border border-teal-200 dark:border-teal-800 transition-colors"
+                                                        >
+                                                            <CheckCircle2 className="w-3.5 h-3.5" />
+                                                            <span>{t("billing.refund.actions.viewNotes", "Lihat Catatan")}</span>
+                                                        </button>
+                                                    ) : isRejectedRefund(r.status) ? (
+                                                        <button
+                                                            onClick={() => setViewModal({ open: true, item: r })}
+                                                            className="inline-flex items-center gap-1 px-2.5 py-1 text-xs font-semibold rounded-lg text-red-600 dark:text-red-400 bg-red-50 dark:bg-red-900/20 hover:bg-red-100 dark:hover:bg-red-900/30 border border-red-200 dark:border-red-800 transition-colors"
+                                                        >
+                                                            <XCircle className="w-3.5 h-3.5" />
+                                                            <span>{t("billing.refund.actions.viewRejectReason", "Alasan Ditolak")}</span>
+                                                        </button>
+                                                    ) : (
+                                                        <span className="text-gray-400 text-xs">—</span>
+                                                    )}
                                                 </td>
                                             </tr>
                                         );

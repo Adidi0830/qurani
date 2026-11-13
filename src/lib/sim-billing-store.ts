@@ -11,7 +11,7 @@ import { getSimOrders, SimOrder } from "@/lib/sim-store"
 // ── Storage Keys ──────────────────────────────────────────────────────────────
 // STORE_VERSION: Naikkan angka ini setiap kali dummy data berubah agar
 // localStorage lama otomatis di-reset ke data terbaru.
-const STORE_VERSION        = "v13-fix-mappings"
+const STORE_VERSION        = "v14-fix-refund-status"
 const STORE_VERSION_KEY    = "qurani_sim_billing_version"
 const PAYOUT_PENDING_KEY   = "qurani_sim_payout_pending"
 const PAYOUT_HISTORY_KEY   = "qurani_sim_payout_history"
@@ -180,7 +180,7 @@ function generateDynamicData() {
     ]
     
     const refundsProcessed: SimRefund[] = [
-        { id: "REF-3004", userId: 889977665544101, userName: "Siti Rahmawati", trainerId: 303, trainerName: "Siti Nurhaliza", bookingId: 3004, amount: 80000, refundAmount: 80000, status: "processed", paymentMethod: "VA Mandiri", refundReason: "Guru berhalangan hadir", createdAt: new Date(Date.now() - 604800000).toISOString(), updatedAt: new Date(Date.now() - 518400000).toISOString(), notes: "Refund telah dikembalikan ke saldo wallet" },
+        { id: "REF-3004", userId: 889977665544101, userName: "Siti Rahmawati", trainerId: 303, trainerName: "Siti Nurhaliza", bookingId: 3004, amount: 80000, refundAmount: 80000, status: "refunded", paymentMethod: "VA Mandiri", refundReason: "Guru berhalangan hadir", createdAt: new Date(Date.now() - 604800000).toISOString(), updatedAt: new Date(Date.now() - 518400000).toISOString(), notes: "Refund telah dikembalikan ke saldo wallet" },
         { id: "REF-3011", userId: 889977665544104, userName: "Budi Santoso", trainerId: 305, trainerName: "Zain Al-Fattah", bookingId: 3011, amount: 405000, refundAmount: 0, status: "rejected", paymentMethod: "OVO", refundReason: "Sinyal sering putus dari murid", createdAt: new Date(Date.now() - 864000000).toISOString(), updatedAt: new Date(Date.now() - 864000000).toISOString(), notes: "Refund ditolak karena masalah teknis bukan dari sisi pengajar" }
     ]
 
