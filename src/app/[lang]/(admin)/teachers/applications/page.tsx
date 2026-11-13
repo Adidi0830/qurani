@@ -582,7 +582,7 @@ function PengajuanContent() {
     // ---------- Filters ----------
     const [search, setSearch] = useState("")
     const [searchInput, setSearchInput] = useState("")
-    const [statusFilter, setStatusFilter] = useState<FilterStatus>("all")
+    const [statusFilter, setStatusFilter] = useState<FilterStatus>("pending")
     const [page, setPage] = useState(1)
 
     const getTranslatedSpecialization = useCallback((spec: string) => {
