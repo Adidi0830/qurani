@@ -168,7 +168,7 @@ function SidebarProvider({
           } as React.CSSProperties
         }
         className={cn(
-          "flex min-h-screen w-full",
+          "flex min-h-screen w-full max-w-full overflow-x-clip",
           className
         )}
         {...props}
