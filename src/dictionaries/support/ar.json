@@ -24,6 +24,13 @@
   "common": {
     "title": "تذاكر الدعم"
   },
+  "title": "تذاكر الدعم",
+  "departments": {
+    "marketing": "التسويق",
+    "billing": "الفواتير",
+    "support": "الدعم",
+    "general": "عام"
+  },
   "search_placeholder": "البحث في التذاكر...",
   "bulk_actions": "إجراءات جماعية",
   "edit_selected": "تعديل المحدد",

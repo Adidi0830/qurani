@@ -24,6 +24,13 @@
     "common": {
         "title": "Support Tickets"
     },
+    "title": "Support Tickets",
+    "departments": {
+        "marketing": "Marketing",
+        "billing": "Billing",
+        "support": "Support",
+        "general": "General"
+    },
     "search_placeholder": "Search tickets...",
     "bulk_actions": "Bulk Actions",
     "edit_selected": "Edit Selected",

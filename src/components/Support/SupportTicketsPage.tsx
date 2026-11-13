@@ -43,7 +43,7 @@ import { useAuth } from "@/hooks/use-auth"
 import { cn } from "@/lib/utils"
 import { useTranslation } from "@/hooks/use-translation"
 import { formatDistanceToNowStrict } from "date-fns"
-import { id, enUS } from "date-fns/locale"
+import { id, enUS, ar } from "date-fns/locale"
 
 type StatusType = "Open" | "In Progress" | "Answered" | "On Hold" | "Closed"
 type PriorityType = "Low" | "Medium" | "High"
@@ -117,6 +117,7 @@ export default function SupportTicketsPage() {
   // UI Toggles
   const [showExportDropdown, setShowExportDropdown] = useState(false)
   const exportDropdownRef = useRef<HTMLDivElement>(null)
+  const tableContainerRef = useRef<HTMLDivElement>(null)
   const [showBulkModal, setShowBulkModal] = useState(false)
   const [showFilterPanel, setShowFilterPanel] = useState(false)
   const [showBulkSuccess, setShowBulkSuccess] = useState(false)
@@ -304,7 +305,10 @@ export default function SupportTicketsPage() {
             return;
           }
         }
-      } catch (clientError) {
+      } catch (clientError: any) {
+        if (signal?.aborted || clientError?.name === 'AbortError' || clientError?.message?.includes('aborted')) {
+          return;
+        }
         console.error('[Tickets] Client API failed:', clientError);
       }
 
@@ -314,9 +318,9 @@ export default function SupportTicketsPage() {
       setTickets([]);
       setTotalCount(0);
 
-    } catch (error) {
+    } catch (error: any) {
       // Ignore abort errors
-      if (error instanceof Error && error.name === 'AbortError') return;
+      if (signal?.aborted || error?.name === 'AbortError' || error?.message?.includes('aborted')) return;
       console.error("Error loading tickets:", error)
     } finally {
       if (!signal?.aborted) setIsLoading(false)
@@ -339,8 +343,15 @@ export default function SupportTicketsPage() {
     // Only auto-load on mount or when filters change
     const load = async () => {
       isLoadingRef.current = true;
-      await loadTickets(controller.signal);
-      isLoadingRef.current = false;
+      try {
+        await loadTickets(controller.signal);
+      } catch (err: any) {
+        if (!controller.signal.aborted && err?.name !== 'AbortError') {
+          console.error('[Tickets] Load error:', err);
+        }
+      } finally {
+        isLoadingRef.current = false;
+      }
     };
 
     load();
@@ -422,6 +433,40 @@ export default function SupportTicketsPage() {
     return () => document.removeEventListener("mousedown", handleClickOutside)
   }, [])
 
+  // In RTL, ensure table scroll container starts at the rightmost position
+  useEffect(() => {
+    if (locale === 'ar' && tableContainerRef.current) {
+      tableContainerRef.current.scrollLeft = tableContainerRef.current.scrollWidth
+    }
+  }, [locale, tickets, isLoading])
+
+  const getDepartmentLabel = useCallback((dept: string | null | undefined) => {
+    if (!dept) return "-"
+    const raw = String(dept).toLowerCase()
+    const deptLabels: Record<string, Record<string, string>> = {
+      ar: {
+        marketing: "التسويق",
+        billing: "الفواتير",
+        support: "الدعم",
+        general: "عام",
+      },
+      id: {
+        marketing: "Pemasaran",
+        billing: "Penagihan",
+        support: "Dukungan",
+        general: "Umum",
+      },
+      en: {
+        marketing: "Marketing",
+        billing: "Billing",
+        support: "Support",
+        general: "General",
+      }
+    }
+    const currentLoc = (locale === 'ar' || locale === 'id' || locale === 'en') ? locale : 'en'
+    return deptLabels[currentLoc]?.[raw] || t(`departments.${raw}`, dept)
+  }, [locale, t])
+
   // Realtime: not yet available in API Qurani (removed Supabase realtime)
 
   // --- Handlers ---
@@ -462,7 +507,7 @@ export default function SupportTicketsPage() {
       t.id,
       t.ticket_number,
       t.subject,
-      t.department,
+      getDepartmentLabel(t.department),
       t.contact,
       t.status,
       t.priority,
@@ -496,11 +541,12 @@ export default function SupportTicketsPage() {
       link.click()
       URL.revokeObjectURL(url)
     } else if (type === "print") {
+      const isRtl = locale === 'ar'
       const printContent = `
-        <html><head><title>${reportTitle}</title><style>
-            body { font-family: Arial, sans-serif; padding: 20px; }
+        <html dir="${isRtl ? 'rtl' : 'ltr'}" lang="${locale}"><head><title>${reportTitle}</title><style>
+            body { font-family: Arial, sans-serif; padding: 20px; direction: ${isRtl ? 'rtl' : 'ltr'}; }
             table { width: 100%; border-collapse: collapse; font-size: 12px; }
-            th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
+            th, td { border: 1px solid #ddd; padding: 8px; text-align: ${isRtl ? 'right' : 'left'}; }
             th { background-color: #10b981; color: white; }
             tr:nth-child(even) { background-color: #f9f9f9; }
         </style></head><body>
@@ -559,11 +605,11 @@ export default function SupportTicketsPage() {
 
   const getStatusConfig = (status: string) => {
     const config: Record<string, { label: string; badgeVariant: "default" | "secondary" | "destructive" | "outline"; icon: React.ReactNode }> = {
-      Open: { label: t("status_labels.open", "Open"), badgeVariant: 'destructive', icon: <AlertCircle className="w-3 h-3 mr-1" /> },
-      "In Progress": { label: t("status_labels.in_progress", "In Progress"), badgeVariant: 'secondary', icon: <Clock className="w-3 h-3 mr-1" /> },
-      Answered: { label: t("status_labels.answered", "Answered"), badgeVariant: 'secondary', icon: <MessageSquare className="w-3 h-3 mr-1" /> },
-      "On Hold": { label: t("status_labels.on_hold", "On Hold"), badgeVariant: 'outline', icon: <Clock className="w-3 h-3 mr-1" /> },
-      Closed: { label: t("status_labels.closed", "Closed"), badgeVariant: 'secondary', icon: <CheckCircle className="w-3 h-3 mr-1" /> },
+      Open: { label: t("status_labels.open", "Open"), badgeVariant: 'destructive', icon: <AlertCircle className="w-3 h-3 me-1" /> },
+      "In Progress": { label: t("status_labels.in_progress", "In Progress"), badgeVariant: 'secondary', icon: <Clock className="w-3 h-3 me-1" /> },
+      Answered: { label: t("status_labels.answered", "Answered"), badgeVariant: 'secondary', icon: <MessageSquare className="w-3 h-3 me-1" /> },
+      "On Hold": { label: t("status_labels.on_hold", "On Hold"), badgeVariant: 'outline', icon: <Clock className="w-3 h-3 me-1" /> },
+      Closed: { label: t("status_labels.closed", "Closed"), badgeVariant: 'secondary', icon: <CheckCircle className="w-3 h-3 me-1" /> },
     }
     const fallbackClass: Record<string, string> = {
       Open: "bg-red-100 text-red-700 dark:bg-red-900/30 dark:text-red-400 border-red-200",
@@ -615,7 +661,7 @@ export default function SupportTicketsPage() {
       if (Number.isNaN(date.getTime())) return dateString
 
       if (variant === 'relative') {
-        const localeObj = locale === 'id' ? id : enUS
+        const localeObj = locale === 'ar' ? ar : locale === 'id' ? id : enUS
         return formatDistanceToNowStrict(date, { addSuffix: true, locale: localeObj })
       }
 
@@ -637,7 +683,7 @@ export default function SupportTicketsPage() {
       }
 
       return new Intl.DateTimeFormat(
-        locale === 'id' ? 'id-ID' : 'en-GB',
+        locale === 'ar' ? 'ar-SA' : locale === 'id' ? 'id-ID' : 'en-GB',
         options
       ).format(date)
     } catch {
@@ -650,10 +696,10 @@ export default function SupportTicketsPage() {
   const totalPages = Math.ceil(totalCount / itemsPerPage)
 
   return (
-    <div className="p-2 sm:p-4 md:p-6 space-y-4 w-full mx-auto min-h-screen bg-gray-50/50 dark:bg-black/20">
+    <div dir={locale === "ar" ? "rtl" : "ltr"} className="p-2 sm:p-4 md:p-6 space-y-4 w-full mx-auto min-h-screen bg-gray-50/50 dark:bg-black/20">
       {/* Toast Success */}
       {showBulkSuccess && (
-        <div className="fixed top-4 right-4 z-50 bg-emerald-500 text-white px-4 py-3 rounded-lg shadow-lg flex items-center gap-2 animate-in fade-in slide-in-from-top-2">
+        <div className="fixed top-4 end-4 z-50 bg-emerald-500 text-white px-4 py-3 rounded-lg shadow-lg flex items-center gap-2 animate-in fade-in slide-in-from-top-2">
           <CheckCircle className="w-5 h-5" />
           <span className="font-medium">{t('success_bulk')}</span>
         </div>
@@ -661,7 +707,9 @@ export default function SupportTicketsPage() {
 
       {/* --- PAGE TITLE --- */}
       <div className="mb-4 flex items-center justify-between">
-        <h1 className="text-xl md:text-2xl font-bold text-gray-900 dark:text-white">Support Tickets</h1>
+        <h1 className="text-xl md:text-2xl font-bold text-gray-900 dark:text-white">
+          {t('title', t('common.title', locale === 'ar' ? 'تذاكر الدعم' : 'Support Tickets'))}
+        </h1>
         <Button variant="ghost" size="icon" className="h-9 w-9 text-gray-500 hover:text-emerald-600 bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 shadow-sm" onClick={() => loadTickets()} disabled={isLoading}>
           <RefreshCw className={cn("w-4 h-4", isLoading && "animate-spin")} />
         </Button>
@@ -681,7 +729,7 @@ export default function SupportTicketsPage() {
             )}
           >
             {t('all_tickets')}
-            <Badge variant="secondary" className="ml-1 bg-gray-100 text-gray-600 dark:bg-gray-800 dark:text-gray-400 h-5 px-1.5 min-w-[1.25rem]">{statusCounts.all}</Badge>
+            <Badge variant="secondary" className="ms-1 bg-gray-100 text-gray-600 dark:bg-gray-800 dark:text-gray-400 h-5 px-1.5 min-w-[1.25rem]">{statusCounts.all}</Badge>
           </button>
           {/* Status buttons logic remains mostly same, can translate status if needed but status keys are usually db values */}
           {(["Open", "In Progress", "Answered", "On Hold", "Closed"] as StatusType[]).map((status) => {
@@ -703,7 +751,7 @@ export default function SupportTicketsPage() {
               >
                 {getStatusConfig(status).label}
                 <Badge variant="secondary" className={cn(
-                  "ml-1 h-5 px-1.5 min-w-[1.25rem]",
+                  "ms-1 h-5 px-1.5 min-w-[1.25rem]",
                   isSelected ? "bg-emerald-100 text-emerald-700 dark:bg-emerald-900/40 dark:text-emerald-400" : "bg-gray-100 text-gray-600 dark:bg-gray-800 dark:text-gray-400"
                 )}>
                   {statusCounts[countKey] || 0}
@@ -717,11 +765,22 @@ export default function SupportTicketsPage() {
       </div>      {/* --- TOOLBAR SECTION --- */}
       <div className="flex flex-wrap gap-2 items-center bg-white dark:bg-gray-900 p-2 rounded-xl border border-gray-200 dark:border-gray-800 shadow-sm">
         {/* Search Bar */}
-        <div className="flex items-center flex-1 min-w-[140px] sm:flex-none sm:w-64 order-1">
-          <div className="flex w-full rounded-lg shadow-sm border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-950 overflow-hidden focus-within:ring-2 focus-within:ring-emerald-500 focus-within:border-emerald-500 transition-all">
+        <div className="flex items-center flex-1 min-w-[180px] sm:flex-none sm:w-64 order-1">
+          <div className="relative flex items-center w-full rounded-lg shadow-sm border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-950 overflow-hidden focus-within:ring-2 focus-within:ring-emerald-500 focus-within:border-emerald-500 transition-all">
+            <button
+              type="button"
+              onClick={() => {
+                setSearchQuery(searchInput)
+                setCurrentPage(1)
+              }}
+              className="absolute start-2.5 top-1/2 -translate-y-1/2 text-gray-400 hover:text-emerald-600 transition-colors p-0.5"
+              title={t('search', 'Search')}
+            >
+              <Search className="w-4 h-4" />
+            </button>
             <input
               type="text"
-              placeholder={t('search_placeholder') || "Cari ticket..."}
+              placeholder={t('search_placeholder') || (locale === 'ar' ? "البحث في التذاكر..." : "Cari ticket...")}
               value={searchInput}
               onChange={(e) => setSearchInput(e.target.value)}
               onKeyDown={(e) => {
@@ -730,17 +789,21 @@ export default function SupportTicketsPage() {
                   setCurrentPage(1)
                 }
               }}
-              className="w-full pl-3 pr-2 h-9 text-sm bg-transparent focus:outline-none placeholder:text-gray-400"
+              className="w-full ps-9 pe-8 h-9 text-sm bg-transparent focus:outline-none placeholder:text-gray-400 text-start"
             />
-            <button 
+            {searchInput && (
+              <button
+                type="button"
                 onClick={() => {
-                  setSearchQuery(searchInput)
+                  setSearchInput("")
+                  setSearchQuery("")
                   setCurrentPage(1)
                 }}
-                className="bg-emerald-500 hover:bg-emerald-600 text-white h-9 w-10 flex items-center justify-center shrink-0"
-            >
-                <Search className="w-4 h-4" />
-            </button>
+                className="absolute end-2 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600 p-0.5"
+              >
+                <X className="w-3.5 h-3.5" />
+              </button>
+            )}
           </div>
         </div>
 
@@ -762,7 +825,7 @@ export default function SupportTicketsPage() {
           }}
         >
           <Filter className="w-3.5 h-3.5" />
-          <span className="hidden sm:inline ml-1.5 text-xs whitespace-nowrap">{t('filters')}</span>
+          <span className="hidden sm:inline ms-1.5 text-xs whitespace-nowrap">{t('filters')}</span>
         </Button>
 
         {/* Date Range - calendar icon + text on mobile */}
@@ -770,7 +833,7 @@ export default function SupportTicketsPage() {
           <PopoverTrigger asChild>
             <Button variant="outline" size="sm" className={cn("h-9 px-2.5 sm:px-3 order-3", (dateRange.start || dateRange.end) && "border-emerald-500 text-emerald-700 bg-emerald-50")}>
               <CalendarIcon className="w-3.5 h-3.5 text-emerald-600" />
-              <span className="ml-1.5 text-xs whitespace-nowrap">
+              <span className="ms-1.5 text-xs whitespace-nowrap">
                 {dateRange.start ? `${dateRange.start}${dateRange.end ? ` - ${dateRange.end}` : ''}` : t('date_range')}
               </span>
             </Button>
@@ -816,11 +879,11 @@ export default function SupportTicketsPage() {
         </Popover>
 
         {/* Bulk Actions - text visible on mobile */}
-        <DropdownMenu>
+        <DropdownMenu dir={locale === 'ar' ? 'rtl' : undefined}>
           <DropdownMenuTrigger asChild>
             <Button variant="outline" size="sm" className="h-9 px-2.5 sm:px-3 order-4 text-xs">
               <span className="">{t('bulk_actions')}</span>
-              <ChevronDown className="w-3 h-3 ml-2 opacity-50" />
+              <ChevronDown className="w-3 h-3 ms-2 opacity-50" />
             </Button>
           </DropdownMenuTrigger>
           <DropdownMenuContent align="start">
@@ -832,22 +895,23 @@ export default function SupportTicketsPage() {
         <DropdownMenu
           open={showExportDropdown}
           onOpenChange={setShowExportDropdown}
+          dir={locale === 'ar' ? 'rtl' : undefined}
         >
           <DropdownMenuTrigger asChild>
             <Button variant="outline" size="sm" className="h-9 px-2.5 sm:px-3 order-5 text-xs" disabled={isExporting}>
               {isExporting ? <RefreshCw className="w-3 h-3 animate-spin" /> : <FileSpreadsheet className="w-3.5 h-3.5 text-gray-500" />}
-              <span className="ml-1.5">{t("export_label", "Export")}</span>
+              <span className="ms-1.5">{t("export_label", "Export")}</span>
             </Button>
           </DropdownMenuTrigger>
           <DropdownMenuContent align="start">
             <DropdownMenuItem onClick={() => handleExport("excel")}>
-              <FileSpreadsheet className="w-3.5 h-3.5 mr-2 text-emerald-600" /> {t("export.excel", "Excel")}
+              <FileSpreadsheet className="w-3.5 h-3.5 me-2 text-emerald-600" /> {t("export.excel", "Excel")}
             </DropdownMenuItem>
             <DropdownMenuItem onClick={() => handleExport("csv")}>
-              <FileText className="w-3.5 h-3.5 mr-2 text-blue-600" /> {t("export.csv", "CSV")}
+              <FileText className="w-3.5 h-3.5 me-2 text-blue-600" /> {t("export.csv", "CSV")}
             </DropdownMenuItem>
             <DropdownMenuItem onClick={() => handleExport("print")}>
-              <Printer className="w-3.5 h-3.5 mr-2 text-gray-600" /> {t("export.print", "Print")}
+              <Printer className="w-3.5 h-3.5 me-2 text-gray-600" /> {t("export.print", "Print")}
             </DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
@@ -874,7 +938,7 @@ export default function SupportTicketsPage() {
           <div className="space-y-3 sm:hidden">
             {isLoading
               ? Array.from({ length: 5 }).map((_, i) => (
-                <Card key={i} className="overflow-hidden border-l-4 border-l-transparent shadow-sm">
+                <Card key={i} className="overflow-hidden border-s-4 border-s-transparent shadow-sm">
                   <CardContent className="p-4 space-y-3">
                     <div className="flex justify-between items-start">
                       <div className="flex items-center gap-2">
@@ -904,7 +968,7 @@ export default function SupportTicketsPage() {
                 const statusConfig = getStatusConfig(ticket.status)
                 const priorityConfig = getPriorityConfig(ticket.priority)
                 return (
-                  <Card key={ticket.id} className="overflow-hidden border-l-4 border-l-transparent hover:border-l-emerald-500 transition-all shadow-sm active:scale-[0.99]">
+                  <Card key={ticket.id} className="overflow-hidden border-s-4 border-s-transparent hover:border-s-emerald-500 transition-all shadow-sm active:scale-[0.99]">
                     <CardContent className="p-4 space-y-3">
                       <div className="flex justify-between items-start mb-2">
                         <div className="flex items-center gap-2">
@@ -916,13 +980,13 @@ export default function SupportTicketsPage() {
                             {statusConfig.label}
                           </Badge>
                         </div>
-                        <DropdownMenu>
+                        <DropdownMenu dir={locale === 'ar' ? 'rtl' : undefined}>
                           <DropdownMenuTrigger asChild>
-                            <Button variant="ghost" size="sm" className="h-7 w-7 p-0 -mr-2">
+                            <Button variant="ghost" size="sm" className="h-7 w-7 p-0 -me-2">
                               <MoreHorizontal className="w-4 h-4" />
                             </Button>
                           </DropdownMenuTrigger>
-                          <DropdownMenuContent align="end">
+                          <DropdownMenuContent align={locale === 'ar' ? 'start' : 'end'}>
                             <DropdownMenuItem onClick={(e) => handleNavigateToTicket(ticket, e as any)}>{t('view_details')}</DropdownMenuItem>
                           </DropdownMenuContent>
                         </DropdownMenu>
@@ -933,7 +997,7 @@ export default function SupportTicketsPage() {
                           {ticket.subject}
                         </h3>
                         <p className="text-xs text-gray-500 flex items-center gap-1.5 flex-wrap">
-                          <span className="px-1.5 py-0.5 rounded bg-gray-100 dark:bg-gray-800">{ticket.department}</span>
+                          <span className="px-1.5 py-0.5 rounded bg-gray-100 dark:bg-gray-800">{getDepartmentLabel(ticket.department)}</span>
                           <span className="text-gray-300">-</span>
                           {ticket.contact && ticket.contact.startsWith('@') ? (
                             <div onClick={(e) => e.stopPropagation()} className="inline-block">
@@ -971,8 +1035,8 @@ export default function SupportTicketsPage() {
 
           {/* TABLE VIEW (Tablet & Desktop) */}
           <div className="hidden sm:block bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 rounded-xl overflow-hidden shadow-sm">
-            <div className="overflow-x-auto">
-              <table className="w-full text-sm text-left">
+            <div className="overflow-x-auto" ref={tableContainerRef} dir={locale === 'ar' ? 'rtl' : 'ltr'}>
+              <table className="w-full text-sm text-start" dir={locale === 'ar' ? 'rtl' : 'ltr'}>
                 <thead className="bg-gray-50 dark:bg-gray-950 text-gray-500 font-medium border-b border-gray-200 dark:border-gray-800">
                   <tr>
                     <th className="px-4 py-3 w-[40px] text-center">
@@ -984,14 +1048,14 @@ export default function SupportTicketsPage() {
                         disabled={isLoading}
                       />
                     </th>
-                    <th className="px-4 py-3 w-[180px]">{t('subject')}</th>
-                    <th className="px-4 py-3 w-[140px] hidden md:table-cell">{t('status')}</th>
-                    <th className="px-4 py-3 hidden md:table-cell">{t('priority')}</th>
-                    <th className="px-4 py-3 hidden lg:table-cell">{t('department')}</th>
-                    <th className="px-4 py-3 hidden lg:table-cell">{t('contact')}</th>
-                    <th className="px-4 py-3 hidden xl:table-cell">{t('created')}</th>
-                    <th className="px-4 py-3 text-right">{t('last_reply')}</th>
-                    <th className="px-4 py-3 w-[50px]"></th>
+                    <th className="px-4 py-3 w-[180px] text-start">{t('subject')}</th>
+                    <th className="px-4 py-3 w-[140px] hidden md:table-cell text-start">{t('status')}</th>
+                    <th className="px-4 py-3 hidden md:table-cell text-start">{t('priority')}</th>
+                    <th className="px-4 py-3 hidden lg:table-cell text-start">{t('department')}</th>
+                    <th className="px-4 py-3 hidden lg:table-cell text-start">{t('contact')}</th>
+                    <th className="px-4 py-3 hidden xl:table-cell text-start">{t('created')}</th>
+                    <th className="px-4 py-3 text-end">{t('last_reply')}</th>
+                    <th className="px-4 py-3 w-[50px] text-center"></th>
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-gray-100 dark:divide-gray-800">
@@ -1001,39 +1065,39 @@ export default function SupportTicketsPage() {
                         <td className="px-4 py-3 text-center">
                           <input type="checkbox" disabled checked={false} className="rounded border-gray-300 dark:border-gray-700 bg-gray-50 dark:bg-gray-800 opacity-50" />
                         </td>
-                        <td className="px-4 py-3 max-w-[300px]">
+                        <td className="px-4 py-3 max-w-[300px] text-start">
                           <div className="flex flex-col gap-1.5">
                             <Skeleton className="h-4 w-48 rounded bg-gray-200 dark:bg-gray-800" />
                             <Skeleton className="h-3 w-16 rounded bg-gray-200 dark:bg-gray-800 opacity-70" />
                           </div>
                         </td>
-                        <td className="px-4 py-3 hidden md:table-cell">
+                        <td className="px-4 py-3 hidden md:table-cell text-start">
                           <Skeleton className="h-5 w-24 rounded-full bg-gray-200 dark:bg-gray-800" />
                         </td>
-                        <td className="px-4 py-3 hidden md:table-cell">
+                        <td className="px-4 py-3 hidden md:table-cell text-start">
                           <Skeleton className="h-5 w-16 rounded bg-gray-200 dark:bg-gray-800" />
                         </td>
-                        <td className="px-4 py-3 hidden lg:table-cell">
+                        <td className="px-4 py-3 hidden lg:table-cell text-start">
                           <Skeleton className="h-4 w-24 rounded bg-gray-200 dark:bg-gray-800" />
                         </td>
-                        <td className="px-4 py-3 hidden lg:table-cell">
+                        <td className="px-4 py-3 hidden lg:table-cell text-start">
                           <div className="flex items-center gap-2">
                             <Skeleton className="h-6 w-6 rounded-full bg-gray-200 dark:bg-gray-800 shrink-0" />
                             <Skeleton className="h-4 w-24 rounded bg-gray-200 dark:bg-gray-800" />
                           </div>
                         </td>
-                        <td className="px-4 py-3 hidden xl:table-cell">
+                        <td className="px-4 py-3 hidden xl:table-cell text-start">
                           <Skeleton className="h-4 w-32 rounded bg-gray-200 dark:bg-gray-800" />
                         </td>
-                        <td className="px-4 py-3 text-right">
+                        <td className="px-4 py-3 text-end">
                           <div className="flex flex-col items-end gap-1">
                             <Skeleton className="h-4 w-24 rounded bg-gray-200 dark:bg-gray-800" />
                             <Skeleton className="h-3 w-12 rounded bg-gray-200 dark:bg-gray-800 opacity-70" />
                           </div>
                         </td>
-                        <td className="px-4 py-3 text-right">
+                        <td className="px-4 py-3 text-center">
                           {/* Action placeholder */}
-                          <Skeleton className="h-8 w-8 rounded-lg bg-gray-100 dark:bg-gray-800 ml-auto opacity-50" />
+                          <Skeleton className="h-8 w-8 rounded-lg bg-gray-100 dark:bg-gray-800 mx-auto opacity-50" />
                         </td>
                       </tr>
                     ))
@@ -1060,7 +1124,7 @@ export default function SupportTicketsPage() {
                               onChange={(e) => handleSelectTicket(ticket.id, e as unknown as React.MouseEvent)}
                             />
                           </td>
-                          <td className="px-4 py-3 max-w-[300px]">
+                          <td className="px-4 py-3 max-w-[300px] text-start">
                             <div className="flex flex-col">
                               <span className="font-medium text-gray-900 dark:text-white truncate" title={ticket.subject}>{ticket.subject}</span>
                               <div className="flex items-center gap-2 mt-0.5">
@@ -1068,20 +1132,20 @@ export default function SupportTicketsPage() {
                               </div>
                             </div>
                           </td>
-                          <td className="px-4 py-3 hidden md:table-cell">
+                          <td className="px-4 py-3 hidden md:table-cell text-start">
                             <Badge className={cn("font-medium whitespace-nowrap", statusConfig.className)} variant="outline">
                               {statusConfig.icon} {statusConfig.label}
                             </Badge>
                           </td>
-                          <td className="px-4 py-3 hidden md:table-cell">
+                          <td className="px-4 py-3 hidden md:table-cell text-start">
                             <Badge variant="secondary" className={cn("font-normal border-0 text-xs", priorityConfig.className)}>
                               {priorityConfig.label}
                             </Badge>
                           </td>
-                          <td className="px-4 py-3 hidden lg:table-cell text-gray-600 dark:text-gray-300 text-sm">
-                            {ticket.department}
+                          <td className="px-4 py-3 hidden lg:table-cell text-gray-600 dark:text-gray-300 text-sm text-start">
+                            {getDepartmentLabel(ticket.department)}
                           </td>
-                          <td className="px-4 py-3 hidden lg:table-cell">
+                          <td className="px-4 py-3 hidden lg:table-cell text-start">
                             <div className="flex items-center gap-2">
                               <div className="w-6 h-6 rounded-full bg-emerald-100 dark:bg-emerald-900/30 text-emerald-600 dark:text-emerald-400 flex items-center justify-center text-[10px] font-bold shrink-0">
                                 {ticket.contact.charAt(0)}
@@ -1101,12 +1165,12 @@ export default function SupportTicketsPage() {
                             </div>
                           </td>
                           <td
-                            className="px-4 py-3 hidden xl:table-cell text-xs text-gray-500 whitespace-nowrap cursor-help"
+                            className="px-4 py-3 hidden xl:table-cell text-xs text-gray-500 whitespace-nowrap cursor-help text-start"
                             title={`${formatDate(ticket.submitted_date, 'long')} (${userTimezone})`}
                           >
                             {formatDate(ticket.submitted_date, 'relative')}
                           </td>
-                          <td className="px-4 py-3 text-right whitespace-nowrap">
+                          <td className="px-4 py-3 text-end whitespace-nowrap">
                             <span
                               className="text-sm text-gray-700 dark:text-gray-300 font-medium cursor-help"
                               title={ticket.last_reply
@@ -1117,16 +1181,16 @@ export default function SupportTicketsPage() {
                               {formatDate(ticket.last_reply, 'relative')}
                             </span>
                           </td>
-                          <td className="px-4 py-3 text-right" onClick={(e) => e.stopPropagation()}>
-                            <DropdownMenu>
+                          <td className="px-4 py-3 text-end" onClick={(e) => e.stopPropagation()}>
+                            <DropdownMenu dir={locale === 'ar' ? 'rtl' : undefined}>
                               <DropdownMenuTrigger asChild>
                                 <Button variant="ghost" size="icon" className="h-8 w-8 text-gray-400 hover:text-gray-600 hover:bg-gray-100 dark:hover:bg-gray-800">
                                   <MoreHorizontal className="w-4 h-4" />
                                 </Button>
                               </DropdownMenuTrigger>
-                              <DropdownMenuContent align="end">
+                              <DropdownMenuContent align={locale === 'ar' ? 'start' : 'end'}>
                                 <DropdownMenuItem onClick={(e) => handleNavigateToTicket(ticket, e as any)}>
-                                  <Eye className="w-3.5 h-3.5 mr-2" /> {t("view_details", "View Details")}
+                                  <Eye className="w-3.5 h-3.5 me-2" /> {t("view_details", "View Details")}
                                 </DropdownMenuItem>
                               </DropdownMenuContent>
                             </DropdownMenu>
@@ -1155,7 +1219,7 @@ export default function SupportTicketsPage() {
                     onClick={() => setCurrentPage(p => Math.max(1, p - 1))}
                     disabled={currentPage === 1}
                   >
-                    <ChevronLeft className="w-4 h-4" />
+                    <ChevronLeft className="w-4 h-4 rtl:rotate-180" />
                   </Button>
                   <span className="flex items-center px-2 text-sm text-gray-500 font-medium">
                     {t("pagination.page_of", "Page {{page}} of {{total}}", { page: currentPage, total: totalPages })}
@@ -1167,7 +1231,7 @@ export default function SupportTicketsPage() {
                     onClick={() => setCurrentPage(p => Math.min(totalPages, p + 1))}
                     disabled={currentPage === totalPages}
                   >
-                    <ChevronRight className="w-4 h-4" />
+                    <ChevronRight className="w-4 h-4 rtl:rotate-180" />
                   </Button>
                 </div>
               </div>
@@ -1187,7 +1251,7 @@ export default function SupportTicketsPage() {
               </Button>
             </div>
 
-            <div className="space-y-4 max-h-[60vh] overflow-y-auto pr-2">
+            <div className="space-y-4 max-h-[60vh] overflow-y-auto pe-2">
               {/* Department Filters */}
               <div className="space-y-2">
                 <label className="text-sm font-semibold">{t('department')}</label>
@@ -1197,7 +1261,7 @@ export default function SupportTicketsPage() {
                       <input type="checkbox" className="rounded accent-emerald-600" checked={tempDepartmentFilters.includes(dept) === true}
                         onChange={() => setTempDepartmentFilters(prev => prev.includes(dept) ? prev.filter(d => d !== dept) : [...prev, dept])}
                       />
-                      <span className="text-sm">{dept}</span>
+                      <span className="text-sm">{getDepartmentLabel(dept)}</span>
                     </label>
                   ))}
                 </div>

@@ -24,6 +24,13 @@
     "common": {
         "title": "Tiket Dukungan"
     },
+    "title": "Tiket Dukungan",
+    "departments": {
+        "marketing": "Pemasaran",
+        "billing": "Penagihan",
+        "support": "Dukungan",
+        "general": "Umum"
+    },
     "search_placeholder": "Cari tiket...",
     "bulk_actions": "Aksi Massal",
     "edit_selected": "Edit Terpilih",
